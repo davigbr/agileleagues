@@ -77,7 +77,7 @@ class DATABASE_CONFIG {
 		'password' => DB_PASS,
 		'database' => DB_NAME,
 		'prefix' => '',
-		'encoding' => 'utf8',
+		'encoding' => 'utf8'
 	);
 
 	public $test = array(
@@ -87,9 +87,8 @@ class DATABASE_CONFIG {
 		'port' => DB_PORT,
 		'login' => DB_USER,
 		'password' => DB_PASS,
-		'database' => DB_NAME . '_test',
+		'database' => 'agileleagues_test',
 		'prefix' => '',
-		'encoding' => 'utf8',
+		'encoding' => 'utf8'
 	);
-
 }
