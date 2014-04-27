@@ -7,6 +7,8 @@
 /build
 /dist
 /tags
+/app/Config/core.php
+/app/Config/database.php
 
 # OS generated files #
 ######################
