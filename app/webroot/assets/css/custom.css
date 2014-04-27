@@ -1,0 +1,64 @@
+body {
+	color: black;	
+}
+
+.panel-primary {
+	border-color: #ddd;
+}
+.form-control {
+	border-color: #ccc;
+}
+.form-control-inline {
+	display: inline;
+	width: auto;		
+}
+hr {
+	border-color: #ddd;
+}
+
+footer.main {
+	border-color: #ddd;
+}
+
+.table th {
+	font-weight: bold;
+}
+.progress {
+	background-color: #ddd;
+}
+.table td, th {
+	vertical-align: middle !important;
+}
+.control-group {
+	padding-bottom: 10px;
+}
+.control-group label {
+	padding-right: 10px;
+}
+.tile-title .title {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.tile-progress {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.glyphicon {
+	margin-bottom: 1px !important;
+}
+.login-page .login-header {
+	padding: 50px;
+}
+.calendar-env .calendar-body {
+	width: 100%;
+	padding: 20px;
+	float: none;
+}
+.help-block {
+	margin-left: 5px;
+}
+.btn.disabled {
+    pointer-events: auto;
+    cursor: default;
+}
+input[data-mask="decimal"] {
+	text-align: right;
+}

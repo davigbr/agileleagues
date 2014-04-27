@@ -1,0 +1,15 @@
+SOURCE views/activity_leaderboards.sql;
+SOURCE views/activity_leaderboards_last_month.sql;
+SOURCE views/activity_leaderboards_last_week.sql;
+SOURCE views/activity_leaderboards_this_month.sql;
+SOURCE views/activity_leaderboards_this_week.sql;
+SOURCE views/activity_ranking.sql;
+SOURCE views/badge_activity_progress.sql;
+SOURCE views/badge_claimed.sql;
+SOURCE views/calendar_log.sql;
+SOURCE views/different_activities_completed.sql;
+SOURCE views/domain_activities_count.sql;
+SOURCE views/last_week_logs.sql;
+SOURCE views/player_activity_coins.sql;
+SOURCE views/player_total_activity_coins.sql;
+SOURCE views/event_activity_progress.sql;
