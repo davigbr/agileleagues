@@ -1,1 +1,1 @@
-pear.phpunit.de/PHPUnit
+pear.phpunit.de/PHPUnit-3.7.35
