@@ -59,36 +59,35 @@
  * For Postgres : http://www.postgresql.org/docs/9.2/static/sql-set.html
  * For Sql Server : http://msdn.microsoft.com/en-us/library/ms190356.aspx
  */
+
+define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
+define('DB_PORT', getenv('OPENSHIFT_MYSQL_DB_PORT')); 
+define('DB_USER', getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
+define('DB_PASS', getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
+define('DB_NAME', getenv('OPENSHIFT_GEAR_NAME'));
+
 class DATABASE_CONFIG {
 
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'adminnEmhFH2',
-		'password' => 'HBwXzDKIWvIF',
-		'database' => 'agileleagues',
+		'host' => DB_HOST,
+		'port' => DB_PORT,
+		'login' => DB_USER,
+		'password' => DB_PASS,
+		'database' => DB_NAME,
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);
-	// public $default = array(
-	// 	'datasource' => 'Database/Mysql',
-	// 	'persistent' => false,
-	// 	'host' => 'localhost',
-	// 	'login' => 'root',
-	// 	'password' => '',
-	// 	'database' => 'agileleagues',
-	// 	'prefix' => '',
-	// 	'encoding' => 'utf8',
-	// );
 
 	public $test = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'agileleagues_test',
+		'host' => DB_HOST,
+		'port' => DB_PORT,
+		'login' => DB_USER,
+		'password' => DB_PASS,
+		'database' => DB_NAME . '_test',
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);
