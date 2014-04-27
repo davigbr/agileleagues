@@ -64,7 +64,7 @@ class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => '127.5.136.130',
+		'host' => 'localhost',
 		'login' => 'adminnEmhFH2',
 		'password' => 'HBwXzDKIWvIF',
 		'database' => 'agileleagues',
