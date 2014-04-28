@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="<? echo Router::url('/assets/js/vertical-timeline/css/component.css'); ?>">
 
 	<script src="<? echo Router::url('/assets/js/jquery-1.11.0.min.js'); ?>"></script>
+	<script src="<? echo Router::url('/js/analytics.js'); ?>"></script>
 
 	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -31,6 +32,7 @@
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	<?= $this->element('meta') ?>
 </head>
 <body class="page-body gray">
 	<div class="page-container <? echo $collapseSidebar? 'sidebar-collapsed' : '' ?>">
