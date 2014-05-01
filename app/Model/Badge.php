@@ -10,10 +10,17 @@ class Badge extends AppModel {
 
 	public $hasMany = array(
 		'BadgeRequisite',
-		'ActivityRequisite'
+		'ActivityRequisite',
+		'BadgeLog'
 	);
 
-	public $uses = array('BadgeActivityProgress', 'BadgeClaimed', 'BadgeLog', 'Player', 'Notification');
+	public $uses = array(
+		'BadgeActivityProgress', 
+		'BadgeClaimed', 
+		'BadgeLog', 
+		'Player', 
+		'Notification'
+	);
 
 	public function allFromDomainById($domainId) {
 		return $this->all(array('Badge.domain_id' => $domainId), 'id');

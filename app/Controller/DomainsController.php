@@ -15,7 +15,6 @@ class DomainsController extends AppController {
         }
         $this->Badge->recursive = 1;
 
-
         $playerId = $this->Auth->user('id');
         $badges = $this->Badge->allFromDomainById($domainId);
         $playerBadgesById = $this->BadgeLog->allFromPlayerByBadgeId($playerId);
@@ -56,5 +55,6 @@ class DomainsController extends AppController {
         $this->set('badgeActivitiesProgress', $badgeActivitiesProgress);
         $this->set('domain', $this->Domain->findById($domainId));
         $this->set('badges', $badges);
+        $this->set('players', $this->Player->all(array(), 'id'));
     }
 }

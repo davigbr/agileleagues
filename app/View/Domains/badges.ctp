@@ -6,7 +6,7 @@
             $activitiesProgress = $badgeActivitiesProgress[$badgeId];
         ?>
         <div class="col-lg-3 col-md-6">
-            <div class="tile-title" style="height: 290px; <? echo $badge['claimed']? 'background-color: ' . $badge['Domain']['color']:''?>">           
+            <div class="tile-title" style="height: 330px; <? echo $badge['claimed']? 'background-color: ' . $badge['Domain']['color']:''?>">           
                 <div class="icon">
                     <a href="<? echo $this->Html->url('/badges/view/' . $badgeId); ?>">
                         <?if($badge['claimed']):?>
@@ -30,6 +30,22 @@
                     <div class="tile-progress" style="margin-bottom: 0">
                         <div class="tile-progressbar">
                             <span data-fill="<?=number_format($badge['progress'], 2); ?>%" style="width: <?=number_format($badge['progress'], 2); ?>%;"></span>
+                        </div>
+                        <div style="height: 40px" >
+                            <?
+                                $divWidth = 350;
+                                $maximumWidth = 40;
+                                $width = $maximumWidth; 
+                                if (count($badge['BadgeLog']) * $maximumWidth > $divWidth) {
+                                    $width = floor($divWidth / count($badge['BadgeLog']));
+                                }
+                            ?>
+                            <?foreach ($badge['BadgeLog'] as $badgeLog): ?>
+                                <? 
+                                    $player = $players[$badgeLog['player_id']]['Player']['email']; 
+                                ?>
+                                <img style="margin-left: -1px; margin-right: -1px" src="<?= $this->Gravatar->get($player, $width) ?>" width="<?= $width?>" alt=""/>
+                            <?endforeach;?>
                         </div>
                         <div class="tile-footer" style="height: 100px; text-align: center">
                             <div class="row">
