@@ -181,4 +181,32 @@ class LogTest extends CakeTestCase {
 		}
 	}
 
+	public function testReviewFirstTimeActivity() {
+        $activityId = 99;
+        $playerId = DEVELOPER_1_ID;
+        $this->utils->Activity->save(array(
+        	'id' => $activityId, 
+        	'name' => 'Activity 99', 
+        	'reported' => 1, 
+        	'domain_id' => 1, 
+        	'xp' => rand(5, 100)
+    	));
+
+    	$this->utils->Log->save(array(
+            'activity_id' => $activityId, 
+            'player_id' => $playerId, 
+            'acquired' => date('Y-m-d')
+        ));
+
+        $this->utils->Log->review($this->utils->Log->id);
+        $notification = $this->utils->Notification->find('first', array(
+        	'conditions' => array(
+        		'Notification.player_id' => $playerId,
+        		'Notification.title LIKE' => '%first%'
+    		)
+    	));
+        $this->assertNotEmpty($notification);
+
+	}
+
 }

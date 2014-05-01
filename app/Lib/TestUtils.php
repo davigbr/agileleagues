@@ -77,39 +77,39 @@ class TestUtils {
 
     public function generateActivities() {
         $this->Activity->saveMany(array(
-            array('id' => 1, 'name' => 'Activity 1', 'code' => 1, 'reported' => 1, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 2, 'name' => 'Activity 2', 'code' => 2, 'reported' => 10, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 3, 'name' => 'Activity 3', 'code' => 3, 'reported' => 100, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 4, 'name' => 'Activity 4', 'code' => 4, 'reported' => 1000, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 5, 'name' => 'Activity 5', 'code' => 5, 'reported' => 10000, 'domain_id' => 2, 'xp' => rand(5, 100)),
-            array('id' => 6, 'name' => 'Activity 6', 'code' => 6, 'reported' => 100000, 'domain_id' => 2, 'xp' => rand(5, 100)),
-            array('id' => 7, 'name' => 'Activity 7', 'code' => 7, 'reported' => 1000000, 'domain_id' => 2, 'xp' => rand(5, 100)),
-            array('id' => 8, 'name' => 'Activity 8', 'code' => 8, 'reported' => 10000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_10),
-            array('id' => 9, 'name' => 'Activity 9', 'code' => 9, 'reported' => 100000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_20),
-            array('id' => 10, 'name' => 'Activity 10', 'code' => 10, 'reported' => 0, 'domain_id' => 2, 'xp' => 1000),
+            array('id' => 1, 'name' => 'Activity 1', 'reported' => 1, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 2, 'name' => 'Activity 2', 'reported' => 10, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 3, 'name' => 'Activity 3', 'reported' => 100, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 4, 'name' => 'Activity 4', 'reported' => 1000, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 5, 'name' => 'Activity 5', 'reported' => 10000, 'domain_id' => 2, 'xp' => rand(5, 100)),
+            array('id' => 6, 'name' => 'Activity 6', 'reported' => 100000, 'domain_id' => 2, 'xp' => rand(5, 100)),
+            array('id' => 7, 'name' => 'Activity 7', 'reported' => 1000000, 'domain_id' => 2, 'xp' => rand(5, 100)),
+            array('id' => 8, 'name' => 'Activity 8', 'reported' => 10000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_10),
+            array('id' => 9, 'name' => 'Activity 9', 'reported' => 100000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_20),
+            array('id' => 10, 'name' => 'Activity 10', 'reported' => 0, 'domain_id' => 2, 'xp' => 1000),
         ));
     }
 
     public function generateInactiveActivities() {
         $this->Activity->saveMany(array(
-            array('id' => 11, 'name' => 'Inactive Activity 1', 'code' => 11, 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 12, 'name' => 'Inactive Activity 2', 'code' => 12, 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 13, 'name' => 'Inactive Activity 3', 'code' => 13, 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 14, 'name' => 'Inactive Activity 4', 'code' => 14, 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 15, 'name' => 'Inactive Activity 5', 'code' => 15, 'domain_id' => 2, 'inactive' => 1),
-            array('id' => 16, 'name' => 'Inactive Activity 6', 'code' => 16, 'domain_id' => 2, 'inactive' => 1),
-            array('id' => 17, 'name' => 'Inactive Activity 7', 'code' => 17, 'domain_id' => 2, 'inactive' => 1),
-            array('id' => 18, 'name' => 'Inactive Activity 8', 'code' => 18, 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 11, 'name' => 'Inactive Activity 1', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 12, 'name' => 'Inactive Activity 2', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 13, 'name' => 'Inactive Activity 3', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 14, 'name' => 'Inactive Activity 4', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 15, 'name' => 'Inactive Activity 5', 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 16, 'name' => 'Inactive Activity 6', 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 17, 'name' => 'Inactive Activity 7', 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 18, 'name' => 'Inactive Activity 8', 'domain_id' => 2, 'inactive' => 1),
         ));
     }
 
 
     public function generateBadges() {
         $this->Badge->saveMany(array(
-            array('id' => 1, 'name' => 'Badge 1', 'code' => 1, 'domain_id' => 1, 'abbr' => 'BG1'),
-            array('id' => 2, 'name' => 'Badge 2', 'code' => 2, 'domain_id' => 1, 'abbr' => 'BG2'),
-            array('id' => 3, 'name' => 'Badge 3', 'code' => 3, 'domain_id' => 2, 'abbr' => 'BG3'),
-            array('id' => 4, 'name' => 'Badge 4', 'code' => 4, 'domain_id' => 2, 'abbr' => 'BG4'),
+            array('id' => 1, 'name' => 'Badge 1', 'domain_id' => 1, 'abbr' => 'BG1'),
+            array('id' => 2, 'name' => 'Badge 2', 'domain_id' => 1, 'abbr' => 'BG2'),
+            array('id' => 3, 'name' => 'Badge 3', 'domain_id' => 2, 'abbr' => 'BG3'),
+            array('id' => 4, 'name' => 'Badge 4', 'domain_id' => 2, 'abbr' => 'BG4'),
         ));
     }
 
