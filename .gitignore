@@ -1,7 +1,6 @@
 # User specific & automatically generated files #
 #################################################
-/app/tmp/cache/models/*
-/app/tmp/cache/persistent/*
+/app/tmp/cache/*
 /app/tmp/sessions/*
 /app/tmp/tests/*
 /app/tmp/logs/*
