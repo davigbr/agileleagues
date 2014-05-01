@@ -49,7 +49,7 @@ class NotificationTest extends CakeTestCase {
 			$this->utils->Notification->_broadcast('', 'texto', 'success');
 			$this->fail();
 		} catch (Exception $ex) {
-			$this->assertEquals('Could not broad notification', $ex->getMessage());
+			$this->assertEquals('Could not broadcast notification', $ex->getMessage());
 		}
 	}
 
@@ -68,6 +68,29 @@ class NotificationTest extends CakeTestCase {
 		foreach ($notifications as $notification) {
 			$this->assertEquals(1, (int)$notification['Notification']['read']);
 		}
+	}
+
+	public function testSendBroadcast() {
+		$this->utils->Notification->query('DELETE FROM notification');
+		$this->utils->Notification->send('a', 'b', 'success');	
+		$playersCount = $this->utils->Player->find('count');
+		$notificationsCount = $this->utils->Notification->find('count');
+		$this->assertEquals($playersCount, $notificationsCount);
+	}
+
+	public function testSend() {
+		$this->utils->Notification->query('DELETE FROM notification');
+		$playerId = DEVELOPER_1_ID;
+		$this->utils->Notification->send('a', 'b', 'success', $playerId);	
+		$notificationsCount = $this->utils->Notification->find('count');
+		$this->assertEquals(1, $notificationsCount);
+	}
+
+	public function testSendException() {
+		$this->utils->Notification->query('DELETE FROM notification');
+		$playerId = DEVELOPER_1_ID;
+		$this->setExpectedException('Exception');
+		$this->utils->Notification->send('', '', 'success', $playerId);	
 	}
 
 }

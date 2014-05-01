@@ -7,6 +7,7 @@ class Notification extends AppModel {
 	public $useTable = 'notification';
 	public $displayField = 'text';
 	public $belongsTo = array('Player');
+	public $order = array('Notification.created' => 'DESC');
 
 	public $validate = array(
 		'title' => 'notEmpty',
@@ -23,6 +24,30 @@ class Notification extends AppModel {
 			),
 			'limit' => $limit
 		));
+	}
+
+	/**
+	 * Controller method only!
+	 */
+	public function send($title, $text, $type, $playerId = null) {
+		$ds = $this->getDataSource();
+		$ds->begin();
+		try {
+			if (!$playerId) {
+				$this->_broadcast($title, $text, $type);
+			} else {
+				$this->_add(array(
+					'type' => $type,
+		            'title' => $title,
+		            'text' => $text,
+		            'player_id' => $playerId
+				));
+			}
+			$ds->commit();
+		} catch (Exception $ex) {
+			$ds->rollback();
+			throw $ex;
+		}
 	}
 
 	public function _add($data) {
@@ -66,7 +91,7 @@ class Notification extends AppModel {
 		}
 		$saved = $this->saveMany($notifications);
 		if ($saved === false) {
-			throw new Exception('Could not broad notification');
+			throw new Exception('Could not broadcast notification');
 		}
 		return true;
 	}

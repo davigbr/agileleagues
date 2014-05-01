@@ -169,6 +169,29 @@
 			<?endif;?>
 		</ul>
 	</li>
+	<?if ($isScrumMaster): ?>
+		<li data-controller="notifications">
+			<a href="#">
+				<i class="entypo-mail"></i>
+				<span>Notifications</span>
+				<span class="badge badge-danger">NEW</span>
+			</a>
+			<ul>
+				<li data-action="index">
+					<a href="<? echo $this->Html->url('/notifications'); ?>"><i class="entypo-list"></i>
+						<span>Last Notifications</span>
+						<span class="badge badge-danger">NEW</span>
+					</a>
+				</li>
+				<li data-action="send">
+					<a href="<? echo $this->Html->url('/notifications/send'); ?>"><i class="entypo-pencil"></i>
+						<span>Send</span>
+						<span class="badge badge-danger">NEW</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	<?endif;?>
 </ul>
 
 <script type="text/javascript">

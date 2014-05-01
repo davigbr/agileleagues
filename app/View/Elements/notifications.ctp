@@ -1,4 +1,4 @@
-<? if ($loggedPlayer !== null && isset($notifications)) :?>
+<? if ($loggedPlayer !== null && isset($notificationsUnread)) :?>
 
 <script type="text/javascript">
 	$(function() {
@@ -16,7 +16,7 @@
 			'showMethod': 'fadeIn',
 			'hideMethod': 'fadeOut'
 		};
-		var notifications = <? echo json_encode($notifications); ?>;
+		var notifications = <? echo json_encode($notificationsUnread); ?>;
 		for (var i in notifications) {
 			var notification = notifications[i];
 			var type = notification.Notification['type'];
@@ -29,7 +29,7 @@
 </script>
 
 <?
-	$this->Notifications->markAsRead($notifications); 
+	$this->Notifications->markAsRead($notificationsUnread); 
 ?>
 
 <?endif;?>

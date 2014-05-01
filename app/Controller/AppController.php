@@ -105,7 +105,7 @@ class AppController extends Controller {
 
 			if (!$this->request->is('ajax') && $this->request->is('get')) {
 				$notifications = $this->Notification->unread($playerId, 5);
-				$this->set('notifications', $notifications);
+				$this->set('notificationsUnread', $notifications);
 			}
 
 			$this->isDeveloper = $this->player['Player']['player_type_id'] == PLAYER_TYPE_DEVELOPER;
