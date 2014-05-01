@@ -26,6 +26,7 @@ class Notification extends AppModel {
 	}
 
 	public function _add($data) {
+		$this->create();
 		$saved = $this->save($data);
 		if (!$saved) {
 			throw new Exception('Could not save notification');
@@ -63,7 +64,6 @@ class Notification extends AppModel {
 	            'player_id' => $id
 			);
 		}
-
 		$saved = $this->saveMany($notifications);
 		if ($saved === false) {
 			throw new Exception('Could not broad notification');

@@ -31,17 +31,18 @@ class XpLog extends AppModel {
 			'player_id' => $playerId,
 			'xp' => $xp
 		));
-		$this->_levelUpNotification($playerBefore);
+		$this->_levelUpNotification($playerBefore, $xp);
 	}
 
 	public function _eventJoined($playerId, $eventId) {
 		$playerBefore = $this->Player->findById($playerId);		
+		$xp = EVENT_JOIN_XP;
 		$this->_add(array(
 			'event_id_joined' => $eventId,
 			'player_id' => $playerId,
-			'xp' => EVENT_JOIN_XP
+			'xp' => $xp
 		));
-		$this->_levelUpNotification($playerBefore);
+		$this->_levelUpNotification($playerBefore, $xp);
 	}
 
 	public function _activityReviewed($activityId) {
@@ -85,13 +86,14 @@ class XpLog extends AppModel {
 			throw new Exception('Player not found');
 		}
 
+		$xp = $activity['Activity']['xp'];
 		$this->_add(array(
 			'activity_id' => $activityId,
 			'player_id' => $playerId,
-			'xp' => $activity['Activity']['xp']
+			'xp' => $xp
 		));
 
-		$this->_levelUpNotification($playerBefore);
+		$this->_levelUpNotification($playerBefore, $xp);
 	}
 
 	public function _eventTaskReviewed($eventTaskId) {
@@ -135,22 +137,22 @@ class XpLog extends AppModel {
 			throw new Exception('Player not found');
 		}
 
+		$xp = $eventTask['EventTask']['xp'];
 		$this->_add(array(
 			'event_task_id' => $eventTaskId,
 			'player_id' => $playerId,
-			'xp' => $eventTask['EventTask']['xp']
+			'xp' => $xp
 		));
 
-
-		$this->_levelUpNotification($playerBefore);
+		$this->_levelUpNotification($playerBefore, $xp);
 	}
 
-	private function _levelUpNotification($playerBefore) {
-		$levelBefore = $playerBefore['Player']['level'];
+	public function _levelUpNotification($playerBefore, $xpGained) {
+		$levelBefore = (int)$playerBefore['Player']['level'];
 		$playerName = h($playerBefore['Player']['name']);
 		$playerId = $playerBefore['Player']['id'];
 
-		$levelAfter = $this->Player->field('level',  array('Player.id' => $playerId));
+		$levelAfter = $this->Player->level($playerBefore['Player']['xp'] + $xpGained);
 
 		if ($levelAfter > $levelBefore) {
 			switch ($levelAfter) {

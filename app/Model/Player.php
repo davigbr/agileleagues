@@ -70,7 +70,7 @@ class Player extends AppModel {
     }
 
     public function level($xp) {
-        return 1 + 0.0464159 * pow($xp, 2/3);
+        return (int)(1 + 0.0464159 * pow($xp, 2/3));
     }
 
     public function xp($level) {

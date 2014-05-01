@@ -221,4 +221,24 @@ class XpLogTest extends CakeTestCase {
 			$this->assertEquals('Activity not found', $ex->getMessage());
 		}
 	}
+
+	public function testLevelUpNotification() {
+		$playerId = DEVELOPER_1_ID;
+		$playerBefore = $this->utils->Player->findById($playerId);
+		$xp = 20;
+		// Raise the player xp points (to level 5)
+		$playerUpdate = array('Player' => array(
+			'id' => $playerId,
+			'xp' => $playerBefore['Player']['xp'] + $xp
+		));
+		$this->utils->Player->save($playerUpdate);
+		$this->utils->XpLog->_levelUpNotification($playerBefore, $xp);
+		$notification = $this->utils->Notification->find('first', array(
+			'conditions' => array(
+				'Notification.player_id' => $playerId,
+				'Notification.title LIKE' => '%Level Up%'
+			)
+		));
+		$this->assertNotEmpty($notification);
+	}
 }
