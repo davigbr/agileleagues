@@ -75,11 +75,20 @@ class Log extends AppModel {
 			if (!$log) {
 				throw new ModelException('Log not found');
 			}
+			
 			$activityId = $log['Log']['activity_id'];
 			$activityName = $this->Activity->field('name', array('Activity.id' => $activityId));
 			$playerId = $log['Log']['player_id'];
 			$playerName = $this->Player->field('name', array('Player.id' => $playerId));
-			
+
+			// Verifica se esta atividade já foi logada (e revisada)
+			$logged = $this->find('count', array(
+				'conditions'=> array(
+					'Log.activity_id' => $activityId,
+					'Log.reviewed IS NOT NULL'
+				)
+			));
+
 			$this->query('UPDATE log SET reviewed = NOW() WHERE id = ?', array($this->id));
 			$this->query('UPDATE activity SET reported = reported + 1 WHERE id = ?', array($activityId));
 
@@ -90,11 +99,13 @@ class Log extends AppModel {
 			$this->XpLog->_activityReviewed($activityId);
 
 			// Se foi a primeira vez que esta atividade foi logada, gera uma notificação
-			$this->Notification->_success(
-				$playerId, 
-				'First Time Completion', 
-				__('The %s activity was completed for the first time in this game. Congratulations, %s!', $activityName, $playerName)
-			);
+			if (!$logged) {
+				$this->Notification->_success(
+					$playerId, 
+					'First Time Completion', 
+					__('The %s activity was completed for the first time in this game. Congratulations, %s!', $activityName, $playerName)
+				);
+			}
 
 			$this->commit();
 		} catch (ModelException $ex) {

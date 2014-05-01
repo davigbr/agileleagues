@@ -206,7 +206,28 @@ class LogTest extends CakeTestCase {
     		)
     	));
         $this->assertNotEmpty($notification);
+	}
 
+	public function testReviewNotFirstTimeActivity() {
+        $playerId = DEVELOPER_1_ID;
+        $log = $this->utils->Log->findByPlayerId($playerId);
+        $this->assertNotEmpty($log);
+        $activityId = $log['Log']['activity_id'];
+
+    	$this->utils->Log->save(array(
+            'activity_id' => $activityId, 
+            'player_id' => $playerId, 
+            'acquired' => date('Y-m-d')
+        ));
+
+        $this->utils->Log->review($this->utils->Log->id);
+        $notification = $this->utils->Notification->find('first', array(
+        	'conditions' => array(
+        		'Notification.player_id' => $playerId,
+        		'Notification.title LIKE' => '%first%'
+    		)
+    	));
+        $this->assertEmpty($notification);
 	}
 
 }
