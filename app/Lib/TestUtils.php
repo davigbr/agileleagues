@@ -10,6 +10,7 @@ define('XP_TO_REACH_LEVEL_20', 8000);
 class TestUtils {
 
     private $models = array(
+        'Configuration',
         'XpLog',    
         'EventCompleteLog',
         'EventTaskLog',

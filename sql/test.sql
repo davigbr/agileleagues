@@ -239,9 +239,9 @@ CREATE TABLE `badge_log` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique` (`badge_id`,`player_id`) USING HASH,
   KEY `fk_badge_log_player_id` (`player_id`),
-  CONSTRAINT `fk_badge_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`),
-  CONSTRAINT `fk_badge_log_badge_id` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_badge_log_badge_id` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`),
+  CONSTRAINT `fk_badge_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,6 +279,22 @@ SET character_set_client = utf8;
   `activity_id` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `configuration`
+--
+
+DROP TABLE IF EXISTS `configuration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `configuration` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(30) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key_idx` (`key`) USING HASH
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Temporary table structure for view `different_activities_completed`
@@ -347,7 +363,7 @@ CREATE TABLE `event` (
   PRIMARY KEY (`id`),
   KEY `fk_event_event_type_id` (`event_type_id`),
   CONSTRAINT `fk_event_event_type_id` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -367,7 +383,7 @@ CREATE TABLE `event_activity` (
   KEY `fk_event_activity_activity_id` (`activity_id`),
   CONSTRAINT `fk_event_activity_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`),
   CONSTRAINT `fk_event_activity_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -405,7 +421,7 @@ CREATE TABLE `event_complete_log` (
   KEY `fk_event_completed_log_player_id` (`player_id`),
   CONSTRAINT `fk_event_completed_log_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_event_completed_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -425,7 +441,7 @@ CREATE TABLE `event_join_log` (
   KEY `fk_event_join_log_player_id` (`player_id`),
   CONSTRAINT `fk_event_join_log_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_event_join_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -444,7 +460,7 @@ CREATE TABLE `event_task` (
   PRIMARY KEY (`id`),
   KEY `fk_event_task_event_id` (`event_id`),
   CONSTRAINT `fk_event_task_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -468,7 +484,7 @@ CREATE TABLE `event_task_log` (
   CONSTRAINT `fk_event_task_log_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_event_task_log_event_task_id` FOREIGN KEY (`event_task_id`) REFERENCES `event_task` (`id`),
   CONSTRAINT `fk_event_task_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -483,7 +499,7 @@ CREATE TABLE `event_type` (
   `name` varchar(30) NOT NULL,
   `level_required` smallint(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -528,7 +544,7 @@ CREATE TABLE `log` (
   CONSTRAINT `fk_log_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`),
   CONSTRAINT `fk_log_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=790 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=811 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -549,7 +565,7 @@ CREATE TABLE `notification` (
   `action` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_notification_player_id` (`player_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=482 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=618 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -689,13 +705,13 @@ CREATE TABLE `xp_log` (
   KEY `fk_xp_log_event_task_id` (`event_task_id`),
   KEY `fk_xp_log_event_task_id_reviewed` (`event_task_id_reviewed`),
   KEY `fk_xp_log_player_id` (`player_id`),
-  CONSTRAINT `fk_xp_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`),
   CONSTRAINT `fk_xp_log_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`),
   CONSTRAINT `fk_xp_log_activity_id_reviewed` FOREIGN KEY (`activity_id_reviewed`) REFERENCES `activity` (`id`),
   CONSTRAINT `fk_xp_log_event_id_completed` FOREIGN KEY (`event_id_completed`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_xp_log_event_task_id` FOREIGN KEY (`event_task_id`) REFERENCES `event_task` (`id`),
-  CONSTRAINT `fk_xp_log_event_task_id_reviewed` FOREIGN KEY (`event_task_id_reviewed`) REFERENCES `event_task` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=414 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_xp_log_event_task_id_reviewed` FOREIGN KEY (`event_task_id_reviewed`) REFERENCES `event_task` (`id`),
+  CONSTRAINT `fk_xp_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=454 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -988,12 +1004,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `player_activity_coins` AS select `log`.`player_id` AS `player_id`,`player`.`name` AS `player_name`,count(0) AS `coins`,sum(`log`.`spent`) AS `spent`,(count(0) - sum(`log`.`spent`)) AS `remaining`,`log`.`activity_id` AS `activity_id`,`log`.`reviewed` AS `log_reviewed`,`activity`.`name` AS `activity_name`,`activity`.`description` AS `activity_description`,`domain`.`id` AS `domain_id`,`domain`.`name` AS `domain_name`,`domain`.`abbr` AS `domain_abbr`,`domain`.`color` AS `domain_color` from (((`log` join `activity` on((`activity`.`id` = `log`.`activity_id`))) join `player` on((`player`.`id` = `log`.`player_id`))) join `domain` on((`domain`.`id` = `activity`.`domain_id`))) group by `log`.`activity_id`,`log`.`player_id` order by `log`.`player_id`,`activity`.`domain_id`,`activity`.`name` */;
+/*!50001 VIEW `player_activity_coins` AS select `log`.`player_id` AS `player_id`,`player`.`name` AS `player_name`,count(0) AS `coins`,sum(`log`.`spent`) AS `spent`,(count(0) - sum(`log`.`spent`)) AS `remaining`,`log`.`activity_id` AS `activity_id`,`log`.`reviewed` AS `log_reviewed`,`activity`.`name` AS `activity_name`,`activity`.`description` AS `activity_description`,`domain`.`id` AS `domain_id`,`domain`.`name` AS `domain_name`,`domain`.`abbr` AS `domain_abbr`,`domain`.`color` AS `domain_color` from (((`log` join `activity` on((`activity`.`id` = `log`.`activity_id`))) join `player` on((`player`.`id` = `log`.`player_id`))) join `domain` on((`domain`.`id` = `activity`.`domain_id`))) where (`activity`.`inactive` = 0) group by `log`.`activity_id`,`log`.`player_id` order by `log`.`player_id`,`activity`.`domain_id`,`activity`.`name` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1026,4 +1042,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-16 21:03:08
+-- Dump completed on 2014-05-01 14:04:34

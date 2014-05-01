@@ -19,4 +19,13 @@ from (((`log`
 	join `domain` on((`domain`.`id` = `activity`.`domain_id`))) 
 where `activity`.inactive = 0
 group by `log`.`activity_id`,`log`.`player_id` 
-order by `log`.`player_id`,`activity`.`domain_id`, `activity`.`name`
+order by `log`.`player_id`,`activity`.`domain_id`, `activity`.`name`;
+
+CREATE TABLE `configuration` (
+`id`  int(10) UNSIGNED NULL AUTO_INCREMENT ,
+`key`  varchar(30) NOT NULL ,
+`value`  varchar(255) NOT NULL ,
+PRIMARY KEY (`id`),
+UNIQUE INDEX `key_idx` (`key`) USING HASH 
+);
+
