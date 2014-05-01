@@ -100,8 +100,7 @@ class Log extends AppModel {
 
 			// Se foi a primeira vez que esta atividade foi logada, gera uma notificação
 			if (!$logged) {
-				$this->Notification->_success(
-					$playerId, 
+				$this->Notification->_broadcast(
 					'First Time Completion', 
 					__('The %s activity was completed for the first time in this game. Congratulations, %s!', $activityName, $playerName)
 				);

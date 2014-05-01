@@ -199,13 +199,12 @@ class LogTest extends CakeTestCase {
         ));
 
         $this->utils->Log->review($this->utils->Log->id);
-        $notification = $this->utils->Notification->find('first', array(
+        $notifications = $this->utils->Notification->find('all', array(
         	'conditions' => array(
-        		'Notification.player_id' => $playerId,
-        		'Notification.title LIKE' => '%first%'
+        		'Notification.title' => 'First Time Completion'
     		)
     	));
-        $this->assertNotEmpty($notification);
+        $this->assertEquals($this->utils->Player->find('count'), count($notifications));
 	}
 
 	public function testReviewNotFirstTimeActivity() {
@@ -221,13 +220,12 @@ class LogTest extends CakeTestCase {
         ));
 
         $this->utils->Log->review($this->utils->Log->id);
-        $notification = $this->utils->Notification->find('first', array(
+        $notifications = $this->utils->Notification->find('all', array(
         	'conditions' => array(
-        		'Notification.player_id' => $playerId,
         		'Notification.title LIKE' => '%first%'
     		)
     	));
-        $this->assertEmpty($notification);
+        $this->assertEquals(0, count($notifications));
 	}
 
 }
