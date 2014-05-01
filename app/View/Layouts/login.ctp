@@ -43,7 +43,7 @@
 					<span>Agile</span>
 					<span style="color: #888">Leagues</span>
 				</span>
-				<p style="color: white" class="description">Dear user, please log in.</p>
+				<p style="color: white" class="description">Dear user, please enter your e-mail and password.</p>
 				<!-- progress bar indicator -->
 				<div class="login-progressbar-indicator">
 					<h3>43%</h3>
@@ -66,7 +66,7 @@
 							<div class="input-group-addon">
 								<i class="entypo-user"></i>
 							</div>
-							<input autocomplete="off" type="text" required="required" class="form-control" name="email" id="email" placeholder="E-mail" />
+							<input type="text" required="required" class="form-control" name="email" id="email" placeholder="E-mail" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -74,16 +74,16 @@
 							<div class="input-group-addon">
 								<i class="entypo-key"></i>
 							</div>
-							<input autocomplete="off" type="password" required="required" class="form-control" name="password" id="password" placeholder="Password"/>
+							<input type="password" required="required" class="form-control" name="password" id="password" placeholder="Password"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary btn-block btn-login">
-							Login In
-							<i class="entypo-login"></i>
+							Login
+							<!-- <i class="entypo-login"></i> -->
 						</button>
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<em>- or -</em>
 					</div>
 					<div class="form-group">
@@ -91,7 +91,16 @@
 							Login with Facebook
 							<i class="entypo-facebook"></i>
 						</button>
-					</div>
+					</div> -->
+
+					<p style="color: white">
+						For better experience, please use 
+					</p>
+					<br/>
+					<a href="http://www.google.com/chrome"><?= $this->Html->image('chrome.png', array('width' => 250))?></a>
+
+
+
 					<!-- 
 					You can also use other social network buttons
 					<div class="form-group">
@@ -109,8 +118,8 @@
 				</form>
 				<div class="login-bottom-links">
 					<a href="#" class="link">Forgot your password? Talk to the administrator (:</a>
-					<br />
-					<a href="#">Privacy Policy</a>
+					<!-- <br /> -->
+					<!-- <a href="#">Privacy Policy</a> -->
 				</div>
 			</div>
 		</div>
