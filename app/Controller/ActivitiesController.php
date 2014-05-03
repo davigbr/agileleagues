@@ -35,7 +35,9 @@ class ActivitiesController extends AppController {
 			if ($this->Activity->save($update)) {
 				$this->flashSuccess(__('Activity inactivated successfully!'));
 			} else {
+				//@codeCoverageIgnoreStart
 				$this->flashError(__('An error occurred while trying to inactivate the activity.'));
+				//@codeCoverageIgnoreEnd
 			}
 		}
 		

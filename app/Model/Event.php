@@ -81,8 +81,10 @@ class Event extends AppModel {
 			);
 			$this->commit();
 		} catch (Exception $ex) {
+			//@codeCoverageIgnoreStart
 			$this->rollback();
 			throw $ex;
+			//@codeCoverageIgnoreEnd
 		}
 	}
 

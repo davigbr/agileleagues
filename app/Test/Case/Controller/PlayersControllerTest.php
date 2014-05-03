@@ -14,6 +14,29 @@ class PlayersControllerTest extends ControllerTestCase {
 		session_unset ();
 	}
 
+	public function testTeamGet() {
+		$id = DEVELOPER_1_ID;
+		$vars = $this->testAction('/players/team/' . $id, array('method' => 'get', 'return' => 'vars'));
+		$this->assertTrue(isset($vars['teams']));
+	}
+
+	public function testTeamNotFound() {
+		$this->setExpectedException('NotFoundException');
+		$this->testAction('/players/team/0', array('method' => 'get'));
+	}
+
+	public function testTeamPost() {
+		$id = DEVELOPER_1_ID;
+		$teamId = TEAM_ID_EMPTY;
+		$data = array('Player' => array(
+			'id' => $id,
+			'team_id' => $teamId
+		));
+		$this->testAction('/players/team/' . $id, array('return' => 'vars', 'data' => $data));
+		$player = $this->utils->Player->findById($id);
+		$this->assertEquals($teamId, (int)$player['Player']['team_id']);
+	}
+
 	public function testIndex() {
 		$this->controllerUtils->mockAuthUser();
 
@@ -27,6 +50,7 @@ class PlayersControllerTest extends ControllerTestCase {
 				'email', 
 				'password', 
 				'xp', 
+				'team_id',
 				'level', 
 				'next_level_total_xp', 
 				'next_level_xp', 

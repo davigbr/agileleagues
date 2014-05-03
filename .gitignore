@@ -12,6 +12,7 @@
 /tags
 /app/Config/core.php
 /app/Config/database.php
+/app/webroot/coverage
 
 # OS generated files #
 ######################

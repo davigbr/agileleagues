@@ -31,9 +31,6 @@ class Log extends AppModel {
 
 	public function beforeInsert($options = array()) {
 		$activity = $this->Activity->findById($this->data['Log']['activity_id']);
-		if (!$activity) {
-			return false;
-		}
 		$this->data['Log']['domain_id'] = $activity['Activity']['domain_id'];
 		$this->data['Log']['xp'] = $activity['Activity']['xp'];
 		return true;

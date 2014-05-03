@@ -1,5 +1,8 @@
 <?php
 
+define('TEAM_ID', 1);
+define('TEAM_ID_EMPTY', 2);
+
 define('DEVELOPER_1_ID', 1);
 define('DEVELOPER_2_ID', 2);
 define('SCRUMMASTER_ID', 3);
@@ -28,6 +31,7 @@ class TestUtils {
         'Domain', 
         'Event',
         'EventType',
+        'Team',
         'Player',
         'PlayerType'
     );
@@ -56,16 +60,51 @@ class TestUtils {
         }
     }
 
+    public function generatePO($name) {
+        $saved = $this->generatePlayer($name, PLAYER_TYPE_PRODUCT_OWNER);
+        return $saved;
+    }
+
+    public function generatePlayer($name = 'Player', $type = PLAYER_TYPE_DEVELOPER) {
+        $this->generatePlayerTypes();
+        $email = md5($name) . '@email.com';
+        $saved = $this->Player->save(array('Player' => array(
+            'name' => $name, 
+            'player_type_id' => $type,
+            'email' => $email,
+            'password' => 123456,
+            'repeat_password' => 123456,
+            'team_id' => null
+        )));
+        return $saved;
+    }
+
+    public function generatePlayerTypes() {
+        if ($this->PlayerType->find('count') === 0) { 
+            $this->PlayerType->saveMany(array(
+                array('id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer'),
+                array('id' => PLAYER_TYPE_SCRUMMASTER, 'name' => 'ScrumMaster'),
+                array('id' => PLAYER_TYPE_PRODUCT_OWNER, 'name' => 'Product Owner'),
+            ));
+        }
+    }
+
     public function generatePlayers() {
-        $this->PlayerType->saveMany(array(
-            array('id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer'),
-            array('id' => PLAYER_TYPE_SCRUMMASTER, 'name' => 'ScrumMaster'),
-            array('id' => PLAYER_TYPE_PRODUCT_OWNER, 'name' => 'Product Owner'),
-        ));
+        $this->generatePlayerTypes();
+
+        $teamId = $this->Team->find('count') > 0? TEAM_ID : null;
+
         $this->Player->saveMany(array(
-            array('id' => DEVELOPER_1_ID, 'player_type_id' => 1, 'name' => 'Developer 1', 'email' => 'email1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 500),
-            array('id' => DEVELOPER_2_ID, 'player_type_id' => 1, 'name' => 'Developer 2', 'email' => 'email2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100),
-            array('id' => SCRUMMASTER_ID, 'player_type_id' => 2, 'name' => 'ScrumMaster', 'email' => 'scrummaster@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999),
+            array('id' => DEVELOPER_1_ID, 'team_id' => $teamId, 'player_type_id' => 1, 'name' => 'Developer 1', 'email' => 'email1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 500),
+            array('id' => DEVELOPER_2_ID, 'team_id' => $teamId, 'player_type_id' => 1, 'name' => 'Developer 2', 'email' => 'email2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100),
+            array('id' => SCRUMMASTER_ID, 'team_id' => $teamId, 'player_type_id' => 2, 'name' => 'ScrumMaster', 'email' => 'scrummaster@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999),
+        ));
+    }
+
+    public function generateTeams() {
+        $this->Team->saveMany(array(
+            array('id' => TEAM_ID, 'name' => 'Team 1', 'player_id_product_owner' => null, 'player_id_scrummaster' => SCRUMMASTER_ID),
+            array('id' => TEAM_ID_EMPTY, 'name' => 'Team 2', 'player_id_product_owner' => null, 'player_id_scrummaster' => null),
         ));
     }
 

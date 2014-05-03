@@ -8,10 +8,40 @@ class PlayerTest extends CakeTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
+		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
 		$this->utils->generateLogs();
+	}
+
+	public function testFreeDeveloperList() {
+		$this->utils->generatePlayer('Developer');
+		$list = $this->utils->Player->freeDeveloperList();
+		$this->assertNotEmpty($list);
+		foreach ($list as $id => $name) {
+			$this->assertTrue(is_int($id));
+			$this->assertTrue(is_string($name));
+		}
+	}
+
+	public function testScrumMasterList() {
+		$list = $this->utils->Player->scrumMasterList();
+		$this->assertNotEmpty($list);
+		foreach ($list as $id => $name) {
+			$this->assertTrue(is_int($id));
+			$this->assertTrue(is_string($name));
+		}
+	}
+
+	public function testProductOwnerList() {
+		$this->utils->generatePO('Product Owner');
+		$list = $this->utils->Player->productOwnerList();
+		$this->assertNotEmpty($list);
+		foreach ($list as $id => $name) {
+			$this->assertTrue(is_int($id));
+			$this->assertTrue(is_string($name));
+		}
 	}
 
 	public function testDevelopersCount() {

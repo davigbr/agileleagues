@@ -34,35 +34,17 @@
 	?>
 	<?= $this->element('meta') ?>
 </head>
-<body class="page-body gray">
-	<div class="page-container <? echo $collapseSidebar? 'sidebar-collapsed' : '' ?>">
-		<div class="sidebar-menu">
-			<header class="logo-env">
-				<div class="logo">
-					<?= $this->element('logo')?>
-				</div>
-				<div class="sidebar-collapse">
-					<a href="#" class="sidebar-collapse-icon with-animation">
-						<i class="entypo-menu"></i>
-					</a>
-				</div>
-				<div class="sidebar-mobile-menu visible-xs">
-					<a href="#" class="with-animation">
-						<i class="entypo-menu"></i>
-					</a>
-				</div>
-			</header>
-			<? echo $this->element('main_menu'); ?>		
-		</div>	
+<body class="page-body">
+	<div class="page-container horizontal-menu sidebar-collapsed">
+		<?= $this->element('home_menu') ?>
 		<div class="main-content">
-			<? echo $this->element('topbar'); ?>
-			<? echo $this->element('messages') ?>	
-			<? echo $this->fetch('content'); ?>
-			<? echo $this->element('footer'); ?>	
+			<div class="container">
+				<? echo $this->element('messages') ?>	
+				<? echo $this->fetch('content'); ?>
+				<? echo $this->element('footer'); ?>	
+			</div>
 		</div>
 	</div>
-
-	<? echo $this->element('notifications'); ?>
 
 	<link rel="stylesheet" href="<? echo Router::url('/assets/js/jvectormap/jquery-jvectormap-1.2.2.css'); ?>">
 	<link rel="stylesheet" href="<? echo Router::url('/assets/js/rickshaw/rickshaw.min.css'); ?>">

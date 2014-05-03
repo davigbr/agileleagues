@@ -39,10 +39,12 @@
 	<div class="login-container">
 		<div class="login-header login-caret">
 			<div class="login-content">
-				<span style="color: white; font-size:50px">
-					<span>Agile</span>
-					<span style="color: #888">Leagues</span>
-				</span>
+				<a href="<?= Router::url('/', true); ?>">
+					<span style="color: white; font-size:50px">
+						<span>Agile</span>
+						<span style="color: #888">Leagues</span>
+					</span>
+				</a>
 				<p style="color: white" class="description">Dear user, please enter your e-mail and password.</p>
 				<!-- progress bar indicator -->
 				<div class="login-progressbar-indicator">

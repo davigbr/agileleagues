@@ -4,6 +4,8 @@ App::uses('AppController', 'Controller');
 
 class PlayersController extends AppController {
 
+	public $uses = array('Team');
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow('login', 'logout');
@@ -33,6 +35,28 @@ class PlayersController extends AppController {
 
 	public function logout() {
 		$this->redirect($this->Auth->logout());
+	}
+
+	// Change team
+	public function team($id) {
+		$this->set('teams', $this->Team->simple());
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->Player->save($this->request->data)) {
+				$this->flashSuccess(__('Player saved successfully!'));
+				return $this->redirect('/players');
+			} 
+			else {
+				//@codeCoverageIgnoreStart
+				$this->flashError(__('Error while trying to save player.'));
+				// @codeCoverageIgnoreEnd
+			}
+		} else {
+			$this->request->data = $this->Player->findById($id);
+			if (!$this->request->data) {
+				throw new NotFoundException();
+			}
+		}
 	}
 
 	public function myaccount() {

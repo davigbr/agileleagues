@@ -20,7 +20,7 @@
 			</tr>
 			<?if (empty($activities)): ?>
 				<tr>
-					<td colspan="1000">
+					<td colspan="6">
 						<p style="text-align: center">No activities :(</p>
 					</td>
 				</tr>

@@ -107,7 +107,7 @@ class AppController extends Controller {
 				$notifications = $this->Notification->unread($playerId, 5);
 				$this->set('notificationsUnread', $notifications);
 			}
-
+			
 			$this->isDeveloper = $this->player['Player']['player_type_id'] == PLAYER_TYPE_DEVELOPER;
 			$this->isScrumMaster = $this->player['Player']['player_type_id'] == PLAYER_TYPE_SCRUMMASTER;
 			$this->isProductOwner = $this->player['Player']['player_type_id'] == PLAYER_TYPE_PRODUCT_OWNER;

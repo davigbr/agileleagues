@@ -31,6 +31,14 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
 
+	public $layout = 'institutional';
+
+	public function beforeFilter() {
+		$this->Auth->allow();
+		parent::beforeFilter();
+	}
+
+
 	public function display() {
 		$path = func_get_args();
 
@@ -65,9 +73,5 @@ class PagesController extends AppController {
 	}
 
 	public function home() {
-		if ($this->Auth->user()) {
-			$this->redirect('/dashboards/activities');
-		}
-		
 	}
 }

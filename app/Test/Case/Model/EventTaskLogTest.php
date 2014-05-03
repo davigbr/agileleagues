@@ -103,4 +103,17 @@ class EventTaskLogTest extends CakeTestCase {
 		$this->assertNotNull($log['EventTaskLog']['reviewed']);
 	}
 
+	public function testReviewWithIdAlreadyReviewed() {
+		$log = $this->utils->EventTaskLog->findByReviewed(null);
+		$this->assertNull($log['EventTaskLog']['reviewed']);
+		$id = $log['EventTaskLog']['id'];
+		$this->utils->EventTaskLog->review($id);
+		try {
+			$this->utils->EventTaskLog->review($id);
+			$this->fail();
+		} catch (Exception $ex){
+			$this->assertEquals('Log already reviewed', $ex->getMessage());
+		}
+	}
+
 }

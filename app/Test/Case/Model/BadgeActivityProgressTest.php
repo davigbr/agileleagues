@@ -13,14 +13,18 @@ class BadgeActivityProgressTest extends CakeTestCase {
 		$this->utils->generateActivities();
 		$this->utils->generateLogs();
 		$this->utils->generateBadges();
+		$this->utils->generateBadgeRequisites();
+		$this->utils->generateActivityRequisites();
 		$this->utils->generateBadgeLogs();
 	}
 
 	public function testAllFromPlayerByBadgeIdAndActivityId() {
-		$this->utils->BadgeActivityProgress->allFromPlayerByBadgeIdAndActivityId(1);
+		$all = $this->utils->BadgeActivityProgress->allFromPlayerByBadgeIdAndActivityId(1);
+		$this->assertNotEmpty($all);
 	}
 
 	public function testAllFromBadgeAndPlayer() {
-		$this->utils->BadgeActivityProgress->allFromBadgeAndPlayer(1, 1);
+		$all = $this->utils->BadgeActivityProgress->allFromBadgeAndPlayer(1, 1);
+		$this->assertNotEmpty($all);
 	}
 }

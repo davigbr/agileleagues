@@ -7,7 +7,7 @@ class Player extends AppModel {
 	
 	public $useTable = 'player';
     public $order = array('Player.player_type_id' => 'ASC', 'Player.name' => 'ASC');
-	public $belongsTo = array('PlayerType');
+	public $belongsTo = array('PlayerType', 'Team');
     public $hasOne = array('PlayerTotalActivityCoins');
     public $hasMany = array('PlayerActivityCoins', 'Notification', 'BadgeLog');
 
@@ -26,14 +26,19 @@ class Player extends AppModel {
         )
     );
     
-    public $virtualFields = array(
-        'level' => 'player_level(Player.xp)',
-        'next_level_total_xp' => 'FLOOR(100 * POW(player_level(Player.xp), 3/2))',
-        'next_level_xp' => 'FLOOR(100 * POW(player_level(Player.xp), 3/2)) - FLOOR(100 * POW(-1 + player_level(Player.xp), 3/2))',
-        'next_level_xp_completed' => 'Player.xp - FLOOR(100 * POW(FLOOR(0.0464159 * POW(Player.xp, 2/3)), 3/2))',
-        'progress' => '100*(Player.xp - FLOOR(100 * POW(FLOOR(0.0464159 * POW(Player.xp, 2/3)), 3/2)))/(FLOOR(100 * POW(player_level(Player.xp), 3/2)) - FLOOR(100 * POW(-1 + player_level(Player.xp), 3/2)))',
-        'title' => 'SELECT `title` FROM `title` WHERE min_level > player_level(Player.xp) ORDER BY min_level ASC LIMIT 1'
-    );
+    public $virtualFields = array();
+
+    public function __construct($id = false, $table = null, $ds = null) {
+        parent::__construct($id, $table, $ds);
+        $alias = $this->alias;
+        $this->virtualFields['level'] = "player_level({$alias}.xp)";
+        $this->virtualFields['next_level_total_xp'] = "FLOOR(100 * POW(player_level({$alias}.xp), 3/2))";
+        $this->virtualFields['next_level_xp'] = "FLOOR(100 * POW(player_level({$alias}.xp), 3/2)) - FLOOR(100 * POW(-1 + player_level({$alias}.xp), 3/2))";
+        $this->virtualFields['next_level_xp_completed'] = "{$alias}.xp - FLOOR(100 * POW(FLOOR(0.0464159 * POW({$alias}.xp, 2/3)), 3/2))";
+        $this->virtualFields['progress'] = "100*({$alias}.xp - FLOOR(100 * POW(FLOOR(0.0464159 * POW({$alias}.xp, 2/3)), 3/2)))/(FLOOR(100 * POW(player_level({$alias}.xp), 3/2)) - FLOOR(100 * POW(-1 + player_level({$alias}.xp), 3/2)))";
+        $this->virtualFields['title'] = "SELECT title FROM title WHERE min_level > player_level({$alias}.xp) ORDER BY min_level ASC LIMIT 1";
+    }
+
 
     public function beforeSave($options = array()) {
         if (isset($this->data['Player']['password'])) {
@@ -96,4 +101,29 @@ class Player extends AppModel {
         return true;
     }
 	
+
+    public function freeDeveloperList() {
+        return $this->find('list', array(
+            'conditions' => array(
+                'Player.player_type_id' => PLAYER_TYPE_DEVELOPER,
+                'Player.team_id IS NULL'
+            )
+        ));
+    }
+
+    public function scrumMasterList() {
+        return $this->find('list', array(
+            'conditions' => array(
+                'Player.player_type_id' => PLAYER_TYPE_SCRUMMASTER
+            )
+        ));
+    }
+
+    public function productOwnerList() {
+        return $this->find('list', array(
+            'conditions' => array(
+                'Player.player_type_id' => PLAYER_TYPE_PRODUCT_OWNER
+            )
+        ));
+    }
 }

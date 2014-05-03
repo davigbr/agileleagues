@@ -191,6 +191,27 @@
 				</li>
 			</ul>
 		</li>
+		<li data-controller="teams">
+			<a href="#">
+				<i class="entypo-users"></i>
+				<span>Teams</span>
+				<span class="badge badge-danger">NEW</span>
+			</a>
+			<ul>
+				<li data-action="add">
+					<a href="<? echo $this->Html->url('/teams/add'); ?>"><i class="entypo-plus"></i>
+						<span>Create</span>
+						<span class="badge badge-danger">NEW</span>
+					</a>
+				</li>
+				<li data-action="index">
+					<a href="<? echo $this->Html->url('/teams'); ?>"><i class="entypo-list"></i>
+						<span>List all teams</span>
+						<span class="badge badge-danger">NEW</span>
+					</a>
+				</li>
+			</ul>
+		</li>
 	<?endif;?>
 </ul>
 

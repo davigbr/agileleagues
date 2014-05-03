@@ -5,6 +5,7 @@ class ControllerTestCaseUtils {
 	public function __construct(ControllerTestCase $controllerTestCase) {
 		$this->controllerTestCase = $controllerTestCase;
         $this->controllerName = substr(get_class($this->controllerTestCase), 0, -strlen('ControllerTest'));
+        CakeSession::destroy();
     }
 
     public function mockAuthLogin() {
