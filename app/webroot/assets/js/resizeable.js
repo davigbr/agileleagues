@@ -63,7 +63,7 @@ function resizable(breakpoint)
 	
 	
 	// Trigger Event
-	$(window).trigger('neon.resize');
+	jQuery(window).trigger('neon.resize');
 	
 	
 	// Fit main content height
@@ -77,7 +77,7 @@ function resizable(breakpoint)
 // Get current breakpoint
 function get_current_breakpoint()
 {
-	var width = $(window).width(),
+	var width = jQuery(window).width(),
 		breakpoints = public_vars.breakpoints;
 	
 	for(var breakpont_label in breakpoints)

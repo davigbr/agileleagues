@@ -474,7 +474,9 @@ var public_vars = public_vars || {};
 					min_val = attrDefault($this, 'min-val', 10),
 					max_val = attrDefault($this, 'max-val', 90),
 					
-					is_range = $this.is('[data-min-val]') || $this.is('[data-max-val]');
+					is_range = $this.is('[data-min-val]') || $this.is('[data-max-val]'),
+					
+					reps = 0;
 				
 				
 				// Range Slider Options
@@ -498,6 +500,25 @@ var public_vars = public_vars || {};
 							
 							if(fill)
 								$fill.val(min_val + ',' + max_val);
+								
+							reps++;
+						},
+						change: function(ev, ui)
+						{
+							if(reps == 1)
+							{
+								var opts = $this.data('uiSlider').options,
+									min_val = (prefix ? prefix : '') + ui.values[0] + (postfix ? postfix : ''),
+									max_val = (prefix ? prefix : '') + ui.values[1] + (postfix ? postfix : '');
+								
+								$label_1.html( min_val );
+								$label_2.html( max_val );
+								
+								if(fill)
+									$fill.val(min_val + ',' + max_val);
+							}
+							
+							reps = 0;
 						}
 					});
 				
@@ -512,6 +533,7 @@ var public_vars = public_vars || {};
 				// Normal Slider
 				else
 				{	
+					
 					$this.slider({
 						range: attrDefault($this, 'basic', 0) ? false : "min",
 						orientation: orientation,
@@ -528,6 +550,23 @@ var public_vars = public_vars || {};
 							
 							if(fill)
 								$fill.val(val);
+							
+							reps++;
+						},
+						change: function(ev, ui)
+						{
+							if(reps == 1)
+							{
+								var opts = $this.data('uiSlider').options,
+									val = (prefix ? prefix : '') + opts.value + (postfix ? postfix : '');
+								
+								$label_1.html( val );
+								
+								if(fill)
+									$fill.val(val);
+							}
+							
+							reps = 0;
 						}
 					});
 					
@@ -1006,6 +1045,7 @@ var public_vars = public_vars || {};
 						}
 					},
 					$fields = $this.find('[data-validate]');
+				
 					
 				$fields.each(function(j, el2)
 				{
@@ -1057,6 +1097,7 @@ var public_vars = public_vars || {};
 					}
 				});
 				
+				console.log( opts );
 				$this.validate(opts);
 			});
 		}
@@ -1284,14 +1325,16 @@ var public_vars = public_vars || {};
 		// Modal Static
 		public_vars.$body.on('click', '.modal[data-backdrop="static"]', function(ev)
 		{
-			var $modal_dialog = $(this).find('.modal-dialog .modal-content');
-			
-			var tt = new TimelineMax({paused: true});
-			
-			tt.append( TweenMax.to($modal_dialog, .1, {css: {scale: 1.1}, ease: Expo.easeInOut}) );
-			tt.append( TweenMax.to($modal_dialog, .3, {css: {scale: 1}, ease: Back.easeOut}) );
-			
-			tt.play();
+			if( $(ev.target).is('.modal') )
+			{			
+				var $modal_dialog = $(this).find('.modal-dialog .modal-content'),
+					tt = new TimelineMax({paused: true});
+				
+				tt.append( TweenMax.to($modal_dialog, .1, {css: {scale: 1.1}, ease: Expo.easeInOut}) );
+				tt.append( TweenMax.to($modal_dialog, .3, {css: {scale: 1}, ease: Back.easeOut}) );
+				
+				tt.play();
+			}
 		});
 		
 		
@@ -1444,6 +1487,8 @@ var public_vars = public_vars || {};
 /* Functions */
 function fit_main_content_height()
 {
+	var $ = jQuery;
+	
 	if(public_vars.$sidebarMenu.length && public_vars.$sidebarMenu.hasClass('fixed') == false)
 	{
 		public_vars.$sidebarMenu.css('min-height', '');
@@ -1463,7 +1508,8 @@ function fit_main_content_height()
 		var sm_height  = public_vars.$sidebarMenu.outerHeight(),
 			mc_height  = public_vars.$mainContent.outerHeight(),
 			doc_height = $(document).height(),
-			win_height = $(window).height();
+			win_height = $(window).height(),
+			sm_height_real = 0;
 		
 		if(win_height > doc_height)
 		{
@@ -1477,7 +1523,6 @@ function fit_main_content_height()
 			doc_height -= hm_height;
 			sm_height -= hm_height;
 		}
-		
 		
 		public_vars.$mainContent.css('min-height', doc_height);
 		public_vars.$sidebarMenu.css('min-height', doc_height);
@@ -1495,7 +1540,8 @@ function fit_main_content_height()
 // Sidebar Menu Setup
 function setup_sidebar_menu()
 {
-	var $items_with_submenu	  = public_vars.$sidebarMenu.find('li:has(ul)'),
+	var $ = jQuery,
+		$items_with_submenu	  = public_vars.$sidebarMenu.find('li:has(ul)'),
 		submenu_options		  = {
 			submenu_open_delay: 0.5,
 			submenu_open_easing: Sine.easeInOut,
@@ -1669,7 +1715,8 @@ function menu_set_active_class_to_parents($active_element)
 // Horizontal Menu Setup
 function setup_horizontal_menu()
 {
-	var $nav_bar_menu		  = public_vars.$horizontalMenu.find('.navbar-nav'),
+	var $					  = jQuery,
+		$nav_bar_menu		  = public_vars.$horizontalMenu.find('.navbar-nav'),
 		$items_with_submenu	  = $nav_bar_menu.find('li:has(ul)'),
 		$search				  = public_vars.$horizontalMenu.find('li#search'),
 		$search_input		  = $search.find('.search-input'),
@@ -1729,6 +1776,7 @@ function setup_horizontal_menu()
 				fit_main_content_height();
 			}
 		});
+		
 	});
 	
 	
@@ -1892,10 +1940,12 @@ function setCurrentProgressTab($rootwizard, $nav, $tab, $progress, index)
 // Replace Checkboxes
 function replaceCheckboxes()
 {
+	var $ = jQuery;
+	
 	$(".checkbox-replace:not(.neon-cb-replacement), .radio-replace:not(.neon-cb-replacement)").each(function(i, el)
 	{
 		var $this = $(el),
-			$input = $this.find('input'),
+			$input = $this.find('input:first'),
 			$wrapper = $('<label class="cb-wrapper" />'),
 			$checked = $('<div class="checked" />'),
 			checked_class = 'checked',
@@ -1920,7 +1970,8 @@ function replaceCheckboxes()
 		{	
 			if(is_radio)
 			{
-				$(".neon-cb-replacement input[type=radio][name='"+name+"']").closest('.neon-cb-replacement').removeClass(checked_class);
+				//$(".neon-cb-replacement input[type=radio][name='"+name+"']").closest('.neon-cb-replacement').removeClass(checked_class);
+				$(".neon-cb-replacement input[type=radio][name='"+name+"']:not(:checked)").closest('.neon-cb-replacement').removeClass(checked_class);
 			}
 			
 			if($input.is(':disabled'))
@@ -1939,6 +1990,8 @@ function replaceCheckboxes()
 // Scroll to Bottom
 function scrollToBottom($el)
 {
+	var $ = jQuery;
+	
 	if(typeof $el == 'string')
 		$el = $($el);
 		
@@ -2056,4 +2109,77 @@ function continueWrappingPanelTables()
 		$tables.wrap('<div class="panel-body with-table"></div>');
 		continueWrappingPanelTables();
 	}
+}
+
+
+function show_loading_bar(options)
+{
+	var defaults = {
+		pct: 0, 
+		delay: 1.3, 
+		wait: 0,
+		before: function(){},
+		finish: function(){},
+		resetOnEnd: true
+	};
+	
+	if(typeof options == 'object')
+		defaults = jQuery.extend(defaults, options);
+	else
+	if(typeof options == 'number')
+		defaults.pct = options;
+		
+	
+	if(defaults.pct > 100)
+		defaults.pct = 100;
+	else
+	if(defaults.pct < 0)
+		defaults.pct = 0;
+	
+	var $ = jQuery,
+		$loading_bar = $(".neon-loading-bar");
+	
+	if($loading_bar.length == 0)
+	{
+		$loading_bar = $('<div class="neon-loading-bar progress-is-hidden"><span data-pct="0"></span></div>');
+		public_vars.$body.append( $loading_bar );
+	}
+	
+	var $pct = $loading_bar.find('span'),
+		current_pct = $pct.data('pct'),
+		is_regress = current_pct > defaults.pct;
+	
+	
+	defaults.before(current_pct);
+	
+	TweenMax.to($pct, defaults.delay, {css: {width: defaults.pct + '%'}, delay: defaults.wait, ease: is_regress ? Expo.easeOut : Expo.easeIn, 
+	onStart: function()
+	{
+		$loading_bar.removeClass('progress-is-hidden');
+	},
+	onComplete: function()
+	{
+		var pct = $pct.data('pct');
+		
+		if(pct == 100 && defaults.resetOnEnd)
+		{
+			hide_loading_bar();
+		}
+		
+		defaults.finish(pct);
+	}, 
+	onUpdate: function()
+	{
+		$pct.data('pct', parseInt($pct.get(0).style.width, 10));
+	}});
+}
+
+function hide_loading_bar()
+{
+	var $ = jQuery,
+		$loading_bar = $(".neon-loading-bar"),
+		$pct = $loading_bar.find('span');
+	
+	$loading_bar.addClass('progress-is-hidden');
+	$pct.width(0).data('pct');
 }

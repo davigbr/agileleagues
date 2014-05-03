@@ -1018,6 +1018,10 @@ th {
   left: 75px;
   right: auto;
 }
+.page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li > a > span.badge {
+  left: -225px;
+  right: auto;
+}
 .page-container.sidebar-collapsed .sidebar-menu #main-menu > li > ul li a {
   padding-left: 15px;
   padding-right: 15px;

@@ -1,5 +1,5 @@
 /* Set the defaults for DataTables initialisation */
-$.extend( true, $.fn.dataTable.defaults, {
+jQuery.extend( true, jQuery.fn.dataTable.defaults, {
 	"sDom": "<'row'<'col-xs-6 col-left'l><'col-xs-6 col-right'f>r>t<'row'<'col-xs-6 col-left'i><'col-xs-6 col-right'p>>",
 	"sPaginationType": "bootstrap",
 	"oLanguage": {
@@ -11,7 +11,7 @@ $.extend( true, $.fn.dataTable.defaults, {
 
 
 /* Default class modification */
-$.extend( $.fn.dataTableExt.oStdClasses, {
+jQuery.extend( jQuery.fn.dataTableExt.oStdClasses, {
 	"sWrapper": "dataTables_wrapper form-inline",
 	"sFilterInput": "form-control input-sm",
 	"sLengthSelect": "form-control input-sm"
@@ -19,7 +19,7 @@ $.extend( $.fn.dataTableExt.oStdClasses, {
 
 
 /* API method to get paging information */
-$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
+jQuery.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 {
 	return {
 		"iStart":         oSettings._iDisplayStart,
@@ -36,7 +36,7 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 
 
 /* Bootstrap style pagination control */
-$.extend( $.fn.dataTableExt.oPagination, {
+jQuery.extend( jQuery.fn.dataTableExt.oPagination, {
 	"bootstrap": {
 		"fnInit": function( oSettings, nPaging, fnDraw ) {
 			var oLang = oSettings.oLanguage.oPaginate;
@@ -47,15 +47,15 @@ $.extend( $.fn.dataTableExt.oPagination, {
 				}
 			};
 
-			$(nPaging).append(
+			jQuery(nPaging).append(
 				'<ul class="pagination pagination-sm">'+
 					'<li class="prev disabled"><a href="#"><i class="entypo-left-open"></i></a></li>'+
 					'<li class="next disabled"><a href="#"><i class="entypo-right-open"></i></a></li>'+
 				'</ul>'
 			);
-			var els = $('a', nPaging);
-			$(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
-			$(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
+			var els = jQuery('a', nPaging);
+			jQuery(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
+			jQuery(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
 		},
 
 		"fnUpdate": function ( oSettings, fnDraw ) {
@@ -81,31 +81,31 @@ $.extend( $.fn.dataTableExt.oPagination, {
 
 			for ( i=0, ien=an.length ; i<ien ; i++ ) {
 				// Remove the middle elements
-				$('li:gt(0)', an[i]).filter(':not(:last)').remove();
+				jQuery('li:gt(0)', an[i]).filter(':not(:last)').remove();
 
 				// Add the new list items and their event handlers
 				for ( j=iStart ; j<=iEnd ; j++ ) {
 					sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
-					$('<li '+sClass+'><a href="#">'+j+'</a></li>')
-						.insertBefore( $('li:last', an[i])[0] )
+					jQuery('<li '+sClass+'><a href="#">'+j+'</a></li>')
+						.insertBefore( jQuery('li:last', an[i])[0] )
 						.bind('click', function (e) {
 							e.preventDefault();
-							oSettings._iDisplayStart = (parseInt($('a', this).text(),10)-1) * oPaging.iLength;
+							oSettings._iDisplayStart = (parseInt(jQuery('a', this).text(),10)-1) * oPaging.iLength;
 							fnDraw( oSettings );
 						} );
 				}
 
 				// Add / remove disabled classes from the static elements
 				if ( oPaging.iPage === 0 ) {
-					$('li:first', an[i]).addClass('disabled');
+					jQuery('li:first', an[i]).addClass('disabled');
 				} else {
-					$('li:first', an[i]).removeClass('disabled');
+					jQuery('li:first', an[i]).removeClass('disabled');
 				}
 
 				if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
-					$('li:last', an[i]).addClass('disabled');
+					jQuery('li:last', an[i]).addClass('disabled');
 				} else {
-					$('li:last', an[i]).removeClass('disabled');
+					jQuery('li:last', an[i]).removeClass('disabled');
 				}
 			}
 		}
@@ -117,9 +117,9 @@ $.extend( $.fn.dataTableExt.oPagination, {
  * TableTools Bootstrap compatibility
  * Required TableTools 2.1+
  */
-if ( $.fn.DataTable.TableTools ) {
+if ( jQuery.fn.DataTable.TableTools ) {
 	// Set the classes that TableTools uses to something suitable for Bootstrap
-	$.extend( true, $.fn.DataTable.TableTools.classes, {
+	jQuery.extend( true, jQuery.fn.DataTable.TableTools.classes, {
 		"container": "DTTT btn-group",
 		"buttons": {
 			"normal": "btn btn-white",
@@ -141,7 +141,7 @@ if ( $.fn.DataTable.TableTools ) {
 	} );
 
 	// Have the collection use a bootstrap compatible dropdown
-	$.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
+	jQuery.extend( true, jQuery.fn.DataTable.TableTools.DEFAULTS.oTags, {
 		"collection": {
 			"container": "ul",
 			"button": "li",

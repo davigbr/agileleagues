@@ -1842,9 +1842,7 @@ output {
 .form-control:focus {
   border-color: #c8cdd7;
   outline: 0;
-  -webkit-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  -moz-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
+  -moz-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   -webkit-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
 }
@@ -2183,14 +2181,10 @@ select[multiple].input-lg {
 .btn.active {
   outline: none;
   background-image: none;
-  -webkit-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  -moz-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
+  -moz-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   -webkit-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
-  -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
 }
@@ -2275,11 +2269,11 @@ fieldset[disabled] .btn-default.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-default.btn-icon.icon-left {
@@ -2290,11 +2284,11 @@ fieldset[disabled] .btn-default.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-default.btn-icon.btn-lg {
@@ -2395,11 +2389,11 @@ fieldset[disabled] .btn-primary.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-primary.btn-icon.icon-left {
@@ -2410,11 +2404,11 @@ fieldset[disabled] .btn-primary.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-primary.btn-icon.btn-lg {
@@ -2515,11 +2509,11 @@ fieldset[disabled] .btn-blue.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-blue.btn-icon.icon-left {
@@ -2530,11 +2524,11 @@ fieldset[disabled] .btn-blue.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-blue.btn-icon.btn-lg {
@@ -2635,11 +2629,11 @@ fieldset[disabled] .btn-red.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-red.btn-icon.icon-left {
@@ -2650,11 +2644,11 @@ fieldset[disabled] .btn-red.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-red.btn-icon.btn-lg {
@@ -2755,11 +2749,11 @@ fieldset[disabled] .btn-orange.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-orange.btn-icon.icon-left {
@@ -2770,11 +2764,11 @@ fieldset[disabled] .btn-orange.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-orange.btn-icon.btn-lg {
@@ -2875,11 +2869,11 @@ fieldset[disabled] .btn-gold.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-gold.btn-icon.icon-left {
@@ -2890,11 +2884,11 @@ fieldset[disabled] .btn-gold.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-gold.btn-icon.btn-lg {
@@ -2995,11 +2989,11 @@ fieldset[disabled] .btn-black.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-black.btn-icon.icon-left {
@@ -3010,11 +3004,11 @@ fieldset[disabled] .btn-black.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-black.btn-icon.btn-lg {
@@ -3116,11 +3110,11 @@ fieldset[disabled] .btn-white.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-white.btn-icon.icon-left {
@@ -3131,11 +3125,11 @@ fieldset[disabled] .btn-white.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-white.btn-icon.btn-lg {
@@ -3236,11 +3230,11 @@ fieldset[disabled] .btn-warning.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-warning.btn-icon.icon-left {
@@ -3251,11 +3245,11 @@ fieldset[disabled] .btn-warning.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-warning.btn-icon.btn-lg {
@@ -3356,11 +3350,11 @@ fieldset[disabled] .btn-danger.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-danger.btn-icon.icon-left {
@@ -3371,11 +3365,11 @@ fieldset[disabled] .btn-danger.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-danger.btn-icon.btn-lg {
@@ -3505,11 +3499,11 @@ fieldset[disabled] .btn-green.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-success.btn-icon.icon-left,
@@ -3522,11 +3516,11 @@ fieldset[disabled] .btn-green.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-success.btn-icon.btn-lg,
@@ -3636,11 +3630,11 @@ fieldset[disabled] .btn-info.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .btn-info.btn-icon.icon-left {
@@ -3651,11 +3645,11 @@ fieldset[disabled] .btn-info.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
 }
 .btn-info.btn-icon.btn-lg {
@@ -4720,20 +4714,20 @@ input[type="button"].btn-block {
 }
 .btn-group.left-dropdown .btn {
   float: right;
-  -webkit-border-radius: 0px 3px 3px 0px !important;
+  -webkit-border-radius: 0 3px 3px 0 !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px !important;
+  -moz-border-radius: 0 3px 3px 0 !important;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px !important;
+  border-radius: 0 3px 3px 0 !important;
   background-clip: padding-box;
 }
 .btn-group.left-dropdown .btn.dropdown-toggle {
   float: left;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
+  -webkit-border-radius: 3px 0 0 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
+  border-radius: 3px 0 0 3px !important;
   background-clip: padding-box;
   border-left: 0;
 }
@@ -4834,9 +4828,7 @@ input[type="button"].btn-block {
   padding-right: 12px;
 }
 .btn-group.open .dropdown-toggle {
-  -webkit-box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.125);
-  -moz-box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.125);
+  -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
@@ -5110,19 +5102,19 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 2;
 }
 .input-group > .twitter-typeahead:first-child .typeahead {
-  -webkit-border-radius: 3px 0px 0px 3px;
+  -webkit-border-radius: 3px 0 0 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
+  -moz-border-radius: 3px 0 0 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
+  border-radius: 3px 0 0 3px;
   background-clip: padding-box;
 }
 .input-group > .twitter-typeahead:last-child .typeahead {
-  -webkit-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0 3px 3px 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
+  -moz-border-radius: 0 3px 3px 0;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0 3px 3px 0;
   background-clip: padding-box;
 }
 .nav {
@@ -5291,11 +5283,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs.bordered + .tab-content {
   border: 1px solid #ebebeb;
   border-top: 0;
-  -webkit-border-radius: 0px 0px 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
+  border-radius: 0 0 3px 3px;
   background-clip: padding-box;
   padding: 10px 15px;
   margin-bottom: 20px;
@@ -5649,9 +5641,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.1), 0px 1px 0px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.1), 0px 1px 0px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.1), 0px 1px 0px rgba(255, 255, 255, 0.1);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   margin-top: 9.5px;
@@ -6569,11 +6559,11 @@ a.thumbnail.active {
   background-image: -webkit-linear-gradient(45deg, #e1e1e1 25%, transparent 25%, transparent 50%, #e1e1e1 50%, #e1e1e1 75%, transparent 75%, transparent);
   background-image: -moz-linear-gradient(45deg, #e1e1e1 25%, transparent 25%, transparent 50%, #e1e1e1 50%, #e1e1e1 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, #e1e1e1 25%, transparent 25%, transparent 50%, #e1e1e1 50%, #e1e1e1 75%, transparent 75%, transparent);
-  -webkit-border-radius: 10px 0px 0px 10px;
+  -webkit-border-radius: 10px 0 0 10px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 10px 0px 0px 10px;
+  -moz-border-radius: 10px 0 0 10px;
   -moz-background-clip: padding;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px 0 0 10px;
   background-clip: padding-box;
 }
 .progress-striped .progress-bar-default .progress-bar {
@@ -6777,9 +6767,7 @@ a.list-group-item.active:focus .list-group-item-text {
   border-radius: 3px;
 }
 .panel.panel-shadow {
-  -webkit-box-shadow: 0px 3px 1px rgba(0,0,0,.04);
-  -moz-box-shadow: 0px 3px 1px rgba(0,0,0,.04);
-  box-shadow: 0px 3px 1px rgba(0,0,0,.04);
+  -moz-box-shadow: 0 3px 1px rgba(0,0,0,.04);
   -webkit-box-shadow: 0 3px 1px rgba(0,0,0,.04);
   box-shadow: 0 3px 1px rgba(0,0,0,.04);
 }
@@ -6837,11 +6825,11 @@ a.list-group-item.active:focus .list-group-item-text {
 .panel.minimal > .panel-heading > .panel-options > .nav-tabs > li a {
   padding: 8px 10px;
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -7123,7 +7111,7 @@ lesshat-selector {
 @-webkit-keyframes reloadingAnimation{ 0%{ -webkit-transform: rotate(0deg); } 100%{ -webkit-transform: rotate(360deg); }}
 @-moz-keyframes reloadingAnimation{ 0%{ -moz-transform: rotate(0deg); } 100%{ -moz-transform: rotate(360deg); }}
 @-o-keyframes reloadingAnimation{ 0%{ -o-transform: rotate(0deg); } 100%{ -o-transform: rotate(360deg); }}
-@keyframes reloadingAnimation{ 0%{ transform: rotate(0deg); } 100%{ transform: rotate(360deg); };
+@keyframes reloadingAnimation{ 0%{-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);transform: rotate(0deg); } 100%{-webkit-transform: rotate(360deg);-moz-transform: rotate(360deg);-ms-transform: rotate(360deg);transform: rotate(360deg); };
 }
 .panel-title {
   margin-top: 0;
@@ -7169,11 +7157,11 @@ lesshat-selector {
   border-bottom: 1px solid #ebebeb;
 }
 .panel-group.joined > .panel {
-  -webkit-border-radius: 0px;
+  -webkit-border-radius: 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
+  -moz-border-radius: 0;
   -moz-background-clip: padding;
-  border-radius: 0px;
+  border-radius: 0;
   background-clip: padding-box;
 }
 .panel-group.joined > .panel + .panel {
@@ -7213,19 +7201,19 @@ lesshat-selector {
   font-size: 12px;
 }
 .panel-group.joined > .panel:first-child {
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
 }
 .panel-group.joined > .panel:last-child {
-  -webkit-border-radius: 0px 0px 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
+  border-radius: 0 0 3px 3px;
   background-clip: padding-box;
 }
 .panel-primary {
@@ -7295,11 +7283,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(55, 62, 74, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -7400,11 +7388,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -7509,11 +7497,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(55, 62, 74, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -7621,11 +7609,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(4, 87, 2, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -7733,11 +7721,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(87, 72, 2, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -7845,11 +7833,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(172, 24, 24, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -7957,11 +7945,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(44, 126, 161, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -8069,11 +8057,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -8187,11 +8175,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(55, 62, 74, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -8307,11 +8295,11 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(48, 54, 65, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0 0;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0 0;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0 0;
   background-clip: padding-box;
   -moz-transition: all 300ms ease-in-out;
   -o-transition: all 300ms ease-in-out;
@@ -8409,10 +8397,14 @@ button.close {
 .modal-open {
   overflow: hidden;
 }
+.modal-open .page-container {
+  padding-right: 15px;
+}
 .modal {
   display: none;
   overflow: auto;
   overflow-y: scroll;
+  overflow-y: auto;
   position: fixed;
   top: 0;
   right: 0;
@@ -8539,11 +8531,8 @@ button.close {
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
 }
 .modal.in .modal-dialog {
-  -webkit-transform: translate(0px, 0px);
-  -moz-transform: translate(0px, 0px);
-  -o-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   transform: translate(0, 0);
@@ -9117,10 +9106,9 @@ button.close {
 .carousel-inner > .item {
   display: none;
   position: relative;
-  -webkit-transition: 0.6s, ease-in-out, left;
-  -moz-transition: 0.6s, ease-in-out, left;
-  -o-transition: 0.6s, ease-in-out, left;
-  transition: 0.6s, ease-in-out, left;
+  min-width: 100%;
+  -moz-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
   -webkit-transition: 0.6s ease-in-out left;
   transition: 0.6s ease-in-out left;
 }
@@ -9138,6 +9126,7 @@ button.close {
 }
 .carousel-inner > .active {
   left: 0;
+  right: 0;
 }
 .carousel-inner > .next,
 .carousel-inner > .prev {

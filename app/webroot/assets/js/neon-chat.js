@@ -735,12 +735,14 @@ var neonChat = neonChat || {
 				}
 				
 				$chat.show();
-				TweenMax.set($chat, {css: {transform: "translateX("+((public_vars.$pageContainer.hasClass('right-sidebar') ? -1 : 1) * chat_width)+"px)"}});
+				TweenMax.set($chat, {css: {autoAlpha: public_vars.$body.hasClass('boxed-layout') ? 0 : 1, transform: "translateX("+((public_vars.$pageContainer.hasClass('right-sidebar') ? -1 : 1) * chat_width)+"px)"}});
 				
-				TweenMax.to($chat, .65, {css: {transform: "translateX(0)"}, ease: Sine.easeOut, onComplete: function()
+				TweenMax.to($chat, .65, {css: {autoAlpha: 1, transform: "translateX(0)"}, ease: Sine.easeOut, onComplete: function()
 				{
 					public_vars.$pageContainer.addClass(visible_class);
-					$chat.add(public_vars.$mainContent).attr('style', '');
+					public_vars.$mainContent.attr('style', '');
+					
+					TweenMax.set($chat, {css: {transform: '', paddingRight: '', paddingLeft: ''}});
 					
 					$chat.data('is-busy', false);
 				}});
@@ -783,7 +785,7 @@ var neonChat = neonChat || {
 				// Close any opened conversation
 				neonChat.close();
 				
-				TweenMax.to($chat, .4, {css: {autoAlpha: 1, transform: "translateX("+ ((public_vars.$pageContainer.hasClass('right-sidebar') ? -1 : 1) * chat_width) +"px)"}, ease: Sine.easeIn});
+				TweenMax.to($chat, .4, {css: {autoAlpha: (public_vars.$body.hasClass('boxed-layout') ? 0 : 1), transform: "translateX("+ ((public_vars.$pageContainer.hasClass('right-sidebar') ? -1 : 1) * chat_width) +"px)"}, ease: Sine.easeIn});
 				
 				var opts = {
 					paddingRight: mc_padding_right,

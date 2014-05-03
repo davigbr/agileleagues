@@ -1843,9 +1843,7 @@ output {
 .form-control:focus {
   border-color: #c8cdd7;
   outline: 0;
-  -webkit-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  -moz-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
+  -moz-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   -webkit-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
 }
@@ -2184,14 +2182,10 @@ select[multiple].input-lg {
 .btn.active {
   outline: none;
   background-image: none;
-  -webkit-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  -moz-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
+  -moz-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   -webkit-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
-  -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
 }
@@ -2277,11 +2271,8 @@ fieldset[disabled] .btn-default.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -2295,11 +2286,8 @@ fieldset[disabled] .btn-default.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -2403,11 +2391,8 @@ fieldset[disabled] .btn-primary.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -2421,11 +2406,8 @@ fieldset[disabled] .btn-primary.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -2529,11 +2511,8 @@ fieldset[disabled] .btn-blue.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -2547,11 +2526,8 @@ fieldset[disabled] .btn-blue.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -2655,11 +2631,8 @@ fieldset[disabled] .btn-red.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -2673,11 +2646,8 @@ fieldset[disabled] .btn-red.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -2781,11 +2751,8 @@ fieldset[disabled] .btn-orange.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -2799,11 +2766,8 @@ fieldset[disabled] .btn-orange.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -2907,11 +2871,8 @@ fieldset[disabled] .btn-gold.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -2925,11 +2886,8 @@ fieldset[disabled] .btn-gold.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3033,11 +2991,8 @@ fieldset[disabled] .btn-black.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3051,11 +3006,8 @@ fieldset[disabled] .btn-black.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3160,11 +3112,8 @@ fieldset[disabled] .btn-white.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3178,11 +3127,8 @@ fieldset[disabled] .btn-white.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3286,11 +3232,8 @@ fieldset[disabled] .btn-warning.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3304,11 +3247,8 @@ fieldset[disabled] .btn-warning.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3412,11 +3352,8 @@ fieldset[disabled] .btn-danger.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3430,11 +3367,8 @@ fieldset[disabled] .btn-danger.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3567,11 +3501,8 @@ fieldset[disabled] .btn-green.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3587,11 +3518,8 @@ fieldset[disabled] .btn-green.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3704,11 +3632,8 @@ fieldset[disabled] .btn-info.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3722,11 +3647,8 @@ fieldset[disabled] .btn-info.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -4794,11 +4716,8 @@ input[type="button"].btn-block {
 }
 .btn-group.left-dropdown .btn {
   float: right;
-  -webkit-border-radius: 0px 3px 3px 0px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px !important;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px !important;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0 !important;
   -moz-border-radius: 0 3px 3px 0 !important;
@@ -4806,11 +4725,8 @@ input[type="button"].btn-block {
 }
 .btn-group.left-dropdown .btn.dropdown-toggle {
   float: left;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -4864,17 +4780,11 @@ input[type="button"].btn-block {
 }
 .btn-group > .btn:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
-  -webkit-border-top-left-radius: 0px;
-  -moz-border-radius-topleft: 0px;
-  border-top-left-radius: 0px;
   -webkit-border-top-left-radius: 0;
   -moz-border-radius-topleft: 0;
   border-top-left-radius: 0;
-  -webkit-border-bottom-left-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius-bottomleft: 0px;
   -moz-background-clip: padding;
-  border-bottom-left-radius: 0px;
   background-clip: padding-box;
   -webkit-border-bottom-left-radius: 0;
   -moz-border-radius-bottomleft: 0;
@@ -4892,17 +4802,11 @@ input[type="button"].btn-block {
   border-top-right-radius: 0;
 }
 .btn-group > .btn-group:last-child > .btn:first-child {
-  -webkit-border-top-left-radius: 0px;
-  -moz-border-radius-topleft: 0px;
-  border-top-left-radius: 0px;
   -webkit-border-top-left-radius: 0;
   -moz-border-radius-topleft: 0;
   border-top-left-radius: 0;
-  -webkit-border-bottom-left-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius-bottomleft: 0px;
   -moz-background-clip: padding;
-  border-bottom-left-radius: 0px;
   background-clip: padding-box;
   -webkit-border-bottom-left-radius: 0;
   -moz-border-radius-bottomleft: 0;
@@ -4940,9 +4844,7 @@ input[type="button"].btn-block {
   padding-right: 12px;
 }
 .btn-group.open .dropdown-toggle {
-  -webkit-box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.125);
-  -moz-box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.125);
+  -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
@@ -5188,17 +5090,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child) {
-  -webkit-border-top-left-radius: 0px;
-  -moz-border-radius-topleft: 0px;
-  border-top-left-radius: 0px;
   -webkit-border-top-left-radius: 0;
   -moz-border-radius-topleft: 0;
   border-top-left-radius: 0;
-  -webkit-border-bottom-left-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius-bottomleft: 0px;
   -moz-background-clip: padding;
-  border-bottom-left-radius: 0px;
   background-clip: padding-box;
   -webkit-border-bottom-left-radius: 0;
   -moz-border-radius-bottomleft: 0;
@@ -5229,22 +5125,16 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 2;
 }
 .input-group > .twitter-typeahead:first-child .typeahead {
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
 }
 .input-group > .twitter-typeahead:last-child .typeahead {
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -5416,11 +5306,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs.bordered + .tab-content {
   border: 1px solid #ebebeb;
   border-top: 0;
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -5777,9 +5664,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.1), 0px 1px 0px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.1), 0px 1px 0px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.1), 0px 1px 0px rgba(255, 255, 255, 0.1);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   margin-top: 9.5px;
@@ -6718,11 +6603,8 @@ a.thumbnail.active {
   background-image: -webkit-linear-gradient(45deg, #e1e1e1 25%, transparent 25%, transparent 50%, #e1e1e1 50%, #e1e1e1 75%, transparent 75%, transparent);
   background-image: -moz-linear-gradient(45deg, #e1e1e1 25%, transparent 25%, transparent 50%, #e1e1e1 50%, #e1e1e1 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, #e1e1e1 25%, transparent 25%, transparent 50%, #e1e1e1 50%, #e1e1e1 75%, transparent 75%, transparent);
-  -webkit-border-radius: 10px 0px 0px 10px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 10px 0px 0px 10px;
   -moz-background-clip: padding;
-  border-radius: 10px 0px 0px 10px;
   background-clip: padding-box;
   -webkit-border-radius: 10px 0 0 10px;
   -moz-border-radius: 10px 0 0 10px;
@@ -6929,9 +6811,7 @@ a.list-group-item.active:focus .list-group-item-text {
   border-radius: 3px;
 }
 .panel.panel-shadow {
-  -webkit-box-shadow: 0px 3px 1px rgba(0,0,0,.04);
-  -moz-box-shadow: 0px 3px 1px rgba(0,0,0,.04);
-  box-shadow: 0px 3px 1px rgba(0,0,0,.04);
+  -moz-box-shadow: 0 3px 1px rgba(0,0,0,.04);
   -webkit-box-shadow: 0 3px 1px rgba(0,0,0,.04);
   box-shadow: 0 3px 1px rgba(0,0,0,.04);
 }
@@ -6989,11 +6869,8 @@ a.list-group-item.active:focus .list-group-item-text {
 .panel.minimal > .panel-heading > .panel-options > .nav-tabs > li a {
   padding: 8px 10px;
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -7278,7 +7155,7 @@ lesshat-selector {
 @-webkit-keyframes reloadingAnimation{ 0%{ -webkit-transform: rotate(0deg); } 100%{ -webkit-transform: rotate(360deg); }}
 @-moz-keyframes reloadingAnimation{ 0%{ -moz-transform: rotate(0deg); } 100%{ -moz-transform: rotate(360deg); }}
 @-o-keyframes reloadingAnimation{ 0%{ -o-transform: rotate(0deg); } 100%{ -o-transform: rotate(360deg); }}
-@keyframes reloadingAnimation{ 0%{ transform: rotate(0deg); } 100%{ transform: rotate(360deg); };
+@keyframes reloadingAnimation{ 0%{-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);transform: rotate(0deg); } 100%{-webkit-transform: rotate(360deg);-moz-transform: rotate(360deg);-ms-transform: rotate(360deg);transform: rotate(360deg); };
 }
 .panel-title {
   margin-top: 0;
@@ -7324,11 +7201,8 @@ lesshat-selector {
   border-bottom: 1px solid #ebebeb;
 }
 .panel-group.joined > .panel {
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -7371,22 +7245,16 @@ lesshat-selector {
   font-size: 12px;
 }
 .panel-group.joined > .panel:first-child {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
   border-radius: 3px 3px 0 0;
 }
 .panel-group.joined > .panel:last-child {
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -7459,11 +7327,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(55, 62, 74, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -7567,11 +7432,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -7679,11 +7541,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(55, 62, 74, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -7794,11 +7653,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(4, 87, 2, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -7909,11 +7765,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(87, 72, 2, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -8024,11 +7877,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(172, 24, 24, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -8139,11 +7989,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(44, 126, 161, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -8254,11 +8101,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -8375,11 +8219,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(55, 62, 74, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -8498,11 +8339,8 @@ lesshat-selector {
   padding: 8px 10px;
   color: rgba(48, 54, 65, 0.5);
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -8605,10 +8443,14 @@ button.close {
 .modal-open {
   overflow: hidden;
 }
+.modal-open .page-container {
+  padding-right: 15px;
+}
 .modal {
   display: none;
   overflow: auto;
   overflow-y: scroll;
+  overflow-y: auto;
   position: fixed;
   top: 0;
   right: 0;
@@ -8739,11 +8581,8 @@ button.close {
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
 }
 .modal.in .modal-dialog {
-  -webkit-transform: translate(0px, 0px);
-  -moz-transform: translate(0px, 0px);
-  -o-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   transform: translate(0, 0);
@@ -9324,10 +9163,7 @@ button.close {
 .carousel-inner > .item {
   display: none;
   position: relative;
-  -webkit-transition: 0.6s, ease-in-out, left;
-  -moz-transition: 0.6s, ease-in-out, left;
-  -o-transition: 0.6s, ease-in-out, left;
-  transition: 0.6s, ease-in-out, left;
+  min-width: 100%;
   -webkit-transition: 0.6s ease-in-out left;
   -moz-transition: 0.6s ease-in-out left;
   -o-transition: 0.6s ease-in-out left;
@@ -9347,6 +9183,7 @@ button.close {
 }
 .carousel-inner > .active {
   left: 0;
+  right: 0;
 }
 .carousel-inner > .next,
 .carousel-inner > .prev {
@@ -10367,11 +10204,8 @@ div.datepicker table tr td.range:hover,
 div.datepicker table tr td.range.disabled,
 div.datepicker table tr td.range.disabled:hover {
   background: #eeeeee;
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -10384,11 +10218,8 @@ div.datepicker table tr td.range.today.disabled:hover {
   *background-color: #f3ea7a;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -10595,22 +10426,16 @@ div.datepicker thead tr:first-child th.cw {
   text-align: center;
 }
 .input-daterange input:first-child {
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
 }
 .input-daterange input:last-child {
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -10809,11 +10634,8 @@ div.datepicker thead tr:first-child th.cw {
   width: 30%;
 }
 .date-and-time > input:first-child {
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
@@ -10821,11 +10643,8 @@ div.datepicker thead tr:first-child th.cw {
   border-right: 0;
 }
 .date-and-time > input:last-child {
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -11158,6 +10977,10 @@ div.colorpicker {
 .input-group-addon:not(:first-child) {
   border-left: 0;
 }
+.fileinput .uneditable-input,
+.fileinput-new .input-group .btn-file {
+  display: table-cell !important;
+}
 .toast-title {
   font-weight: bold;
 }
@@ -11362,6 +11185,7 @@ button.toast-close-button {
 }
 .page-container {
   position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   top: 0;
@@ -11693,6 +11517,7 @@ button.toast-close-button {
   -webkit-transition: -webkit-transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
   -moz-transition: -moz-transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
   -o-transition: -o-transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
+  transition: -webkit-transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950),-moz-transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950),-o-transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950),transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
   -webkit-transition: transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
   -moz-transition: transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
   -o-transition: transform 350ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
@@ -11995,11 +11820,8 @@ button.toast-close-button {
   background: #262b34;
   border: 1px solid #454a54;
   width: 250px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -12031,11 +11853,8 @@ button.toast-close-button {
   border-bottom: 1px solid #454a54;
   width: 250px;
   visibility: hidden;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -12069,11 +11888,8 @@ button.toast-close-button {
   top: auto;
   left: 65px;
   width: 250px;
-  -webkit-border-radius: 0px 0px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 0;
   -moz-border-radius: 0 0 3px 0;
@@ -12108,11 +11924,8 @@ button.toast-close-button {
 }
 .page-container.sidebar-collapsed .sidebar-menu #main-menu > li.has-sub:hover.has-sub > a > span:not(.badge),
 .page-container.sidebar-collapsed .sidebar-menu #main-menu > li:hover.has-sub > a > span:not(.badge) {
-  -webkit-border-radius: 0px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 0 0;
   -moz-border-radius: 0 3px 0 0;
@@ -12249,11 +12062,8 @@ button.toast-close-button {
   left: 0;
   right: 0;
   top: 0;
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -12679,18 +12489,13 @@ button.toast-close-button {
 }
 .page-container.horizontal-menu header.navbar ul.nav > li.dropdown .dropdown-menu {
   background-color: #f5f5f6;
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
-  -webkit-box-shadow: 0px 1px 0px rgba(0,0,0,.05);
-  -moz-box-shadow: 0px 1px 0px rgba(0,0,0,.05);
-  box-shadow: 0px 1px 0px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 0px rgba(0,0,0,.05);
   -webkit-box-shadow: 0 1px 0px rgba(0,0,0,.05);
   box-shadow: 0 1px 0px rgba(0,0,0,.05);
   border: 1px solid #f8f8f8;
@@ -13268,19 +13073,21 @@ button.toast-close-button {
     margin-right: 0;
   }
   .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li > a > span.badge {
-    right: auto;
-    left: -240px;
+    right: 75px;
+    left: auto;
   }
   .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li > a > span:not(.badge) {
-    -webkit-border-radius: 3px 0px 0px 3px;
     -webkit-background-clip: padding-box;
-    -moz-border-radius: 3px 0px 0px 3px;
     -moz-background-clip: padding;
-    border-radius: 3px 0px 0px 3px;
     background-clip: padding-box;
     -webkit-border-radius: 3px 0 0 3px;
     -moz-border-radius: 3px 0 0 3px;
     border-radius: 3px 0 0 3px;
+    padding-left: 15px;
+  }
+  .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li > ul li a {
+    padding-left: 15px;
+    padding-right: 10px;
   }
   .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li > ul li a i {
     margin-right: 0;
@@ -13291,11 +13098,8 @@ button.toast-close-button {
     left: auto;
   }
   .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li > ul {
-    -webkit-border-radius: 0px 0px 0px 3px;
     -webkit-background-clip: padding-box;
-    -moz-border-radius: 0px 0px 0px 3px;
     -moz-background-clip: padding;
-    border-radius: 0px 0px 0px 3px;
     background-clip: padding-box;
     -webkit-border-radius: 0 0 0 3px;
     -moz-border-radius: 0 0 0 3px;
@@ -13304,11 +13108,8 @@ button.toast-close-button {
   .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li#search.focused .search-input {
     left: auto;
     right: 65px;
-    -webkit-border-radius: 3px 0px 0px 3px;
     -webkit-background-clip: padding-box;
-    -moz-border-radius: 3px 0px 0px 3px;
     -moz-background-clip: padding;
-    border-radius: 3px 0px 0px 3px;
     background-clip: padding-box;
     -webkit-border-radius: 3px 0 0 3px;
     -moz-border-radius: 3px 0 0 3px;
@@ -13333,22 +13134,19 @@ button.toast-close-button {
   .page-container.right-sidebar #chat .chat-conversation {
     left: 280px;
     right: auto;
-    -webkit-border-radius: 0px 3px 3px 0px;
     -webkit-background-clip: padding-box;
-    -moz-border-radius: 0px 3px 3px 0px;
     -moz-background-clip: padding;
-    border-radius: 0px 3px 3px 0px;
     background-clip: padding-box;
     -webkit-border-radius: 0 3px 3px 0;
     -moz-border-radius: 0 3px 3px 0;
     border-radius: 0 3px 3px 0;
   }
   .page-container.right-sidebar.sidebar-is-collapsing .sidebar-menu #main-menu li a i {
-    -webkit-transform: translateX(0px);
-    -moz-transform: translateX(0px);
-    -o-transform: translateX(0px);
-    -ms-transform: translateX(0px);
-    transform: translateX(0px);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -o-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
   }
   .page-container.right-sidebar.sidebar-is-collapsing .sidebar-menu {
     -webkit-transition: all 350ms;
@@ -13389,11 +13187,8 @@ button.toast-close-button {
   }
   .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li.has-sub:hover.has-sub > a > span:not(.badge),
   .page-container.right-sidebar.sidebar-collapsed .sidebar-menu #main-menu > li:hover.has-sub > a > span:not(.badge) {
-    -webkit-border-radius: 3px 0px 0px 0px;
     -webkit-background-clip: padding-box;
-    -moz-border-radius: 3px 0px 0px 0px;
     -moz-background-clip: padding;
-    border-radius: 3px 0px 0px 0px;
     background-clip: padding-box;
     -webkit-border-radius: 3px 0 0 0;
     -moz-border-radius: 3px 0 0 0;
@@ -13543,11 +13338,8 @@ button.toast-close-button {
 }
 .notifications.dropdown.open > a {
   background-color: #f5f5f6;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -13555,18 +13347,13 @@ button.toast-close-button {
 }
 .notifications.dropdown .dropdown-menu {
   background-color: #f5f5f6;
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
-  -webkit-box-shadow: 0px 1px 0px rgba(0,0,0,.05);
-  -moz-box-shadow: 0px 1px 0px rgba(0,0,0,.05);
-  box-shadow: 0px 1px 0px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 0px rgba(0,0,0,.05);
   -webkit-box-shadow: 0 1px 0px rgba(0,0,0,.05);
   box-shadow: 0 1px 0px rgba(0,0,0,.05);
   border: 1px solid #f8f8f8;
@@ -13893,6 +13680,11 @@ canvas + .knob {
   display: inline-block;
   margin-top: 5px;
 }
+.validate-has-error .validate-has-error {
+  color: #cc2424;
+  display: inline-block;
+  margin-top: 5px;
+}
 .make-switch + .validate-has-error {
   margin-left: 10px;
 }
@@ -13968,11 +13760,8 @@ canvas + .knob {
   display: inline-block;
   padding: 6px 12px;
   vertical-align: middle;
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
@@ -14047,6 +13836,12 @@ footer.main:after {
 .margin-bottom {
   margin-bottom: 20px !important;
 }
+.bold {
+  font-weight: bold !important;
+}
+.default-padding {
+  padding: 0 15px !important;
+}
 img.full-width {
   width: 100%;
 }
@@ -14078,6 +13873,9 @@ img.full-width {
 }
 .padding-lg {
   padding: 20px !important;
+}
+.border-top {
+  border-top: 1px solid #ebebeb;
 }
 #rickshaw-chart-demo {
   -webkit-background-clip: padding-box;
@@ -14194,11 +13992,8 @@ img.full-width {
   background: rgba(235, 235, 235, 0.4);
 }
 .theme-skins > li.active a {
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -14262,9 +14057,7 @@ img.full-width {
 }
 .thumbnail-highlight {
   border: 5px solid rgba(235, 235, 235, 0.5);
-  -webkit-box-shadow: 0px 0px 0px 1px #ebebeb;
-  -moz-box-shadow: 0px 0px 0px 1px #ebebeb;
-  box-shadow: 0px 0px 0px 1px #ebebeb;
+  -moz-box-shadow: 0 0 0 1px #ebebeb;
   -webkit-box-shadow: 0 0 0 1px #ebebeb;
   box-shadow: 0 0 0 1px #ebebeb;
 }
@@ -14323,11 +14116,8 @@ img.full-width {
   border-left: 0;
   border-right: 0;
   text-align: center;
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -14347,22 +14137,16 @@ img.full-width {
   width: 160px;
 }
 .input-spinner button {
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
 }
 .input-spinner button + input + button {
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -14468,6 +14252,105 @@ img.full-width {
 .calendar-widget th {
   padding: 12px 0;
 }
+@-moz-document url-prefix() {
+  .page-container .tile-group .tile-left .map,
+  .page-container .tile-group .tile-right .map {
+    left: 40%;
+    right: 16px;
+  }
+  .page-container .tile-stats .icon {
+    bottom: 35px;
+  }
+}
+.form-control + .description {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+}
+.search-form-full {
+  position: relative;
+  margin-top: -2px;
+}
+.search-form-full .form-group {
+  position: relative;
+}
+.search-form-full .form-group i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  font-size: 14px;
+  margin-top: -9px;
+  color: rgba(148, 148, 148, 0.8);
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.search-form-full .form-group .form-control {
+  margin-top: 12px;
+  background: #f5f5f6;
+  height: 38px;
+  -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,.015);
+  -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.015);
+  box-shadow: inset 0 1px 0 rgba(0,0,0,.015);
+}
+.search-form-full .form-group .form-control:focus + i {
+  color: #737881;
+}
+@media screen and (max-width: 480px) {
+  .search-form-full {
+    margin-top: 30px;
+  }
+}
+.page-container .aciTree.aciBorder {
+  border: 1px solid #ebebeb;
+  min-height: 50px;
+}
+.neon-loading-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  background: rgba(48, 54, 65, 0.3);
+  height: 5px;
+  z-index: 10000;
+  top: 0px;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.neon-loading-bar span {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background: #ec5956;
+}
+.neon-loading-bar.progress-is-hidden {
+  top: -5px;
+  -webkit-opacity: 0.5;
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  filter: alpha(opacity=50);
+  visibility: hidden;
+}
+body {
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  perspective: 800px;
+  -webkit-perspective: 800;
+  -moz-perspective: 800;
+  perspective: 800;
+}
 .tabs-vertical-env {
   margin-bottom: 20px;
 }
@@ -14514,11 +14397,8 @@ img.full-width {
   border-bottom: 1px solid #ebebeb;
 }
 .tabs-vertical > li:first-child > a {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -14528,11 +14408,8 @@ img.full-width {
   border-bottom: 0;
 }
 .tabs-vertical > li:last-child > a {
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -14882,6 +14759,7 @@ blockquote.blockquote-danger small strong {
   position: relative;
   display: inline-block;
   border: 1px solid #ebebeb;
+  margin-bottom: 0;
   width: 16px;
   height: 15px;
   -webkit-box-sizing: border-box;
@@ -14956,9 +14834,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace:hover .cb-wrapper,
 .radio-replace:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(0,0,0,.03);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(0,0,0,.03);
-  box-shadow: 0px 0px 0px 2px rgba(0,0,0,.03);
+  -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.03);
   -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.03);
   box-shadow: 0 0 0 2px rgba(0,0,0,.03);
 }
@@ -14998,9 +14874,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace:hover .cb-wrapper,
 .radio-replace:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(209.5,209.5,209.5,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(209.5,209.5,209.5,.1);
-  box-shadow: 0px 0px 0px 2px rgba(209.5,209.5,209.5,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(209.5,209.5,209.5,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(209.5,209.5,209.5,.1);
   box-shadow: 0 0 0 2px rgba(209.5,209.5,209.5,.1);
 }
@@ -15014,9 +14888,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace.color-primary:hover .cb-wrapper,
 .radio-replace.color-primary:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(48,54,65,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(48,54,65,.1);
-  box-shadow: 0px 0px 0px 2px rgba(48,54,65,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(48,54,65,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(48,54,65,.1);
   box-shadow: 0 0 0 2px rgba(48,54,65,.1);
 }
@@ -15030,9 +14902,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace.color-red:hover .cb-wrapper,
 .radio-replace.color-red:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(238,71,73,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(238,71,73,.1);
-  box-shadow: 0px 0px 0px 2px rgba(238,71,73,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(238,71,73,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(238,71,73,.1);
   box-shadow: 0 0 0 2px rgba(238,71,73,.1);
 }
@@ -15046,9 +14916,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace.color-blue:hover .cb-wrapper,
 .radio-replace.color-blue:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(33,169,225,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(33,169,225,.1);
-  box-shadow: 0px 0px 0px 2px rgba(33,169,225,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(33,169,225,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(33,169,225,.1);
   box-shadow: 0 0 0 2px rgba(33,169,225,.1);
 }
@@ -15062,9 +14930,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace.color-green:hover .cb-wrapper,
 .radio-replace.color-green:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(0,166,81,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(0,166,81,.1);
-  box-shadow: 0px 0px 0px 2px rgba(0,166,81,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(0,166,81,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(0,166,81,.1);
   box-shadow: 0 0 0 2px rgba(0,166,81,.1);
 }
@@ -15078,9 +14944,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace.color-gold:hover .cb-wrapper,
 .radio-replace.color-gold:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(250,216,57,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(250,216,57,.1);
-  box-shadow: 0px 0px 0px 2px rgba(250,216,57,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(250,216,57,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(250,216,57,.1);
   box-shadow: 0 0 0 2px rgba(250,216,57,.1);
 }
@@ -15094,9 +14958,7 @@ blockquote.blockquote-danger small strong {
 }
 .checkbox-replace.color-white:hover .cb-wrapper,
 .radio-replace.color-white:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(255,255,255,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(255,255,255,.1);
-  box-shadow: 0px 0px 0px 2px rgba(255,255,255,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(255,255,255,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(255,255,255,.1);
   box-shadow: 0 0 0 2px rgba(255,255,255,.1);
 }
@@ -15258,11 +15120,8 @@ blockquote.blockquote-danger small strong {
 }
 .page-body .select2-container.select2-dropdown-open .select2-choice,
 .page-body .select2-container.select2-dropdown-open .select2-choices {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -15333,9 +15192,6 @@ blockquote.blockquote-danger small strong {
   padding: 6px 12px;
 }
 .page-body .select2-container .select2-choices .select2-search-choice {
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -15386,16 +15242,11 @@ blockquote.blockquote-danger small strong {
   -webkit-border-radius: 1px 1px 4px 4px;
   -moz-border-radius: 1px 1px 4px 4px;
   border-radius: 1px 1px 4px 4px;
-  -webkit-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  -moz-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  box-shadow: 0px 2px 7px rgba(0,0,0,.06);
+  -moz-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   -webkit-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   box-shadow: 0 2px 7px rgba(0,0,0,.06);
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -15467,9 +15318,7 @@ blockquote.blockquote-danger small strong {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: inset 0px 1px 0px rgba(0,0,0,.03);
-  -moz-box-shadow: inset 0px 1px 0px rgba(0,0,0,.03);
-  box-shadow: inset 0px 1px 0px rgba(0,0,0,.03);
+  -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,.03);
   -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.03);
   box-shadow: inset 0 1px 0 rgba(0,0,0,.03);
   padding: 10px 12px;
@@ -15532,11 +15381,8 @@ blockquote.blockquote-danger small strong {
   color: #303641;
 }
 .page-body .selectboxit-container .selectboxit.selectboxit-open {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -15588,20 +15434,15 @@ blockquote.blockquote-danger small strong {
 .page-body .selectboxit-container .selectboxit-options {
   width: 100%;
   background: #fff;
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
   border-top: 0;
   border-color: #ebebeb;
-  -webkit-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  -moz-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  box-shadow: 0px 2px 7px rgba(0,0,0,.06);
+  -moz-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   -webkit-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   box-shadow: 0 2px 7px rgba(0,0,0,.06);
   max-height: 350px;
@@ -16149,11 +15990,8 @@ input.typeahead {
   margin-bottom: 20px;
 }
 .dataTables_wrapper > table:first-child {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -16205,24 +16043,27 @@ input.typeahead {
 }
 .dataTables_wrapper .dataTables_length {
   border-right: 0;
-  -webkit-border-radius: 3px 0px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 0;
   -moz-border-radius: 3px 0 0 0;
   border-radius: 3px 0 0 0;
 }
+.dataTables_wrapper .dataTables_length > label {
+  white-space: nowrap;
+  margin-top: -7px;
+}
+.dataTables_wrapper .dataTables_length > label .select2-container {
+  display: inline-block;
+  width: auto !important;
+  min-width: 87px;
+}
 .dataTables_wrapper .dataTables_filter {
   border-left: 0;
   padding-top: 13px;
-  -webkit-border-radius: 0px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 0 0;
   -moz-border-radius: 0 3px 0 0;
@@ -16258,9 +16099,7 @@ input.typeahead {
 .dataTables_wrapper .dataTables_filter > label input:focus {
   border-color: #c8cdd7;
   outline: 0;
-  -webkit-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  -moz-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
+  -moz-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   -webkit-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
 }
@@ -16298,7 +16137,7 @@ textarea.dataTables_wrapper .dataTables_filter > label input {
   height: auto;
 }
 .dataTables_wrapper .select2-container {
-  display: inline-block;
+  display: inline-block !important;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -16349,11 +16188,8 @@ textarea.dataTables_wrapper .dataTables_filter > label input {
 .dataTables_wrapper .dataTables_info.dataTables_info,
 .dataTables_wrapper .dataTables_paginate.dataTables_info {
   border-right: 0;
-  -webkit-border-radius: 0px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 0 3px;
   -moz-border-radius: 0 0 0 3px;
@@ -16363,11 +16199,8 @@ textarea.dataTables_wrapper .dataTables_filter > label input {
 .dataTables_wrapper .dataTables_info.dataTables_paginate,
 .dataTables_wrapper .dataTables_paginate.dataTables_paginate {
   border-left: 0;
-  -webkit-border-radius: 0px 0px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 0;
   -moz-border-radius: 0 0 3px 0;
@@ -16409,9 +16242,7 @@ table .replace-inputs input {
 table .replace-inputs input:focus {
   border-color: #c8cdd7;
   outline: 0;
-  -webkit-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  -moz-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
+  -moz-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   -webkit-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
 }
@@ -16447,6 +16278,9 @@ fieldset[disabled] table .replace-inputs input {
 }
 textareatable .replace-inputs input {
   height: auto;
+}
+.dataTables_wrapper .dataTable {
+  width: 100% !important;
 }
 /* Table Tools */
 @media (min-width: 767px) {
@@ -16676,11 +16510,8 @@ textareatable .replace-inputs input {
   right: 280px;
   width: 340px;
   background: #2b303a;
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
@@ -17660,7 +17491,7 @@ textareatable .replace-inputs input {
   padding: 20px;
 }
 .tile-block .tile-content .todo-list .neon-cb-replacement .cb-wrapper + label {
-  top: -8px;
+  top: -3px;
   margin-left: 8px;
 }
 .tile-block .tile-footer {
@@ -17668,11 +17499,8 @@ textareatable .replace-inputs input {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 20px;
   color: #ffffff;
-  -webkit-border-radius: 0px 0px 5px 5px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 5px 5px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 5px 5px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 5px 5px;
   -moz-border-radius: 0 0 5px 5px;
@@ -18063,11 +17891,8 @@ textareatable .replace-inputs input {
   padding: 20px;
   text-align: right;
   background: rgba(0, 0, 0, 0.1);
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -18975,6 +18800,7 @@ hr + .mail-env {
 .mail-env .mail-body .mail-info {
   background: #f3f4f4;
   display: table;
+  width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   border-bottom: 1px solid #ebebeb;
@@ -19515,11 +19341,8 @@ body.page-fade {
   -moz-transition: 400ms all ease-in-out;
   -o-transition: 400ms all ease-in-out;
   transition: 400ms all ease-in-out;
-  -webkit-transform-origin: 50%, 30%;
-  -moz-transform-origin: 50%, 30%;
-  -o-transform-origin: 50%, 30%;
-  -ms-transform-origin: 50%, 30%;
-  transform-origin: 50%, 30%;
+  -o-transform-origin: 50% 30%;
+  -ms-transform-origin: 50% 30%;
   -webkit-transform-origin: 50% 30%;
   -moz-transform-origin: 50% 30%;
   transform-origin: 50% 30%;
@@ -19561,11 +19384,8 @@ body.page-left-in {
   -moz-transition: 400ms all ease-in-out;
   -o-transition: 400ms all ease-in-out;
   transition: 400ms all ease-in-out;
-  -webkit-transform-origin: 0%, 50%;
-  -moz-transform-origin: 0%, 50%;
-  -o-transform-origin: 0%, 50%;
-  -ms-transform-origin: 0%, 50%;
-  transform-origin: 0%, 50%;
+  -o-transform-origin: 0% 50%;
+  -ms-transform-origin: 0% 50%;
   -webkit-transform-origin: 0% 50%;
   -moz-transform-origin: 0% 50%;
   transform-origin: 0% 50%;
@@ -19614,11 +19434,8 @@ body.page-right-in {
   -moz-transition: 400ms all ease-in-out;
   -o-transition: 400ms all ease-in-out;
   transition: 400ms all ease-in-out;
-  -webkit-transform-origin: 100%, 50%;
-  -moz-transform-origin: 100%, 50%;
-  -o-transform-origin: 100%, 50%;
-  -ms-transform-origin: 100%, 50%;
-  transform-origin: 100%, 50%;
+  -o-transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
   -webkit-transform-origin: 100% 50%;
   -moz-transform-origin: 100% 50%;
   transform-origin: 100% 50%;
@@ -19666,11 +19483,8 @@ body.page-fade-only {
   -moz-transition: 900ms all cubic-bezier(0.445, 0.050, 0.550, 0.950);
   -o-transition: 900ms all cubic-bezier(0.445, 0.050, 0.550, 0.950);
   transition: 900ms all cubic-bezier(0.445, 0.050, 0.550, 0.950);
-  -webkit-transform-origin: 50%, 30%;
-  -moz-transform-origin: 50%, 30%;
-  -o-transform-origin: 50%, 30%;
-  -ms-transform-origin: 50%, 30%;
-  transform-origin: 50%, 30%;
+  -o-transform-origin: 50% 30%;
+  -ms-transform-origin: 50% 30%;
   -webkit-transform-origin: 50% 30%;
   -moz-transform-origin: 50% 30%;
   transform-origin: 50% 30%;
@@ -20239,11 +20053,8 @@ body.page-fade-only-init > .page-container {
   margin-top: -10px;
   margin-left: -10px;
   margin-right: -10px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -20278,11 +20089,8 @@ body.page-fade-only-init > .page-container {
   margin: 0;
   margin-bottom: 5px;
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -20559,11 +20367,8 @@ hr + .calendar-env {
   background-color: #ffffff;
   border-color: #ffffff;
   border-color: #ebebeb;
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -20585,14 +20390,10 @@ hr + .calendar-env {
 .calendar-env .calendar-body .fc-header .fc-button.active {
   outline: none;
   background-image: none;
-  -webkit-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  -moz-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
+  -moz-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   -webkit-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
-  -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
 }
@@ -20673,11 +20474,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-header .fc-button.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -20691,11 +20489,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-header .fc-button.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -20741,22 +20536,16 @@ fieldset[disabled] .calendar-env .calendar-body .fc-header .fc-button.active {
   border-radius: 2px;
 }
 .calendar-env .calendar-body .fc-header .fc-button.fc-corner-left {
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
 }
 .calendar-env .calendar-body .fc-header .fc-button.fc-corner-right {
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -20918,11 +20707,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -20936,11 +20722,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -21155,6 +20938,7 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   -webkit-transition: opacity 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
   -moz-transition: opacity 300ms ease-in-out, -moz-transform 300ms ease-in-out;
   -o-transition: opacity 300ms ease-in-out, -o-transform 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out,-webkit-transform 300ms ease-in-out,-moz-transform 300ms ease-in-out,-o-transform 300ms ease-in-out,transform 300ms ease-in-out;
   -webkit-transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
   -moz-transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
   -o-transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
@@ -21466,11 +21250,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   display: block;
   max-width: 100%;
   height: auto;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -21610,11 +21391,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   opacity: 0;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   filter: alpha(opacity=0);
-  -webkit-transform-origin: 50%, 0%;
-  -moz-transform-origin: 50%, 0%;
-  -o-transform-origin: 50%, 0%;
-  -ms-transform-origin: 50%, 0%;
-  transform-origin: 50%, 0%;
+  -o-transform-origin: 50% 0%;
+  -ms-transform-origin: 50% 0%;
   -webkit-transform-origin: 50% 0%;
   -moz-transform-origin: 50% 0%;
   transform-origin: 50% 0%;
@@ -21639,9 +21417,7 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   -moz-border-radius: 12px;
   border-radius: 12px;
   text-align: center;
-  -webkit-box-shadow: 0px 2px 5px rgba(0,0,0,.2);
-  -moz-box-shadow: 0px 2px 5px rgba(0,0,0,.2);
-  box-shadow: 0px 2px 5px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 2px 5px rgba(0,0,0,.2);
   -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.2);
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
 }
@@ -21761,11 +21537,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   filter: alpha(opacity=100);
 }
 .gallery-image-edit-env .jcrop-holder {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -22898,22 +22671,16 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   padding: 0;
   width: 200px;
   overflow: hidden;
-  -webkit-border-radius: 0px 3px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 3px;
   -moz-border-radius: 0 3px 3px 3px;
   border-radius: 0 3px 3px 3px;
 }
 .language-selector .dropdown-menu.pull-right {
-  -webkit-border-radius: 3px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 3px 3px;
   -moz-border-radius: 3px 0 3px 3px;
@@ -22926,11 +22693,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
 .language-selector .dropdown-menu > li a {
   margin: 0;
   display: block;
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -22956,11 +22720,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   color: #737881;
 }
 .language-selector.open > .dropdown-toggle {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -22992,11 +22753,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
 }
 .search-results-env .search-bar .form-control + .input-group-btn {
   border: 1px solid #303641;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -23090,6 +22848,673 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   }
   .search-results-env .nav-tabs > li .search-string {
     padding-bottom: 15px;
+  }
+}
+.member-entry {
+  border: 1px solid #ebebeb;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  -moz-box-shadow: 1px 1px 1px rgba(0, 1, 1, 0.02);
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 1, 1, 0.02);
+  box-shadow: 1px 1px 1px rgba(0, 1, 1, 0.02);
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.member-entry:before,
+.member-entry:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.member-entry:after {
+  clear: both;
+}
+.member-entry:before,
+.member-entry:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.member-entry:after {
+  clear: both;
+}
+.member-entry:hover {
+  background: rgba(235, 235, 235, 0.3);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 1, 1, 0.06);
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 1, 1, 0.06);
+  box-shadow: 1px 1px 1px rgba(0, 1, 1, 0.06);
+}
+.member-entry .member-img,
+.member-entry .member-details {
+  float: left;
+}
+.member-entry .member-img {
+  position: relative;
+  display: block;
+  width: 10%;
+}
+.member-entry .member-img img {
+  width: 100%;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.member-entry .member-img i {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  margin-top: -12.5px;
+  margin-left: -12.5px;
+  color: #FFF;
+  font-size: 25px;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  filter: alpha(opacity=0);
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transform: scale(0.5, );
+  -ms-transform: scale(0.5, );
+  transform: scale(0.5, );
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.member-entry .member-img:hover i {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -webkit-transform: scale(1, );
+  -ms-transform: scale(1, );
+  transform: scale(1, );
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
+}
+.member-entry .member-details {
+  width: 89.9%;
+}
+.member-entry .member-details h4 {
+  font-size: 18px;
+  margin-left: 20px;
+}
+.member-entry .member-details h4 a {
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.member-entry .member-details .info-list {
+  margin-left: 5px;
+}
+.member-entry .member-details .info-list > div {
+  margin-top: 5px;
+  font-size: 13px;
+}
+.member-entry .member-details .info-list > div a {
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.member-entry .member-details .info-list > div i {
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.member-entry .member-details .info-list > div:hover i {
+  color: #4f5259;
+}
+@media screen and (max-width: 768px) {
+  .member-entry .member-img {
+    width: 18%;
+  }
+  .member-entry .member-details {
+    width: 81.9%;
+  }
+  .member-entry .member-details h4 {
+    margin-top: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .member-entry .member-img {
+    width: 100%;
+    float: none;
+    text-align: center;
+    position: relative;
+    background: #f8f8f8;
+    margin-bottom: 15px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+  .member-entry .member-img img {
+    width: auto;
+    display: inline-block;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
+  .member-entry .member-details {
+    width: 100%;
+    float: none;
+  }
+  .member-entry .member-details h4,
+  .member-entry .member-details .info-list {
+    margin-left: 0;
+  }
+  .member-entry .member-details h4 > div,
+  .member-entry .member-details .info-list > div {
+    padding: 0;
+  }
+  .member-entry .member-details .info-list > div {
+    margin-top: 10px;
+  }
+}
+.comments-env .comment-filters {
+  margin: 15px 0;
+  margin-bottom: 30px;
+}
+.comments-env .comment-filters > a {
+  position: relative;
+  display: inline-block;
+  color: #93979e;
+  margin: 0 15px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.comments-env .comment-filters > a.current {
+  font-weight: bold;
+}
+.comments-env .comment-filters > a:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -18px;
+  width: 1px;
+  height: 12px;
+  background: #ebebeb;
+  top: 3px;
+}
+.comments-env .comment-filters > a:first-child {
+  margin-left: 0;
+}
+.comments-env .comment-filters > a:last-child {
+  margin-right: 0;
+}
+.comments-env .comment-filters > a:last-child:after {
+  display: none;
+}
+.comments-env .filtering .selectboxit-btn {
+  height: 38px;
+}
+.comments-env .filtering .selectboxit-btn span {
+  height: 38px;
+  line-height: 38px;
+}
+.comments-env .filtering .search-form-full .form-control {
+  margin-top: 0;
+}
+.comments-env .filtering .search-form-contaner {
+  max-width: 300px;
+  width: 32%;
+  float: right;
+}
+.comments-env .filtering .search-form-contaner + .pagination-container {
+  margin-right: 20px;
+}
+.comments-env .filtering .pagination-container {
+  float: right;
+}
+.comments-env .filtering .pagination-container .pagination {
+  margin: 0;
+}
+.comments-env .filtering .pagination-container .pagination a {
+  position: relative;
+  padding-top: 9px;
+  padding-bottom: 10px;
+  margin-top: -2px;
+}
+.comments-env .filtering .pagination-container + .search-form-contaner {
+  margin-right: 20px;
+}
+.comments-env .panel-title h4 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.comments-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  position: relative;
+}
+.comments-list > li {
+  border-bottom: 1px solid #ebebeb;
+  padding: 15px;
+}
+.comments-list > li:before,
+.comments-list > li:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.comments-list > li:after {
+  clear: both;
+}
+.comments-list > li:before,
+.comments-list > li:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.comments-list > li:after {
+  clear: both;
+}
+.comments-list > li:nth-child(even) {
+  background: #f5f5f6;
+}
+.comments-list > li .comment-checkbox {
+  float: left;
+  width: 3%;
+  padding-top: 3px;
+}
+.comments-list > li .comment-details {
+  float: right;
+  width: 96.9%;
+}
+.comments-list > li .comment-details a {
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.comments-list > li .comment-details .comment-head {
+  font-size: 13px;
+}
+.comments-list > li .comment-details .comment-head a {
+  font-weight: bold;
+}
+.comments-list > li .comment-details .comment-text {
+  margin-top: 15px;
+}
+.comments-list > li .comment-details .comment-footer {
+  border-top: 1px solid #ebebeb;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+.comments-list > li .comment-details .comment-footer:before,
+.comments-list > li .comment-details .comment-footer:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.comments-list > li .comment-details .comment-footer:after {
+  clear: both;
+}
+.comments-list > li .comment-details .comment-footer:before,
+.comments-list > li .comment-details .comment-footer:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.comments-list > li .comment-details .comment-footer:after {
+  clear: both;
+}
+.comments-list > li .comment-details .comment-footer .comment-time {
+  float: right;
+  color: #80858e;
+}
+.comments-list > li .comment-details .comment-footer .action-links a {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 10px;
+}
+.comments-list > li .comment-details .comment-footer .action-links .approve {
+  color: #00a651;
+}
+.comments-list > li .comment-details .comment-footer .action-links .delete {
+  color: #cc2424;
+}
+.comments-list > li:last-child {
+  border-bottom: 0;
+}
+@media screen and (max-width: 768px) {
+  .comments-list > li .comment-checkbox {
+    width: 5%;
+  }
+  .comments-list > li .comment-details {
+    width: 94.9%;
+  }
+  .comments-env .filtering .search-form-contaner {
+    float: left;
+  }
+  .search-and-pagination {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .comments-env .search-and-pagination .pagination-container,
+  .comments-env .search-and-pagination .search-form-contaner {
+    float: none !important;
+    text-align: left;
+  }
+  .comments-env .search-and-pagination .search-form-contaner {
+    margin-right: 0;
+    width: 100%;
+    max-width: 1000px;
+  }
+  .comments-env .search-and-pagination .search-form-contaner .search-form-full {
+    margin-top: 10px;
+  }
+  .comments-list > li .comment-checkbox {
+    width: 8%;
+  }
+  .comments-list > li .comment-details {
+    width: 91.9%;
+  }
+  .comments-list > li .comment-details .comment-footer .action-links {
+    float: none;
+    width: 100%;
+  }
+  .comments-list > li .comment-details .comment-footer .action-links a {
+    display: block;
+  }
+}
+/**
+ * Nestable
+ */
+.dd {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dd-list {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dd-list .dd-list {
+  padding-left: 30px;
+}
+.dd-collapsed .dd-list {
+  display: none;
+}
+.dd-item,
+.dd-empty,
+.dd-placeholder {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 20px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.dd-handle,
+.dd-content {
+  display: block;
+  margin: 0px 0;
+  padding: 5px 10px;
+  background: #fafafa;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #ebebeb;
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+dd-content,
+.dd-content:hover {
+  background: #fff;
+}
+.dd-item > button {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  float: left;
+  width: 25px;
+  height: 20px;
+  margin: 5px 0;
+  padding: 0;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 10px;
+  outline: 0;
+}
+.dd-item > button:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  bottom: -6px;
+  width: 1px;
+  background: #ebebeb;
+}
+.dd-item > button:before {
+  content: '+';
+  display: block;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  text-indent: 0;
+}
+.dd-item > button[data-action="collapse"]:before {
+  content: '-';
+}
+.dd-placeholder,
+.dd-empty {
+  margin: 0px 0;
+  padding: 0;
+  min-height: 30px;
+  background: rgba(245, 245, 246, 0.3);
+  border: 1px dotted #ebebeb;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dd-empty {
+  border: 1px dashed #bbb;
+  min-height: 100px;
+  background-color: #e5e5e5;
+}
+.dd-dragel {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+}
+.dd-dragel > .dd-item .dd-handle,
+.dd-dragel > .dd-item .dd-content {
+  margin-top: 0;
+}
+.dd-dragel .dd-handle,
+.dd-dragel .dd-content {
+  -moz-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+}
+.nested-list.with-margins .dd-item .dd-handle,
+.nested-list.with-margins .dd-item .dd-content {
+  margin: 5px 0;
+}
+.nested-list.custom-drag-button .dd-handle {
+  position: absolute !important;
+  margin: 0 !important;
+  width: 15px;
+  height: 32px;
+  padding-left: 5px;
+  padding-right: 4px;
+  cursor: pointer;
+  padding-top: 7px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.nested-list.custom-drag-button .dd-handle span {
+  display: block;
+  line-height: 3px;
+  color: rgba(115, 120, 129, 0.7);
+}
+.nested-list.custom-drag-button .dd-content {
+  padding-left: 25px;
+}
+.nested-list.custom-drag-button button + .dd-handle {
+  left: 24px;
+}
+.nested-list.custom-drag-button button + .dd-handle + .dd-content {
+  padding-left: 50px;
+}
+.nested-list.custom-drag-button.drag-button-on-hover .dd-item > .dd-handle {
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  filter: alpha(opacity=0);
+}
+.nested-list.custom-drag-button.drag-button-on-hover .dd-item:hover > .dd-handle {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
+}
+.custom-handler .dd-item .dd-handle {
+  position: absolute !important;
+  margin: 0 !important;
+  width: 15px;
+  height: 32px;
+  padding-left: 5px;
+  padding-right: 4px;
+  cursor: pointer;
+  padding-top: 7px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.custom-handler .dd-item .dd-handle span {
+  display: block;
+  line-height: 3px;
+  color: rgba(115, 120, 129, 0.7);
+}
+.custom-handler .dd-item .dd-content {
+  padding-left: 25px;
+}
+.custom-handler .dd-item button + .dd-handle {
+  left: 24px;
+}
+.custom-handler .dd-item button + .dd-handle + .dd-content {
+  padding-left: 50px;
+}
+.boxed-layout {
+  background: url(../images/boxed-pattern-3.png);
+  padding-bottom: 0px;
+}
+.boxed-layout.page-fade,
+.boxed-layout.page-fade-only,
+.boxed-layout.page-left-in,
+.boxed-layout.page-right-in {
+  background: url(../images/boxed-pattern-3.png);
+}
+.boxed-layout .page-container {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 0px;
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+.boxed-layout .page-container:before,
+.boxed-layout .page-container:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.boxed-layout .page-container:after {
+  clear: both;
+}
+.boxed-layout .page-container:before,
+.boxed-layout .page-container:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.boxed-layout .page-container:after {
+  clear: both;
+}
+.boxed-layout .page-container.horizontal-menu > header.navbar {
+  width: 80%;
+  margin: 0 auto;
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+.boxed-layout .page-container.horizontal-menu .main-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+.boxed-layout .page-container.horizontal-menu .main-content .container {
+  width: 100%;
+}
+.boxed-layout #chat {
+  position: absolute;
+}
+@media screen and (max-width: 992px) {
+  .boxed-layout .page-container {
+    position: absolute;
+    width: 100%;
+    overflow-x: visible;
+  }
+  .boxed-layout #chat {
+    position: fixed;
   }
 }
 @media (max-width: 1199px) {

@@ -685,11 +685,8 @@ div.datepicker table tr td.range:hover,
 div.datepicker table tr td.range.disabled,
 div.datepicker table tr td.range.disabled:hover {
   background: #eeeeee;
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -702,11 +699,8 @@ div.datepicker table tr td.range.today.disabled:hover {
   *background-color: #f3ea7a;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
   -moz-background-clip: padding;
-  border-radius: 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -913,22 +907,16 @@ div.datepicker thead tr:first-child th.cw {
   text-align: center;
 }
 .input-daterange input:first-child {
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
 }
 .input-daterange input:last-child {
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -1127,11 +1115,8 @@ div.datepicker thead tr:first-child th.cw {
   width: 30%;
 }
 .date-and-time > input:first-child {
-  -webkit-border-radius: 3px 0px 0px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
@@ -1139,11 +1124,8 @@ div.datepicker thead tr:first-child th.cw {
   border-right: 0;
 }
 .date-and-time > input:last-child {
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -1465,6 +1447,10 @@ div.colorpicker {
 }
 .input-group-addon:not(:first-child) {
   border-left: 0;
+}
+.fileinput .uneditable-input,
+.fileinput-new .input-group .btn-file {
+  display: table-cell !important;
 }
 .toast-title {
   font-weight: bold;
@@ -2452,9 +2438,7 @@ output {
 .form-control:focus {
   border-color: #c8cdd7;
   outline: 0;
-  -webkit-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  -moz-box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
-  box-shadow:  0px 2px 1px rgba(203, 208, 217, 0.08);
+  -moz-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   -webkit-box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
   box-shadow:  0 2px 1px rgba(203, 208, 217, 0.08);
 }
@@ -2783,14 +2767,10 @@ select[multiple].input-lg {
 .btn.active {
   outline: none;
   background-image: none;
-  -webkit-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  -moz-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
-  box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.225);
+  -moz-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   -webkit-box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
   box-shadow: inset 0 0px 7px rgba(0, 0, 0, 0.225);
-  -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 0px 4px rgba(0, 0, 0, 0.2);
 }
@@ -2876,11 +2856,8 @@ fieldset[disabled] .btn-default.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -2894,11 +2871,8 @@ fieldset[disabled] .btn-default.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3002,11 +2976,8 @@ fieldset[disabled] .btn-primary.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3020,11 +2991,8 @@ fieldset[disabled] .btn-primary.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3128,11 +3096,8 @@ fieldset[disabled] .btn-blue.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3146,11 +3111,8 @@ fieldset[disabled] .btn-blue.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3254,11 +3216,8 @@ fieldset[disabled] .btn-red.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3272,11 +3231,8 @@ fieldset[disabled] .btn-red.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3380,11 +3336,8 @@ fieldset[disabled] .btn-orange.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3398,11 +3351,8 @@ fieldset[disabled] .btn-orange.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3506,11 +3456,8 @@ fieldset[disabled] .btn-gold.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3524,11 +3471,8 @@ fieldset[disabled] .btn-gold.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3632,11 +3576,8 @@ fieldset[disabled] .btn-black.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3650,11 +3591,8 @@ fieldset[disabled] .btn-black.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3759,11 +3697,8 @@ fieldset[disabled] .btn-white.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3777,11 +3712,8 @@ fieldset[disabled] .btn-white.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -3885,11 +3817,8 @@ fieldset[disabled] .btn-warning.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -3903,11 +3832,8 @@ fieldset[disabled] .btn-warning.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -4011,11 +3937,8 @@ fieldset[disabled] .btn-danger.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -4029,11 +3952,8 @@ fieldset[disabled] .btn-danger.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -4166,11 +4086,8 @@ fieldset[disabled] .btn-green.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -4186,11 +4103,8 @@ fieldset[disabled] .btn-green.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -4303,11 +4217,8 @@ fieldset[disabled] .btn-info.active {
   font-size: 12px;
   line-height: 1.42857143;
   border-radius: 3px;
-  -webkit-border-radius: 0px 3px 3px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 3px 3px 0px;
   -moz-background-clip: padding;
-  border-radius: 0px 3px 3px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -4321,11 +4232,8 @@ fieldset[disabled] .btn-info.active {
   float: left;
   right: auto;
   left: 0;
-  -webkit-border-radius: 3px 0px 0px 3px !important;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 0px 0px 3px !important;
   -moz-background-clip: padding;
-  border-radius: 3px 0px 0px 3px !important;
   background-clip: padding-box;
   -webkit-border-radius: 3px 0 0 3px !important;
   -moz-border-radius: 3px 0 0 3px !important;
@@ -4593,6 +4501,7 @@ input[type="button"].btn-block {
   position: relative;
   display: inline-block;
   border: 1px solid #ebebeb;
+  margin-bottom: 0;
   width: 16px;
   height: 15px;
   -webkit-box-sizing: border-box;
@@ -4667,9 +4576,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace:hover .cb-wrapper,
 .radio-replace:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(0,0,0,.03);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(0,0,0,.03);
-  box-shadow: 0px 0px 0px 2px rgba(0,0,0,.03);
+  -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.03);
   -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.03);
   box-shadow: 0 0 0 2px rgba(0,0,0,.03);
 }
@@ -4709,9 +4616,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace:hover .cb-wrapper,
 .radio-replace:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(209.5,209.5,209.5,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(209.5,209.5,209.5,.1);
-  box-shadow: 0px 0px 0px 2px rgba(209.5,209.5,209.5,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(209.5,209.5,209.5,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(209.5,209.5,209.5,.1);
   box-shadow: 0 0 0 2px rgba(209.5,209.5,209.5,.1);
 }
@@ -4725,9 +4630,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace.color-primary:hover .cb-wrapper,
 .radio-replace.color-primary:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(48,54,65,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(48,54,65,.1);
-  box-shadow: 0px 0px 0px 2px rgba(48,54,65,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(48,54,65,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(48,54,65,.1);
   box-shadow: 0 0 0 2px rgba(48,54,65,.1);
 }
@@ -4741,9 +4644,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace.color-red:hover .cb-wrapper,
 .radio-replace.color-red:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(238,71,73,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(238,71,73,.1);
-  box-shadow: 0px 0px 0px 2px rgba(238,71,73,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(238,71,73,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(238,71,73,.1);
   box-shadow: 0 0 0 2px rgba(238,71,73,.1);
 }
@@ -4757,9 +4658,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace.color-blue:hover .cb-wrapper,
 .radio-replace.color-blue:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(33,169,225,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(33,169,225,.1);
-  box-shadow: 0px 0px 0px 2px rgba(33,169,225,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(33,169,225,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(33,169,225,.1);
   box-shadow: 0 0 0 2px rgba(33,169,225,.1);
 }
@@ -4773,9 +4672,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace.color-green:hover .cb-wrapper,
 .radio-replace.color-green:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(0,166,81,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(0,166,81,.1);
-  box-shadow: 0px 0px 0px 2px rgba(0,166,81,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(0,166,81,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(0,166,81,.1);
   box-shadow: 0 0 0 2px rgba(0,166,81,.1);
 }
@@ -4789,9 +4686,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace.color-gold:hover .cb-wrapper,
 .radio-replace.color-gold:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(250,216,57,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(250,216,57,.1);
-  box-shadow: 0px 0px 0px 2px rgba(250,216,57,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(250,216,57,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(250,216,57,.1);
   box-shadow: 0 0 0 2px rgba(250,216,57,.1);
 }
@@ -4805,9 +4700,7 @@ input[type="button"].btn-block {
 }
 .checkbox-replace.color-white:hover .cb-wrapper,
 .radio-replace.color-white:hover .cb-wrapper {
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(255,255,255,.1);
-  -moz-box-shadow: 0px 0px 0px 2px rgba(255,255,255,.1);
-  box-shadow: 0px 0px 0px 2px rgba(255,255,255,.1);
+  -moz-box-shadow: 0 0 0 2px rgba(255,255,255,.1);
   -webkit-box-shadow: 0 0 0 2px rgba(255,255,255,.1);
   box-shadow: 0 0 0 2px rgba(255,255,255,.1);
 }
@@ -4969,11 +4862,8 @@ input[type="button"].btn-block {
 }
 .page-body .select2-container.select2-dropdown-open .select2-choice,
 .page-body .select2-container.select2-dropdown-open .select2-choices {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -5044,9 +4934,6 @@ input[type="button"].btn-block {
   padding: 6px 12px;
 }
 .page-body .select2-container .select2-choices .select2-search-choice {
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -5097,16 +4984,11 @@ input[type="button"].btn-block {
   -webkit-border-radius: 1px 1px 4px 4px;
   -moz-border-radius: 1px 1px 4px 4px;
   border-radius: 1px 1px 4px 4px;
-  -webkit-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  -moz-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  box-shadow: 0px 2px 7px rgba(0,0,0,.06);
+  -moz-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   -webkit-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   box-shadow: 0 2px 7px rgba(0,0,0,.06);
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -5178,9 +5060,7 @@ input[type="button"].btn-block {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: inset 0px 1px 0px rgba(0,0,0,.03);
-  -moz-box-shadow: inset 0px 1px 0px rgba(0,0,0,.03);
-  box-shadow: inset 0px 1px 0px rgba(0,0,0,.03);
+  -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,.03);
   -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.03);
   box-shadow: inset 0 1px 0 rgba(0,0,0,.03);
   padding: 10px 12px;
@@ -5243,11 +5123,8 @@ input[type="button"].btn-block {
   color: #303641;
 }
 .page-body .selectboxit-container .selectboxit.selectboxit-open {
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -5299,20 +5176,15 @@ input[type="button"].btn-block {
 .page-body .selectboxit-container .selectboxit-options {
   width: 100%;
   background: #fff;
-  -webkit-border-radius: 0px 0px 3px 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px 0px 3px 3px;
   -moz-background-clip: padding;
-  border-radius: 0px 0px 3px 3px;
   background-clip: padding-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
   border-top: 0;
   border-color: #ebebeb;
-  -webkit-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  -moz-box-shadow: 0px 2px 7px rgba(0,0,0,.06);
-  box-shadow: 0px 2px 7px rgba(0,0,0,.06);
+  -moz-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   -webkit-box-shadow: 0 2px 7px rgba(0,0,0,.06);
   box-shadow: 0 2px 7px rgba(0,0,0,.06);
   max-height: 350px;
@@ -5946,6 +5818,7 @@ hr + .mail-env {
 .mail-env .mail-body .mail-info {
   background: #f3f4f4;
   display: table;
+  width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   border-bottom: 1px solid #ebebeb;
@@ -7003,11 +6876,8 @@ hr + .mail-env {
   margin-top: -10px;
   margin-left: -10px;
   margin-right: -10px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -7042,11 +6912,8 @@ hr + .mail-env {
   margin: 0;
   margin-bottom: 5px;
   font-size: 12px;
-  -webkit-border-radius: 3px 3px 0px 0px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px 3px 0px 0px;
   -moz-background-clip: padding;
-  border-radius: 3px 3px 0px 0px;
   background-clip: padding-box;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;

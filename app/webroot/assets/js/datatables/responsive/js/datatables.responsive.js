@@ -55,7 +55,7 @@
  */
 function ResponsiveDatatablesHelper(tableSelector, breakpoints, options) {
     if (typeof tableSelector === 'string') {
-        this.tableElement = $(tableSelector);
+        this.tableElement = jQuery(tableSelector);
     } else {
         this.tableElement = tableSelector;
     }
@@ -183,7 +183,7 @@ ResponsiveDatatablesHelper.prototype.init = function (breakpoints, options) {
     _.each(headerColumns, function (col, index) {
         // Get the column with the attribute data-class="expand" so we know
         // where to display the expand icon.
-        if ($(col.nTh).attr('data-class') === 'expand') {
+        if (jQuery(col.nTh).attr('data-class') === 'expand') {
             this.expandColumn = this.columnIndexes[index];
         }
 
@@ -191,7 +191,7 @@ ResponsiveDatatablesHelper.prototype.init = function (breakpoints, options) {
         // is associated with.
         // If it's defined, get the data-hide attribute and sort this
         // column into the appropriate breakpoint's columnsToHide array.
-        var dataHide = $(col.nTh).attr('data-hide');
+        var dataHide = jQuery(col.nTh).attr('data-hide');
         if (dataHide !== undefined) {
             var splitBreakingPoints = dataHide.split(/,\s*/);
             _.each(splitBreakingPoints, function (e) {
@@ -222,11 +222,11 @@ ResponsiveDatatablesHelper.prototype.setWindowsResizeHandler = function(bindFlag
 
     if (bindFlag) {
         var that = this;
-        $(window).bind("resize", function () {
+        jQuery(window).bind("resize", function () {
             that.respond();
         });
     } else {
-        $(window).unbind("resize");
+        jQuery(window).unbind("resize");
     }
 }
 
@@ -240,7 +240,7 @@ ResponsiveDatatablesHelper.prototype.respond = function () {
     var that = this;
 
     // Get new windows width
-    var newWindowWidth = $(window).width();
+    var newWindowWidth = jQuery(window).width();
     var updatedHiddenColumnsCount = 0;
 
     // Loop through breakpoints to see which columns need to be shown/hidden.
@@ -288,16 +288,16 @@ ResponsiveDatatablesHelper.prototype.respond = function () {
         this.tableElement.addClass('has-columns-hidden');
 
         // Show details for each row that is tagged with the class .detail-show.
-        $('tr.detail-show', this.tableElement).each(function (index, element) {
-            var tr = $(element);
+        jQuery('tr.detail-show', this.tableElement).each(function (index, element) {
+            var tr = jQuery(element);
             if (tr.next('.row-detail').length === 0) {
                 ResponsiveDatatablesHelper.prototype.showRowDetail(that, tr);
             }
         });
     } else {
         this.tableElement.removeClass('has-columns-hidden');
-        $('tr.row-detail').each(function (event) {
-            ResponsiveDatatablesHelper.prototype.hideRowDetail(that, $(this).prev());
+        jQuery('tr.row-detail').each(function (event) {
+            ResponsiveDatatablesHelper.prototype.hideRowDetail(that, jQuery(this).prev());
         });
     }
 };
@@ -319,12 +319,12 @@ ResponsiveDatatablesHelper.prototype.showHideColumns = function () {
 
     // Rebuild details to reflect shown/hidden column changes.
     var that = this;
-    $('tr.row-detail').each(function () {
-        ResponsiveDatatablesHelper.prototype.hideRowDetail(that, $(this).prev());
+    jQuery('tr.row-detail').each(function () {
+        ResponsiveDatatablesHelper.prototype.hideRowDetail(that, jQuery(this).prev());
     });
     if (this.tableElement.hasClass('has-columns-hidden')) {
-        $('tr.detail-show', this.tableElement).each(function (index, element) {
-            ResponsiveDatatablesHelper.prototype.showRowDetail(that, $(element));
+        jQuery('tr.detail-show', this.tableElement).each(function (index, element) {
+            ResponsiveDatatablesHelper.prototype.showRowDetail(that, jQuery(element));
         });
     }
 };
@@ -342,17 +342,17 @@ ResponsiveDatatablesHelper.prototype.createExpandIcon = function (tr) {
 
     // Get the td for tr with the same index as the th in the header tr
     // that has the data-class="expand" attribute defined.
-    var tds = $('td', tr);
+    var tds = jQuery('td', tr);
     var that = this;
     // Loop through tds and create an expand icon on the td that has a column
     // index equal to the expand column given.
     for (var i = 0, l = tds.length; i < l; i++) {
         var td = tds[i];
         var tdIndex = that.tableElement.fnGetPosition(td)[2];
-        td = $(td);
+        td = jQuery(td);
         if (tdIndex === that.expandColumn) {
             // Create expand icon if there isn't one already.
-            if ($('span.responsiveExpander', td).length == 0) {
+            if (jQuery('span.responsiveExpander', td).length == 0) {
                 td.prepend(that.expandIconTemplate);
 
                 // Respond to click event on expander icon.
@@ -377,7 +377,7 @@ ResponsiveDatatablesHelper.prototype.showRowDetailEventHandler = function (event
     }
 
     // Get the parent tr of which this td belongs to.
-    var tr = $(this).closest('tr');
+    var tr = jQuery(this).closest('tr');
 
     // Show/hide row details
     if (tr.hasClass('detail-show')) {
@@ -404,10 +404,10 @@ ResponsiveDatatablesHelper.prototype.showRowDetail = function (responsiveDatatab
     var columns = tableContainer.fnSettings().aoColumns;
 
     // Create the new tr.
-    var newTr = $(responsiveDatatablesHelperInstance.rowTemplate);
+    var newTr = jQuery(responsiveDatatablesHelperInstance.rowTemplate);
 
     // Get the ul that we'll insert li's into.
-    var ul = $('ul', newTr);
+    var ul = jQuery('ul', newTr);
 
     // Loop through hidden columns and create an li for each of them.
     _.each(responsiveDatatablesHelperInstance.columnsHiddenIndexes, function (index) {
@@ -417,16 +417,16 @@ ResponsiveDatatablesHelper.prototype.showRowDetail = function (responsiveDatatab
 
         // Don't create li if contents are empty (depends on hideEmptyColumnsInRowDetail option).
         if (!responsiveDatatablesHelperInstance.options.hideEmptyColumnsInRowDetail || td.innerHTML.trim().length) {
-            var li = $(responsiveDatatablesHelperInstance.rowLiTemplate);
-            $('.columnTitle', li).html(columns[index].sTitle);
-            var rowHtml = $(td).contents().clone();
-            $('.columnValue', li).html(rowHtml);
+            var li = jQuery(responsiveDatatablesHelperInstance.rowLiTemplate);
+            jQuery('.columnTitle', li).html(columns[index].sTitle);
+            var rowHtml = jQuery(td).contents().clone();
+            jQuery('.columnValue', li).html(rowHtml);
 
             // Copy index to data attribute, so we'll know where to put the value when the tr.row-detail is removed.
             li.attr('data-column', index);
 
             // Copy td class to new li.
-            var tdClass = $(td).attr('class');
+            var tdClass = jQuery(td).attr('class');
             if (tdClass !== 'undefined' && tdClass !== false && tdClass !== '') {
                       li.addClass(tdClass)
             }
@@ -457,9 +457,9 @@ ResponsiveDatatablesHelper.prototype.hideRowDetail = function (responsiveDatatab
         var tableContainer = responsiveDatatablesHelperInstance.tableElement;
         var aoData = tableContainer.fnSettings().aoData;
         var rowIndex = tableContainer.fnGetPosition(tr[0]);
-        var column = $(this).attr('data-column');
-        var td = $(this).find('span.columnValue').contents();
-        aoData[rowIndex]._anHidden[column] = $(aoData[rowIndex]._anHidden[column]).empty().append(td)[0];
+        var column = jQuery(this).attr('data-column');
+        var td = jQuery(this).find('span.columnValue').contents();
+        aoData[rowIndex]._anHidden[column] = jQuery(aoData[rowIndex]._anHidden[column]).empty().append(td)[0];
     });
     tr.next('.row-detail').remove();
 };
@@ -477,13 +477,13 @@ ResponsiveDatatablesHelper.prototype.disable = function (disable) {
         this.setWindowsResizeHandler(false);
 
         // Remove all trs that have row details.
-        $('tbody tr.row-detail', this.tableElement).remove();
+        jQuery('tbody tr.row-detail', this.tableElement).remove();
 
         // Remove all trs that are marked to have row details shown.
-        $('tbody tr', this.tableElement).removeClass('detail-show');
+        jQuery('tbody tr', this.tableElement).removeClass('detail-show');
 
         // Remove all expander icons.
-        $('tbody tr span.responsiveExpander', this.tableElement).remove();
+        jQuery('tbody tr span.responsiveExpander', this.tableElement).remove();
 
         this.columnsHiddenIndexes = [];
         this.columnsShownIndexes = this.columnIndexes;
@@ -506,7 +506,7 @@ ResponsiveDatatablesHelper.prototype.disable = function (disable) {
  * @param {Object} oSettings DataTables settings object
  * @param {node}   mTr       TR node or aoData index
  */
-$.fn.dataTableExt.oApi.fnGetTds = function (oSettings, mTr)
+jQuery.fn.dataTableExt.oApi.fnGetTds = function (oSettings, mTr)
 {
     var anTds = [];
     var anVisibleTds = [];
