@@ -113,7 +113,6 @@
 						</a>
 					</li>
 				<?endif;?>
-
 				<li data-action="index"><a href="<?= $this->Html->url('/domains/'); ?>"><span><i class="entypo-list"></i>Domains List</span></a></li>
 				<?foreach ($allDomains as $domain): ?>
 					<li data-action="badges">

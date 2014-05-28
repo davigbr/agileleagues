@@ -53,6 +53,97 @@ class BadgesControllerTest extends ControllerTestCase {
 		$this->assertEquals(false, $result['canClaim']);
 	}
 
+
+
+
+
+
+
+	public function testAddGet() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$domain = $this->utils->Domain->find('first');
+		$domainId = $domain['Domain']['id'];
+		$vars = $this->testAction('/badges/add/' . $domainId, array('method' => 'get', 'return' => 'vars'));
+		$this->assertTrue(isset($vars['badges']));
+		$this->assertTrue(isset($vars['activities']));
+		$this->assertTrue(isset($vars['domain']));
+	}
+
+	public function testEditGet() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$domain = $this->utils->Domain->find('first');
+		$badge = $this->utils->Badge->find('first');
+		$id = $badge['Badge']['id'];
+		$domainId = $domain['Domain']['id'];
+		$vars = $this->testAction('/badges/edit/' . $domainId . '/' . $id, array('method' => 'get', 'return' => 'vars'));
+		$this->assertTrue(isset($vars['badges']));
+		$this->assertTrue(isset($vars['activities']));
+		$this->assertTrue(isset($vars['domain']));
+	}
+
+
+	public function testEditNotFound() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$domain = $this->utils->Domain->find('first');
+		$domainId = $domain['Domain']['id'];
+		$this->setExpectedException('NotFoundException');
+		$this->testAction('/badges/edit/' . $domainId . '/0', array('method' => 'get'));
+	}
+
+	public function testAddPostSuccess() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$data = array();
+		$data['Badge']['name']= 'Glossarier';
+		$data['Badge']['icon']= 'entypo entypo-users';
+		$data['BadgeRequisite'][0]['badge_id_requisite']= '';
+		$data['BadgeRequisite'][1]['badge_id_requisite']= '';
+		$data['BadgeRequisite'][2]['badge_id_requisite']= '';
+		$data['BadgeRequisite'][3]['badge_id_requisite']= '';
+		$data['ActivityRequisite'][0]['activity_id']= '';
+		$data['ActivityRequisite'][0]['count']= '';
+		$data['ActivityRequisite'][1]['activity_id']= '';
+		$data['ActivityRequisite'][1]['count']= '';
+		$data['ActivityRequisite'][2]['activity_id']= '';
+		$data['ActivityRequisite'][2]['count']= '';
+		$data['ActivityRequisite'][3]['activity_id']= '';
+		$data['ActivityRequisite'][3]['count']= '';
+		$data['Badge']['new']= '1';
+		$domain = $this->utils->Domain->find('first');
+		$domainId = $domain['Domain']['id'];
+		$badgesBefore = $this->utils->Badge->find('count');
+		$this->testAction('/badges/add/' . $domainId, array('data' => $data));
+		$badgesAfter = $this->utils->Badge->find('count');
+		$this->assertNotNull($this->controller->flashSuccess);
+		$this->assertEquals($badgesBefore + 1, $badgesAfter);
+	}
+
+
+	public function testAddPostError() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$data = array();
+		$data['Badge']['name']= '';
+		$data['Badge']['icon']= 'entypo entypo-users';
+		$data['BadgeRequisite'][0]['badge_id_requisite']= '';
+		$data['BadgeRequisite'][1]['badge_id_requisite']= '';
+		$data['BadgeRequisite'][2]['badge_id_requisite']= '';
+		$data['BadgeRequisite'][3]['badge_id_requisite']= '';
+		$data['ActivityRequisite'][0]['activity_id']= '';
+		$data['ActivityRequisite'][0]['count']= '';
+		$data['ActivityRequisite'][1]['activity_id']= '';
+		$data['ActivityRequisite'][1]['count']= '';
+		$data['ActivityRequisite'][2]['activity_id']= '';
+		$data['ActivityRequisite'][2]['count']= '';
+		$data['ActivityRequisite'][3]['activity_id']= '';
+		$data['ActivityRequisite'][3]['count']= '';
+		$data['Badge']['new']= '1';
+		$domain = $this->utils->Domain->find('first');
+		$domainId = $domain['Domain']['id'];		
+		$teamsBefore = $this->utils->Team->find('count');
+		$this->testAction('/badges/add/' . $domainId, array('data' => $data));
+		$teamsAfter = $this->utils->Team->find('count');
+		$this->assertNotNull($this->controller->flashError);
+		$this->assertEquals($teamsBefore, $teamsAfter);
+	}
 	
 
 }

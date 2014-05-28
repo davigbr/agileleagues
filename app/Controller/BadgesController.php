@@ -53,15 +53,24 @@ class BadgesController extends AppController {
 		return $this->redirect('/badges');
     }
 
-    public function edit($badgeId) {
-    	if (!$this->isScrumMaster) {
-			return $this->redirect('/badges');
-		}
-        
-		$this->Badge->recursive = 1; 
-        $badge = $this->Badge->findById($badgeId);
+    public function add($domainId) {
+        $this->_save($domainId);
+    }
 
+    public function edit($domainId, $id) {
+        $this->_save($domainId, $id);
+    }
+
+    public function _save($domainId, $id = null) {
+        if (!$this->isScrumMaster) {
+            throw new ForbiddenException();
+        }
+
+        $this->Badge->recursive = 1;
+        
         if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['Badge']['domain_id'] = $domainId;
+
             foreach ($this->request->data['ActivityRequisite'] as $key => $value) {
                 if (!$value['activity_id']) unset($this->request->data['ActivityRequisite'][$key]);
             }
@@ -71,21 +80,29 @@ class BadgesController extends AppController {
             if (empty($this->request->data['ActivityRequisite'])) unset($this->request->data['ActivityRequisite']);
             if (empty($this->request->data['BadgeRequisite'])) unset($this->request->data['BadgeRequisite']);
 
-            $this->BadgeRequisite->query('DELETE FROM badge_requisite WHERE badge_id = ? ', array($badgeId));
-            $this->ActivityRequisite->query('DELETE FROM activity_requisite WHERE badge_id = ? ', array($badgeId));
+            if ($id !== null) {
+                $this->BadgeRequisite->query('DELETE FROM badge_requisite WHERE badge_id = ? ', array($badgeId));
+                $this->ActivityRequisite->query('DELETE FROM activity_requisite WHERE badge_id = ? ', array($badgeId));
+            }   
 
             if ($this->Badge->saveAssociated($this->request->data)) {
-                $this->flashSuccess(__('Badge edited successfully!'));
+                $this->flashSuccess(__('Badge saved successfully!'));
                 return $this->redirect('/badges');
             } else {
                 $this->flashError(__('Error while trying to edit badge.'));
             }
         } else {
-            $this->request->data = $badge;
-		}
-
-        $domainId = $badge['Badge']['domain_id'];
-		$this->set('badges', $this->Badge->simpleFromDomain($domainId));
-		$this->set('activities', $this->Activity->simpleFromDomain($domainId));
+            if ($id !== null) {
+                $badge = $this->Badge->findById($id);
+                if (!$badge) {
+                    throw new NotFoundException();
+                }
+                $this->request->data = $badge;
+            }
+        }
+        $this->set('domain', $this->Domain->findById($domainId));
+        $this->set('badges', $this->Badge->simpleFromDomain($domainId));
+        $this->set('activities', $this->Activity->simpleFromDomain($domainId));
     }
+
 }

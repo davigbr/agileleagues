@@ -84,8 +84,11 @@
 </div>
 <?if ($isScrumMaster): ?>
     <div class="btn-group">
+        <a href="<? echo $this->Html->url('/badges/add/' . $domain['Domain']['id']); ?>" class="btn btn-success btn-lg">
+            <i class="glyphicon glyphicon-plus"></i> Create Badge
+        </a>
         <a href="<? echo $this->Html->url('/domains/edit/' . $domain['Domain']['id']); ?>" class="btn btn-primary btn-lg">
-            <i class="glyphicon glyphicon-edit"></i> Edit
+            <i class="glyphicon glyphicon-edit"></i> Edit Domain
         </a>
     </div>
 <?endif;?>

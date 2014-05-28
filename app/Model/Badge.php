@@ -14,6 +14,11 @@ class Badge extends AppModel {
 		'BadgeLog'
 	);
 
+	public $validate = array(
+		'name' => 'notEmpty',
+		'abbr' => 'notEmpty'
+	);
+
 	public $uses = array(
 		'BadgeActivityProgress', 
 		'BadgeClaimed', 
