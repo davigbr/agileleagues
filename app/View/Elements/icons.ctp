@@ -947,6 +947,7 @@
 	$(function() {
 		$('div.icon-el > a > i').click(function(){
 			$('#DomainIcon').val($(this).attr('class'));
+			$('#BadgeIcon').val($(this).attr('class'));
 		});
 	});
 </script>

@@ -14,4 +14,4 @@
 	</div>
 </div>
 
-<? require_once 'icons.ctp'; ?>
+<?= $this->element('icons'); ?>
