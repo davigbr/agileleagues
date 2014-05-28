@@ -1,25 +1,30 @@
-<h3><? echo $domain['Domain']['name']?> Badges</h3>
-<br/>
+<div class="panel panel-primary panel-table">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h3><?= h($domain['Domain']['name'])?> Badges</h3>
+        </div>
+    </div>
+</div>
 <div class="row">
     <?foreach ($badges as $badgeId => $badge): ?>
         <?
             $activitiesProgress = $badgeActivitiesProgress[$badgeId];
         ?>
         <div class="col-lg-3 col-md-6">
-            <div class="tile-title" style="height: 330px; <? echo $badge['claimed']? 'background-color: ' . $badge['Domain']['color']:''?>">           
+            <div class="tile-title" style="height: 330px; <?= $badge['claimed']? 'background-color: ' . $badge['Domain']['color']:''?>">           
                 <div class="icon">
-                    <a href="<? echo $this->Html->url('/badges/view/' . $badgeId); ?>">
+                    <a href="<?= $this->Html->url('/badges/view/' . $badgeId); ?>">
                         <?if($badge['claimed']):?>
-                            <i class="<? echo $badge['Badge']['icon']? $badge['Badge']['icon'] : 'fa fa-question'?>"></i>
+                            <i class="<?= $badge['Badge']['icon']? h($badge['Badge']['icon']) : 'fa fa-question'?>"></i>
                         <?else:?>
                             <i class="glyphicon glyphicon-lock"></i>
                         <?endif;?>
                     </a>
                 </div>
                 <div class="title">
-                    <a href="<? echo $this->Html->url('/badges/view/' . $badgeId); ?>">
+                    <a href="<?= $this->Html->url('/badges/view/' . $badgeId); ?>">
                         <h3>
-                            <? echo h($badge['Badge']['name']); ?>&nbsp;
+                            <?= h($badge['Badge']['name']); ?>&nbsp;
                         </h3>
                         <?if(!$badge['claimed'] && $badge['progress'] === 100):?>
                             <p>All required activities have been <strong style="color: green">completed</strong>. Claim now!</p>
@@ -58,12 +63,12 @@
                                     <?else:?>
                                         <i style="color: red" class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;
                                     <?endif;?>
-                                    <span title="<? echo $activityProgress['Activity']['name']?>">
-                                        <span title="Required"><? echo $activityProgress['BadgeActivityProgress']['coins_required']?>x </span>
-                                        <? echo h($activityProgress['Activity']['name']); ?>
+                                    <span title="<?= $activityProgress['Activity']['name']?>">
+                                        <span title="Required"><?= $activityProgress['BadgeActivityProgress']['coins_required']?>x </span>
+                                        <?= h($activityProgress['Activity']['name']); ?>
                                         <?if (!$badge['claimed']): ?>
                                             <span title="You have">
-                                                (<? echo $activityProgress['BadgeActivityProgress']['coins_obtained']?>)
+                                                (<?= $activityProgress['BadgeActivityProgress']['coins_obtained']?>)
                                             </span>
                                         <?endif;?>
                                     </span>
@@ -77,3 +82,10 @@
         </div>
     <?endforeach;?>
 </div>
+<?if ($isScrumMaster): ?>
+    <div class="btn-group">
+        <a href="<? echo $this->Html->url('/domains/edit/' . $domain['Domain']['id']); ?>" class="btn btn-primary btn-lg">
+            <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+    </div>
+<?endif;?>

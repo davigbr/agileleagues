@@ -110,8 +110,8 @@ class TestUtils {
 
     public function generateDomains() {
         $this->Domain->saveMany(array(
-            array('id' => 1, 'name' => 'Domain 1', 'abbr' => 'DM1', 'color' => '#aaa'),
-            array('id' => 2, 'name' => 'Domain 2', 'abbr' => 'DM2', 'color' => '#bbb'),
+            array('id' => 1, 'name' => 'Domain 1', 'description' => 'Domain description...', 'abbr' => 'DM1', 'color' => '#aaaaaa'),
+            array('id' => 2, 'name' => 'Domain 2', 'description' => 'Domain description...', 'abbr' => 'DM2', 'color' => '#bbbbbb'),
         ));
     }
 

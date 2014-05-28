@@ -1,15 +1,20 @@
-<h3>Domains</h3>
-<br/>
+<div class="panel panel-primary panel-table">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h1>Domains</h1>
+        </div>
+    </div>
+</div>
 <div class="row">
 	<? foreach ($domains as $domain) : ?>
 		<div class="col-sm-3">
-			<div class="tile-title" style="background-color: <? echo $domain['Domain']['color']?>">
+			<div class="tile-title" style="height: 220px; background-color: <?= $domain['Domain']['color']?>">
 				<div class="icon">
-					<a href="<? echo $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>"><i class="<? echo h($domain['Domain']['icon']); ?>"></i></a>
+					<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>"><i class="<?= h($domain['Domain']['icon']); ?>"></i></a>
 				</div>
 				<div class="title">
-					<a href="<? echo $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>"><h3><? echo h($domain['Domain']['name']); ?></h3></a>
-					<p><? echo h($domain['Domain']['description']); ?></p>
+					<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>"><h3><?= h($domain['Domain']['name']); ?></h3></a>
+					<p><?= h($domain['Domain']['description']); ?></p>
 				</div>
 			</div>
 		</div>

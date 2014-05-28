@@ -35,6 +35,7 @@
 	<?= $this->element('meta') ?>
 </head>
 <body class="page-body">
+	<?//= $this->element('carousel')?>
 	<div class="page-container horizontal-menu sidebar-collapsed">
 		<?= $this->element('home_menu') ?>
 		<div class="main-content">

@@ -4,13 +4,6 @@ App::uses('AppController', 'Controller');
 
 class NotificationsController extends AppController {
 
-	public function beforeFilter() {
-		parent::beforeFilter();
-		if (!$this->isScrumMaster) {
-			throw new ForbiddenException();
-		}
-	}
-
 	public function index() {
 		$this->set('notifications', $this->Notification->find('all', array(
 			'contain' => array('Player'),

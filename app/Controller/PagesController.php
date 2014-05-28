@@ -38,7 +38,6 @@ class PagesController extends AppController {
 		parent::beforeFilter();
 	}
 
-
 	public function display() {
 		$path = func_get_args();
 
@@ -73,5 +72,6 @@ class PagesController extends AppController {
 	}
 
 	public function home() {
+		$this->redirect('/dashboards/activities');
 	}
 }

@@ -1,37 +1,28 @@
 <header class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
+	<div class="navbar-inner" style="width: 1170px; margin: auto">
 		<div class="navbar-brand">
 			<?= $this->element('logo')?>
 		</div>
 		<ul class="navbar-nav">
 			<li class="root-level">
 				<a href="#">
-					<i class="entypo-gauge"></i>
-					<span>Dashboard</span>
+					<span>Scrum Gamification</span>
 				</a>
 			</li>
 			<li class="root-level">
 				<a href="#">
-					<i class="entypo-gauge"></i>
-					<span>Dashboard</span>
+					<span>XP Gamification</span>
 				</a>
 			</li>
 			<li class="root-level">
 				<a href="#">
-					<i class="entypo-gauge"></i>
-					<span>Dashboard</span>
-				</a>
-			</li>
-			<li class="root-level">
-				<a href="#">
-					<i class="entypo-gauge"></i>
-					<span>Dashboard</span>
+					<span>Contact Us</span>
 				</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-right pull-right">
 			<li>
-				<a href="<?= $this->Html->url('/dashboards/activities')?>">Play</a>
+				<a href="<?= $this->Html->url('/dashboards/activities')?>">Play <i class="entypo-play right"></i></a>
 			</li>
 			<li class="sep"></li>
 			<li>

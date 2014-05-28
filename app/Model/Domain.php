@@ -8,6 +8,20 @@ class Domain extends AppModel {
 
 	public $order = array('Domain.id' => 'ASC');
 
+	public $validate = array(
+		'abbr' => 'notEmpty',
+		'color' => array(
+			'notEmpty',
+			'color' => array(
+				'rule' => array('custom', '/\\#[A-Fa-f0-9]{6}/'),
+				'message' => 'Invalid color'
+			)
+		),
+		'icon' => 'notEmpty',
+		'name' => 'notEmpty',
+		'description' => 'notEmpty'
+	);
+
 	public $hasMany = array(
 		'Badge',
 		'Activity' => array(

@@ -34,13 +34,6 @@ class NotificationsControllerTest extends ControllerTestCase {
 		}
 	}
 
-	public function testNotScrumMaster() {
-		$this->setExpectedException('ForbiddenException');
-		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
-		$result = $this->testAction('/notifications', array('return' => 'vars'));
-	}
-
-
 	public function testSendGet() {
 		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
 		$result = $this->testAction('/notifications/send', array('return' => 'vars', 'method' => 'GET'));

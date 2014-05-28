@@ -27,8 +27,8 @@
 			<? foreach ($players as $player) : ?>
 				<tr>
 					<td style="text-align: center"><img src="<? echo $this->Gravatar->get($player['Player']['email'], 60) ?>" alt="" class="img-rounded" width="60"></td>
-					<td><? echo h($player['Team']['name']); ?></td>
 					<td><? echo h($player['Player']['name']); ?>, <? echo h($player['Player']['title']); ?></td>
+					<td><? echo h($player['Team']['name']); ?></td>
 					<td><? echo h($player['PlayerType']['name']); ?></td>
 					<td><? echo h($player['Player']['email']); ?></td>
 					<td><? echo h($player['Player']['xp']); ?></td>

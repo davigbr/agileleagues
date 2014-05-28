@@ -87,7 +87,7 @@ class LogTest extends CakeTestCase {
 	public function testAcquiredPastRule() {
 		$log = $this->utils->Log->find('first');
 		$date = new DateTime();
-		$date->modify('-2 day');
+		$date->modify('-8 day');
 		$log['Log']['acquired'] = $date->format('Y-m-d');
 		$this->utils->Log->data = $log;
 		$this->assertFalse($this->utils->Log->acquiredPastRule());

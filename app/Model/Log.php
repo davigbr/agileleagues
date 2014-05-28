@@ -13,7 +13,7 @@ class Log extends AppModel {
 			'notEmpty', 
 			'acquiredPastRule' => array(
 				'rule' => 'acquiredPastRule',
-				'message' => 'Activities performed more than one day ago cannot be reported. '
+				'message' => 'Activities performed more than one week ago cannot be reported. '
 			),
 			'acquiredFutureRule' => array(
 				'rule' => 'acquiredFutureRule',
@@ -51,7 +51,7 @@ class Log extends AppModel {
 		if (isset($this->data['Log']['acquired'])) {
 			$acquired = new DateTime($this->data['Log']['acquired']);
 			$now = new DateTime(date('Y-m-d') . ' 00:00:00');
-			$now->modify('-1 day');
+			$now->modify('-1 week');
 			if ($acquired < $now) {
 				return false;
 			}

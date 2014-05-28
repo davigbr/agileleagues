@@ -8,6 +8,34 @@ class DomainsController extends AppController {
 		$this->set('domains', $this->Domain->all());
 	}
 
+    public function add() {
+        $this->_save();
+    }
+
+    public function edit($id) {
+        $this->_save($id);
+    }
+
+    public function _save($id = null) {
+        if (!$this->isScrumMaster) {
+            throw new ForbiddenException();
+        }
+        
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Domain->save($this->request->data)) {
+                $this->flashSuccess(__('Domain saved successfully.'));
+                return $this->redirect('/domains');
+            } else {
+                $this->flashError(__('There are validation errors.'));
+            }
+        } else if ($id !== null) {
+            $this->request->data = $this->Domain->findById($id);
+            if (!$this->request->data) {
+                throw new NotFoundException();
+            }
+        }
+    }
+
     public function badges($domainId) {
         $this->Domain->id = $domainId;
         if (!$this->Domain->exists()) {
