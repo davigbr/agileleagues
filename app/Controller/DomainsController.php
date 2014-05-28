@@ -34,6 +34,8 @@ class DomainsController extends AppController {
                 throw new NotFoundException();
             }
         }
+
+        $this->set('playerTypes', $this->Player->PlayerType->simple());
     }
 
     public function badges($domainId) {

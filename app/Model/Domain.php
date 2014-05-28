@@ -17,6 +17,7 @@ class Domain extends AppModel {
 				'message' => 'Invalid color'
 			)
 		),
+		'player_type_id' => 'notEmpty',
 		'icon' => 'notEmpty',
 		'name' => 'notEmpty',
 		'description' => 'notEmpty'

@@ -13,3 +13,9 @@ ADD COLUMN `team_id`  int(10) UNSIGNED NULL DEFAULT NULL AFTER `xp`;
 
 ALTER TABLE `player` ADD CONSTRAINT `fk_player_team_id` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`);
 
+ALTER TABLE `domain`
+ADD COLUMN `player_type_id`  int(10) UNSIGNED NULL DEFAULT NULL AFTER `icon`;
+
+ALTER TABLE `domain` ADD CONSTRAINT `fk_domain_player_type_id` FOREIGN KEY (`player_type_id`) REFERENCES `player_type` (`id`);
+
+UPDATE domain SET player_type_id = 1;
