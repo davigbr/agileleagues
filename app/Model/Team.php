@@ -14,6 +14,12 @@ class Team extends AppModel {
 			'conditions' => array(
 				'Developers.player_type_id' => PLAYER_TYPE_DEVELOPER
 			)
+		),
+		'ProductOwners' => array(
+			'className' => 'Player',
+			'conditions' => array(
+				'ProductOwners.player_type_id' => PLAYER_TYPE_PRODUCT_OWNER
+			)
 		)
 	);
 
@@ -25,11 +31,11 @@ class Team extends AppModel {
 		'ScrumMaster' => array(
 			'className' => 'Player',
 			'foreignKey' => 'player_id_scrummaster'
-		),
-		'ProductOwner' => array(
-			'className' => 'Player',
-			'foreignKey' => 'player_id_product_owner'
 		)
 	);
+
+	public function simpleFromScrumMaster($scrumMasterId) {
+		return $this->simple(array('Team.player_id_scrummaster'=> $scrumMasterId));
+	}
 
 }

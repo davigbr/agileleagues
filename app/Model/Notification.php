@@ -6,7 +6,14 @@ class Notification extends AppModel {
 	
 	public $useTable = 'notification';
 	public $displayField = 'text';
-	public $belongsTo = array('Player');
+	public $belongsTo = array(
+		'Player',
+		'PlayerSender' => array(
+			'className' => 'Player',
+			'foreignKey' => 'player_id_sender'
+		)
+	);
+	
 	public $order = array('Notification.created' => 'DESC');
 
 	public $validate = array(
@@ -29,18 +36,19 @@ class Notification extends AppModel {
 	/**
 	 * Controller method only!
 	 */
-	public function send($title, $text, $type, $playerId = null) {
+	public function send($playerIdSender, $title, $text, $type, $playerIdTarget = null) {
 		$ds = $this->getDataSource();
 		$ds->begin();
 		try {
-			if (!$playerId) {
-				$this->_broadcast($title, $text, $type);
+			if (!$playerIdTarget) {
+				$this->_broadcast($playerIdSender, $title, $text, $type);
 			} else {
 				$this->_add(array(
+					'player_id_sender' => $playerIdSender,
 					'type' => $type,
 		            'title' => $title,
 		            'text' => $text,
-		            'player_id' => $playerId
+		            'player_id' => $playerIdTarget
 				));
 			}
 			$ds->commit();
@@ -59,30 +67,37 @@ class Notification extends AppModel {
 		return $saved;
 	}
 
-	public function _success($playerId, $title, $text) {
+	public function _success($playerId, $title, $text, $playerIdSender = null) {
 		return $this->_add(array(
 			'type' => 'success',
             'title' => $title,
             'text' => $text,
-            'player_id' => $playerId
+            'player_id' => $playerId,
+            'player_id_sender' => $playerIdSender
 		));
 	}
 
-	public function _warning($playerId, $title, $text) {
+	public function _warning($playerId, $title, $text, $playerIdSender = null) {
 		return $this->_add(array(
 			'type' => 'warning',
             'title' => $title,
             'text' => $text,
-            'player_id' => $playerId
+            'player_id' => $playerId,
+            'player_id_sender' => $playerIdSender
 		));
 		if (!$saved) throw new Exception('Could not save notification');
 	}
 
-	public function _broadcast($title, $text, $type = 'success') {
-		$players = $this->Player->find('list');
+	public function _broadcast($playerIdSender, $title, $text, $type = 'success') {
+		// Broadcast messages only to related players
+		// For example, if it is a ScrumMaster, broadcast the message to all players from all his teams
+		// If it is a Developer or Product Owner, broadcast the message to all players from the same team, including the SM
+		$players = $this->Player->simpleVerifiedFromPlayerTeam($playerIdSender);
+		
 		$notifications = array();
 		foreach ($players as $id => $name) {
 			$notifications[] = array(
+				'player_id_sender' => $playerIdSender,
 				'type' => $type,
 	            'title' => $title,
 	            'text' => $text,

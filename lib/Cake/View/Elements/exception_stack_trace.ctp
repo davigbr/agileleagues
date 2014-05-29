@@ -20,9 +20,9 @@ App::uses('Debugger', 'Utility');
 
 ?>
 <h3>Stack Trace</h3>
-<ul class="cake-stack-trace">
+<div class="cake-stack-trace">
 <?php foreach ($error->getTrace() as $i => $stack): ?>
-	<li><?php
+	<p><?php
 	$excerpt = $arguments = '';
 	$params = array();
 
@@ -63,9 +63,9 @@ App::uses('Debugger', 'Utility');
 	endif;
 	echo $excerpt;
 	echo $arguments;
-	?></li>
+	?></p>
 <?php endforeach; ?>
-</ul>
+</div>
 <script type="text/javascript">
 function traceToggle(event, id) {
 	var el = document.getElementById(id);

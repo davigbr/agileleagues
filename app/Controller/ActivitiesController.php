@@ -82,10 +82,11 @@ class ActivitiesController extends AppController {
 	}
 
 	public function report($activityId = null) {
-		$this->set('activities', $this->Activity->simpleActive());
+		$playerTypeId = $this->Auth->user('player_type_id');
+
+		$this->set('activities', $this->Activity->simpleActiveFromPlayerType($playerTypeId));
 		$this->set('activitiesById', $this->Activity->all(array(), 'id'));
 		$this->set('events', $this->Event->simpleActive());
-		$this->set('players', $this->Player->simple());	
 
 		if ($this->request->is('post')) {
 			$log = $this->request->data;

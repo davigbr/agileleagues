@@ -21,6 +21,6 @@ class DomainTest extends CakeTestCase {
 				$this->assertEquals(6, $activities);
 			}
 		}
-		$this->assertEquals(2, count($domains));
+		$this->assertEquals(4, count($domains));
 	}
 }

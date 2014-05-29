@@ -28,6 +28,16 @@ class Activity extends AppModel {
 		return $this->simple(array('Activity.inactive' => 0));
 	}
 
+	public function simpleActiveFromPlayerType($playerTypeId) {
+		return $this->find('list', array(
+			'conditions' => array(
+				'Activity.inactive' => 0, 
+				'Domain.player_type_id' => $playerTypeId
+			),
+			'recursive' => 0
+		));
+	}
+
 	public function simpleFromDomain($domainId) {
 		return $this->simple(array('Activity.domain_id' => $domainId));
 	}
@@ -67,33 +77,36 @@ class Activity extends AppModel {
 		');
 	}
 
-	public function leastReported($limit = 20) {
+	public function leastReported($playerTypeId, $limit = 20) {
 		return $this->find('all', array(
 			'conditions' => array(
 				'Activity.inactive' => 0,
-				'Activity.reported <>' => 0
+				'Activity.reported <>' => 0,
+				'Domain.player_type_id' => $playerTypeId
 			),
 			'limit' => $limit,
 			'order' => 'Activity.reported ASC'
 		));
 	}
 
-	public function mostReported($limit = 20) {
+	public function mostReported($playerTypeId, $limit = 20) {
 		return $this->find('all', array(
 			'conditions' => array(
 				'Activity.inactive' => 0,
-				'Activity.reported <>' => 0
+				'Activity.reported <>' => 0,
+				'Domain.player_type_id' => $playerTypeId
 			),
 			'limit' => $limit,
 			'order' => 'Activity.reported DESC'
 		));
 	}
 
-	public function neverReported($limit = 20) {
+	public function neverReported($playerTypeId, $limit = 20) {
 		return $this->find('all', array(
 			'conditions' => array(
 				'Activity.inactive' => 0,
-				'Activity.reported' => 0
+				'Activity.reported' => 0,
+				'Domain.player_type_id' => $playerTypeId
 			),
 			'limit' => $limit
 		));

@@ -17,28 +17,33 @@ class ActivityTest extends CakeTestCase {
 
 	public function testSimple() {
 		$simple = $this->utils->Activity->simple();
-		$this->assertEquals(18, count($simple));
+		$this->assertEquals(22, count($simple));
 	}
 
 	public function testSimpleActive() {
 		$simple = $this->utils->Activity->simpleActive();
+		$this->assertEquals(14, count($simple));
+	}
+
+	public function testSimpleActiveFromPlayerType() {
+		$simple = $this->utils->Activity->simpleActiveFromPlayerType(PLAYER_TYPE_DEVELOPER);
 		$this->assertEquals(10, count($simple));
 	}
 
 	public function testAll() {
 		$all = $this->utils->Activity->all();
-		$this->assertEquals(18, count($all));
+		$this->assertEquals(22, count($all));
 	}
 
 	public function testCount() {
 		$count = $this->utils->Activity->count();
-		$this->assertEquals(10, $count);
+		$this->assertEquals(14, $count);
 	}
 
 	public function testLeaderboardsLastWeek() {
 		$leaderboards = $this->utils->Activity->leaderboardsLastWeek();
 		foreach ($leaderboards as $row) {
-			if ($row['Player']['player_type_id'] != 2) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
 				$this->assertEquals(1, (int)$row['Leaderboards']['count']);
 			}
 		}
@@ -47,7 +52,7 @@ class ActivityTest extends CakeTestCase {
 	public function testLeaderboardsLastMonth() {
 		$leaderboards = $this->utils->Activity->leaderboardsLastMonth();
 		foreach ($leaderboards as $row) {
-			if ($row['Player']['player_type_id'] != 2) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
 				$this->assertTrue((int)$row['Leaderboards']['count'] >= 1);
 			}
 		}
@@ -56,7 +61,7 @@ class ActivityTest extends CakeTestCase {
 	public function testLeaderboardsEver() {
 		$leaderboards = $this->utils->Activity->leaderboardsEver();
 		foreach ($leaderboards as $row) {
-			if ($row['Player']['player_type_id'] != 2) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
 				$this->assertEquals(4, (int)$row['Leaderboards']['count']);
 			}
 		}
@@ -65,7 +70,7 @@ class ActivityTest extends CakeTestCase {
 	public function testLeaderboardsThisWeek() {
 		$leaderboards = $this->utils->Activity->leaderboardsThisWeek();
 		foreach ($leaderboards as $row) {
-			if ($row['Player']['player_type_id'] != 2) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
 				$this->assertEquals(2, (int)$row['Leaderboards']['count']);
 			}
 		}
@@ -74,7 +79,7 @@ class ActivityTest extends CakeTestCase {
 	public function testLeaderboardsThisMonth() {
 		$leaderboards = $this->utils->Activity->leaderboardsThisMonth();
 		foreach ($leaderboards as $row) {
-			if ($row['Player']['player_type_id'] != 2) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
 				$this->assertTrue((int)$row['Leaderboards']['count'] >= 2);
 			}
 		}
@@ -90,18 +95,18 @@ class ActivityTest extends CakeTestCase {
 	}
 
 	public function testNeverReported() {
-		$neverReported = $this->utils->Activity->neverReported(1);
+		$neverReported = $this->utils->Activity->neverReported(PLAYER_TYPE_DEVELOPER, 1);
 		$this->assertEquals(1, count($neverReported));
 		$this->assertEquals(0, (int)$neverReported[0]['Activity']['reported']);
 	}
 
 	public function testLeastReported() {
-		$leastReported = $this->utils->Activity->leastReported(1);
+		$leastReported = $this->utils->Activity->leastReported(PLAYER_TYPE_DEVELOPER, 1);
 		$this->assertEquals(1, count($leastReported));
 	}
 
 	public function testMostReported() {
-		$mostReported = $this->utils->Activity->mostReported(1);
+		$mostReported = $this->utils->Activity->mostReported(PLAYER_TYPE_DEVELOPER, 1);
 		$this->assertEquals(1, count($mostReported));
 	}
 

@@ -52,11 +52,10 @@ CREATE TABLE `activity` (
   `xp` int(10) unsigned NOT NULL,
   `reported` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `activity_name` (`name`),
   KEY `activity_domain_id` (`domain_id`),
   KEY `activity_reported` (`reported`) USING BTREE,
   CONSTRAINT `activity_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +165,7 @@ CREATE TABLE `activity_requisite` (
   KEY `prerequisite_activity_id` (`activity_id`),
   CONSTRAINT `prerequisite_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`),
   CONSTRAINT `prerequisite_badge_id` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,12 +183,11 @@ CREATE TABLE `badge` (
   `abbr` varchar(3) DEFAULT NULL,
   `new` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `icon` varchar(50) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `badge_name` (`name`),
-  UNIQUE KEY `badge_abbr` (`abbr`),
   KEY `badge_domain_id` (`domain_id`),
   CONSTRAINT `badge_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +239,7 @@ CREATE TABLE `badge_log` (
   KEY `fk_badge_log_player_id` (`player_id`),
   CONSTRAINT `fk_badge_log_badge_id` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`),
   CONSTRAINT `fk_badge_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,8 +325,12 @@ CREATE TABLE `domain` (
   `abbr` char(3) NOT NULL,
   `description` varchar(200) NOT NULL,
   `icon` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `player_type_id` int(10) unsigned DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_domain_player_type_id` (`player_type_id`),
+  CONSTRAINT `fk_domain_player_type_id` FOREIGN KEY (`player_type_id`) REFERENCES `player_type` (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,6 +362,7 @@ CREATE TABLE `event` (
   `end` date NOT NULL,
   `description` varchar(200) NOT NULL,
   `xp` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_event_event_type_id` (`event_type_id`),
   CONSTRAINT `fk_event_event_type_id` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`)
@@ -544,7 +547,7 @@ CREATE TABLE `log` (
   CONSTRAINT `fk_log_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`),
   CONSTRAINT `fk_log_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=811 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=817 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -565,7 +568,7 @@ CREATE TABLE `notification` (
   `action` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_notification_player_id` (`player_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=618 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=688 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -582,10 +585,17 @@ CREATE TABLE `player` (
   `email` varchar(250) NOT NULL,
   `password` varchar(40) NOT NULL,
   `xp` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `team_id` int(10) unsigned DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `verification_hash` char(64) DEFAULT NULL,
+  `verified_in` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_verification_hash` (`verification_hash`) USING HASH,
   KEY `fk_player_type_id` (`player_type_id`),
+  KEY `fk_player_team_id` (`team_id`),
+  CONSTRAINT `fk_player_team_id` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`),
   CONSTRAINT `fk_player_type_id` FOREIGN KEY (`player_type_id`) REFERENCES `player_type` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -639,6 +649,23 @@ CREATE TABLE `player_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `team`
+--
+
+DROP TABLE IF EXISTS `team`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `team` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `player_id_scrummaster` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_team_player_id_scrummaster` (`player_id_scrummaster`),
+  CONSTRAINT `fk_team_player_id_scrummaster` FOREIGN KEY (`player_id_scrummaster`) REFERENCES `player` (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -711,7 +738,7 @@ CREATE TABLE `xp_log` (
   CONSTRAINT `fk_xp_log_event_task_id` FOREIGN KEY (`event_task_id`) REFERENCES `event_task` (`id`),
   CONSTRAINT `fk_xp_log_event_task_id_reviewed` FOREIGN KEY (`event_task_id_reviewed`) REFERENCES `event_task` (`id`),
   CONSTRAINT `fk_xp_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=454 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=460 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1042,4 +1069,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-01 14:04:34
+-- Dump completed on 2014-05-29 11:50:44

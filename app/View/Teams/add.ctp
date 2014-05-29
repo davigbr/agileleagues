@@ -7,19 +7,6 @@
 			<div class="panel-body">
 				<?= $this->Bootstrap->create('Team'); ?>
 				<?= $this->Bootstrap->input('name', array('type' => 'text', 'class' => 'form-control')); ?>
-				<?= $this->Bootstrap->input('player_id_scrummaster', array(
-					'label' => __('ScrumMaster'),
-					'options' => $scrumMasters, 
-					'class' => 'form-control',
-					'readonly' => 'readonly'
-				)); ?>
-				<?= $this->Bootstrap->input('player_id_product_owner', array(
-					'label' => __('Product Owner'),
-					'empty' => '-',
-					'options' => $productOwners, 
-					'class' => 'form-control',
-					'readonly' => 'readonly'
-				)); ?>
 				<br/>
 				<button type="submit" class="btn btn-lg btn-success">Save</button>
 				<?= $this->Bootstrap->end(); ?>

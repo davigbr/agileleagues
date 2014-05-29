@@ -12,13 +12,22 @@ class Player extends AppModel {
     public $hasMany = array('PlayerActivityCoins', 'Notification', 'BadgeLog');
 
     public $validate = array(
+        'name' => 'notEmpty',
         'email' => array(
-            'rule' => 'email',
-            'message' => 'Invalid e-mail address.'
+            'email' => array(
+                'rule' => 'email',
+                'message' => 'Invalid e-mail address.'
+            ),
+            'isUnique' => array(
+                'rule' => 'isUnique',
+                'message' => 'It seems this e-mail address is already registered.'
+            )    
         ),
-        'password' =>  array(
-            'rule' => array('minLength', 6),
-            'message' => 'Password must contain at least 6 chars.'
+        'password' => array(
+            'between' => array(
+                'rule' => array('between', 6, 20),
+                'message' => 'Password length must be between 6 and 20 characters.'
+            )
         ),
         'repeat_password' => array(
             'rule' => array('repeatPasswordRule'),
@@ -85,7 +94,8 @@ class Player extends AppModel {
     public function developersCount() {
         return $this->find('count', array(
             'conditions' => array(
-                'Player.player_type_id' => PLAYER_TYPE_DEVELOPER
+                'Player.player_type_id' => PLAYER_TYPE_DEVELOPER,
+                'Player.verified_in IS NOT NULL'
             )
         ));
     }
@@ -126,4 +136,87 @@ class Player extends AppModel {
             )
         ));
     }
+
+    public function scrumMasterId($playerId) {
+        if (!$playerId) return 0; 
+        
+        $player = $this->findById($playerId);
+        if (!$player) return 0;
+
+        if ($player['Player']['player_type_id'] == PLAYER_TYPE_SCRUMMASTER) {
+            return $playerId;
+        } else {
+            $team = $this->Team->findById($player['Player']['team_id']);
+            if ($team) {
+                return $team['Team']['player_id_scrummaster'];
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public function visibleTeams($id) {
+        $player = $this->findById($id);
+        if ($player) {
+            switch ((int)$player['Player']['player_type_id']) {
+                case PLAYER_TYPE_DEVELOPER: 
+                case PLAYER_TYPE_PRODUCT_OWNER: 
+                    return array((int)$player['Player']['team_id']);
+                case PLAYER_TYPE_SCRUMMASTER:
+                    $teams = $this->Team->find('all', array(
+                        'conditions' => array(
+                            'Team.player_id_scrummaster' => $id
+                        )
+                    ));
+                    $ids = array();
+                    foreach ($teams as $team) {
+                        $ids[] = (int)$team['Team']['id'];
+                    }
+                    return $ids;
+            }
+        }
+        return array();
+    }
+
+    public function allFromPlayerTeam($playerId, $options = array()) {
+        $conditions = array( 
+            'OR' => array(
+                'Player.team_id' => $this->visibleTeams($playerId),
+                'Player.id' => $this->scrumMasterId($playerId)
+            ),
+            'Player.verified_in IS NOT NULL'
+        );
+        return $this->findAll('id', array_merge(
+            array('conditions' => $conditions), 
+            $options
+        ));
+    }
+
+    public function allFromPlayerScrumMasterTeams($playerId, $options = array()) {
+        $conditions = array( 
+            'OR' => array(
+                'Player.team_id' => $this->visibleTeams($this->scrumMasterId($playerId)),
+                'Player.id' => $this->scrumMasterId($playerId)
+            ),
+            'Player.verified_in IS NOT NULL'
+        );
+        return $this->findAll('id', array_merge(
+            array('conditions' => $conditions), 
+            $options
+        ));
+    }
+
+    public function simpleVerifiedFromPlayerTeam($playerId, $options = array()) {
+        $conditions = array(
+            'Player.verified_in IS NOT NULL',
+            'OR' => array(
+                'Player.team_id' => $this->visibleTeams($playerId),
+                'Player.id' => $this->scrumMasterId($playerId)
+            )
+        );
+        return $this->find('list', array_merge(
+            array('conditions' => $conditions), $options
+        ));
+    }
+
 }

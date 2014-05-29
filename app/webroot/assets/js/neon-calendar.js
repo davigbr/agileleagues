@@ -45,44 +45,7 @@ var neonCalendar = neonCalendar || {};
 			// Setup Calendar
 			if($.isFunction($.fn.fullCalendar))
 			{
-				var calendar = $('#calendar');
 				
-				calendar.fullCalendar({
-					header: {
-						left: 'title',
-						right: 'month,agendaWeek,agendaDay today prev,next'
-					},
-					
-					//defaultView: 'basicWeek',
-					
-					editable: true,
-					firstDay: 1,
-					height: 600,
-					droppable: true,
-					drop: function(date, allDay) {
-						
-						var $this = $(this),
-							eventObject = {
-								title: $this.text(),
-								start: date,
-								allDay: allDay,
-								className: $this.data('event-class')
-							};
-							
-						calendar.fullCalendar('renderEvent', eventObject, true);
-						
-						$this.remove();
-					}
-				});
-				
-				$("#draggable_events li a").draggable({
-					zIndex: 999,
-					revert: true,
-					revertDuration: 0
-				}).on('click', function()
-				{
-					return false;
-				});
 			}
 			else
 			{

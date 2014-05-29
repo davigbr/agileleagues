@@ -60,24 +60,25 @@ class DomainsControllerTest extends ControllerTestCase {
 	public function testAddPostError() {
 		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
 		$data = array(
-			'Team' => array(
+			'Domain' => array(
 				'name' => '',
-				'player_id_scrummaster' => SCRUMMASTER_ID,
-				'player_id_product_owner' => null
+				'abbr' => 'ABBR',
+				'color' => '#112233',
+				'description' => 'Blablablabla',
+				'icon' => 'icon-icon'
 			)
 		);
-		$teamsBefore = $this->utils->Team->find('count');
+		$domainsBefore = $this->utils->Domain->find('count');
 		$this->testAction('/domains/add', array('data' => $data));
-		$teamsAfter = $this->utils->Team->find('count');
+		$domainsAfter = $this->utils->Domain->find('count');
+		$this->assertEquals($domainsBefore, $domainsAfter);
 		$this->assertNotNull($this->controller->flashError);
-		$this->assertEquals($teamsBefore, $teamsAfter);
 	}
 
 	public function testIndex() {
 		$result = $this->testAction('/domains/index', array('return' => 'vars'));
 		foreach ($result['domains'] as $domain) {
-			$domainFields = array('id', 'name', 'color', 'abbr', 'description', 'icon');
-			$this->assertEquals($domainFields, array_keys($domain['Domain']));
+			$this->assertTrue(isset($domain['Domain']['name']));
 		}
 	}
 }

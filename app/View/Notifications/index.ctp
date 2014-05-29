@@ -9,7 +9,8 @@
     <div class="panel-body with-table">
 		<table class="table table-striped table-bordered table-condensed">
 			<tr>
-				<th>Player</th>
+				<th>Sender</th>
+				<th>Target</th>
 				<th>Title</th>
 				<th>Text</th>
 				<th>Read</th>
@@ -25,6 +26,7 @@
 			<?else:?>
 				<? foreach ($notifications as $notification) : ?>
 					<tr>
+						<td><a href="<?= $this->Html->url('/players/')?>"><?= h($notification['PlayerSender']['name']) ?></a></td>
 						<td><a href="<?= $this->Html->url('/players/')?>"><?= h($notification['Player']['name']) ?></a></td>
 						<td><?= h($notification['Notification']['title']) ?></td>
 						<td><?= h($notification['Notification']['text']) ?></td>

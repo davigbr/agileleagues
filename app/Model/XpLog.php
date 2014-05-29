@@ -157,19 +157,25 @@ class XpLog extends AppModel {
 		if ($levelAfter > $levelBefore) {
 			switch ($levelAfter) {
 				case EVENT_LEVEL_REQUIRED_MISSION: {
-					$this->Notification->_broadCast('Level Up - Missions Unlocked',
+					$this->Notification->_broadCast(
+						$playerId,
+						__('Level Up - Missions Unlocked'),
 						__('%s reached level 10 and can now join Missions!', $playerName),
 						'warning');
 					break;
 				}
 				case EVENT_LEVEL_REQUIRED_CHALLENGE: {
-					$this->Notification->_broadCast('Level Up - Challenges Unlocked',
+					$this->Notification->_broadCast(
+						$playerId,
+						__('Level Up - Challenges Unlocked'),
 						__('%s reached level 10 and can now join Challenges!', $playerName),
 						'warning');
 					break;
 				}
 				default: {
-					$this->Notification->_broadCast('Level Up',
+					$this->Notification->_broadCast(
+						$playerId,
+						__('Level Up'),
 						__('%s reached level %s!', $playerName, $levelAfter),
 						'warning');
 					break;

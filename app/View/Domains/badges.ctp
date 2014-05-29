@@ -47,9 +47,12 @@
                             ?>
                             <?foreach ($badge['BadgeLog'] as $badgeLog): ?>
                                 <? 
-                                    $player = $players[$badgeLog['player_id']]['Player']['email']; 
+                                    $playerId = $badgeLog['player_id'];
                                 ?>
-                                <img style="margin-left: -1px; margin-right: -1px" src="<?= $this->Gravatar->get($player, $width) ?>" width="<?= $width?>" alt=""/>
+                                <? if (isset($players[$playerId])): ?>
+                                    <? $player = $players[$playerId]['Player']['email']; ?>
+                                    <img style="margin-left: -1px; margin-right: -1px" src="<?= $this->Gravatar->get($player, $width) ?>" width="<?= $width?>" alt=""/>
+                                <?endif; ?>
                             <?endforeach;?>
                         </div>
                         <div class="tile-footer" style="height: 100px; text-align: center">

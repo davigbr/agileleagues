@@ -8,24 +8,40 @@ class NotificationTest extends CakeTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
+		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateNotifications();
 	}
 
-	public function testBroadcast() {
-		$this->utils->Notification->_broadcast('título', 'texto', 'success');
-		$all = $this->utils->Notification->all();
-		$this->assertEquals(11, count($all));
+	public function testBroadcastAsDeveloper() {
+		$countBefore = $this->utils->Notification->find('count');
+		$this->utils->Notification->_broadcast(DEVELOPER_1_ID, 'título', 'texto', 'success');
+		$countAfter = $this->utils->Notification->find('count');
+		$this->assertEquals(4, $countAfter - $countBefore);
+	}
+
+	public function testBroadcastAsScrumMaster() {
+		$countBefore = $this->utils->Notification->find('count');
+		$this->utils->Notification->_broadcast(SCRUMMASTER_ID, 'título', 'texto', 'success');
+		$countAfter = $this->utils->Notification->find('count');
+		$this->assertEquals(5, $countAfter - $countBefore);
+	}
+
+	public function testBroadcastAsProductOwner() {
+		$countBefore = $this->utils->Notification->find('count');
+		$this->utils->Notification->_broadcast(PRODUCT_OWNER_ID, 'título', 'texto', 'success');
+		$countAfter = $this->utils->Notification->find('count');
+		$this->assertEquals(4, $countAfter - $countBefore);
 	}
 
 	public function testSuccess() {
-		$this->utils->Notification->_success(DEVELOPER_1_ID, 'success', 'texto');
+		$this->utils->Notification->_success(DEVELOPER_1_ID, 'success', 'texto', DEVELOPER_1_ID);
 		$notification = $this->utils->Notification->findByTitleAndType('success', 'success');
 		$this->assertNotEmpty($notification);
 	}
 
 	public function testWarning() {
-		$this->utils->Notification->_warning(DEVELOPER_1_ID, 'warning', 'texto');
+		$this->utils->Notification->_warning(DEVELOPER_1_ID, 'warning', 'texto', DEVELOPER_1_ID);
 		$notification = $this->utils->Notification->findByTitleAndType('warning', 'warning');
 		$this->assertNotEmpty($notification);
 	}
@@ -46,7 +62,7 @@ class NotificationTest extends CakeTestCase {
 
 	public function testBroadcastFailure() {
 		try {
-			$this->utils->Notification->_broadcast('', 'texto', 'success');
+			$this->utils->Notification->_broadcast(DEVELOPER_1_ID, '', 'texto', 'success');
 			$this->fail();
 		} catch (Exception $ex) {
 			$this->assertEquals('Could not broadcast notification', $ex->getMessage());
@@ -72,16 +88,15 @@ class NotificationTest extends CakeTestCase {
 
 	public function testSendBroadcast() {
 		$this->utils->Notification->query('DELETE FROM notification');
-		$this->utils->Notification->send('a', 'b', 'success');	
-		$playersCount = $this->utils->Player->find('count');
+		$this->utils->Notification->send(DEVELOPER_1_ID, 'a', 'b', 'success');	
 		$notificationsCount = $this->utils->Notification->find('count');
-		$this->assertEquals($playersCount, $notificationsCount);
+		$this->assertEquals(4, $notificationsCount);
 	}
 
 	public function testSend() {
 		$this->utils->Notification->query('DELETE FROM notification');
 		$playerId = DEVELOPER_1_ID;
-		$this->utils->Notification->send('a', 'b', 'success', $playerId);	
+		$this->utils->Notification->send($playerId, 'a', 'b', 'success', $playerId);	
 		$notificationsCount = $this->utils->Notification->find('count');
 		$this->assertEquals(1, $notificationsCount);
 	}
@@ -90,7 +105,7 @@ class NotificationTest extends CakeTestCase {
 		$this->utils->Notification->query('DELETE FROM notification');
 		$playerId = DEVELOPER_1_ID;
 		$this->setExpectedException('Exception');
-		$this->utils->Notification->send('', '', 'success', $playerId);	
+		$this->utils->Notification->send(DEVELOPER_1_ID, '', '', 'success', $playerId);	
 	}
 
 }

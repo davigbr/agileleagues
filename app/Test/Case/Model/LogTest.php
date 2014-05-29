@@ -8,6 +8,7 @@ class LogTest extends CakeTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
+		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
@@ -65,11 +66,7 @@ class LogTest extends CakeTestCase {
 			$log['Log']['activity_id']
 		);
 
-		$developersCount = $this->utils->Player->find('count', array(
-			'conditions' => array(
-				'Player.player_type_id' => PLAYER_TYPE_DEVELOPER
-			)
-		));
+		$developersCount = $this->utils->Player->developersCount(SCRUMMASTER_ID);
 
 		$expectedXp = floor($log['Activity']['xp'] / $developersCount);
 		$this->assertEquals($expectedXp, $xpLog['XpLog']['xp']);
@@ -171,16 +168,6 @@ class LogTest extends CakeTestCase {
 		$this->assertEquals(4, $count);
 	}
 
-	public function testLastFromEachPlayer() {
-		$playerLogs = $this->utils->Log->lastFromEachPlayer(1);
-		$this->assertEquals(3, count($playerLogs));
-		foreach ($playerLogs as $playerId => $logs) {
-			if ($playerId != SCRUMMASTER_ID) {
-				$this->assertEquals(1, count($logs));
-			}
-		}
-	}
-
 	public function testReviewFirstTimeActivity() {
         $activityId = 99;
         $playerId = DEVELOPER_1_ID;
@@ -204,7 +191,7 @@ class LogTest extends CakeTestCase {
         		'Notification.title' => 'First Time Completion'
     		)
     	));
-        $this->assertEquals($this->utils->Player->find('count'), count($notifications));
+        $this->assertEquals(4, count($notifications));
 	}
 
 	public function testReviewNotFirstTimeActivity() {

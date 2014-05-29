@@ -12,7 +12,7 @@
 					'class' => 'form-control'
 				)); ?>
 				<br/>
-				<button type="submit" class="btn btn-lg btn-success">Save</button>
+				<button type="submit" class="btn btn-lg btn-success">Change Team</button>
 				<?= $this->Bootstrap->end(); ?>
 			</div>
 		</div>

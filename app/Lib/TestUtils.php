@@ -1,11 +1,15 @@
 <?php
 
-define('TEAM_ID', 1);
-define('TEAM_ID_EMPTY', 2);
+define('TEAM_ID_1', 1);
+define('TEAM_ID_2', 2);
+define('TEAM_ID_EMPTY', 3);
 
 define('DEVELOPER_1_ID', 1);
 define('DEVELOPER_2_ID', 2);
-define('SCRUMMASTER_ID', 3);
+define('DEVELOPER_3_ID', 3);
+define('DEVELOPER_4_ID', 4);
+define('SCRUMMASTER_ID', 5);
+define('PRODUCT_OWNER_ID', 6);
 
 define('XP_TO_REACH_LEVEL_10', 2200);
 define('XP_TO_REACH_LEVEL_20', 8000);
@@ -92,26 +96,45 @@ class TestUtils {
     public function generatePlayers() {
         $this->generatePlayerTypes();
 
-        $teamId = $this->Team->find('count') > 0? TEAM_ID : null;
-
         $this->Player->saveMany(array(
-            array('id' => DEVELOPER_1_ID, 'team_id' => $teamId, 'player_type_id' => 1, 'name' => 'Developer 1', 'email' => 'email1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 500),
-            array('id' => DEVELOPER_2_ID, 'team_id' => $teamId, 'player_type_id' => 1, 'name' => 'Developer 2', 'email' => 'email2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100),
-            array('id' => SCRUMMASTER_ID, 'team_id' => $teamId, 'player_type_id' => 2, 'name' => 'ScrumMaster', 'email' => 'scrummaster@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999),
+            array('id' => DEVELOPER_1_ID, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 1', 'email' => 'email1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 500, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => DEVELOPER_2_ID, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 2', 'email' => 'email2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => DEVELOPER_3_ID, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 3', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => date('Y-m-d H:i:s')),
+            // Account not verified
+            array('id' => DEVELOPER_4_ID, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 4', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => null),
+            array('id' => SCRUMMASTER_ID, 'player_type_id' => PLAYER_TYPE_SCRUMMASTER, 'name' => 'ScrumMaster', 'email' => 'scrummaster@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => PRODUCT_OWNER_ID, 'player_type_id' => PLAYER_TYPE_PRODUCT_OWNER, 'name' => 'PO', 'email' => 'po@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'verified_in' => date('Y-m-d H:i:s')),
         ));
+
+        $this->Team->updateAll(
+            array('Team.player_id_scrummaster' => SCRUMMASTER_ID), 
+            array('Team.id' => array(TEAM_ID_1, TEAM_ID_2))
+        );
+
+        $this->Player->updateAll(
+            array('team_id' => TEAM_ID_1), 
+            array('Player.id' => array(DEVELOPER_1_ID, DEVELOPER_2_ID, PRODUCT_OWNER_ID))
+        );
+        $this->Player->updateAll(
+            array('team_id' => TEAM_ID_2), 
+            array('Player.id' => array(DEVELOPER_3_ID, DEVELOPER_4_ID))
+        );
     }
 
     public function generateTeams() {
         $this->Team->saveMany(array(
-            array('id' => TEAM_ID, 'name' => 'Team 1', 'player_id_product_owner' => null, 'player_id_scrummaster' => SCRUMMASTER_ID),
-            array('id' => TEAM_ID_EMPTY, 'name' => 'Team 2', 'player_id_product_owner' => null, 'player_id_scrummaster' => null),
+            array('id' => TEAM_ID_1, 'name' => 'Team 1'),
+            array('id' => TEAM_ID_2, 'name' => 'Team 2'),
+            array('id' => TEAM_ID_EMPTY, 'name' => 'Team Empty', 'player_id_scrummaster' => null),
         ));
     }
 
     public function generateDomains() {
         $this->Domain->saveMany(array(
-            array('id' => 1, 'name' => 'Domain 1', 'description' => 'Domain description...', 'abbr' => 'DM1', 'color' => '#aaaaaa'),
-            array('id' => 2, 'name' => 'Domain 2', 'description' => 'Domain description...', 'abbr' => 'DM2', 'color' => '#bbbbbb'),
+            array('id' => 1, 'name' => 'Domain 1', 'description' => 'Domain description...', 'abbr' => 'DM1', 'color' => '#aaaaaa', 'player_type_id' => PLAYER_TYPE_DEVELOPER),
+            array('id' => 2, 'name' => 'Domain 2', 'description' => 'Domain description...', 'abbr' => 'DM2', 'color' => '#bbbbbb', 'player_type_id' => PLAYER_TYPE_DEVELOPER),
+            array('id' => 3, 'name' => 'SM Domain', 'description' => 'SM Domain description...', 'abbr' => 'SM', 'color' => '#cccccc', 'player_type_id' => PLAYER_TYPE_SCRUMMASTER),
+            array('id' => 4, 'name' => 'PO Domain', 'description' => 'PO Domain description...', 'abbr' => 'PO', 'color' => '#dddddd', 'player_type_id' => PLAYER_TYPE_PRODUCT_OWNER)
         ));
     }
 
@@ -127,19 +150,23 @@ class TestUtils {
             array('id' => 8, 'name' => 'Activity 8', 'reported' => 10000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_10),
             array('id' => 9, 'name' => 'Activity 9', 'reported' => 100000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_20),
             array('id' => 10, 'name' => 'Activity 10', 'reported' => 0, 'domain_id' => 2, 'xp' => 1000),
+            array('id' => 11, 'name' => 'SM Activity 1', 'reported' => 0, 'domain_id' => 3, 'xp' => 1000),
+            array('id' => 12, 'name' => 'SM Activity 2', 'reported' => 0, 'domain_id' => 3, 'xp' => 1000),
+            array('id' => 13, 'name' => 'PO Activity 1', 'reported' => 0, 'domain_id' => 4, 'xp' => 1000),
+            array('id' => 14, 'name' => 'PO Activity 2', 'reported' => 0, 'domain_id' => 4, 'xp' => 1000),
         ));
     }
 
     public function generateInactiveActivities() {
         $this->Activity->saveMany(array(
-            array('id' => 11, 'name' => 'Inactive Activity 1', 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 12, 'name' => 'Inactive Activity 2', 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 13, 'name' => 'Inactive Activity 3', 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 14, 'name' => 'Inactive Activity 4', 'domain_id' => 1, 'inactive' => 1),
-            array('id' => 15, 'name' => 'Inactive Activity 5', 'domain_id' => 2, 'inactive' => 1),
-            array('id' => 16, 'name' => 'Inactive Activity 6', 'domain_id' => 2, 'inactive' => 1),
-            array('id' => 17, 'name' => 'Inactive Activity 7', 'domain_id' => 2, 'inactive' => 1),
-            array('id' => 18, 'name' => 'Inactive Activity 8', 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 15, 'name' => 'Inactive Activity 1', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 16, 'name' => 'Inactive Activity 2', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 17, 'name' => 'Inactive Activity 3', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 18, 'name' => 'Inactive Activity 4', 'domain_id' => 1, 'inactive' => 1),
+            array('id' => 19, 'name' => 'Inactive Activity 5', 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 20, 'name' => 'Inactive Activity 6', 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 21, 'name' => 'Inactive Activity 7', 'domain_id' => 2, 'inactive' => 1),
+            array('id' => 22, 'name' => 'Inactive Activity 8', 'domain_id' => 2, 'inactive' => 1),
         ));
     }
 

@@ -9,7 +9,7 @@
 			<tr>
 				<th>Name</th>
 				<th>ScrumMaster</th>
-				<th>Product Owner</th>
+				<th>Product Owners</th>
 				<th>Developers</th>
 				<th>
 					<a href="<? echo $this->Html->url('/teams/add'); ?>" class="btn btn-large btn-success"><i class="glyphicon glyphicon-plus"></i> Create </a>
@@ -26,7 +26,11 @@
 					<tr>
 						<td><?= h($team['Team']['name'])?></td>
 						<td><?= h($team['ScrumMaster']['name'])?></td>
-						<td><?= h($team['ProductOwner']['name'])?></td>
+						<td>
+							<?foreach ($team['ProductOwners'] as $po): ?>
+								<?= h($po['name']) ?>; 
+							<?endforeach;?>
+						</td>
 						<td>
 							<?foreach ($team['Developers'] as $dev): ?>
 								<?= h($dev['name']) ?>; 

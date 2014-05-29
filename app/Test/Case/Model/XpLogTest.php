@@ -8,10 +8,10 @@ class XpLogTest extends CakeTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
+		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
-		$this->utils->generatePlayers();
 		$this->utils->generateEvents();
 		$this->utils->generateEventTasks();
 		$this->utils->generateEventTaskLogs();
@@ -88,8 +88,8 @@ class XpLogTest extends CakeTestCase {
 		$activity = $this->utils->Activity->findByXp(1000);
 		$activityId = $activity['Activity']['id'];
 
-		$countPlayers = $this->utils->Player->find('count');
 		$playerBefore = $this->utils->Player->findById($playerId);
+		$countPlayers = 4;
 
 		$this->utils->XpLog->_activityReported($playerId, $activityId);
 
@@ -109,12 +109,11 @@ class XpLogTest extends CakeTestCase {
 		$this->assertEquals($countPlayers - 1, count ($otherPlayersNotifications));
 	}
 
-	public function testActivityReportedUnlockedMission() {
+	public function testActivityReportedUnlockedMissions() {
 		$playerId = DEVELOPER_1_ID;
 		$activity = $this->utils->Activity->findByXp(XP_TO_REACH_LEVEL_10);
 		$activityId = $activity['Activity']['id'];
 
-		$countPlayers = $this->utils->Player->find('count');
 		$playerBefore = $this->utils->Player->findById($playerId);
 
 		$this->utils->XpLog->_activityReported($playerId, $activityId);
@@ -132,15 +131,14 @@ class XpLogTest extends CakeTestCase {
 				'Player.id <>' => $playerId
 			)
 		));
-		$this->assertEquals($countPlayers - 1, count ($otherPlayersNotifications));
+		$this->assertEquals(3, count ($otherPlayersNotifications));
 	}
 
-	public function testActivityReportedUnlockedChallenge() {
+	public function testActivityReportedUnlockedChallenges() {
 		$playerId = DEVELOPER_1_ID;
 		$activity = $this->utils->Activity->findByXp(XP_TO_REACH_LEVEL_20);
 		$activityId = $activity['Activity']['id'];
 
-		$countPlayers = $this->utils->Player->find('count');
 		$playerBefore = $this->utils->Player->findById($playerId);
 
 		$this->utils->XpLog->_activityReported($playerId, $activityId);
@@ -157,7 +155,7 @@ class XpLogTest extends CakeTestCase {
 				'Player.id <>' => $playerId
 			)
 		));
-		$this->assertEquals($countPlayers - 1, count ($otherPlayersNotifications));
+		$this->assertEquals(3, count ($otherPlayersNotifications));
 	}
 
 	public function testActivityReportedPlayerNotFound() {

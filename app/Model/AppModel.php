@@ -80,6 +80,19 @@ class AppModel extends Model {
 		return $this->find('list', array('conditions' => $conditions));
 	}
 
+	public function findAll($key = false, $options = array()) {
+		$rows = $this->find('all', $options);
+		if ($key) {
+			$list = array();
+			foreach ($rows as $row) {
+				$list[$row[$this->name][$key]] = $row;
+			}
+			return $list;
+		} else {
+			return $rows;
+		}
+	}
+
 	public function all($conditions = array(), $key = false) {
 		$rows = $this->find('all', array('conditions' => $conditions));
 		if ($key) {

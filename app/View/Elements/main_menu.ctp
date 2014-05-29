@@ -129,6 +129,13 @@
 				<span>Players</span>
 			</a>
 			<ul>
+				<?if ($isScrumMaster): ?>
+					<li data-action="invite">
+						<a href="<?= $this->Html->url('/players/invite'); ?>"><i class="entypo-plus"></i>
+							<span>Invite</span>
+						</a>
+					</li>
+				<?endif;?>
 				<li data-action="index">
 					<a href="<?= $this->Html->url('/players/'); ?>">
 						<span><i class="entypo-list"></i>Players List</span>
@@ -188,27 +195,29 @@
 				</li>
 			</ul>
 		</li>
-		<li data-controller="teams">
-			<a href="#">
-				<i class="entypo-users"></i>
-				<span>Teams</span>
-				<span class="badge badge-danger">NEW</span>
-			</a>
-			<ul>
-				<li data-action="add">
-					<a href="<?= $this->Html->url('/teams/add'); ?>"><i class="entypo-plus"></i>
-						<span>Create</span>
-						<span class="badge badge-danger">NEW</span>
-					</a>
-				</li>
-				<li data-action="index">
-					<a href="<?= $this->Html->url('/teams'); ?>"><i class="entypo-list"></i>
-						<span>List all teams</span>
-						<span class="badge badge-danger">NEW</span>
-					</a>
-				</li>
-			</ul>
-		</li>
+		<?if ($isScrumMaster): ?>
+			<li data-controller="teams">
+				<a href="#">
+					<i class="entypo-users"></i>
+					<span>Teams</span>
+					<span class="badge badge-danger">NEW</span>
+				</a>
+				<ul>
+					<li data-action="add">
+						<a href="<?= $this->Html->url('/teams/add'); ?>"><i class="entypo-plus"></i>
+							<span>Create</span>
+							<span class="badge badge-danger">NEW</span>
+						</a>
+					</li>
+					<li data-action="index">
+						<a href="<?= $this->Html->url('/teams'); ?>"><i class="entypo-list"></i>
+							<span>List all teams</span>
+							<span class="badge badge-danger">NEW</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		<?endif;?>
 	<?endif;?>
 </ul>
 

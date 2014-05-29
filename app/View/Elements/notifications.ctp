@@ -5,7 +5,7 @@
 		var opts = {
 			'closeButton': true,
 			'debug': false,
-			'positionClass': 'toast-bottom-right',
+			'positionClass': 'toast-top-right',
 			'onclick': null,
 			'showDuration': '1000',
 			'hideDuration': '1000',
@@ -17,15 +17,14 @@
 			'hideMethod': 'fadeOut'
 		};
 		var notifications = <? echo json_encode($notificationsUnread); ?>;
+		console.log(notifications);
 		for (var i in notifications) {
 			var notification = notifications[i];
 			var type = notification.Notification['type'];
 			var func = toastr[type];
 			func(notification.Notification['text'], notification.Notification['title'], opts);
 		}
-
-	})
-
+	});
 </script>
 
 <?

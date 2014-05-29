@@ -29,13 +29,8 @@ class TeamsControllerTest extends ControllerTestCase {
 			$this->assertEquals(array(
 				'id', 
 				'name', 
-				'player_id_scrummaster', 
-				'player_id_product_owner'
+				'player_id_scrummaster'
 			), array_keys($team['Team']));
-			$this->assertEquals(array(
-				'id', 
-				'name'
-			), array_keys($team['ProductOwner']));
 			$this->assertEquals(array(
 				'id', 
 				'name' 
@@ -47,15 +42,14 @@ class TeamsControllerTest extends ControllerTestCase {
 					'team_id'
 				), array_keys($dev));
 			}
+			foreach ($team['ProductOwners'] as $dev) {
+				$this->assertEquals(array(
+					'id', 
+					'name',
+					'team_id'
+				), array_keys($dev));
+			}
 		}
-	}
-
-	public function testAddGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
-		$vars = $this->testAction('/teams/add', array('method' => 'get', 'return' => 'vars'));
-		$this->assertTrue(isset($vars['developers']));
-		$this->assertTrue(isset($vars['scrumMasters']));
-		$this->assertTrue(isset($vars['productOwners']));
 	}
 
 	public function testEditGet() {
@@ -63,9 +57,6 @@ class TeamsControllerTest extends ControllerTestCase {
 		$team = $this->utils->Team->find('first');
 		$id = $team['Team']['id'];
 		$vars = $this->testAction('/teams/edit/' . $id, array('method' => 'get', 'return' => 'vars'));
-		$this->assertTrue(isset($vars['developers']));
-		$this->assertTrue(isset($vars['scrumMasters']));
-		$this->assertTrue(isset($vars['productOwners']));
 	}
 
 
@@ -74,14 +65,17 @@ class TeamsControllerTest extends ControllerTestCase {
 		$this->setExpectedException('NotFoundException');
 		$this->testAction('/teams/edit/0', array('method' => 'get'));
 	}
+	
+	public function testAddGet() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$vars = $this->testAction('/teams/add', array('method' => 'get', 'return' => 'vars'));
+	}
 
 	public function testAddPostSuccess() {
 		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
 		$data = array(
 			'Team' => array(
-				'name' => 'A team',
-				'player_id_scrummaster' => SCRUMMASTER_ID,
-				'player_id_product_owner' => null
+				'name' => 'A team'
 			)
 		);
 		$teamsBefore = $this->utils->Team->find('count');
@@ -90,7 +84,6 @@ class TeamsControllerTest extends ControllerTestCase {
 		$this->assertNotNull($this->controller->flashSuccess);
 		$this->assertEquals($teamsBefore + 1, $teamsAfter);
 	}
-
 
 	public function testAddPostError() {
 		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
@@ -125,7 +118,7 @@ class TeamsControllerTest extends ControllerTestCase {
 
 	public function testDeleteError() {
 		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
-		$team = $this->utils->Team->findById(TEAM_ID);
+		$team = $this->utils->Team->findById(TEAM_ID_1);
 		$id = $team['Team']['id'];
 		$this->testAction('/teams/delete/' . $id);
 		$this->assertNotNull($this->controller->flashError);

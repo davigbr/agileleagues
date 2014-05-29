@@ -6,7 +6,7 @@ class Domain extends AppModel {
 	
 	public $useTable = 'domain';
 
-	public $order = array('Domain.id' => 'ASC');
+	public $order = array('Domain.player_type_id' => 'ASC', 'Domain.name' => 'ASC');
 
 	public $validate = array(
 		'abbr' => 'notEmpty',

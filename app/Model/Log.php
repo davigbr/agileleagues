@@ -98,7 +98,8 @@ class Log extends AppModel {
 			// Se foi a primeira vez que esta atividade foi logada, gera uma notificação
 			if (!$logged) {
 				$this->Notification->_broadcast(
-					'First Time Completion', 
+					$playerId,
+					__('First Time Completion'), 
 					__('The %s activity was completed for the first time in this game. Congratulations, %s!', $activityName, $playerName)
 				);
 			}
@@ -170,24 +171,4 @@ class Log extends AppModel {
 			'order' => array('Log.creation' => 'DESC')
 		));
 	}
-
-	public function lastFromEachPlayer($limit = 10) {
-		$players = $this->Player->find('list');
-		$logs = array();
-		foreach ($players as $id => $desc) {
-			$logs[$id] = $this->find('all', array(
-				'limit' => $limit,
-				'contain' => array(
-					'Activity', 'Domain'
-				),
-				'conditions' => array(
-					'Log.reviewed IS NOT NULL',
-					'Log.player_id' => $id
-				),
-				'order' => array('Log.acquired' => 'DESC')
-			));
-		}
-		return $logs;
-	}
-
 }

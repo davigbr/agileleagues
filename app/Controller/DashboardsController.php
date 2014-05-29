@@ -14,17 +14,22 @@ class DashboardsController extends AppController {
     }
 
     public function players() {
-        $players = $this->Player->find('all', array(
-            'order' => array('Player.xp' => 'DESC'),
-            'contain' => array(
-                'PlayerTotalActivityCoins',
-                'BadgeLog' => array(
-                    'Badge' => array(
-                        'Domain'
+        $players = $this->Player->allFromPlayerTeam(
+            $this->Auth->user('id'), 
+            array(
+                'order' => array('Player.xp' => 'DESC'),
+                'contain' => array(
+                    'Team',
+                    'PlayerType',
+                    'PlayerTotalActivityCoins',
+                    'BadgeLog' => array(
+                        'Badge' => array(
+                            'Domain'
+                        )
                     )
                 )
             )
-        ));
+        );
         $this->set('players', $players);
         $this->set('collapseSidebar', true);
     }
@@ -68,7 +73,10 @@ class DashboardsController extends AppController {
             $totalDifferentActivitiesCompleted += $count;
         }
 
-        $domains = $this->Domain->all(array(), 'id');
+        // Bring only the domains from the logged in player type
+        $domains = $this->Domain->all(array(
+            'Domain.player_type_id' => $this->Auth->user('player_type_id')
+        ), 'id');
 
         $this->set(compact(
             'differentActivitiesCompleted', 
@@ -84,9 +92,9 @@ class DashboardsController extends AppController {
         $this->set('activitiesLogged', $this->Log->find('count'));
         $this->set('averageActivitiesLogged', $this->Log->average());
 
-        $this->set('neverReportedActivities', $this->Activity->neverReported());
-        $this->set('leastReportedActivities', $this->Activity->leastReported());
-        $this->set('mostReportedActivities', $this->Activity->mostReported());
+        $this->set('neverReportedActivities', $this->Activity->neverReported($this->Auth->user('player_type_id')));
+        $this->set('leastReportedActivities', $this->Activity->leastReported($this->Auth->user('player_type_id')));
+        $this->set('mostReportedActivities', $this->Activity->mostReported($this->Auth->user('player_type_id')));
     }
 
     public function leaderboards() {

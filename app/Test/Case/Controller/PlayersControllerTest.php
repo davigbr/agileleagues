@@ -10,8 +10,170 @@ class PlayersControllerTest extends ControllerTestCase {
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
 		$this->utils->generatePlayers();
+		$this->utils->generateTeams();
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
-		session_unset ();
+	}
+
+	public function testJoinGetHashNotFound() {
+		$this->setExpectedException('NotFoundException');
+		$this->testAction('/players/join/invalidhash', array('method' => 'get'));
+	}
+
+	public function testJoinGetEmptyHash() {
+		$this->setExpectedException('NotFoundException');
+		$this->testAction('/players/join/', array('method' => 'get'));
+	}
+
+	public function testJoinGetSuccess() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'verification_hash' => $hash,
+			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+		$this->testAction('/players/join/' . $hash, array('method' => 'get', 'return' => 'vars'));
+	}
+
+	public function testJoinPostValidationError() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'verification_hash' => $hash,
+			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+
+		$data = array(
+			'Player' => array(
+				'id' => $id,
+				'password' => '654321',
+				'repeat_password' => '123456'
+			)
+		);
+
+		$this->testAction('/players/join/' . $hash, array('method' => 'post', 'data' => $data));
+		$playerAfter = $this->utils->Player->findById($id);
+		$this->assertNull($playerAfter['Player']['verified_in']);
+		$this->assertNotNull($this->controller->flashError);
+	}
+
+	public function testJoinPostSuccess() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'verification_hash' => $hash,
+			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+
+		$data = array(
+			'Player' => array(
+				'id' => $id,
+				'password' => '123456',
+				'repeat_password' => '123456'
+			)
+		);
+
+		$this->testAction('/players/join/' . $hash, array('method' => 'post', 'data' => $data));
+		$playerAfter = $this->utils->Player->findById($id);
+		$this->assertNotNull($playerAfter['Player']['verified_in']);
+	}
+
+	public function testJoinGetAlreadyVerified() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'verification_hash' => $hash,
+			'verified_in' => date('Y-m-d H:i:s'),
+			'player_type_id' => PLAYER_TYPE_DEVELOPER
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+
+		$this->testAction('/players/join/' . $hash, array('method' => 'get'));
+		$this->assertNotNull($this->controller->flashError);
+	}
+
+	public function testInviteGet() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
+		$this->assertTrue(isset($vars['playerTypes']));
+	}
+
+	public function testInviteNotScrumMaster() {
+		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
+		$this->setExpectedException('ForbiddenException');
+		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
+	}
+
+	public function testInvitePostSuccess() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$data = array(
+			'Player' => array(
+				'name' => 'A team',
+				'email' => 'email@email.com',
+				'player_type_id' => PLAYER_TYPE_PRODUCT_OWNER,
+				'team_id' => '1'
+			)
+		);
+		$this->testAction('/players/invite', array('data' => $data));
+		$player = $this->utils->Player->findByEmail('email@email.com');
+		$this->assertNotEmpty($player['Player']['verification_hash']);
+		$this->assertNotNull($this->controller->flashSuccess);
+	}
+
+	public function testInvitePostScrumMaster() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$data = array(
+			'Player' => array(
+				'name' => 'A team',
+				'email' => 'email@email.com',
+				'player_type_id' => PLAYER_TYPE_SCRUMMASTER,
+				'team_id' => '1'
+			)
+		);
+		$this->testAction('/players/invite', array('data' => $data));
+		$player = $this->utils->Player->findByEmail('email@email.com');
+		$this->assertEmpty($player);
+		$this->assertNotNull($this->controller->flashError);
+	}
+
+
+	public function testInvitePostValidationError() {
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$data = array(
+			'Player' => array(
+				'name' => '',
+				'email' => 'email@email.com',
+				'player_type_id' => PLAYER_TYPE_PRODUCT_OWNER,
+				'team_id' => '1'
+			)
+		);
+		$playersBefore = $this->utils->Player->find('count');
+		$this->testAction('/players/invite', array('data' => $data));
+		$playersAfter = $this->utils->Player->find('count');
+		$this->assertEquals($playersBefore, $playersAfter);
+		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testTeamGet() {
@@ -44,21 +206,7 @@ class PlayersControllerTest extends ControllerTestCase {
 		$players = $result['players'];
 		$this->assertNotEmpty($players);
 		foreach ($players as $player) {
-			$playerFields = array('id', 
-				'name', 
-				'player_type_id', 
-				'email', 
-				'password', 
-				'xp', 
-				'team_id',
-				'level', 
-				'next_level_total_xp', 
-				'next_level_xp', 
-				'next_level_xp_completed', 
-				'progress', 
-				'title'
-			);
-			$this->assertEquals($playerFields, array_keys($player['Player']));
+			$this->assertTrue(isset($player['Player']['name']));
 		}
 	}
 

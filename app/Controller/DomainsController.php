@@ -85,6 +85,6 @@ class DomainsController extends AppController {
         $this->set('badgeActivitiesProgress', $badgeActivitiesProgress);
         $this->set('domain', $this->Domain->findById($domainId));
         $this->set('badges', $badges);
-        $this->set('players', $this->Player->all(array(), 'id'));
+        $this->set('players', $this->Player->allFromPlayerScrumMaster($this->Auth->user('id')));
     }
 }

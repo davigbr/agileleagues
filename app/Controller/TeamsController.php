@@ -15,23 +15,13 @@ class TeamsController extends AppController {
 		$this->set('teams', $this->Team->find('all', array(
 			'contain' => array(
 				'ScrumMaster' => array('id', 'name'), 
-				'ProductOwner' => array('id', 'name'), 
+				'ProductOwners' => array('id', 'name'), 
 				'Developers' => array('id', 'name')
 			)
 		)));
 	}
 
 	private function _save($id = null) {
-		$this->set('developers', $this->Player->freeDeveloperList());
-		// Only the ScrumMaster logged in
-		$this->set('scrumMasters', array(
-			(int)$this->Auth->user('id') => $this->Auth->user('name')
-		));
-		//$this->set('scrumMasters', $this->Player->scrumMasterList());
-		// No Product Owners for a while
-		$this->set('productOwners', array());
-		//$this->set('productOwners', $this->Player->productOwnerList());
-		
 		if ($this->request->is('post') || $this->request->is('put')) {
 			// Enforces the logged ScrumMaster
 			$this->request->data['Team']['player_id_scrummaster'] = $this->Auth->user('id');

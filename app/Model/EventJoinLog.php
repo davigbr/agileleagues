@@ -20,6 +20,7 @@ class EventJoinLog extends AppModel {
 			$event = $this->Event->findById($eventId);
 
 			$this->Notification->_broadcast(
+				$playerId,
 				'Event Joined',
 				__('%s joined the %s %s.', $player['Player']['name'], $event['Event']['name'], $event['EventType']['name'])
 			);

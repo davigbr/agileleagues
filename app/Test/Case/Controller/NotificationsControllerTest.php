@@ -19,18 +19,9 @@ class NotificationsControllerTest extends ControllerTestCase {
 		$result = $this->testAction('/notifications', array('return' => 'vars'));
 		$notifications = $result['notifications'];
 		$this->assertNotEmpty($notifications);
-		$expectedFields = array(
-			'id',
-			'text',
-			'read',
-			'player_id',
-			'created',
-			'title',
-			'type',
-			'action'
-		);
+	
 		foreach ($notifications as $notification) {
-			$this->assertEquals($expectedFields, array_keys($notification['Notification']));
+			$this->assertTrue(isset($notification['Notification']['text']));
 		}
 	}
 

@@ -11,6 +11,7 @@ class DashboardsControllerTest extends ControllerTestCase {
 		$this->utils->clearDatabase();
 		$this->utils->generateDomains();
 		$this->utils->generateBadges();
+		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateActivities();
 		$this->utils->generateInactiveActivities();
@@ -33,14 +34,14 @@ class DashboardsControllerTest extends ControllerTestCase {
 		
 		$this->assertEquals(4, $result['averageActivitiesLogged']);
 		$this->assertEquals(8, $result['activitiesLogged']);
-		$this->assertEquals(10, $result['totalActivities']);
+		$this->assertEquals(14, $result['totalActivities']);
 		$this->assertEquals(4, $result['badgesCompletedCount']);
 		$this->assertEquals(4, $result['activitiesCompletedCount']);
-		$this->assertEquals(10, $result['totalActivitiesCount']);
+		$this->assertEquals(14, $result['totalActivitiesCount']);
 		$this->assertEquals(4, $result['totalDifferentActivitiesCompleted']);
 		$this->assertEquals(2, count($result['domains']));
 		$this->assertEquals(1, count($result['differentActivitiesCompleted']));
-		$this->assertEquals(2, count($result['activitiesCount']));
+		$this->assertEquals(4, count($result['activitiesCount']));
 	}
 
 	public function testActivitiesDomainDetails() {
@@ -71,7 +72,7 @@ class DashboardsControllerTest extends ControllerTestCase {
 	public function testPlayers() {
 		$result = $this->testAction('/dashboards/players', array('return' => 'vars'));
 		$players = $result['players'];
-		$this->assertEquals(3, count($players));
+		$this->assertEquals(4, count($players));
 	}
 
 }

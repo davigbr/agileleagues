@@ -26,10 +26,8 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->assertNotEmpty($activities);
 
 		foreach ($activities as $activity) {
-			$activityFields = array('id', 'name', 'domain_id', 'description', 'inactive', 'new', 'xp', 'reported');
-			$domainFields = array('id', 'name', 'color', 'abbr', 'description', 'icon');
-			$this->assertEquals($activityFields, array_keys($activity['Activity']));
-			$this->assertEquals($domainFields, array_keys($activity['Domain']));
+			$this->assertTrue(isset($activity['Activity']['name']));
+			$this->assertTrue(isset($activity['Domain']['name']));
 		}
 	}
 
@@ -56,12 +54,10 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
 		$result = $this->testAction('/activities/report', array('return' => 'vars', 'method' => 'GET'));
 		$activities = $result['activities'];
-		$players = $result['players'];
 		$events = $result['events'];
 
 		$this->assertEquals(2, count($events));
 		$this->assertEquals(10, count($activities));
-		$this->assertEquals(3, count($players));
 	}
 
 	public function testReportPost() {

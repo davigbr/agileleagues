@@ -1,5 +1,9 @@
-<div class="well">
-    <h1>Activities Dashboard</h1>
+<div class="panel panel-primary panel-table">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h1>Activities Dashboard</h1>
+        </div>
+    </div>
 </div>
 <div class="row">
     <?foreach ($domains as $domainId => $domain): ?>
@@ -56,7 +60,7 @@
             <div class="icon"><i class="entypo-flag"></i></div>
             <div class="num"><? echo $totalActivitiesCount?></div>
             <h3>Different Activities</h3>
-            <p>Total amount of different activities from all domains. </p>
+            <p>Total amount of different activities from all domains and player types. </p>
         </div>
     </div>
     <div class="col-lg-3">
