@@ -30,16 +30,17 @@ class Event extends AppModel {
 
 	public $uses = array('EventActivityProgress', 'Notification', 'Player', 'XpLog');
 
-	public function simpleActive() {
+	public function simpleActive($playerIdOwner) {
 		return $this->find('list', array(
 			'conditions' => array(
+				'Event.player_id_owner' => $playerIdOwner,
 				'CURRENT_DATE BETWEEN Event.start AND Event.end'
 			),
 			'order' => 'Event.name ASC'
 		));
 	}
 
-	public function allActive($limit = 5) {
+	public function allActive($playerIdOwner, $limit = 5) {
 		$options = array(
 			'contain' => array(
 				'EventTask',
@@ -47,7 +48,10 @@ class Event extends AppModel {
 				'EventJoinLog' => array('Player'),
 				'EventCompleteLog' => array('Player')
 			),
-			'conditions' => array('CURRENT_DATE BETWEEN Event.start AND Event.end'),
+			'conditions' => array(
+				'Event.player_id_owner' => $playerIdOwner,
+				'CURRENT_DATE BETWEEN Event.start AND Event.end'
+			),
 			'order' => 'Event.start DESC'
 		);
 		if ($limit) {
@@ -158,21 +162,27 @@ class Event extends AppModel {
 		return $event;
 	}
 	
-	public function allPast($limit = 5) {
+	public function allPast($playerIdOwner, $limit = 5) {
 		return $this->find('all', array(
 			'contain' => array(
 				'EventType',
 				'EventCompleteLog' => array('Player')
 			),
-			'conditions' => array('Event.end < CURRENT_DATE'),
+			'conditions' => array(
+				'Event.end < CURRENT_DATE',
+				'Event.player_id_owner' => $playerIdOwner
+			),
 			'limit' => $limit,
 			'order' => 'Event.end DESC'
 		));
 	}
 
-	public function allFuture($limit = 5) {
+	public function allFuture($playerIdOwner, $limit = 5) {
 		return $this->find('all', array(
-			'conditions' => array('Event.start > CURRENT_DATE'),
+			'conditions' => array(
+				'Event.start > CURRENT_DATE',
+				'Event.player_id_owner' => $playerIdOwner
+			),
 			'limit' => $limit,
 			'order' => 'Event.start DESC'
 		));

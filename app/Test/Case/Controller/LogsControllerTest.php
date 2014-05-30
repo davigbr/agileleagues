@@ -14,7 +14,7 @@ class LogsControllerTest extends ControllerTestCase {
 		$this->utils->generateActivities();
 		$this->utils->generateLogsNotReviewed();
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 	}
 
 	public function testDelete() {

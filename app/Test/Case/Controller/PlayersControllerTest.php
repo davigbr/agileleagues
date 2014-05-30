@@ -115,19 +115,19 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testInviteGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
 		$this->assertTrue(isset($vars['playerTypes']));
 	}
 
 	public function testInviteNotScrumMaster() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$this->setExpectedException('ForbiddenException');
 		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
 	}
 
 	public function testInvitePostSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$data = array(
 			'Player' => array(
 				'name' => 'A team',
@@ -143,7 +143,7 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testInvitePostScrumMaster() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$data = array(
 			'Player' => array(
 				'name' => 'A team',
@@ -160,7 +160,7 @@ class PlayersControllerTest extends ControllerTestCase {
 
 
 	public function testInvitePostValidationError() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$data = array(
 			'Player' => array(
 				'name' => '',
@@ -177,7 +177,7 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testTeamGet() {
-		$id = DEVELOPER_1_ID;
+		$id = DEVELOPER_ID_1;
 		$vars = $this->testAction('/players/team/' . $id, array('method' => 'get', 'return' => 'vars'));
 		$this->assertTrue(isset($vars['teams']));
 	}
@@ -188,7 +188,7 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testTeamPost() {
-		$id = DEVELOPER_1_ID;
+		$id = DEVELOPER_ID_1;
 		$teamId = TEAM_ID_EMPTY;
 		$data = array('Player' => array(
 			'id' => $id,

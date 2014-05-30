@@ -102,13 +102,15 @@ class EventTaskLog extends AppModel {
 			$eventTaskId = $log['EventTaskLog']['event_task_id'];
 			$playerId = $log['EventTaskLog']['player_id'];
 			
+			$smId = $this->Player->scrumMasterId($playerId);
+			
 			$this->query('UPDATE event_task_log SET reviewed = NOW() WHERE id = ?', array($this->id));
 
 			// Gera experiência para o jogador
 			$this->XpLog->_eventTaskReported($playerId, $eventTaskId);
 
 			// Gera experiência para o ScrumMaster que revisou a atividade
-			$this->XpLog->_eventTaskReviewed($eventTaskId);
+			$this->XpLog->_eventTaskReviewed($smId, $eventTaskId);
 
 			$this->commit();
 		} catch (Exception $ex) {

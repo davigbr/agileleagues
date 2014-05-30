@@ -15,7 +15,7 @@ class NotificationsControllerTest extends ControllerTestCase {
 	}
 
 	public function testIndex() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$result = $this->testAction('/notifications', array('return' => 'vars'));
 		$notifications = $result['notifications'];
 		$this->assertNotEmpty($notifications);
@@ -26,13 +26,13 @@ class NotificationsControllerTest extends ControllerTestCase {
 	}
 
 	public function testSendGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$result = $this->testAction('/notifications/send', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotEmpty($result['players']);
 	}
 
 	public function testSendPost() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$data = array(
 			'Notification' => array(
 				'title' => 'A',

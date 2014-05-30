@@ -5,21 +5,9 @@ App::uses('AppController', 'Controller');
 class ActivitiesController extends AppController {
 
 	public function index() {
-		$activities = $this->Activity->all(array('inactive' => 0));
+		$activities = $this->Activity->allActive(
+			$this->Player->scrumMasterId($this->Auth->user('id')));
 		$this->set('activities', $activities);
-	}
-
-	public function add() {
-		$this->set('domains', $this->Domain->simple());
-
-		if ($this->request->is('post')) {
-			if ($this->Activity->save($this->request->data)) {
-				$this->flashSuccess(__('Activity saved successfully!'));
-				return $this->redirect('/activities');
-			} else {
-				$this->flashError(__('Error while trying to save activity.'));
-			}
-		}
 	}
 
 	public function inactivate($id) {
@@ -84,16 +72,19 @@ class ActivitiesController extends AppController {
 	public function report($activityId = null) {
 		$playerTypeId = $this->Auth->user('player_type_id');
 
-		$this->set('activities', $this->Activity->simpleActiveFromPlayerType($playerTypeId));
-		$this->set('activitiesById', $this->Activity->all(array(), 'id'));
-		$this->set('events', $this->Event->simpleActive());
+		$this->set('activities', $this->Activity->simpleActiveFromPlayerType(
+			$this->scrumMasterId(), 
+			$playerTypeId
+		));
+		$this->set('activitiesById', $this->Activity->allFromOwnerById($this->scrumMasterId()));
+		$this->set('events', $this->Event->simpleActive($this->scrumMasterId()));
 
 		if ($this->request->is('post')) {
 			$log = $this->request->data;
 
 			$playerId = $this->Auth->user('id');
 			$log['Log']['player_id'] = $playerId;
-
+			$log['Log']['player_id_owner'] = $this->scrumMasterId();
 			$activityId = $log['Log']['activity_id'];
 
 			if ($this->Log->save($log)) {
@@ -111,23 +102,35 @@ class ActivitiesController extends AppController {
 		}
 	}
 
-	public function edit($id = null) {
+
+	public function _save($id = null) {
 		if (!$this->isScrumMaster) {
-			return $this->redirect('/activities');
+			throw new ForbiddenException();
 		}
 
-		$this->set('domains', $this->Domain->simple());
+		$this->set('domains', $this->Domain->simpleFromOwner($this->scrumMasterId()));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
+            
+            $this->request->data['Activity']['player_id_owner'] = $this->Auth->user('id');
+
 			if ($this->Activity->save($this->request->data)) {
-				$this->flashSuccess(__('Activity edited successfully!'));
+				$this->flashSuccess(__('Activity saved successfully!'));
 				return $this->redirect('/activities');
 			} else {
-				$this->flashError(__('Error while trying to edit activity.'));
+				$this->flashError(__('Error while trying to save activity.'));
 			}
-		} else {
+		} else if ($id !== null) {
 			$this->request->data = $this->Activity->findById($id);
 		}
-		
+	}
+
+	public function add() {
+		$this->_save();
+	}
+
+
+	public function edit($id = null) {
+		$this->_save($id);
 	}
 }

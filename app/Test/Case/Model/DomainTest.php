@@ -8,12 +8,30 @@ class DomainTest extends CakeTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
+		$this->utils->generateTeams();
+		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
 	}
 
+	public function testAllFromOwner() {
+		$this->assertEqual(4, count($this->utils->Domain->allFromOwner(SCRUMMASTER_ID_1)));
+		$this->assertEqual(0, count($this->utils->Domain->allFromOwner(SCRUMMASTER_ID_2)));
+	}
+	
+	public function testSimpleFromOwner() {
+		$list = $this->utils->Domain->simpleFromOwner(SCRUMMASTER_ID_1);
+		
+		$this->assertEqual(4, count($list));
+		$this->assertEqual(0, count($this->utils->Domain->simpleFromOwner(SCRUMMASTER_ID_2)));
+
+		foreach ($list as $key => $value) {
+			$this->assertTrue(is_integer($key), is_string($value));
+		}
+	}
+
 	public function testActivitiesCount(){
-		$domains = $this->utils->Domain->activitiesCount();
+		$domains = $this->utils->Domain->activitiesCount(SCRUMMASTER_ID_1);
 		foreach ($domains as $id => $activities) {
 			if ($id == 1) {
 				$this->assertEquals(4, $activities);
@@ -22,5 +40,10 @@ class DomainTest extends CakeTestCase {
 			}
 		}
 		$this->assertEquals(4, count($domains));
+	}
+
+	public function testActivitiesCountSM2(){
+		$this->assertEmpty($this->utils->Domain->activitiesCount(SCRUMMASTER_ID_2));
+
 	}
 }

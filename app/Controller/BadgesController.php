@@ -5,10 +5,11 @@ App::uses('AppController', 'Controller');
 class BadgesController extends AppController {
 
 	public function index() {
-		$this->set('activitiesById', $this->Activity->all(array(), 'id'));
-		$this->set('badgesById', $this->Badge->all(array(), 'id'));
+        $smId = $this->scrumMasterId();
+		$this->set('activitiesById', $this->Activity->allFromOwnerById($smId));
+		$this->set('badgesById', $this->Badge->allFromOwnerById($smId));
 		$this->Badge->recursive = 1;
-		$this->set('badges', $this->Badge->all());
+		$this->set('badges', $this->Badge->allFromOwner($smId));
 	}
 
     public function view($badgeId) {
@@ -69,6 +70,8 @@ class BadgesController extends AppController {
         $this->Badge->recursive = 1;
         
         if ($this->request->is('post') || $this->request->is('put')) {
+
+            $this->request->data['Badge']['player_id_owner'] = $this->Auth->user('id');
             $this->request->data['Badge']['domain_id'] = $domainId;
 
             foreach ($this->request->data['ActivityRequisite'] as $key => $value) {

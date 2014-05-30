@@ -1,5 +1,5 @@
 <?= $this->Bootstrap->input('name', array('type' => 'text', 'class' => 'form-control')); ?>
-<?= $this->Bootstrap->input('icon', array('type' => 'text', 'class' => 'form-control')); ?>
+<?= $this->Bootstrap->input('icon', array('type' => 'text', 'readonly' => 'readonly', 'class' => 'form-control')); ?>
 <br/>
 <div class="row">
 	<div class="col-sm-6">

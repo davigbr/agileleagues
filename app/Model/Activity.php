@@ -11,7 +11,8 @@ class Activity extends AppModel {
 	public $validate = array(
 		'name' => 'notEmpty',
 		'description' => 'notEmpty',
-		'xp' => 'notEmpty'
+		'xp' => 'notEmpty',
+		'domain_id' => 'notEmpty'
 	);
 
 	public $belongsTo = array(
@@ -20,17 +21,41 @@ class Activity extends AppModel {
 
 	public $hasOne = array('LastWeekLog');
 
-	public function count() {
-		return $this->find('count', array('conditions' => array('inactive' => 0)));
+	public function allFromOwnerById($playerIdOwner) {
+		return $this->all(array(
+			'Activity.player_id_owner' => $playerIdOwner
+		), 'id');
 	}
 
-	public function simpleActive() {
-		return $this->simple(array('Activity.inactive' => 0));
+	public function allActive($playerIdOwner) {
+		return $this->find('all', array(
+			'conditions' => array(
+				'Activity.inactive' => 0,
+				'Activity.player_id_owner' => $playerIdOwner
+			)
+		));
 	}
 
-	public function simpleActiveFromPlayerType($playerTypeId) {
+	public function count($playerIdOwner) {
+		return $this->find('count', array(
+			'conditions' => array(
+				'Activity.inactive' => 0,
+				'Activity.player_id_owner' => $playerIdOwner
+			))
+		);
+	}
+
+	public function simpleActive($playerIdOwner) {
+		return $this->simple(array(
+			'Activity.inactive' => 0,
+			'Activity.player_id_owner' => $playerIdOwner
+		));
+	}
+
+	public function simpleActiveFromPlayerType($playerIdOwner, $playerTypeId) {
 		return $this->find('list', array(
 			'conditions' => array(
+				'Activity.player_id_owner' => $playerIdOwner,
 				'Activity.inactive' => 0, 
 				'Domain.player_type_id' => $playerTypeId
 			),
@@ -42,39 +67,44 @@ class Activity extends AppModel {
 		return $this->simple(array('Activity.domain_id' => $domainId));
 	}
 	
-	public function leaderboardsLastWeek() {
+	public function leaderboardsLastWeek($playerIdOwner) {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_last_week AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-		');
+			WHERE player_id_owner = ?
+		', array($playerIdOwner));
 	}
 	
-	public function leaderboardsLastMonth() {
+	public function leaderboardsLastMonth($playerIdOwner) {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_last_month AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-		');
+			WHERE player_id_owner = ?
+		', array($playerIdOwner));
 	}
 	
-	public function leaderboardsEver() {
+	public function leaderboardsEver($playerIdOwner) {
 		return $this->query('
 			SELECT * FROM activity_leaderboards AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-		');
+			WHERE player_id_owner = ?
+		', array($playerIdOwner));
 	}
 	
-	public function leaderboardsThisWeek() {
+	public function leaderboardsThisWeek($playerIdOwner) {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_this_week AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-		');
+			WHERE player_id_owner = ?
+		', array($playerIdOwner));
 	}
 
-	public function leaderboardsThisMonth() {
+	public function leaderboardsThisMonth($playerIdOwner) {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_this_month AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-		');
+			WHERE player_id_owner = ?
+		', array($playerIdOwner));
 	}
 
 	public function leastReported($playerTypeId, $limit = 20) {

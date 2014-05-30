@@ -77,6 +77,7 @@ class Log extends AppModel {
 			$activityName = $this->Activity->field('name', array('Activity.id' => $activityId));
 			$playerId = $log['Log']['player_id'];
 			$playerName = $this->Player->field('name', array('Player.id' => $playerId));
+			$smId = $this->Player->scrumMasterId($playerId);
 
 			// Verifica se esta atividade já foi logada (e revisada)
 			$logged = $this->find('count', array(
@@ -93,7 +94,7 @@ class Log extends AppModel {
 			$this->XpLog->_activityReported($playerId, $activityId);
 
 			// Gera experiência para o ScrumMaster que revisou a atividade
-			$this->XpLog->_activityReviewed($activityId);
+			$this->XpLog->_activityReviewed($smId, $activityId);
 
 			// Se foi a primeira vez que esta atividade foi logada, gera uma notificação
 			if (!$logged) {
@@ -144,8 +145,15 @@ class Log extends AppModel {
 				'Log.player_id' => $playerId)));
 	}
 
-	public function average() {
-		$result = $this->query('SELECT AVG(count) AS average FROM (SELECT COUNT(*) AS count FROM log WHERE reviewed IS NOT NULL GROUP BY player_id) A');
+	public function average($playerIdOwner) {
+		$result = $this->query('
+			SELECT AVG(count) AS average 
+			FROM (
+				SELECT COUNT(*) AS count FROM log 
+				WHERE reviewed IS NOT NULL 
+				AND player_id_owner = ?
+				GROUP BY player_id
+			) A', array($playerIdOwner));
 		$average = @$result[0][0]['average'];
 		return $average? (float)$average : 0;
 	}
@@ -171,4 +179,13 @@ class Log extends AppModel {
 			'order' => array('Log.creation' => 'DESC')
 		));
 	}
+
+	public function count($playerIdOwner) {
+		return $this->find('count', array(
+			'conditions' => array(
+				'Log.player_id_owner' => $playerIdOwner
+			))
+		);
+	}
+
 }

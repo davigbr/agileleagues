@@ -9,6 +9,7 @@ class BadgesControllerTest extends ControllerTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
+		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
@@ -17,7 +18,7 @@ class BadgesControllerTest extends ControllerTestCase {
 	}
 
 	public function testIndex() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$result = $this->testAction('/badges/index', array('return' => 'vars'));
 		$badges = $result['badges'];
 		$this->assertNotEmpty($badges);
@@ -27,7 +28,7 @@ class BadgesControllerTest extends ControllerTestCase {
 	}
 
 	public function testClaimSuccess() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$badge = $this->utils->Badge->findById(1);
 		$badgeId = $badge['Badge']['id'];
 		$this->testAction('/badges/claim/' . $badgeId, array('return' => 'vars'));
@@ -35,13 +36,13 @@ class BadgesControllerTest extends ControllerTestCase {
 	}
 
 	public function testClaimException() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$this->testAction('/badges/claim/0');
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testView() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_1_ID);
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$this->utils->generateActivityRequisites();
 		$this->utils->generateBadgeRequisites();
 		$badge = $this->utils->Badge->findById(1);
@@ -53,7 +54,7 @@ class BadgesControllerTest extends ControllerTestCase {
 	}
 
 	public function testAddGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$domain = $this->utils->Domain->find('first');
 		$domainId = $domain['Domain']['id'];
 		$vars = $this->testAction('/badges/add/' . $domainId, array('method' => 'get', 'return' => 'vars'));
@@ -63,7 +64,7 @@ class BadgesControllerTest extends ControllerTestCase {
 	}
 
 	public function testEditGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$domain = $this->utils->Domain->find('first');
 		$badge = $this->utils->Badge->find('first');
 		$id = $badge['Badge']['id'];
@@ -76,7 +77,7 @@ class BadgesControllerTest extends ControllerTestCase {
 
 
 	public function testEditNotFound() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$domain = $this->utils->Domain->find('first');
 		$domainId = $domain['Domain']['id'];
 		$this->setExpectedException('NotFoundException');
@@ -84,7 +85,7 @@ class BadgesControllerTest extends ControllerTestCase {
 	}
 
 	public function testAddPostSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$data = array();
 		$data['Badge']['name']= 'Glossarier';
 		$data['Badge']['icon']= 'entypo entypo-users';
@@ -112,7 +113,7 @@ class BadgesControllerTest extends ControllerTestCase {
 
 
 	public function testAddPostError() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID);
+		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
 		$data = array();
 		$data['Badge']['name']= '';
 		$data['Badge']['icon']= 'entypo entypo-users';

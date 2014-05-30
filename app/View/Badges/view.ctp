@@ -1,16 +1,11 @@
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <h1>
-                        <? echo h($badge['Badge']['name']); ?>
-                    </h1>
-                </div>
-            </div>
+<div class="panel panel-primary panel-table">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h1><?= h($badge['Badge']['name']); ?></h1>
         </div>
     </div>
 </div>
+
 <div class="row">
 	<div class="col-md-6">
     	 <div class="panel panel-primary panel-table">

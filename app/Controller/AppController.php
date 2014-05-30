@@ -55,6 +55,7 @@ class AppController extends Controller {
 		'Player', 
 		'PlayerActivityCoins',
 		'Timeline', 
+		'Team'
 	);
 
 	public $components = array(
@@ -117,7 +118,7 @@ class AppController extends Controller {
 			$this->set('activitiesNotReviewedCount', $this->Log->countNotReviewed());
 			$this->set('eventTasksNotReviewedCount', $this->EventTaskLog->countNotReviewed());
 
-			$this->set('allDomains', $this->Domain->all());	
+			$this->set('allDomains', $this->Domain->allFromOwner($this->scrumMasterId()));	
 		}
 
 		$this->set('isDeveloper', $this->isDeveloper);
@@ -125,6 +126,13 @@ class AppController extends Controller {
 		$this->set('isProductOwner', $this->isProductOwner);
 		$this->set('loggedPlayer', $this->player);
 		$this->set('collapseSidebar', false);
+	}
+
+	protected function scrumMasterId() {
+		if (!$this->smId) {
+			$this->smId = $this->Player->scrumMasterId($this->Auth->user('id'));
+		}
+		return $this->smId;
 	}
 
 	public function flashSuccess($message) {

@@ -12,13 +12,7 @@ class TeamsController extends AppController {
 	}
 
 	public function index() {
-		$this->set('teams', $this->Team->find('all', array(
-			'contain' => array(
-				'ScrumMaster' => array('id', 'name'), 
-				'ProductOwners' => array('id', 'name'), 
-				'Developers' => array('id', 'name')
-			)
-		)));
+		$this->set('teams', $this->Team->allFromOwner($this->Auth->user('id')));
 	}
 
 	private function _save($id = null) {

@@ -31,8 +31,23 @@ class Domain extends AppModel {
 		)
 	);
 
-	public function activitiesCount() {
-		$data = $this->query('SELECT * FROM domain_activities_count AS Domain');
+	public function allFromOwner($playerIdOwner) {
+		return $this->all(array(
+			'Domain.player_id_owner' => $playerIdOwner
+		));
+	}
+
+	public function simpleFromOwner($playerIdOwner) {
+		return $this->simple(array(
+			'Domain.player_id_owner' => $playerIdOwner
+		));
+	}
+
+	public function activitiesCount($playerIdOwner) {
+		$data = $this->query('
+			SELECT * FROM domain_activities_count AS Domain
+			WHERE player_id_owner = ?
+		', array($playerIdOwner));
 		$list = array();
 		// Return a list where the key is the domain_id and the value is the activities count
 		foreach ($data as $row) {

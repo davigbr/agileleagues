@@ -5,9 +5,9 @@ App::uses('AppController', 'Controller');
 class EventsController extends AppController {
 
 	public function index() {
-		$this->set('activeEvents', $this->Event->allActive(10));
-		$this->set('pastEvents', $this->Event->allPast(5));
-		$this->set('futureEvents', $this->Event->allFuture(5));
+		$this->set('activeEvents', $this->Event->allActive($this->scrumMasterId(), 10));
+		$this->set('pastEvents', $this->Event->allPast($this->scrumMasterId(), 5));
+		$this->set('futureEvents', $this->Event->allFuture($this->scrumMasterId(), 5));
 	}
 
 	public function notReviewed() {
@@ -39,18 +39,6 @@ class EventsController extends AppController {
 		return $this->redirect($this->referer());
 	}
 
-	public function create() {
-		if (!$this->isScrumMaster) {
-			return $this->redirect('/events');
-		}
-
-		$this->set('eventTypes', $this->EventType->simple());
-		$this->set('activities', $this->Activity->simpleActive());
-
-		if ($this->request->is('post')) {
-			$this->saveEvent();
-		}
-	}
 
 	public function complete($id) {
 		try {
@@ -64,8 +52,8 @@ class EventsController extends AppController {
 	}
 
 	public function report() {
-		$this->set('events', $this->Event->simpleActive());
-		$this->set('allEvents', $this->Event->allActive(false));
+		$this->set('events', $this->Event->simpleActive($this->scrumMasterId()));
+		$this->set('allEvents', $this->Event->allActive($this->scrumMasterId(), false));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 			
@@ -92,73 +80,82 @@ class EventsController extends AppController {
 		}
 	}
 
-	private function saveEvent() {
-		$id = isset($this->request->data['Event']['id']) ? $this->request->data['Event']['id'] : null;
-
-		foreach ($this->request->data['EventActivity'] as $key => $value) {
-            if (!$value['activity_id']) {
-            	unset($this->request->data['EventActivity'][$key]);
-            } else {
-            	if (!$this->request->data['EventActivity'][$key]['count']) {
-            		$this->request->data['EventActivity'][$key]['count'] = 1;
-            	}
-            }
-        }
-        foreach ($this->request->data['EventTask'] as $key => $value) {
-            if (!$value['name']) {
-            	unset($this->request->data['EventTask'][$key]);
-            } else {
-            	if (!$this->request->data['EventTask'][$key]['xp']) {
-            		$this->request->data['EventTask'][$key]['xp'] = 0;
-            	}
-            }
-        }
-
-        if (empty($this->request->data['EventActivity'])) unset($this->request->data['EventActivity']);
-        if (empty($this->request->data['EventTask'])) unset($this->request->data['EventTask']);
-
-        $ds = $this->Event->getDataSource();
-        $ds->begin();
-        
-        try {
-	        if ($id) {
-		        $this->EventTask->query('DELETE FROM event_task WHERE event_id = ? ', array($id));
-		        $this->EventActivity->query('DELETE FROM event_activity WHERE event_id = ? ', array($id));
-	    	}
-
-	        if ($this->Event->saveAssociated($this->request->data)) {
-				$ds->commit();
-				$this->flashSuccess(__('Event saved succesfully!'));
-				return $this->redirect('/events');
-			} else {
-				$ds->rollback();
-				$this->flashError(__('Error while trying to save event.'));
-			}
-		} catch (PDOException $ex) {
-			$ds->rollback();
-			$this->flashError(__('This event cannot be edited anymore. Some players have already reported activities.'));
-			return $this->redirect('/events');
-		}	
-	}
-
-	public function edit($id) {
+	private function _save($id = null) {
 		if (!$this->isScrumMaster) {
-			return $this->redirect('/events');
+			throw new ForbiddenException();
 		}
 
 		$this->set('eventTypes', $this->EventType->simple());
-		$this->set('activities', $this->Activity->simpleActive());
+		$this->set('activities', $this->Activity->simpleActive($this->scrumMasterId()));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->saveEvent();
-		} else {
-			$this->Event->recursive = 2;
-			$this->request->data = $this->Event->findById($id);
-			if (!$this->request->data) {
-				$this->flashError(__('Event not found.'));
+			
+			$this->request->data['Event']['player_id_owner'] = $this->Auth->user('id');
+
+			foreach ($this->request->data['EventActivity'] as $key => $value) {
+	            if (!$value['activity_id']) {
+	            	unset($this->request->data['EventActivity'][$key]);
+	            } else {
+	            	if (!$this->request->data['EventActivity'][$key]['count']) {
+	            		$this->request->data['EventActivity'][$key]['count'] = 1;
+	            	}
+	            }
+	        }
+	        foreach ($this->request->data['EventTask'] as $key => $value) {
+	            if (!$value['name']) {
+	            	unset($this->request->data['EventTask'][$key]);
+	            } else {
+	            	if (!$this->request->data['EventTask'][$key]['xp']) {
+	            		$this->request->data['EventTask'][$key]['xp'] = 0;
+	            	}
+	            }
+	        }
+
+	        if (empty($this->request->data['EventActivity'])) unset($this->request->data['EventActivity']);
+	        if (empty($this->request->data['EventTask'])) unset($this->request->data['EventTask']);
+
+	        $ds = $this->Event->getDataSource();
+	        $ds->begin();
+	        
+	        try {
+		        if ($id) {
+			        $this->EventTask->query('DELETE FROM event_task WHERE event_id = ? ', array($id));
+			        $this->EventActivity->query('DELETE FROM event_activity WHERE event_id = ? ', array($id));
+		    	}
+
+		        if ($this->Event->saveAssociated($this->request->data)) {
+					$ds->commit();
+					$this->flashSuccess(__('Event saved succesfully!'));
+					return $this->redirect('/events');
+				} else {
+					$ds->rollback();
+					$this->flashError(__('Error while trying to save event.'));
+				}
+			} catch (PDOException $ex) {
+				$ds->rollback();
+				$this->flashError(__('This event cannot be edited anymore. Some players have already reported activities.'));
 				return $this->redirect('/events');
+			}	
+			
+		} else if ($id !== null) {
+			$this->Event->recursive = 2;
+
+			$this->request->data = $this->Event->findById($id);
+
+			if (!$this->request->data) {
+				throw new NotFoundException();
 			}
 		}
+
+	}
+
+
+	public function create() {
+		$this->_save();
+	}
+
+	public function edit($id = null) {
+		$this->_save($id);		
 	}
 	
 	public function join($id) {		

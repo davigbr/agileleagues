@@ -16,8 +16,13 @@ class LogTest extends CakeTestCase {
 		$this->utils->generateLogsNotReviewed();
 	}
 
+	public function testCount() {
+		$this->assertEquals(16, $this->utils->Log->count(SCRUMMASTER_ID_1));
+		$this->assertEquals(0, $this->utils->Log->count(SCRUMMASTER_ID_2));
+	}
+
 	public function testBeforeSave() {
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		$activity = $this->utils->Activity->find('first');
 		$data = array(
 			'Log' => array(
@@ -62,11 +67,11 @@ class LogTest extends CakeTestCase {
 		$this->utils->Log->review($log['Log']['id']);
 
 		$xpLog = $this->utils->XpLog->findByPlayerIdAndActivityIdReviewed(
-			SCRUMMASTER_ID, 
+			SCRUMMASTER_ID_1, 
 			$log['Log']['activity_id']
 		);
 
-		$developersCount = $this->utils->Player->developersCount(SCRUMMASTER_ID);
+		$developersCount = $this->utils->Player->developersCount(SCRUMMASTER_ID_1);
 
 		$expectedXp = floor($log['Activity']['xp'] / $developersCount);
 		$this->assertEquals($expectedXp, $xpLog['XpLog']['xp']);
@@ -113,8 +118,13 @@ class LogTest extends CakeTestCase {
 	}
 
 	public function testAverage() {
-		$avg = $this->utils->Log->average();
+		$avg = $this->utils->Log->average(SCRUMMASTER_ID_1);
 		$this->assertEquals(4.0, $avg);
+	}
+
+	public function testAverageSM2() {
+		$avg = $this->utils->Log->average(SCRUMMASTER_ID_2);
+		$this->assertEquals(0, $avg);
 	}
 
 	public function testSimpleReviewed() {
@@ -170,7 +180,7 @@ class LogTest extends CakeTestCase {
 
 	public function testReviewFirstTimeActivity() {
         $activityId = 99;
-        $playerId = DEVELOPER_1_ID;
+        $playerId = DEVELOPER_ID_1;
         $this->utils->Activity->save(array(
         	'id' => $activityId, 
         	'name' => 'Activity 99', 
@@ -195,7 +205,7 @@ class LogTest extends CakeTestCase {
 	}
 
 	public function testReviewNotFirstTimeActivity() {
-        $playerId = DEVELOPER_1_ID;
+        $playerId = DEVELOPER_ID_1;
         $log = $this->utils->Log->findByPlayerId($playerId);
         $this->assertNotEmpty($log);
         $activityId = $log['Log']['activity_id'];

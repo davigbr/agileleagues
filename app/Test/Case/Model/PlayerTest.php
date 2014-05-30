@@ -16,7 +16,7 @@ class PlayerTest extends CakeTestCase {
 	}
 
 	public function testVisibleTeamsScrumMaster() {
-		$teams = $this->utils->Player->visibleTeams(SCRUMMASTER_ID);
+		$teams = $this->utils->Player->visibleTeams(SCRUMMASTER_ID_1);
 		$this->assertEquals(array(TEAM_ID_1, TEAM_ID_2), $teams);
 	}
 
@@ -26,12 +26,12 @@ class PlayerTest extends CakeTestCase {
 	}
 
 	public function testVisibleTeamsDeveloper() {
-		$teams = $this->utils->Player->visibleTeams(DEVELOPER_1_ID);
+		$teams = $this->utils->Player->visibleTeams(DEVELOPER_ID_1);
 		$this->assertEquals(array(TEAM_ID_1), $teams);
 	}
 
 	public function testAllFromPlayerTeamAsScrumMaster() {
-		$players = $this->utils->Player->allFromPlayerTeam(SCRUMMASTER_ID);
+		$players = $this->utils->Player->allFromPlayerTeam(SCRUMMASTER_ID_1);
 		$this->assertEquals(5, count($players));
 	}
 
@@ -41,12 +41,12 @@ class PlayerTest extends CakeTestCase {
 	}
 
 	public function testAllFromPlayerTeamAsDeveloper() {
-		$players = $this->utils->Player->allFromPlayerTeam(DEVELOPER_1_ID);
+		$players = $this->utils->Player->allFromPlayerTeam(DEVELOPER_ID_1);
 		$this->assertEquals(4, count($players));
 	}
 
 	public function testAllFromPlayerScrumMasterTeamsAsScrumMaster() {
-		$players = $this->utils->Player->allFromPlayerScrumMasterTeams(SCRUMMASTER_ID);
+		$players = $this->utils->Player->allFromPlayerScrumMasterTeams(SCRUMMASTER_ID_1);
 		$this->assertEquals(5, count($players));
 	}
 
@@ -56,23 +56,23 @@ class PlayerTest extends CakeTestCase {
 	}
 
 	public function testAllFromPlayerScrumMasterTeamsAsDeveloper() {
-		$players = $this->utils->Player->allFromPlayerScrumMasterTeams(DEVELOPER_1_ID);
+		$players = $this->utils->Player->allFromPlayerScrumMasterTeams(DEVELOPER_ID_1);
 		$this->assertEquals(5, count($players));
 	}
 
 	public function testScrumMasterIdScrumMaster() {
-		$scrumMasterId = $this->utils->Player->scrumMasterId(SCRUMMASTER_ID);
-		$this->assertEquals(SCRUMMASTER_ID, $scrumMasterId);
+		$scrumMasterId = $this->utils->Player->scrumMasterId(SCRUMMASTER_ID_1);
+		$this->assertEquals(SCRUMMASTER_ID_1, $scrumMasterId);
 	}
 
 	public function testScrumMasterIdProductOwner() {
 		$scrumMasterId = $this->utils->Player->scrumMasterId(PRODUCT_OWNER_ID);
-		$this->assertEquals(SCRUMMASTER_ID, $scrumMasterId);
+		$this->assertEquals(SCRUMMASTER_ID_1, $scrumMasterId);
 	}
 
 	public function testScrumMasterIdDeveloper() {
-		$scrumMasterId = $this->utils->Player->scrumMasterId(DEVELOPER_1_ID);
-		$this->assertEquals(SCRUMMASTER_ID, $scrumMasterId);
+		$scrumMasterId = $this->utils->Player->scrumMasterId(DEVELOPER_ID_1);
+		$this->assertEquals(SCRUMMASTER_ID_1, $scrumMasterId);
 	}
 
 	public function testFreeDeveloperList() {
@@ -109,24 +109,6 @@ class PlayerTest extends CakeTestCase {
 		$this->assertEquals(3, $count);
 	}
 
-	public function testScrumMaster() {
-		$sm = $this->utils->Player->_scrumMaster();
-		$this->assertNotEmpty($sm);
-		$this->assertEquals(PLAYER_TYPE_SCRUMMASTER, $sm['Player']['player_type_id']);
-	}
-
-	public function testScrumMasterNotFound() {
-		$this->utils->Notification->query('DELETE FROM notification');
-		$this->utils->XpLog->query('DELETE FROM xp_log');
-		$this->utils->Player->delete(SCRUMMASTER_ID);
-		try {
-			$sm = $this->utils->Player->_scrumMaster();
-			$this->fail();
-		} catch (Exception $ex) {
-			$this->assertEquals('ScrumMaster not found!', $ex->getMessage());
-		}
-	}
-
 	public function testBeforeSave() {
 		$player = array(
 			'name' => 'New Player',
@@ -147,11 +129,15 @@ class PlayerTest extends CakeTestCase {
 	}
 	
 	public function testDifferentActivitiesCompleted(){
-		$activitiesByDomain = $this->utils->Player->differentActivitiesCompletedCount(1);
+		$activitiesByDomain = $this->utils->Player->differentActivitiesCompletedCount(SCRUMMASTER_ID_1, 1);
 		$this->assertEquals(1, count($activitiesByDomain));
 		foreach ($activitiesByDomain as $domainId => $count) {
 			$this->assertEquals(4, (int)$count);
 		}
+	}
+
+	public function testDifferentActivitiesCompletedSM2(){
+		$this->assertEmpty($this->utils->Player->differentActivitiesCompletedCount(SCRUMMASTER_ID_2, 1));
 	}
 
 	public function testLevelAndXP() {
@@ -171,12 +157,12 @@ class PlayerTest extends CakeTestCase {
 	}
 
 	public function testSimpleVerifiedFromPlayerTeamAsDeveloper() {
-		$list = $this->utils->Player->simpleVerifiedFromPlayerTeam(DEVELOPER_1_ID);
+		$list = $this->utils->Player->simpleVerifiedFromPlayerTeam(DEVELOPER_ID_1);
 		$this->assertEquals(4, count($list));
 	}
 
 	public function testSimpleVerifiedFromPlayerTeamAsScrumMaster() {
-		$list = $this->utils->Player->simpleVerifiedFromPlayerTeam(SCRUMMASTER_ID);
+		$list = $this->utils->Player->simpleVerifiedFromPlayerTeam(SCRUMMASTER_ID_1);
 		$this->assertEquals(5, count($list));
 	}
 

@@ -45,7 +45,7 @@ class XpLog extends AppModel {
 		$this->_levelUpNotification($playerBefore, $xp);
 	}
 
-	public function _activityReviewed($activityId) {
+	public function _activityReviewed($smId, $activityId) {
 		$developers = $this->Player->developersCount();
 
 		if ($developers > 0) {
@@ -53,9 +53,6 @@ class XpLog extends AppModel {
 			if (!$activity) {
 				throw new Exception('Activity not found');
 			}
-
-			$sm = $this->Player->_scrumMaster();
-			$smId = $sm['Player']['id'];
 
 			$smXp = floor($activity['Activity']['xp'] / $developers);
 			// Ganha no mínimo 1 ponto de experiência
@@ -96,7 +93,7 @@ class XpLog extends AppModel {
 		$this->_levelUpNotification($playerBefore, $xp);
 	}
 
-	public function _eventTaskReviewed($eventTaskId) {
+	public function _eventTaskReviewed($smId, $eventTaskId) {
 		$developers = $this->Player->developersCount();
 
 		if ($developers > 0) {
@@ -104,9 +101,6 @@ class XpLog extends AppModel {
 			if (!$eventTask) {
 				throw new Exception('EventTask not found');
 			}
-			
-			$sm = $this->Player->_scrumMaster();
-			$smId = $sm['Player']['id'];
 
 			$smXp = floor($eventTask['EventTask']['xp'] / $developers);
 			// Ganha no mínimo 1 ponto de experiência

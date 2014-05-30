@@ -50,12 +50,16 @@ CREATE TABLE `activity` (
   `inactive` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `new` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `xp` int(10) unsigned NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `reported` int(10) unsigned NOT NULL DEFAULT '0',
+  `player_id_owner` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `activity_domain_id` (`domain_id`),
   KEY `activity_reported` (`reported`) USING BTREE,
-  CONSTRAINT `activity_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+  KEY `fk_activity_player_id_owner` (`player_id_owner`),
+  CONSTRAINT `activity_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`),
+  CONSTRAINT `fk_activity_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +72,7 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `activity_leaderboards` (
   `count` tinyint NOT NULL,
+  `player_id_owner` tinyint NOT NULL,
   `player_id` tinyint NOT NULL,
   `player_name` tinyint NOT NULL
 ) ENGINE=MyISAM */;
@@ -83,6 +88,7 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `activity_leaderboards_last_month` (
   `count` tinyint NOT NULL,
+  `player_id_owner` tinyint NOT NULL,
   `player_id` tinyint NOT NULL,
   `player_name` tinyint NOT NULL
 ) ENGINE=MyISAM */;
@@ -98,6 +104,7 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `activity_leaderboards_last_week` (
   `count` tinyint NOT NULL,
+  `player_id_owner` tinyint NOT NULL,
   `player_id` tinyint NOT NULL,
   `player_name` tinyint NOT NULL
 ) ENGINE=MyISAM */;
@@ -113,6 +120,7 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `activity_leaderboards_this_month` (
   `count` tinyint NOT NULL,
+  `player_id_owner` tinyint NOT NULL,
   `player_id` tinyint NOT NULL,
   `player_name` tinyint NOT NULL
 ) ENGINE=MyISAM */;
@@ -128,6 +136,7 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `activity_leaderboards_this_week` (
   `count` tinyint NOT NULL,
+  `player_id_owner` tinyint NOT NULL,
   `player_id` tinyint NOT NULL,
   `player_name` tinyint NOT NULL
 ) ENGINE=MyISAM */;
@@ -184,10 +193,13 @@ CREATE TABLE `badge` (
   `new` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `icon` varchar(50) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `player_id_owner` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `badge_domain_id` (`domain_id`),
-  CONSTRAINT `badge_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+  KEY `badge_player_id_owner` (`player_id_owner`),
+  CONSTRAINT `badge_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`),
+  CONSTRAINT `badge_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,7 +319,8 @@ SET character_set_client = utf8;
   `domain_id` tinyint NOT NULL,
   `domain_name` tinyint NOT NULL,
   `player_id` tinyint NOT NULL,
-  `player_name` tinyint NOT NULL
+  `player_name` tinyint NOT NULL,
+  `player_id_owner` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
 
@@ -327,10 +340,13 @@ CREATE TABLE `domain` (
   `icon` varchar(50) DEFAULT NULL,
   `player_type_id` int(10) unsigned DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `player_id_owner` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_domain_player_type_id` (`player_type_id`),
+  KEY `fk_domain_player_id_owner` (`player_id_owner`),
+  CONSTRAINT `fk_domain_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`),
   CONSTRAINT `fk_domain_player_type_id` FOREIGN KEY (`player_type_id`) REFERENCES `player_type` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,6 +359,7 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `domain_activities_count` (
   `domain_id` tinyint NOT NULL,
+  `player_id_owner` tinyint NOT NULL,
   `count` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
@@ -363,10 +380,13 @@ CREATE TABLE `event` (
   `description` varchar(200) NOT NULL,
   `xp` smallint(5) unsigned NOT NULL DEFAULT '0',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `player_id_owner` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_event_event_type_id` (`event_type_id`),
+  KEY `event_player_id_owner` (`player_id_owner`),
+  CONSTRAINT `event_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`),
   CONSTRAINT `fk_event_event_type_id` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`)
-) ENGINE=MEMORY DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -538,16 +558,19 @@ CREATE TABLE `log` (
   `xp` int(10) unsigned NOT NULL DEFAULT '0',
   `spent` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `event_id` int(1) unsigned DEFAULT NULL,
+  `player_id_owner` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_log_event_id` (`event_id`),
   KEY `fk_activity_activity_id` (`activity_id`) USING BTREE,
   KEY `fk_log_player_idx` (`player_id`) USING BTREE,
   KEY `fk_log_domain_idx` (`domain_id`) USING BTREE,
+  KEY `fk_log_player_id_owner` (`player_id_owner`),
+  CONSTRAINT `fk_log_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`),
   CONSTRAINT `fk_log_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`),
   CONSTRAINT `fk_log_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`),
   CONSTRAINT `fk_log_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=817 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=818 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -566,9 +589,11 @@ CREATE TABLE `notification` (
   `title` varchar(30) DEFAULT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'success',
   `action` varchar(10) DEFAULT NULL,
+  `player_id_sender` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_notification_player_id` (`player_id`)
-) ENGINE=MEMORY AUTO_INCREMENT=688 DEFAULT CHARSET=latin1;
+  KEY `fk_notification_player_id` (`player_id`) USING HASH,
+  KEY `fk_notification_player_id_sender` (`player_id_sender`) USING HASH
+) ENGINE=MEMORY AUTO_INCREMENT=735 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -595,7 +620,7 @@ CREATE TABLE `player` (
   KEY `fk_player_team_id` (`team_id`),
   CONSTRAINT `fk_player_team_id` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`),
   CONSTRAINT `fk_player_type_id` FOREIGN KEY (`player_type_id`) REFERENCES `player_type` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -665,7 +690,7 @@ CREATE TABLE `team` (
   PRIMARY KEY (`id`),
   KEY `fk_team_player_id_scrummaster` (`player_id_scrummaster`),
   CONSTRAINT `fk_team_player_id_scrummaster` FOREIGN KEY (`player_id_scrummaster`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -738,7 +763,7 @@ CREATE TABLE `xp_log` (
   CONSTRAINT `fk_xp_log_event_task_id` FOREIGN KEY (`event_task_id`) REFERENCES `event_task` (`id`),
   CONSTRAINT `fk_xp_log_event_task_id_reviewed` FOREIGN KEY (`event_task_id_reviewed`) REFERENCES `event_task` (`id`),
   CONSTRAINT `fk_xp_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=460 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=461 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -784,12 +809,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `activity_leaderboards` AS select count(0) AS `count`,`log`.`player_id` AS `player_id`,`player`.`name` AS `player_name` from (`log` join `player` on((`player`.`id` = `log`.`player_id`))) where (`log`.`reviewed` is not null) group by `log`.`player_id` order by `count` desc */;
+/*!50001 VIEW `activity_leaderboards` AS select count(0) AS `count`,`log`.`player_id_owner` AS `player_id_owner`,`log`.`player_id` AS `player_id`,`player`.`name` AS `player_name` from (`log` join `player` on((`player`.`id` = `log`.`player_id`))) where (`log`.`reviewed` is not null) group by `log`.`player_id`,`log`.`player_id_owner` order by `count` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -803,12 +828,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `activity_leaderboards_last_month` AS select count(`log`.`id`) AS `count`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval ((dayofmonth(curdate()) + dayofmonth(last_day(curdate()))) - 1) day)) and (`log`.`acquired` < (curdate() - interval (dayofmonth(curdate()) - 1) day)) and (`log`.`reviewed` is not null)))) group by `player`.`id` order by `count` desc */;
+/*!50001 VIEW `activity_leaderboards_last_month` AS select count(`log`.`id`) AS `count`,`log`.`player_id_owner` AS `player_id_owner`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval ((dayofmonth(curdate()) + dayofmonth(last_day(curdate()))) - 1) day)) and (`log`.`acquired` < (curdate() - interval (dayofmonth(curdate()) - 1) day)) and (`log`.`reviewed` is not null)))) group by `player`.`id`,`log`.`player_id_owner` order by `count` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -822,12 +847,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `activity_leaderboards_last_week` AS select count(`log`.`id`) AS `count`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval (dayofweek(curdate()) + 6) day)) and (`log`.`acquired` < (curdate() - interval (dayofweek(curdate()) - 1) day)) and (`log`.`reviewed` is not null)))) group by `player`.`id` order by `count` desc */;
+/*!50001 VIEW `activity_leaderboards_last_week` AS select count(`log`.`id`) AS `count`,`log`.`player_id_owner` AS `player_id_owner`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval (dayofweek(curdate()) + 6) day)) and (`log`.`acquired` < (curdate() - interval (dayofweek(curdate()) - 1) day)) and (`log`.`reviewed` is not null)))) group by `player`.`id`,`log`.`player_id_owner` order by `count` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -841,12 +866,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `activity_leaderboards_this_month` AS select count(`log`.`id`) AS `count`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval (dayofmonth(curdate()) - 1) day)) and (`log`.`acquired` <= curdate()) and (`log`.`reviewed` is not null)))) group by `player`.`id` order by `count` desc */;
+/*!50001 VIEW `activity_leaderboards_this_month` AS select count(`log`.`id`) AS `count`,`log`.`player_id_owner` AS `player_id_owner`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval (dayofmonth(curdate()) - 1) day)) and (`log`.`acquired` <= curdate()) and (`log`.`reviewed` is not null)))) group by `player`.`id`,`log`.`player_id_owner` order by `count` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -860,12 +885,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `activity_leaderboards_this_week` AS select count(`log`.`id`) AS `count`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval (dayofweek(curdate()) - 1) day)) and (`log`.`acquired` <= curdate()) and (`log`.`reviewed` is not null)))) group by `player`.`id` order by `count` desc */;
+/*!50001 VIEW `activity_leaderboards_this_week` AS select count(`log`.`id`) AS `count`,`log`.`player_id_owner` AS `player_id_owner`,`player`.`id` AS `player_id`,`player`.`name` AS `player_name` from (`player` left join `log` on(((`player`.`id` = `log`.`player_id`) and (`log`.`acquired` >= (curdate() - interval (dayofweek(curdate()) - 1) day)) and (`log`.`acquired` <= curdate()) and (`log`.`reviewed` is not null)))) group by `player`.`id`,`log`.`player_id_owner` order by `count` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -955,12 +980,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `different_activities_completed` AS select count(distinct `log`.`activity_id`) AS `different_activities_completed`,`log`.`domain_id` AS `domain_id`,`domain`.`name` AS `domain_name`,`log`.`player_id` AS `player_id`,`player`.`name` AS `player_name` from (((`log` join `player` on((`player`.`id` = `log`.`player_id`))) join `activity` on((`activity`.`id` = `log`.`activity_id`))) join `domain` on((`domain`.`id` = `activity`.`domain_id`))) where ((`log`.`reviewed` is not null) and (`activity`.`inactive` = 0)) group by `log`.`player_id`,`log`.`domain_id` order by `log`.`player_id`,`log`.`domain_id` */;
+/*!50001 VIEW `different_activities_completed` AS select count(distinct `log`.`activity_id`) AS `different_activities_completed`,`log`.`domain_id` AS `domain_id`,`domain`.`name` AS `domain_name`,`log`.`player_id` AS `player_id`,`player`.`name` AS `player_name`,`log`.`player_id_owner` AS `player_id_owner` from (((`log` join `player` on((`player`.`id` = `log`.`player_id`))) join `activity` on((`activity`.`id` = `log`.`activity_id`))) join `domain` on((`domain`.`id` = `activity`.`domain_id`))) where ((`log`.`reviewed` is not null) and (`activity`.`inactive` = 0)) group by `log`.`player_id`,`log`.`domain_id` order by `log`.`player_id`,`log`.`domain_id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -974,12 +999,12 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = cp850 */;
-/*!50001 SET character_set_results     = cp850 */;
-/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `domain_activities_count` AS select `activity`.`domain_id` AS `domain_id`,count(0) AS `count` from `activity` where (`activity`.`inactive` = 0) group by `activity`.`domain_id` order by `activity`.`domain_id` */;
+/*!50001 VIEW `domain_activities_count` AS select `activity`.`domain_id` AS `domain_id`,`activity`.`player_id_owner` AS `player_id_owner`,count(0) AS `count` from `activity` where (`activity`.`inactive` = 0) group by `activity`.`domain_id`,`activity`.`player_id_owner` order by `activity`.`domain_id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1069,4 +1094,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-29 11:50:44
+-- Dump completed on 2014-05-30 19:56:53

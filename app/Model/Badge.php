@@ -27,6 +27,18 @@ class Badge extends AppModel {
 		'Notification'
 	);
 
+	public function allFromOwner($playerIdOwner) {
+		return $this->all(array(
+			'Badge.player_id_owner' => $playerIdOwner
+		));
+	}
+
+	public function allFromOwnerById($playerIdOwner) {
+		return $this->all(array(
+			'Badge.player_id_owner' => $playerIdOwner
+		), 'id');
+	}
+
 	public function allFromDomainById($domainId) {
 		return $this->all(array('Badge.domain_id' => $domainId), 'id');
 	}

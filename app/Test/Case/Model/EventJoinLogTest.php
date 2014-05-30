@@ -13,7 +13,7 @@ class EventJoinLogTest extends CakeTestCase {
 	}
 
 	public function testJoin() {
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		$event = $this->utils->Event->find('first');
 		$eventId = $event['Event']['id'];
 
@@ -22,7 +22,7 @@ class EventJoinLogTest extends CakeTestCase {
 	}
 
 	public function testJoinException() {
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		try {
 			$this->utils->EventJoinLog->join($playerId, 0);
 			$this->fail();

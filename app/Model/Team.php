@@ -38,4 +38,17 @@ class Team extends AppModel {
 		return $this->simple(array('Team.player_id_scrummaster'=> $scrumMasterId));
 	}
 
+	public function allFromOwner($playerIdOwner) {
+		return $this->find('all', array(
+			'conditions' => array(
+				'Team.player_id_scrummaster' => $playerIdOwner
+			),
+			'contain' => array(
+				'ScrumMaster' => array('id', 'name'), 
+				'ProductOwners' => array('id', 'name'), 
+				'Developers' => array('id', 'name')
+			)
+		));
+	}
+
 }

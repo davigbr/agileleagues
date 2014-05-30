@@ -15,6 +15,16 @@ class BadgeTest extends CakeTestCase {
 		$this->utils->generateBadgeRequisites();
 		$this->utils->generateActivityRequisites();
 	}
+
+	public function testAllFromOwner() {
+		$this->assertEquals(4, count($this->utils->Badge->allFromOwner(SCRUMMASTER_ID_1)));
+		$this->assertEquals(0, count($this->utils->Badge->allFromOwner(SCRUMMASTER_ID_2)));
+	}
+
+	public function testAllFromOwnerById() {
+		$this->assertEquals(4, count($this->utils->Badge->allFromOwnerById(SCRUMMASTER_ID_1)));
+		$this->assertEquals(0, count($this->utils->Badge->allFromOwnerById(SCRUMMASTER_ID_2)));
+	}
 	
 	public function testAllFromDomainById(){
 		$domain = $this->utils->Domain->find('first', array('order' => 'Domain.id'));
@@ -47,7 +57,7 @@ class BadgeTest extends CakeTestCase {
 		$this->utils->Badge->recursive = 1;
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 
 		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
 		$this->utils->Badge->claim($playerId, $badgeId);
@@ -75,7 +85,7 @@ class BadgeTest extends CakeTestCase {
 
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		try {
 			$this->utils->Badge->claim($playerId, $badgeId);
 			$this->fail();
@@ -85,7 +95,7 @@ class BadgeTest extends CakeTestCase {
 	}
 
 	public function testClaimBadgeNotFound() {
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		try {
 			$this->utils->Badge->claim($playerId, 0);
 			$this->fail();
@@ -100,7 +110,7 @@ class BadgeTest extends CakeTestCase {
 
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_2_ID;
+		$playerId = DEVELOPER_ID_2;
 
 		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
 
@@ -120,7 +130,7 @@ class BadgeTest extends CakeTestCase {
 
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_2_ID;
+		$playerId = DEVELOPER_ID_2;
 
 		$this->utils->BadgeLog->query('DELETE FROM badge_log');
 

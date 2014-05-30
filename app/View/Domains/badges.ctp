@@ -1,7 +1,7 @@
 <div class="panel panel-primary panel-table">
     <div class="panel-heading">
         <div class="panel-title">
-            <h3><?= h($domain['Domain']['name'])?> Badges</h3>
+            <h1><?= h($domain['Domain']['name'])?> Badges</h1>
         </div>
     </div>
 </div>

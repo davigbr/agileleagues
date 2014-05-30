@@ -16,7 +16,7 @@ class EventTaskLogTest extends CakeTestCase {
 	}
 
 	public function testEventAlreadyCompletedRule() {
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		$event = $this->utils->Event->find('first');
 		$eventId = $event['Event']['id'];
 		$this->utils->EventTaskLog->data = array(
@@ -29,7 +29,7 @@ class EventTaskLogTest extends CakeTestCase {
 	}
 
 	public function testJoinBeforeReportingRule() {
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		$event = $this->utils->Event->find('first');
 		$eventId = $event['Event']['id'];
 		$this->utils->EventTaskLog->data = array(
@@ -42,7 +42,7 @@ class EventTaskLogTest extends CakeTestCase {
 	}
 
 	public function testUniqueTaskPerPlayerRule() {
-		$playerId = DEVELOPER_1_ID;
+		$playerId = DEVELOPER_ID_1;
 		$eventTask = $this->utils->EventTask->find('first');
 		$eventTaskId = $eventTask['Event']['id'];
 		$this->utils->EventTaskLog->data = array(
@@ -55,12 +55,12 @@ class EventTaskLogTest extends CakeTestCase {
 	}
 
 	public function testAllPendingFromPlayer() {
-		$all = $this->utils->EventTaskLog->allPendingFromPlayer(DEVELOPER_2_ID);
+		$all = $this->utils->EventTaskLog->allPendingFromPlayer(DEVELOPER_ID_2);
 		$this->assertEquals(3, count($all));
 	}
 
 	public function testCountPendingFromPlayer() {
-		$count = $this->utils->EventTaskLog->countPendingFromPlayer(DEVELOPER_2_ID);
+		$count = $this->utils->EventTaskLog->countPendingFromPlayer(DEVELOPER_ID_2);
 		$this->assertEquals(3, $count);
 	}
 

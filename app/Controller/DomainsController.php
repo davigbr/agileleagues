@@ -5,7 +5,8 @@ App::uses('AppController', 'Controller');
 class DomainsController extends AppController {
 
 	public function index() {
-		$this->set('domains', $this->Domain->all());
+		$this->set('domains', $this->Domain->allFromOwner(
+            $this->Player->scrumMasterId($this->Auth->user('id'))));
 	}
 
     public function add() {
@@ -22,6 +23,9 @@ class DomainsController extends AppController {
         }
         
         if ($this->request->is('post') || $this->request->is('put')) {
+            
+            $this->request->data['Domain']['player_id_owner'] = $this->Auth->user('id');
+
             if ($this->Domain->save($this->request->data)) {
                 $this->flashSuccess(__('Domain saved successfully.'));
                 return $this->redirect('/domains');
@@ -85,6 +89,6 @@ class DomainsController extends AppController {
         $this->set('badgeActivitiesProgress', $badgeActivitiesProgress);
         $this->set('domain', $this->Domain->findById($domainId));
         $this->set('badges', $badges);
-        $this->set('players', $this->Player->allFromPlayerScrumMaster($this->Auth->user('id')));
+        $this->set('players', $this->Player->allFromPlayerTeam($this->Auth->user('id')));
     }
 }

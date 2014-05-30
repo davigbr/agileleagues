@@ -15,71 +15,66 @@ class ActivityTest extends CakeTestCase {
 		$this->utils->generateLogs();
 	}
 
-	public function testSimple() {
-		$simple = $this->utils->Activity->simple();
-		$this->assertEquals(22, count($simple));
-	}
-
 	public function testSimpleActive() {
-		$simple = $this->utils->Activity->simpleActive();
-		$this->assertEquals(14, count($simple));
+		$this->assertEquals(14, count($this->utils->Activity->simpleActive(SCRUMMASTER_ID_1)));
+		$this->assertEquals(0, count($this->utils->Activity->simpleActive(SCRUMMASTER_ID_2)));
 	}
 
 	public function testSimpleActiveFromPlayerType() {
-		$simple = $this->utils->Activity->simpleActiveFromPlayerType(PLAYER_TYPE_DEVELOPER);
-		$this->assertEquals(10, count($simple));
+		$this->assertEquals(10, count($this->utils->Activity->simpleActiveFromPlayerType(SCRUMMASTER_ID_1, PLAYER_TYPE_DEVELOPER)));
+		$this->assertEquals(0, count($this->utils->Activity->simpleActiveFromPlayerType(SCRUMMASTER_ID_2, PLAYER_TYPE_DEVELOPER)));
 	}
 
-	public function testAll() {
-		$all = $this->utils->Activity->all();
-		$this->assertEquals(22, count($all));
+	public function testAllActive() {
+		$this->assertEquals(14, count($this->utils->Activity->allActive(SCRUMMASTER_ID_1)));
+		$this->assertEquals(0, count($this->utils->Activity->allActive(SCRUMMASTER_ID_2)));
 	}
 
 	public function testCount() {
-		$count = $this->utils->Activity->count();
-		$this->assertEquals(14, $count);
+		$this->assertEquals(14, $this->utils->Activity->count(SCRUMMASTER_ID_1));
+		$this->assertEquals(0, $this->utils->Activity->count(SCRUMMASTER_ID_2));
 	}
 
 	public function testLeaderboardsLastWeek() {
-		$leaderboards = $this->utils->Activity->leaderboardsLastWeek();
+		$leaderboards = $this->utils->Activity->leaderboardsLastWeek(SCRUMMASTER_ID_1);
 		foreach ($leaderboards as $row) {
-			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_ID_1, DEVELOPER_ID_2))) {
 				$this->assertEquals(1, (int)$row['Leaderboards']['count']);
 			}
 		}
 	}
 	
 	public function testLeaderboardsLastMonth() {
-		$leaderboards = $this->utils->Activity->leaderboardsLastMonth();
+		$leaderboards = $this->utils->Activity->leaderboardsLastMonth(SCRUMMASTER_ID_1);
 		foreach ($leaderboards as $row) {
-			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_ID_1, DEVELOPER_ID_2))) {
 				$this->assertTrue((int)$row['Leaderboards']['count'] >= 1);
 			}
 		}
 	}
 	
 	public function testLeaderboardsEver() {
-		$leaderboards = $this->utils->Activity->leaderboardsEver();
+		$leaderboards = $this->utils->Activity->leaderboardsEver(SCRUMMASTER_ID_1);
 		foreach ($leaderboards as $row) {
-			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_ID_1, DEVELOPER_ID_2))) {
 				$this->assertEquals(4, (int)$row['Leaderboards']['count']);
 			}
 		}
 	}
 	
 	public function testLeaderboardsThisWeek() {
-		$leaderboards = $this->utils->Activity->leaderboardsThisWeek();
+		$leaderboards = $this->utils->Activity->leaderboardsThisWeek(SCRUMMASTER_ID_1);
 		foreach ($leaderboards as $row) {
-			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_ID_1, DEVELOPER_ID_2))) {
 				$this->assertEquals(2, (int)$row['Leaderboards']['count']);
 			}
 		}
 	}
 
 	public function testLeaderboardsThisMonth() {
-		$leaderboards = $this->utils->Activity->leaderboardsThisMonth();
+		$leaderboards = $this->utils->Activity->leaderboardsThisMonth(SCRUMMASTER_ID_1);
 		foreach ($leaderboards as $row) {
-			if (in_array($row['Player']['id'], array(DEVELOPER_1_ID, DEVELOPER_2_ID))) {
+			if (in_array($row['Player']['id'], array(DEVELOPER_ID_1, DEVELOPER_ID_2))) {
 				$this->assertTrue((int)$row['Leaderboards']['count'] >= 2);
 			}
 		}
@@ -108,6 +103,27 @@ class ActivityTest extends CakeTestCase {
 	public function testMostReported() {
 		$mostReported = $this->utils->Activity->mostReported(PLAYER_TYPE_DEVELOPER, 1);
 		$this->assertEquals(1, count($mostReported));
+	}
+
+
+	public function testLeaderboardsLastWeekSM2() {
+		$this->assertEmpty($this->utils->Activity->leaderboardsLastWeek(SCRUMMASTER_ID_2));
+	}
+	
+	public function testLeaderboardsLastMonthSM2() {
+		$this->assertEmpty($this->utils->Activity->leaderboardsLastMonth(SCRUMMASTER_ID_2));
+	}
+	
+	public function testLeaderboardsEverSM2() {
+		$this->assertEmpty($this->utils->Activity->leaderboardsEver(SCRUMMASTER_ID_2));
+	}
+	
+	public function testLeaderboardsThisWeekSM2() {
+		$this->assertEmpty($this->utils->Activity->leaderboardsThisWeek(SCRUMMASTER_ID_2));
+	}
+
+	public function testLeaderboardsThisMonthSM2() {
+		$this->assertEmpty($this->utils->Activity->leaderboardsThisMonth(SCRUMMASTER_ID_2));
 	}
 
 }

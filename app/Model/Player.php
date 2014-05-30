@@ -59,10 +59,12 @@ class Player extends AppModel {
         return true;
     }
 
-	public function differentActivitiesCompletedCount($playerId) {
-        $query = 'SELECT different_activities_completed, domain_id, domain_name ';
-        $query .= 'FROM different_activities_completed AS Data WHERE player_id = ?';
-		$rows = $this->query($query, array((int)$playerId));
+	public function differentActivitiesCompletedCount($playerIdOwner, $playerId) {
+        $rows = $this->query('
+            SELECT different_activities_completed, domain_id, domain_name 
+            FROM different_activities_completed AS Data 
+            WHERE player_id_owner = ? AND player_id = ?', 
+            array($playerIdOwner, $playerId));
         $list = array();
         foreach ($rows as $row) {
             $list[$row['Data']['domain_id']] = $row['Data']['different_activities_completed'];
@@ -70,18 +72,6 @@ class Player extends AppModel {
         ksort($list);
         return $list;
 	}
-
-    public function _scrumMaster() {
-        $sm = $this->find('first', array(
-            'conditions' => array(
-                'Player.player_type_id' => PLAYER_TYPE_SCRUMMASTER
-            )
-        ));
-        if (!$sm) {
-            throw new Exception('ScrumMaster not found!');
-        }
-        return $sm;
-    }
 
     public function level($xp) {
         return (int)(1 + 0.0464159 * pow($xp, 2/3));
