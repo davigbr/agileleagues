@@ -55,6 +55,10 @@ class Badge extends AppModel {
 			if (!$badge) {
 				throw new ModelException('Badge not found.');
 			}
+			$player = $this->Player->findById($playerId);
+			if ($badge['Domain']['player_type_id'] != $player['Player']['player_type_id']) {
+				throw new ModelException('Badge not compatible with player type.');
+			}
 
 			$badgesClaimed = $this->BadgeClaimed->allFromPlayerByBadgeId($playerId);
 			if ($badgesClaimed[$badgeId]['BadgeClaimed']['claimed']) {
@@ -85,8 +89,6 @@ class Badge extends AppModel {
 				'badge_id' => $badgeId,
 				'player_id' => $playerId
 			));
-
-			$player = $this->Player->findById($playerId);
 
 			$badgeName = $badge['Badge']['name'];
             $playerName = $player['Player']['name'];

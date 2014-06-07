@@ -38,6 +38,27 @@ class PlayersControllerTest extends ControllerTestCase {
 		$this->utils->Player->create();
 		$this->utils->Player->save($player);
 		$this->testAction('/players/join/' . $hash, array('method' => 'get', 'return' => 'vars'));
+		$playerAfter = $this->utils->Player->findById($id);
+		$this->assertNull($playerAfter['Player']['verified_in']);
+	}
+
+	public function testJoinGetSuccessPasswordAlreadyDefined() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'password' => md5('123456'), 
+			'verification_hash' => $hash,
+			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+		$this->testAction('/players/join/' . $hash, array('method' => 'get', 'return' => 'vars'));
+		$playerAfter = $this->utils->Player->findById($id);
+		$this->assertNotNull($playerAfter['Player']['verified_in']);
 	}
 
 	public function testJoinPostValidationError() {
@@ -276,5 +297,55 @@ class PlayersControllerTest extends ControllerTestCase {
 	public function testLogout() {
 		$this->controllerUtils->mockAuthUser();
 		$this->testAction('/players/logout');
+	}
+
+	public function testSigninPostWrongUser() {
+		$data = array();
+		$result = $this->testAction('/players/signin', array('method' => 'POST', 'data' => $data, 'return' => 'vars'));
+		$this->assertNotNull($this->controller->flashError);
+	}
+
+	public function testSigninRightUser() {
+		$this->controllerUtils->mockAuthLogin();
+		$data = array(
+			'Player' => array(
+				'email' => 'email1@email.com',
+				'password' => '123456'
+			)
+		);
+		$result = $this->testAction('/players/signin', array('method' => 'POST', 'data' => $data, 'return' => 'vars'));
+		$this->assertNull($this->controller->flashError);
+	}
+
+	public function testSignupGet() {
+		$result = $this->testAction('/players/signup', array('method' => 'GET', 'return' => 'vars'));
+		$this->assertEqual(1, count($result['playerTypes']));
+	}
+
+	public function testSignupPostValidationErrors() {
+		$data = array(
+			'Player' => array(
+				'name' => 'A team',
+				'password' => '',
+				'email' => 'email@email.com'
+			)
+		);
+		$this->testAction('/players/signup', array('data' => $data));
+		$player = $this->utils->Player->findByEmail('email@email.com');
+		$this->assertNotNull($this->controller->flashError);
+	}
+
+	public function testSignupPostSuccess() {
+		$data = array(
+			'Player' => array(
+				'name' => 'A team',
+				'password' => '123456',
+				'email' => 'email@email.com'
+			)
+		);
+		$this->testAction('/players/signup', array('data' => $data));
+		$player = $this->utils->Player->findByEmail('email@email.com');
+		$this->assertNotEmpty($player['Player']['verification_hash']);
+		$this->assertNotNull($this->controller->flashSuccess);
 	}
 }

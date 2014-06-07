@@ -16,11 +16,11 @@ class Player extends AppModel {
         'email' => array(
             'email' => array(
                 'rule' => 'email',
-                'message' => 'Invalid e-mail address.'
+                'message' => 'Invalid email address.'
             ),
             'isUnique' => array(
                 'rule' => 'isUnique',
-                'message' => 'It seems this e-mail address is already registered.'
+                'message' => 'It seems this email address is already registered.'
             )    
         ),
         'password' => array(

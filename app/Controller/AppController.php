@@ -66,6 +66,7 @@ class AppController extends Controller {
 	            'controller' => 'players',
 	            'action' => 'login',
 	        ),
+	        'loginRedirect' => '/dashboards/activities',
 	        'authenticate' => array(
 	            'Form' => array(
 	                'userModel' => 'Player',

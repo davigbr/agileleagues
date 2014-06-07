@@ -234,7 +234,7 @@ class EmailComponent extends Component {
 
 /**
  * Whether to generate a Message-ID header for the
- * e-mail. True to generate a Message-ID, False to let
+ * email. True to generate a Message-ID, False to let
  * it be handled by sendmail (or similar) or a string
  * to completely override the Message-ID.
  *

@@ -79,6 +79,24 @@ class BadgeTest extends CakeTestCase {
 		$this->assertEquals($activitiesRequired, $activitiesSpent);
 	}
 
+	public function testClaimWrongPlayerType() {
+		$this->utils->generateBadgeLogs();
+		$this->utils->generateLogs();
+
+		$this->utils->Badge->recursive = 1;
+		$badge = $this->utils->Badge->findById(2);
+		$badgeId = $badge['Badge']['id'];
+		$playerId = SCRUMMASTER_ID_1;
+
+		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
+		try {
+			$this->utils->Badge->claim($playerId, $badgeId);
+			$this->fail();
+		} catch (ModelException $ex) {
+			$this->assertEquals('Badge not compatible with player type.', $ex->getMessage());
+		}
+	}
+
 	public function testClaimAlreadyClaimed() {
 		$this->utils->generateBadgeLogs();
 		$this->utils->generateLogs();

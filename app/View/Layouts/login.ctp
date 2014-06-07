@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $title_for_layout; ?>
-	</title>
+	<?= $this->Html->charset(); ?>
+	<title><?= $title_for_layout; ?> | Agile Leagues</title>
 	<link rel="stylesheet" href="<? echo Router::url('/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css'); ?>">
 	<link rel="stylesheet" href="<? echo Router::url('/assets/css/font-icons/entypo/css/entypo.css'); ?>">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
@@ -45,7 +43,7 @@
 						<span style="color: #888">Leagues</span>
 					</span>
 				</a>
-				<p style="color: white" class="description">Dear user, please enter your e-mail and password.</p>
+				<p style="color: white" class="description">Dear user, please enter your email and password.</p>
 				<!-- progress bar indicator -->
 				<div class="login-progressbar-indicator">
 					<h3>43%</h3>
@@ -60,7 +58,7 @@
 			<div class="login-content">
 				<div class="form-login-error">
 					<h3>Invalid login</h3>
-					<p>Please enter a correct e-mail and password.</p>
+					<p>Please enter a correct email and password.</p>
 				</div>
 				<form method="post" action="<? echo $this->Html->url('/players/login'); ?>" role="form" id="form_login">
 					<div class="form-group">
@@ -119,7 +117,9 @@
 					</div> -->				
 				</form>
 				<div class="login-bottom-links">
-					<a href="#" class="link">Forgot your password? Talk to the administrator (:</a>
+					<a class="link" href="<?= $this->Html->url('/players/signup')?>">Sign Up!</a><br/>
+					<a class="link" href="<?= $this->Html->url('/players/recover')?>">Forgot your password?</a><br/>
+					<a class="link" href="<?= $this->Html->url('/players/resend')?>">Resend verification message?</a><br/>
 					<!-- <br /> -->
 					<!-- <a href="#">Privacy Policy</a> -->
 				</div>

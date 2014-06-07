@@ -334,7 +334,7 @@ INSERT INTO `activity` (`id`, `name`, `domain_id`, `description`, `inactive`, `n
 (43, 'Pair Testing', 4, 'Executar atividade de teste em par. Deve ser ganho junto com outra atividade de teste.', 0, 0, 10, 28),
 (44, 'JUnit Test', 4, 'Criar teste unitário utilizando JUnit (por classe).', 0, 0, 5, 31),
 (45, 'PHPUnit Test', 4, 'Criar teste unitário utilizando PHPUnit (por classe).', 0, 0, 5, 25),
-(46, 'Send Article', 2, 'Enviar artigo para a equipe por e-mail (1 por dia no máximo).', 0, 0, 10, 1),
+(46, 'Send Article', 2, 'Enviar artigo para a equipe por email (1 por dia no máximo).', 0, 0, 10, 1),
 (52, 'Estimation', 2, 'Executar Planning Poker para estimar user stories do backlog (uma vez por dia).', 0, 0, 3, 44),
 (54, 'Read Article 2', 3, 'Ler artigo sobre um dos seguintes protocolos: TCP, HTTP, HTTPS/SSL, FTP.', 0, 0, 20, 0),
 (55, 'Spike', 3, 'Efetuar pesquisa para redução de risco ou dívida técnica.', 0, 1, 0, 1),

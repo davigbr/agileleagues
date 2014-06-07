@@ -39,10 +39,37 @@
 		</div>
 		<div class="col-md-6 col-sm-4 clearfix hidden-xs">
 			<div class="pull-right btn-group" style="margin-top: 5px">
+				<a class="btn btn-md btn-success" title="<?=__('Agile Gamification')?>" target="_blank" href="http://www.agilegamification.org/">
+					<i class="entypo-book-open"></i> 
+					<span class="hidden-sm hidden-md"><?=__('Agile Gamification')?></span>
+				</a>
 				<?if ($loggedPlayer): ?>
-					<a class="btn btn-sm btn-primary" href="<?= $this->Html->url('/players/logout'); ?>">Logout <i class="entypo-logout right"></i></a>
+					<div class="btn-group">
+						<a href="#" class="btn btn-primary hidden-sm btn-md dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-comments"></i> &nbsp;Contact&nbsp; <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu dropdown-primary" role="menu">
+							<li>
+								<a href="<?= $this->Html->url('/contact/bug')?>" title="<?=__('Report a Bug')?>">
+									<i class="fa fa-bug"></i>&nbsp; <?=__('Report a Bug')?>
+								</a>
+							</li>
+							<li>
+								<a href="<?= $this->Html->url('/contact/feature')?>" title="<?=__('Request a Feature')?>">
+									<i class="fa fa-list"></i>&nbsp; <?=__('Request a Feature')?> 
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="mailto:contact@agileleagues.com">
+									<i class="fa fa-envelope"></i>&nbsp; contact@agileleagues.com
+								</a>
+							</li>
+						</ul>
+					</div>
+					<a class="btn btn-md btn-primary" href="<?= $this->Html->url('/players/logout'); ?>">Logout <i class="entypo-logout right"></i></a>
 				<?else:?>
-					<a class="btn btn-sm btn-primary" href="<?= $this->Html->url('/players/login'); ?>">Login <i class="entypo-login right"></i></a>
+					<a class="btn btn-md btn-primary" href="<?= $this->Html->url('/players/login'); ?>">Sign In <i class="entypo-login right"></i></a>
 				<?endif;?>
 			</div>
 		</div>

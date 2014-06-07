@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $title_for_layout; ?>
-	</title>
+	<?= $this->Html->charset(); ?>
+	<title><?= $title_for_layout; ?> | Agile Leagues</title>
 	<link rel="stylesheet" href="<? echo Router::url('/assets/css/font-icons/font-awesome/css/font-awesome.min.css'); ?>">
 	<link rel="stylesheet" href="<? echo Router::url('/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css'); ?>">
 	<link rel="stylesheet" href="<? echo Router::url('/assets/css/font-icons/entypo/css/entypo.css'); ?>">

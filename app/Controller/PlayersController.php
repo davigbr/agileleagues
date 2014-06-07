@@ -9,14 +9,69 @@ class PlayersController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('login', 'logout', 'join');
+		$this->Auth->allow('login', 'logout', 'join', 'signup', 'signin');
 	}
 
 	public function index() {
 		$this->set('players', $this->Player->allFromPlayerTeam($this->Auth->user('id')));
 	}
 
+	public function signup() {
+		$this->layout = 'institutional';
+		$this->set('title_for_layout', 'Sign Up');
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			// Ignore repeat password validation rule
+			unset($this->Player->validate['repeat_password']);
+
+			if ($this->Player->save($this->request->data)) {
+
+				$name = $this->request->data['Player']['name'];
+				$email = $this->request->data['Player']['email'];
+				$hash = $this->Utils->verificationHash($this->Player->id);
+
+				$this->Email->template(
+					'signup', array(
+						'name' => $name,
+						'hash' => $hash
+					)
+				);
+				$this->Email->subject(__('%s, Welcome to Agile Leagues', $name));
+				$this->Email->send($email);
+				
+				// Update the player record with the hash
+				$this->Player->save(array(
+					'Player' => array(
+						'id' => $this->Player->id,
+						'verification_hash' => $hash
+					)
+				));
+
+				$this->flashSuccess(__('Account created successfully! A verification email message was sent to your address: %s.', $email));
+				return $this->redirect('/');
+			} else {
+				$this->flashError(__('Please check the fields below, there are validation errors :('));
+			}
+		}
+
+		$this->set('playerTypes', array(PLAYER_TYPE_SCRUMMASTER => 'ScrumMaster'));
+	}
+
+	private function verify($player) {
+		$player['Player']['verified_in'] = date('Y-m-d H:i:s');
+		if ($this->Player->save($player)) {
+			$this->flashSuccess(__('Account verified successfully!'));
+			$player = $this->Player->findById($player['Player']['id']);
+			$this->Auth->login($player['Player']);
+			return $this->redirect($this->Auth->redirectUrl());
+		} else {
+			$this->flashError(__('There are validation errors.'));
+		}
+	}
+
 	public function join($hash = null) {
+		$this->set('title_for_layout', 'Join');
+
 		if ($hash === null || empty($hash)) {
 			throw new NotFoundException();
 		}
@@ -30,18 +85,18 @@ class PlayersController extends AppController {
 		} else {
 			$id = $player['Player']['id'];
 
+			// If the password is already defined, proceed with instant verification
+			if ($player['Player']['password']) {
+				$this->verify(array(
+					'Player' => array(
+						'id' => $player['Player']['id']
+					)
+				));
+			}
+
 			if ($this->request->is('post') || $this->request->is('put')) {
 				$player = $this->request->data;
-				$player['Player']['verified_in'] = date('Y-m-d H:i:s');
-
-				if ($this->Player->save($player)) {
-					$this->flashSuccess(__('Account verified successfully!'));
-					$player = $this->Player->findById($id);
-					$this->Auth->login($player['Player']);
-					return $this->redirect('/');
-				} else {
-					$this->flashError(__('There are validation errors.'));
-				}
+				$this->verify($player);
 			} else {
 				$this->request->data = array(
 					'Player' => array('id' => $id)
@@ -51,6 +106,8 @@ class PlayersController extends AppController {
 	}
 
 	public function invite() {
+		$this->set('title_for_layout', 'Invite');
+
 		if (!$this->isScrumMaster) {
 			throw new ForbiddenException();
 		}
@@ -91,10 +148,10 @@ class PlayersController extends AppController {
 					)
 				));
 
-				$this->flashSuccess(__('Player invited successfully! An account verification e-mail message was sent to %s.', $email));
+				$this->flashSuccess(__('Player invited successfully! An account verification email message was sent to %s.', $email));
 				return $this->redirect('/players');
 			} else {
-				$this->flashError(__('There were validation errors.'));
+				$this->flashError(__('There are validation errors.'));
 			}
 		}
 
@@ -105,9 +162,22 @@ class PlayersController extends AppController {
 		$this->set('teams', $this->Team->simpleFromScrumMaster($this->Auth->user('id')));
 	}
 
+	public function signin() {
+		if ($this->request->is('post')) {
+			if ($this->Auth->login()) {
+				return $this->redirect($this->Auth->redirectUrl());
+			} else {
+				$this->flashError(__('Invalid email and/or password.'));
+			}
+		}
+		return $this->redirect('/pages/home/');
+	}
+
 	public function login(){
+		$this->set('title_for_layout', 'Login');
+
 		if ($this->Auth->user() != null) {
-			return $this->redirect('/');
+			return $this->redirect($this->Auth->redirectUrl());
 		}
 		if ($this->request->is('post')) {
 			// Login por AJAX
@@ -129,6 +199,8 @@ class PlayersController extends AppController {
 
 	// Change team
 	public function team($id) {
+		$this->set('title_for_layout', 'Change Team');
+
 		$this->set('teams', $this->Team->simple());
 
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -150,6 +222,8 @@ class PlayersController extends AppController {
 	}
 
 	public function myaccount() {
+		$this->set('title_for_layout', 'Account');
+
 		if ($this->request->is('get')) {
 			$this->request->data = $this->player;
 		} else {
