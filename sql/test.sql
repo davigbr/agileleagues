@@ -565,12 +565,12 @@ CREATE TABLE `log` (
   KEY `fk_log_player_idx` (`player_id`) USING BTREE,
   KEY `fk_log_domain_idx` (`domain_id`) USING BTREE,
   KEY `fk_log_player_id_owner` (`player_id_owner`),
-  CONSTRAINT `fk_log_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`),
   CONSTRAINT `fk_log_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`),
   CONSTRAINT `fk_log_domain_id` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`),
   CONSTRAINT `fk_log_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
-  CONSTRAINT `fk_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=818 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`),
+  CONSTRAINT `fk_log_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=819 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -593,7 +593,7 @@ CREATE TABLE `notification` (
   PRIMARY KEY (`id`),
   KEY `fk_notification_player_id` (`player_id`) USING HASH,
   KEY `fk_notification_player_id_sender` (`player_id_sender`) USING HASH
-) ENGINE=MEMORY AUTO_INCREMENT=735 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=736 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -612,15 +612,15 @@ CREATE TABLE `player` (
   `xp` bigint(20) unsigned NOT NULL DEFAULT '0',
   `team_id` int(10) unsigned DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `verification_hash` char(64) DEFAULT NULL,
+  `hash` char(64) DEFAULT NULL,
   `verified_in` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_verification_hash` (`verification_hash`) USING HASH,
+  UNIQUE KEY `idx_verification_hash` (`hash`) USING HASH,
   KEY `fk_player_type_id` (`player_type_id`),
   KEY `fk_player_team_id` (`team_id`),
   CONSTRAINT `fk_player_team_id` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`),
   CONSTRAINT `fk_player_type_id` FOREIGN KEY (`player_type_id`) REFERENCES `player_type` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -763,7 +763,7 @@ CREATE TABLE `xp_log` (
   CONSTRAINT `fk_xp_log_event_task_id` FOREIGN KEY (`event_task_id`) REFERENCES `event_task` (`id`),
   CONSTRAINT `fk_xp_log_event_task_id_reviewed` FOREIGN KEY (`event_task_id_reviewed`) REFERENCES `event_task` (`id`),
   CONSTRAINT `fk_xp_log_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=461 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=462 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1094,4 +1094,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-30 19:56:53
+-- Dump completed on 2014-06-08 13:48:08

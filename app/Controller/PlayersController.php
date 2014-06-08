@@ -9,7 +9,7 @@ class PlayersController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('login', 'logout', 'join', 'signup', 'signin');
+		$this->Auth->allow('login', 'logout', 'join', 'signup', 'signin', 'reset', 'resend');
 	}
 
 	public function index() {
@@ -24,11 +24,13 @@ class PlayersController extends AppController {
 			// Ignore repeat password validation rule
 			unset($this->Player->validate['repeat_password']);
 
+			$this->request->data['Player']['player_type_id'] = PLAYER_TYPE_SCRUMMASTER;
+
 			if ($this->Player->save($this->request->data)) {
 
 				$name = $this->request->data['Player']['name'];
 				$email = $this->request->data['Player']['email'];
-				$hash = $this->Utils->verificationHash($this->Player->id);
+				$hash = $this->Utils->playerHash($this->Player->id);
 
 				$this->Email->template(
 					'signup', array(
@@ -43,7 +45,7 @@ class PlayersController extends AppController {
 				$this->Player->save(array(
 					'Player' => array(
 						'id' => $this->Player->id,
-						'verification_hash' => $hash
+						'hash' => $hash
 					)
 				));
 
@@ -76,7 +78,7 @@ class PlayersController extends AppController {
 			throw new NotFoundException();
 		}
 
-		$player = $this->Player->findByVerificationHash($hash);
+		$player = $this->Player->findByHash($hash);
 
 		if (!$player) {
 			throw new NotFoundException();
@@ -128,7 +130,7 @@ class PlayersController extends AppController {
 				$scrumMasterName = $this->Auth->user('name');
 				$teamName = $team['Team']['name'];
 				
-				$hash = $this->Utils->verificationHash($this->Player->id);
+				$hash = $this->Utils->playerHash($this->Player->id);
 
 				$this->Email->template(
 					'scrummaster_invitation', array(
@@ -144,7 +146,7 @@ class PlayersController extends AppController {
 				$this->Player->save(array(
 					'Player' => array(
 						'id' => $this->Player->id,
-						'verification_hash' => $hash
+						'hash' => $hash
 					)
 				));
 
@@ -234,6 +236,64 @@ class PlayersController extends AppController {
 			} else {
 				$this->flashError(__('Error while trying to edit your data :('));
 			}
+		}
+	}
+
+	public function reset($hash = null) {
+		$this->layout = 'institutional';
+		$this->set('title_for_layout', 'Reset Password');
+
+		if ($hash !== null) {
+			$player = $this->Player->findByHash($hash);
+			if (!$player) {
+				throw new NotFoundException();
+			}
+			if ($this->request->is('put') || $this->request->is('post')) {
+				if (!$player['Player']['verified_in']) {
+					$this->request->data['Player']['verified_in'] = date('Y-m-d H:i:s');
+				}
+
+				if ($this->Player->save($this->request->data)) {
+					$this->flashSuccess(__('Password changed successfully.'));
+					$player = $this->Player->findById($player['Player']['id']);
+					$this->Auth->login($player['Player']);
+					return $this->redirect($this->Auth->redirectUrl());
+				} else {
+					$this->flashError(__('There are validation errors.'));
+				}
+			} else {
+				$this->request->data = array('Player' => array('id' => $player['Player']['id']));
+			}
+			$this->render('reset_password');
+		} else if ($this->request->is('put') || $this->request->is('post')) {
+			$email = @$this->request->data['Player']['email'];
+			$player = $this->Player->findByEmail($email);
+			if (!$player) {
+				$this->flashError(__('This email address is not registered.'));
+				return;
+			} 
+			$name = $player['Player']['name'];
+			$hash = $this->Utils->playerHash($player['Player']['id']);
+
+			$this->Email->template(
+				'reset', array(
+					'name' => $name,
+					'hash' => $hash
+				)
+			);
+			$this->Email->subject(__('%s, please reset your password or verify your account', $name));
+			$this->Email->send($email);
+			
+			// Update the player record with the hash
+			$this->Player->save(array(
+				'Player' => array(
+					'id' => $player['Player']['id'],
+					'hash' => $hash
+				)
+			));
+
+			$this->flashSuccess(__('An email message was sent to %s containing further instructions.', $email));
+			return $this->redirect('/');
 		}
 	}
 }

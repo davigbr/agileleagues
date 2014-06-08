@@ -38,6 +38,7 @@ class AppModel extends Model {
 	public $uses = array();
 
 	public function _add($data) {
+		$this->create();
 		$saved = $this->save($data);
 		if ($saved === false) {
 			throw new Exception('Could not save ' . $this->name);

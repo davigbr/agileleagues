@@ -31,7 +31,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'id' => $id,
 			'name' => 'Name',
 			'email' => 'email@email.com',
-			'verification_hash' => $hash,
+			'hash' => $hash,
 			'player_type_id' => PLAYER_TYPE_DEVELOPER,
 		));
 		unset($this->utils->Player->validate);
@@ -50,7 +50,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'name' => 'Name',
 			'email' => 'email@email.com',
 			'password' => md5('123456'), 
-			'verification_hash' => $hash,
+			'hash' => $hash,
 			'player_type_id' => PLAYER_TYPE_DEVELOPER,
 		));
 		unset($this->utils->Player->validate);
@@ -68,7 +68,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'id' => $id,
 			'name' => 'Name',
 			'email' => 'email@email.com',
-			'verification_hash' => $hash,
+			'hash' => $hash,
 			'player_type_id' => PLAYER_TYPE_DEVELOPER,
 		));
 		unset($this->utils->Player->validate);
@@ -85,8 +85,7 @@ class PlayersControllerTest extends ControllerTestCase {
 
 		$this->testAction('/players/join/' . $hash, array('method' => 'post', 'data' => $data));
 		$playerAfter = $this->utils->Player->findById($id);
-		$this->assertNull($playerAfter['Player']['verified_in']);
-		$this->assertNotNull($this->controller->flashError);
+		$this->assertNull($playerAfter['Player']['verified_in']);		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testJoinPostSuccess() {
@@ -96,7 +95,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'id' => $id,
 			'name' => 'Name',
 			'email' => 'email@email.com',
-			'verification_hash' => $hash,
+			'hash' => $hash,
 			'player_type_id' => PLAYER_TYPE_DEVELOPER,
 		));
 		unset($this->utils->Player->validate);
@@ -123,7 +122,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'id' => $id,
 			'name' => 'Name',
 			'email' => 'email@email.com',
-			'verification_hash' => $hash,
+			'hash' => $hash,
 			'verified_in' => date('Y-m-d H:i:s'),
 			'player_type_id' => PLAYER_TYPE_DEVELOPER
 		));
@@ -159,7 +158,7 @@ class PlayersControllerTest extends ControllerTestCase {
 		);
 		$this->testAction('/players/invite', array('data' => $data));
 		$player = $this->utils->Player->findByEmail('email@email.com');
-		$this->assertNotEmpty($player['Player']['verification_hash']);
+		$this->assertNotEmpty($player['Player']['hash']);
 		$this->assertNotNull($this->controller->flashSuccess);
 	}
 
@@ -345,7 +344,101 @@ class PlayersControllerTest extends ControllerTestCase {
 		);
 		$this->testAction('/players/signup', array('data' => $data));
 		$player = $this->utils->Player->findByEmail('email@email.com');
-		$this->assertNotEmpty($player['Player']['verification_hash']);
+		$this->assertNotEmpty($player['Player']['hash']);
+		$this->assertEquals(PLAYER_TYPE_SCRUMMASTER, $player['Player']['player_type_id']);
+		$this->assertNotNull($this->controller->flashSuccess);
+	}
+
+	public function testResetGet() {
+		$this->testAction('/players/reset', array('method' => 'get'));
+	}
+
+	public function testResetPostWrongEmail() {
+		$data = array('Player' => array('email' => 'invalid'));
+		$result = $this->testAction('/players/reset', array('result' => 'vars', 'data' => $data));
+		$this->assertNotNull($this->controller->flashError);
+	}
+
+	public function testResetPostSuccess() {
+		$data = array('Player' => array('email' => 'email1@email.com'));
+		$result = $this->testAction('/players/reset', array('result' => 'vars', 'data' => $data));
+		$this->assertNotNull($this->controller->flashSuccess);
+	}
+
+	public function testResetPassingHashPostPlayerNotFound() {
+		$this->setExpectedException('NotFoundException');
+		$result = $this->testAction('/players/reset/someinvalidhash', array('method' => 'get'));
+	}
+
+	public function testResetPassingHashGet() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'hash' => $hash,
+			'verified_in' => date('Y-m-d H:i:s'),
+			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+		$this->testAction('/players/reset/' . $hash, array('method' => 'get'));
+	}
+
+	public function testResetPassingHashPostValidationError() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'hash' => $hash,
+			'verified_in' => date('Y-m-d H:i:s'),
+			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+
+		$data = array(
+			'Player' => array(
+				'id' => $id,
+				'password' => '654321',
+				'repeat_password' => '123456'
+			)
+		);
+
+		$this->testAction('/players/reset/' . $hash, array('method' => 'post', 'data' => $data));
+		$this->assertNotNull($this->controller->flashError);
+	}
+
+
+	public function testResetPassingHashPostSuccess() {
+		$id = 1000;
+		$hash = Security::hash($id, 'sha256', true);
+		$player = array('Player' => array(
+			'id' => $id,
+			'name' => 'Name',
+			'email' => 'email@email.com',
+			'hash' => $hash,
+			'verified_in' => date('Y-m-d H:i:s'),
+			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+		));
+		unset($this->utils->Player->validate);
+		$this->utils->Player->create();
+		$this->utils->Player->save($player);
+
+		$data = array(
+			'Player' => array(
+				'id' => $id,
+				'password' => '123456',
+				'repeat_password' => '123456'
+			)
+		);
+
+		$this->testAction('/players/reset/' . $hash, array('method' => 'post', 'data' => $data));
 		$this->assertNotNull($this->controller->flashSuccess);
 	}
 }

@@ -91,7 +91,7 @@
 				<br/>
 				<br/>
 				<div class="alert alert-warning">
-					<strong>Beware!</strong> This tool is so powerful that your teammates may become adicted.
+					<strong>Beware!</strong> This tool is so powerful that your teammates may become addicted.
 					We recommend you to <a href="<?=$this->Html->url('/players/signup')?>">sign up</a> as soon as possible, otherwise they will hate you forever :)
 				</div>
 

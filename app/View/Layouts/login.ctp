@@ -118,8 +118,8 @@
 				</form>
 				<div class="login-bottom-links">
 					<a class="link" href="<?= $this->Html->url('/players/signup')?>">Sign Up!</a><br/>
-					<a class="link" href="<?= $this->Html->url('/players/recover')?>">Forgot your password?</a><br/>
-					<a class="link" href="<?= $this->Html->url('/players/resend')?>">Resend verification message?</a><br/>
+					<a class="link" href="<?= $this->Html->url('/players/reset')?>">Forgot your password?</a><br/>
+					<a class="link" href="<?= $this->Html->url('/players/reset')?>">Resend verification message?</a><br/>
 					<!-- <br /> -->
 					<!-- <a href="#">Privacy Policy</a> -->
 				</div>
