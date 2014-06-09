@@ -68,6 +68,9 @@ p a {
 p a:hover {
 	color: #09f;
 }
+.login-content a:hover {
+	text-decoration: none;
+}
 a:hover {
 	text-decoration: underline;
 }

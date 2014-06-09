@@ -34,7 +34,7 @@
 				<?= $this->Html->image('home/testing.png', array('style' => 'max-width: 100%', 'class' => 'img-polaroid'))?>
 			</div>
 			<div class="col-sm-4">
-				<h2>Actvities</h2>
+				<h2>Activities</h2>
 				<p>Define some cool activities that your players are going to perform. They will be rewarded after completing them!</p>
 				<?= $this->Html->image('home/activities.png', array('style' => 'max-width: 100%', 'class' => 'img-polaroid'))?>
 			</div>

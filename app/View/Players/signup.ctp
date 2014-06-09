@@ -14,6 +14,10 @@
 						You are going to sign up as a <strong>ScrumMaster</strong>. If you want to join an existing team, you should ask a ScrumMaster to invite you. 
 						Also remember that you can sign up as only one role per email address. 
 					</div>
+					<div class="alert alert-info">
+						The <strong>ScrumMaster</strong> is responsible for managing the gamification program.
+						He/she can create domains, activities, badges, manage teams and invite Developers and Product Owners.
+					</div>
 				</div>
 				<div class="panel-footer">
 					<button type="submit" class="btn btn-lg btn-success">Create my account</button>
