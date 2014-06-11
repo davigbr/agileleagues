@@ -90,8 +90,10 @@ class Log extends AppModel {
 			$this->query('UPDATE log SET reviewed = NOW() WHERE id = ?', array($this->id));
 			$this->query('UPDATE activity SET reported = reported + 1 WHERE id = ?', array($activityId));
 
+			$pairActivity = $log['Log']['player_id_pair'] !== null;
+
 			// Gera experiência para o jogador
-			$this->XpLog->_activityReported($playerId, $activityId);
+			$this->XpLog->_activityReported($playerId, $activityId, $pairActivity);
 
 			// Gera experiência para o ScrumMaster que revisou a atividade
 			$this->XpLog->_activityReviewed($smId, $activityId);

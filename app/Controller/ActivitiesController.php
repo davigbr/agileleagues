@@ -78,6 +78,7 @@ class ActivitiesController extends AppController {
 		));
 		$this->set('activitiesById', $this->Activity->allFromOwnerById($this->scrumMasterId()));
 		$this->set('events', $this->Event->simpleActive($this->scrumMasterId()));
+		$this->set('players', $this->Player->simpleVerifiedFromPlayerTeam($this->Auth->user('id')));
 
 		if ($this->request->is('post')) {
 			$log = $this->request->data;

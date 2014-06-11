@@ -63,9 +63,11 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$result = $this->testAction('/activities/report', array('return' => 'vars', 'method' => 'GET'));
 		$activities = $result['activities'];
 		$events = $result['events'];
+		$players = $result['players'];
 
 		$this->assertEquals(2, count($events));
 		$this->assertEquals(10, count($activities));
+		$this->assertEquals(4, count($players));
 	}
 
 	public function testReportGetNoActivities()  {
@@ -73,9 +75,11 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$result = $this->testAction('/activities/report', array('return' => 'vars', 'method' => 'GET'));
 		$activities = $result['activities'];
 		$events = $result['events'];
+		$players = $result['players'];
 
 		$this->assertEquals(0, count($events));
 		$this->assertEquals(0, count($activities));
+		$this->assertEquals(2, count($players));
 	}
 
 	public function testReportPost() {
@@ -89,7 +93,8 @@ class ActivitiesControllerTest extends ControllerTestCase {
 					'month' => date('m'),
 					'year' => date('Y'),
 				),
-				'description' => $description
+				'description' => $description,
+				'player_id_pair' => DEVELOPER_ID_2
 			),
 			'Event' => array(
 				'id' => '',

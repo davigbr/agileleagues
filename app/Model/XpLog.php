@@ -29,6 +29,7 @@ class XpLog extends AppModel {
 		$this->_add(array(
 			'event_id_completed' => $eventId,
 			'player_id' => $playerId,
+			'created' => date('Y-m-d H:i:s'),
 			'xp' => $xp
 		));
 		$this->_levelUpNotification($playerBefore, $xp);
@@ -40,6 +41,7 @@ class XpLog extends AppModel {
 		$this->_add(array(
 			'event_id_joined' => $eventId,
 			'player_id' => $playerId,
+			'created' => date('Y-m-d H:i:s'),
 			'xp' => $xp
 		));
 		$this->_levelUpNotification($playerBefore, $xp);
@@ -61,6 +63,7 @@ class XpLog extends AppModel {
 			$this->_add(array(
 				'activity_id_reviewed' => $activityId,
 				'player_id' => $smId,
+				'created' => date('Y-m-d H:i:s'),
 				'xp' => $smXp
 			));
 
@@ -72,7 +75,7 @@ class XpLog extends AppModel {
 		}
 	}
 
-	public function _activityReported($playerId, $activityId) {
+	public function _activityReported($playerId, $activityId, $pair) {
 		$activity = $this->Activity->findById($activityId);
 		if (!$activity) {
 			throw new Exception('Activity not found');
@@ -84,9 +87,15 @@ class XpLog extends AppModel {
 		}
 
 		$xp = $activity['Activity']['xp'];
+
+		if ($pair) {
+			$xp *= PAIR_XP_MULTIPLIER;
+		}
+
 		$this->_add(array(
 			'activity_id' => $activityId,
 			'player_id' => $playerId,
+			'created' => date('Y-m-d H:i:s'),
 			'xp' => $xp
 		));
 
@@ -109,6 +118,7 @@ class XpLog extends AppModel {
 			$this->_add(array(
 				'event_task_id_reviewed' => $eventTaskId,
 				'player_id' => $smId,
+				'created' => date('Y-m-d H:i:s'),
 				'xp' => $smXp
 			));
 
@@ -135,6 +145,7 @@ class XpLog extends AppModel {
 		$this->_add(array(
 			'event_task_id' => $eventTaskId,
 			'player_id' => $playerId,
+			'created' => date('Y-m-d H:i:s'),
 			'xp' => $xp
 		));
 

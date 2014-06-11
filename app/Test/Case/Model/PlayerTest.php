@@ -157,17 +157,15 @@ class PlayerTest extends CakeTestCase {
 	}
 
 	public function testSimpleVerifiedFromPlayerTeamAsDeveloper() {
-		$list = $this->utils->Player->simpleVerifiedFromPlayerTeam(DEVELOPER_ID_1);
-		$this->assertEquals(4, count($list));
+		$this->assertEquals(4, count($this->utils->Player->simpleVerifiedFromPlayerTeam(DEVELOPER_ID_1)));
 	}
 
 	public function testSimpleVerifiedFromPlayerTeamAsScrumMaster() {
-		$list = $this->utils->Player->simpleVerifiedFromPlayerTeam(SCRUMMASTER_ID_1);
-		$this->assertEquals(5, count($list));
+		$this->assertEquals(5, count($this->utils->Player->simpleVerifiedFromPlayerTeam(SCRUMMASTER_ID_1)));
 	}
 
 	public function testSimpleVerifiedFromPlayerTeamAsProductOwner() {
-		$list = $this->utils->Player->simpleVerifiedFromPlayerTeam(PRODUCT_OWNER_ID);
-		$this->assertEquals(4, count($list));
+		$this->assertEquals(4, count($this->utils->Player->simpleVerifiedFromPlayerTeam(PRODUCT_OWNER_ID)));
 	}
+
 }

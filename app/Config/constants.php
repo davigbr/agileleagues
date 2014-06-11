@@ -11,6 +11,8 @@ define('EVENT_JOIN_XP', 5);
 
 define('MAX_DEVELOPERS_PER_TEAM', 24);
 
+define('PAIR_XP_MULTIPLIER', 1.2);
+
 function array_clear(&$array) {
 	foreach ($array as $key => $value) {
 		unset($array[$key]);

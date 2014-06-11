@@ -6,8 +6,8 @@ class Activity extends AppModel {
 	
 	public $useTable = 'activity';
 	public $order = array('Activity.domain_id' => 'ASC', 'Activity.name' => 'ASC');
-	public $displayField = 'name';
-
+	public $displayField = 'name_xp';
+	public $virtualFields = array();
 	public $validate = array(
 		'name' => 'notEmpty',
 		'description' => 'notEmpty',
@@ -15,11 +15,16 @@ class Activity extends AppModel {
 		'domain_id' => 'notEmpty'
 	);
 
+	public $hasOne = array('LastWeekLog');
 	public $belongsTo = array(
 		'Domain'
 	);
 
-	public $hasOne = array('LastWeekLog');
+    public function __construct($id = false, $table = null, $ds = null) {
+        parent::__construct($id, $table, $ds);
+        $alias = $this->alias;
+        $this->virtualFields['name_xp'] = "CONCAT({$alias}.name, ' (', {$alias}.xp, ' XP)')";
+	}
 
 	public function allFromOwnerById($playerIdOwner) {
 		return $this->all(array(
