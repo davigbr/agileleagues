@@ -8,7 +8,7 @@
 	    <div class="panel-body">
 		    <p>No activities found :( </p>
 		    <?if ($isScrumMaster): ?>
-				<a href="<? echo $this->Html->url('/activities/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Activity </a>
+				<a href="<?= $this->Html->url('/activities/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Activity </a>
 			<?endif;?>
 	    </div>
     <?else:?>
@@ -18,11 +18,13 @@
 					<th style="text-align: center" title="Domain">D</th>
 					<th>Name</th>
 					<th>XP</th>
+					<th title="<?=__('Required Votes for Acceptance')?>">A. Votes</th>
+					<th title="<?=__('Required Votes for Rejection')?>">R. Votes</th>
 					<th>Description</th>
 					<th>Last Week Logs</th>
 					<?if ($isScrumMaster): ?>
 						<th>
-							<a href="<? echo $this->Html->url('/activities/add'); ?>" class="btn btn-lg btn-success"><i class="glyphicon glyphicon-plus"></i> New </a>
+							<a href="<?= $this->Html->url('/activities/add'); ?>" class="btn btn-lg btn-success"><i class="glyphicon glyphicon-plus"></i> New </a>
 						</th>
 					<?endif;?>
 				</tr>
@@ -35,28 +37,38 @@
 				<?else:?>
 					<? foreach ($activities as $activity) : ?>
 						<tr>
-							<td title="<? echo h($activity['Domain']['name']); ?>" style="width: 35px; text-align: center; background-color: <? echo $activity['Domain']['color']?>; color: white">
-								<i class="<? echo h($activity['Domain']['icon']); ?>"></i>
+							<td title="<?= h($activity['Domain']['name']); ?>" style="width: 35px; text-align: center; background-color: <?= $activity['Domain']['color']?>; color: white">
+								<i class="<?= h($activity['Domain']['icon']); ?>"></i>
 							</td>
 							<td>
 								<?if ($activity['Activity']['new']): ?>
 									<span class="badge badge-danger">NEW</span>
 								<?endif;?>
-								<? echo h($activity['Activity']['name']) ?>
+								<?= h($activity['Activity']['name']) ?>
 							</td>
-							<td><? echo h($activity['Activity']['xp']) ?></td>
-							<td><? echo h($activity['Activity']['description']) ?></td>
+							<td><?= h($activity['Activity']['xp']) ?></td>
+							<td>
+								<? for($i = 0; $i < $activity['Activity']['acceptance_votes']; $i++) { 
+									?><i style="color: green" class="entypo-up"></i><?
+								}?>
+							</td>
+							<td>
+								<? for($i = 0; $i < $activity['Activity']['rejection_votes']; $i++) { 
+									?><i style="color: red" class="entypo-down"></i><?
+								}?>
+							</td>
+							<td><?= h($activity['Activity']['description']) ?></td>
 							<td>
 								<span class="last-week-logs">
-									<? echo $activity['LastWeekLog']['logs']?>
+									<?= $activity['LastWeekLog']['logs']?>
 								</span>
 							</td>
 							<?if ($isScrumMaster): ?>
 								<td>
-									<a href="<? echo $this->Html->url('/activities/edit/' . $activity['Activity']['id']); ?>" class="btn btn-primary btn-sm">
+									<a href="<?= $this->Html->url('/activities/edit/' . $activity['Activity']['id']); ?>" class="btn btn-primary btn-sm">
 										<i class="glyphicon glyphicon-edit"></i>
 									</a>
-									<? echo $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/activities/inactivate/' . $activity['Activity']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this activity?')) ?>
+									<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/activities/inactivate/' . $activity['Activity']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this activity?')) ?>
 								</td>
 							<?endif;?>
 						</tr>

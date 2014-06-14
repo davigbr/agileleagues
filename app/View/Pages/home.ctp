@@ -15,7 +15,7 @@
 		</blockquote>
 		<p>Read more about at <a target="_blank" href="http://www.agilegamification.org/">www.agilegamification.org</a></p>
 		<hr/>
-<div class="row">
+		<div class="row">
 			<div class="col-sm-12">
 				<p>With <strong>Agile Leagues</strong>, you can:</p>
 				<ol>
@@ -78,9 +78,9 @@
 			</div>
 			<div class="panel-body">
 				<?= $this->Bootstrap->create('Player', array('action' => 'signup')); ?>
-				<?= $this->Bootstrap->input('name', array('label' => false, 'placeholder' => 'Full Name', 'class' => 'form-control')); ?>
-				<?= $this->Bootstrap->input('email', array('label' => false, 'placeholder' => 'E-mail', 'class' => 'form-control')); ?>
-				<?= $this->Bootstrap->input('password', array('label' => false, 'placeholder' => 'Password (6-20 chars)', 'maxlength' => 20, 'class' => 'form-control')); ?>
+				<?= $this->Bootstrap->input('name', array('autocomplete' => 'off', 'label' => false, 'placeholder' => 'Full Name', 'class' => 'form-control')); ?>
+				<?= $this->Bootstrap->input('email', array('autocomplete' => 'off', 'label' => false, 'placeholder' => 'E-mail', 'class' => 'form-control')); ?>
+				<?= $this->Bootstrap->input('password', array('autocomplete' => 'off', 'label' => false, 'placeholder' => 'Password (6-20 chars)', 'maxlength' => 20, 'class' => 'form-control')); ?>
 				<button class="btn btn-md btn-block btn-success">Sign Up for Agile Leagues</button>
 				<?= $this->Bootstrap->end();?>
 			</div>

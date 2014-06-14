@@ -12,6 +12,7 @@ class XpLogTest extends CakeTestCase {
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
+		$this->utils->generateLogs2();
 		$this->utils->generateEvents();
 		$this->utils->generateEventTasks();
 		$this->utils->generateEventTaskLogs();
@@ -85,13 +86,13 @@ class XpLogTest extends CakeTestCase {
 
 	public function testActivityReported() {
 		$playerId = DEVELOPER_ID_1;
-		$activity = $this->utils->Activity->findByXp(1000);
-		$activityId = $activity['Activity']['id'];
+		$log = $this->utils->Log->find('first');
+		$logId = $log['Log']['id'];
 
 		$playerBefore = $this->utils->Player->findById($playerId);
 		$countPlayers = 4;
 
-		$this->utils->XpLog->_activityReported($playerId, $activityId, false);
+		$this->utils->XpLog->_activityReported($playerId, $logId);
 
 		$xpLog = $this->utils->XpLog->findByPlayerId($playerId);
 
@@ -109,29 +110,15 @@ class XpLogTest extends CakeTestCase {
 		$this->assertEquals($countPlayers - 1, count ($otherPlayersNotifications));
 	}
 
-	public function testActivityReportedInPair() {
-		$playerId = DEVELOPER_ID_1;
-		$activity = $this->utils->Activity->findByXp(1000);
-		$activityId = $activity['Activity']['id'];
-
-		$playerBefore = $this->utils->Player->findById($playerId);
-		$countPlayers = 4;
-
-		$this->utils->XpLog->_activityReported($playerId, $activityId, true);
-
-		$xpLog = $this->utils->XpLog->findByPlayerId($playerId);
-
-		$this->assertEquals(1000 * PAIR_XP_MULTIPLIER, (int)$xpLog['XpLog']['xp']);
-	}
-
 	public function testActivityReportedUnlockedMissions() {
 		$playerId = DEVELOPER_ID_1;
-		$activity = $this->utils->Activity->findByXp(XP_TO_REACH_LEVEL_10);
-		$activityId = $activity['Activity']['id'];
+
+		$log = $this->utils->Log->findByXp(XP_TO_REACH_LEVEL_10);
+		$logId = $log['Log']['id'];
 
 		$playerBefore = $this->utils->Player->findById($playerId);
 
-		$this->utils->XpLog->_activityReported($playerId, $activityId, false);
+		$this->utils->XpLog->_activityReported($playerId, $logId);
 
 		$xpLog = $this->utils->XpLog->findByPlayerId($playerId);
 
@@ -151,12 +138,12 @@ class XpLogTest extends CakeTestCase {
 
 	public function testActivityReportedUnlockedChallenges() {
 		$playerId = DEVELOPER_ID_1;
-		$activity = $this->utils->Activity->findByXp(XP_TO_REACH_LEVEL_20);
-		$activityId = $activity['Activity']['id'];
+		$log = $this->utils->Log->findByXp(XP_TO_REACH_LEVEL_20);
+		$logId = $log['Log']['id'];
 
 		$playerBefore = $this->utils->Player->findById($playerId);
 
-		$this->utils->XpLog->_activityReported($playerId, $activityId, false);
+		$this->utils->XpLog->_activityReported($playerId, $logId);
 
 		$xpLog = $this->utils->XpLog->findByPlayerId($playerId);
 		$levelUp = $xpLog['Player']['level'] > $playerBefore['Player']['level'];
@@ -175,21 +162,21 @@ class XpLogTest extends CakeTestCase {
 
 	public function testActivityReportedPlayerNotFound() {
 		try {
-			$activity = $this->utils->Activity->find('first');
-			$activityId = $activity['Activity']['id'];
-			$this->utils->XpLog->_activityReported(0, $activityId, false);
+			$log = $this->utils->Log->find('first');
+			$logId = $log['Log']['id'];
+			$this->utils->XpLog->_activityReported(0, $logId);
 			$this->fail();
 		} catch (Exception $ex) {
 			$this->assertEquals('Player not found', $ex->getMessage());
 		}
 	}
 
-	public function testActivityReportedActivityNotFound() {
+	public function testActivityReportedLogNotFound() {
 		try {
-			$this->utils->XpLog->_activityReported(DEVELOPER_ID_1, 0, false);
+			$this->utils->XpLog->_activityReported(DEVELOPER_ID_1, 0);
 			$this->fail();
 		} catch (Exception $ex) {
-			$this->assertEquals('Activity not found', $ex->getMessage());
+			$this->assertEquals('Log not found', $ex->getMessage());
 		}
 	}
 
@@ -218,20 +205,30 @@ class XpLogTest extends CakeTestCase {
 		}
 	}
 
-	public function testActivityReviewed() {
-		$activity = $this->utils->Activity->find('first');
-		$activityId = $activity['Activity']['id'];
-		$this->utils->XpLog->_activityReviewed(SCRUMMASTER_ID_1, $activityId);
-		$xpLog = $this->utils->XpLog->findByActivityIdReviewed($activityId);
-		$this->assertNotEmpty($xpLog);
+	public function testActivityReviewedAccepted() {
+		$log = $this->utils->Log->find('first');
+		$logId = $log['Log']['id'];
+		$this->utils->XpLog->_activityReviewed('accept', DEVELOPER_ID_1, $logId);
+		$xpLog = $this->utils->XpLog->findByLogIdReviewed($logId);
+		$this->assertEquals(floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER), $xpLog['XpLog']['xp']);
+		$this->assertNotNull($xpLog['XpLog']['log_id_reviewed']);
+	}
+
+	public function testActivityReviewedRejected() {
+		$log = $this->utils->Log->find('first');
+		$logId = $log['Log']['id'];
+		$this->utils->XpLog->_activityReviewed('reject', DEVELOPER_ID_1, $logId);
+		$xpLog = $this->utils->XpLog->findByLogIdReviewed($logId);
+		$this->assertEquals(REJECTION_XP_BONUS, $xpLog['XpLog']['xp']);
+		$this->assertNotNull($xpLog['XpLog']['log_id_reviewed']);
 	}
 
 	public function testActivityReviewedNotFound() {
 		try {
-			$this->utils->XpLog->_activityReviewed(SCRUMMASTER_ID_1, 0);
+			$this->utils->XpLog->_activityReviewed('accept', DEVELOPER_ID_1, 0);
 			$this->fail();	
 		} catch (Exception $ex) {
-			$this->assertEquals('Activity not found', $ex->getMessage());
+			$this->assertEquals('Log not found', $ex->getMessage());
 		}
 	}
 

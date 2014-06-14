@@ -17,6 +17,6 @@ from (((`log`
 	join `activity` on((`activity`.`id` = `log`.`activity_id`))) 
 	join `player` on((`player`.`id` = `log`.`player_id`))) 
 	join `domain` on((`domain`.`id` = `activity`.`domain_id`))) 
-where `activity`.inactive = 0
+where `activity`.inactive = 0 AND log.accepted IS NOT NULL
 group by `log`.`activity_id`,`log`.`player_id` 
 order by `log`.`player_id`,`activity`.`domain_id`, `activity`.`name`

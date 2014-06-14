@@ -209,4 +209,18 @@ class Player extends AppModel {
         ));
     }
 
+    public function simpleTeamMates($playerId, $options = array()) {
+        $conditions = array(
+            'Player.id <>' => $playerId,
+            'Player.verified_in IS NOT NULL',
+            'OR' => array(
+                'Player.team_id' => $this->visibleTeams($playerId),
+                'Player.id' => $this->scrumMasterId($playerId)
+            )
+        );
+        return $this->find('list', array_merge(
+            array('conditions' => $conditions), $options
+        ));
+    }
+
 }

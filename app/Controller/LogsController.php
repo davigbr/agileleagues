@@ -12,14 +12,4 @@ class LogsController extends AppController {
 		}
 		return $this->redirect($this->referer());
 	}
-
-	public function review($id) {
-		try {
-			$this->Log->review($id);
-			$this->flashSuccess(__('Activity reviewed successfully!'));
-		} catch (ModelException $ex) {
-			$this->flashError('Error while trying to review this activity log: ' . $ex->getMessage());
-		}
-		return $this->redirect($this->referer());
-	}
 }

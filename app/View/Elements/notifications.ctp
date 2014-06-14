@@ -17,7 +17,6 @@
 			'hideMethod': 'fadeOut'
 		};
 		var notifications = <? echo json_encode($notificationsUnread); ?>;
-		console.log(notifications);
 		for (var i in notifications) {
 			var notification = notifications[i];
 			var type = notification.Notification['type'];

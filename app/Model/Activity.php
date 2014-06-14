@@ -8,17 +8,29 @@ class Activity extends AppModel {
 	public $order = array('Activity.domain_id' => 'ASC', 'Activity.name' => 'ASC');
 	public $displayField = 'name_xp';
 	public $virtualFields = array();
+	public $hasOne = array('LastWeekLog');
+	public $belongsTo = array('Domain');
 	public $validate = array(
 		'name' => 'notEmpty',
 		'description' => 'notEmpty',
 		'xp' => 'notEmpty',
-		'domain_id' => 'notEmpty'
+		'domain_id' => 'notEmpty',
+		'acceptance_votes' => array(
+			'notEmpty',
+			'comparison' => array(
+				'rule' => array('comparison', 'is greater', 0),
+				'message' => 'Should be greater than 0.'
+			)
+		),
+		'rejection_votes' => array(
+			'notEmpty',
+			'comparison' => array(
+				'rule' => array('comparison', 'is greater', 0),
+				'message' => 'Should be greater than 0.'
+			)
+		)
 	);
 
-	public $hasOne = array('LastWeekLog');
-	public $belongsTo = array(
-		'Domain'
-	);
 
     public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);

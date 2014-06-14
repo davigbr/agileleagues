@@ -27,6 +27,7 @@ class TestUtils {
         'EventActivity',
         'Notification',
         'Timeline',
+        'LogVote',
         'Log', 
         'BadgeLog', 
         'BadgeRequisite',
@@ -142,20 +143,20 @@ class TestUtils {
 
     public function generateActivities() {
         $this->Activity->saveMany(array(
-            array('id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 1', 'reported' => 1, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 2', 'reported' => 10, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 3, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 3', 'reported' => 100, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 4, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 4', 'reported' => 1000, 'domain_id' => 1, 'xp' => rand(5, 100)),
-            array('id' => 5, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 5', 'reported' => 10000, 'domain_id' => 2, 'xp' => rand(5, 100)),
-            array('id' => 6, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 6', 'reported' => 100000, 'domain_id' => 2, 'xp' => rand(5, 100)),
-            array('id' => 7, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 7', 'reported' => 1000000, 'domain_id' => 2, 'xp' => rand(5, 100)),
-            array('id' => 8, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 8', 'reported' => 10000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_10),
-            array('id' => 9, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 9', 'reported' => 100000000, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_20),
-            array('id' => 10, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 10', 'reported' => 0, 'domain_id' => 2, 'xp' => 1000),
-            array('id' => 11, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'SM Activity 1', 'reported' => 0, 'domain_id' => 3, 'xp' => 1000),
-            array('id' => 12, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'SM Activity 2', 'reported' => 0, 'domain_id' => 3, 'xp' => 1000),
-            array('id' => 13, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'PO Activity 1', 'reported' => 0, 'domain_id' => 4, 'xp' => 1000),
-            array('id' => 14, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'PO Activity 2', 'reported' => 0, 'domain_id' => 4, 'xp' => 1000),
+            array('id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 1', 'reported' => 1, 'acceptance_votes' => 1, 'rejection_votes' => 2, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 2', 'reported' => 10, 'acceptance_votes' => 2, 'rejection_votes' => 1, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 3, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 3', 'reported' => 100, 'acceptance_votes' => 1, 'rejection_votes' => 2, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 4, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 4', 'reported' => 1000, 'acceptance_votes' => 2, 'rejection_votes' => 1, 'domain_id' => 1, 'xp' => rand(5, 100)),
+            array('id' => 5, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 5', 'reported' => 10000, 'acceptance_votes' => 1, 'rejection_votes' => 2, 'domain_id' => 2, 'xp' => rand(5, 100)),
+            array('id' => 6, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 6', 'reported' => 100000, 'acceptance_votes' => 2, 'rejection_votes' => 1, 'domain_id' => 2, 'xp' => rand(5, 100)),
+            array('id' => 7, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 7', 'reported' => 1000000, 'acceptance_votes' => 1, 'rejection_votes' => 2, 'domain_id' => 2, 'xp' => rand(5, 100)),
+            array('id' => 8, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 8', 'reported' => 10000000, 'acceptance_votes' => 2, 'rejection_votes' => 1, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_10),
+            array('id' => 9, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 9', 'reported' => 100000000, 'acceptance_votes' => 1, 'rejection_votes' => 2, 'domain_id' => 2, 'xp' => XP_TO_REACH_LEVEL_20),
+            array('id' => 10, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'Activity 10', 'reported' => 0, 'acceptance_votes' => 2, 'rejection_votes' => 1, 'domain_id' => 2, 'xp' => 1000),
+            array('id' => 11, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'SM Activity 1', 'reported' => 0, 'acceptance_votes' => 1, 'rejection_votes' => 2, 'domain_id' => 3, 'xp' => 1000),
+            array('id' => 12, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'SM Activity 2', 'reported' => 0, 'acceptance_votes' => 2, 'rejection_votes' => 1, 'domain_id' => 3, 'xp' => 1000),
+            array('id' => 13, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'PO Activity 1', 'reported' => 0, 'acceptance_votes' => 1, 'rejection_votes' => 2, 'domain_id' => 4, 'xp' => 1000),
+            array('id' => 14, 'player_id_owner' => SCRUMMASTER_ID_1, 'name' => 'PO Activity 2', 'reported' => 0, 'acceptance_votes' => 2, 'rejection_votes' => 1, 'domain_id' => 4, 'xp' => 1000),
         ));
     }
 
@@ -201,14 +202,14 @@ class TestUtils {
 
     public function generateNotifications() {
         $this->Notification->saveMany(array(
-            array('id' => 1, 'title' => 'Notification title', 'player_id' => 1, 'type' => 'success', 'read' => 0),
-            array('id' => 2, 'title' => 'Notification title', 'player_id' => 1, 'type' => 'success', 'read' => 0),
-            array('id' => 3, 'title' => 'Notification title', 'player_id' => 2, 'type' => 'success', 'read' => 0),
-            array('id' => 4, 'title' => 'Notification title', 'player_id' => 2, 'type' => 'success', 'read' => 0),
-            array('id' => 5, 'title' => 'Notification title', 'player_id' => 2, 'type' => 'success', 'read' => 1),
-            array('id' => 6, 'title' => 'Notification title', 'player_id' => 2, 'type' => 'success', 'read' => 1),
-            array('id' => 7, 'title' => 'Notification title', 'player_id' => 1, 'type' => 'success', 'read' => 1),
-            array('id' => 8, 'title' => 'Notification title', 'player_id' => 1, 'type' => 'success', 'read' => 1),
+            array('id' => 1, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_1, 'type' => 'success', 'read' => 0),
+            array('id' => 2, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_1, 'type' => 'success', 'read' => 0),
+            array('id' => 3, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_2, 'type' => 'success', 'read' => 0),
+            array('id' => 4, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_2, 'type' => 'success', 'read' => 0),
+            array('id' => 5, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_2, 'type' => 'success', 'read' => 1),
+            array('id' => 6, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_2, 'type' => 'success', 'read' => 1),
+            array('id' => 7, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_1, 'type' => 'success', 'read' => 1),
+            array('id' => 8, 'title' => 'Notification title', 'player_id' => DEVELOPER_ID_1, 'type' => 'success', 'read' => 1),
         ));
     }
 
@@ -216,14 +217,14 @@ class TestUtils {
 
     public function generateBadgeLogs() {
         $this->BadgeLog->saveMany(array(
-            array('badge_id' => 1, 'player_id' => 1),
-            array('badge_id' => 2, 'player_id' => 1),
-            array('badge_id' => 3, 'player_id' => 1),
-            array('badge_id' => 4, 'player_id' => 1),
-            array('badge_id' => 1, 'player_id' => 2),
-            array('badge_id' => 2, 'player_id' => 2),
-            array('badge_id' => 3, 'player_id' => 2),
-            array('badge_id' => 4, 'player_id' => 2),
+            array('badge_id' => 1, 'player_id' => DEVELOPER_ID_1),
+            array('badge_id' => 2, 'player_id' => DEVELOPER_ID_1),
+            array('badge_id' => 3, 'player_id' => DEVELOPER_ID_1),
+            array('badge_id' => 4, 'player_id' => DEVELOPER_ID_1),
+            array('badge_id' => 1, 'player_id' => DEVELOPER_ID_2),
+            array('badge_id' => 2, 'player_id' => DEVELOPER_ID_2),
+            array('badge_id' => 3, 'player_id' => DEVELOPER_ID_2),
+            array('badge_id' => 4, 'player_id' => DEVELOPER_ID_2),
         ));
     }
 
@@ -239,28 +240,36 @@ class TestUtils {
         $lastMonth = $lastMonth->format('Y-m-d');
 
         $this->Log->saveMany(array(
-            array('activity_id' => 1, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 2, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 3, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
-            array('activity_id' => 4, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
-            array('activity_id' => 5, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 6, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 7, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
-            array('activity_id' => 8, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
+            array('activity_id' => 1, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('activity_id' => 2, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('activity_id' => 3, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
+            array('activity_id' => 4, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
+            array('activity_id' => 5, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('activity_id' => 6, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('activity_id' => 7, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
+            array('activity_id' => 8, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
         ), array('validate' => false));
         $result = $this->Log->query('UPDATE log SET reviewed = NOW()');
     }
 
+    public function generateLogs2() {
+        $this->Log->saveMany(array(
+            array('activity_id' => 8, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'xp' => XP_TO_REACH_LEVEL_10, 'acquired' => date('Y-m-d H:i:s')),
+            array('activity_id' => 9, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'xp' => XP_TO_REACH_LEVEL_20, 'acquired' => date('Y-m-d H:i:s')),
+        ), array('validate' => false));
+        $result = $this->Log->query('UPDATE log SET reviewed = NOW()');     
+    }
+
     public function generateLogsNotReviewed() {
         $this->Log->saveMany(array(
-            array('activity_id' => 1, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
-            array('activity_id' => 2, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
-            array('activity_id' => 3, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
-            array('activity_id' => 4, 'player_id' => 1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
-            array('activity_id' => 5, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
-            array('activity_id' => 6, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
-            array('activity_id' => 7, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
-            array('activity_id' => 8, 'player_id' => 2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 1, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 2, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 3, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 4, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 5, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 6, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 7, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
+            array('activity_id' => 8, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => '2014-01-01'),
         ), array('validate' => false));
     }
 

@@ -15,7 +15,7 @@ class XpLog extends AppModel {
 		'xp' => 'notEmpty'
 	);
 
-	public $uses = array('Notification', 'Activity', 'EventTask', 'Event');
+	public $uses = array('Notification', 'Log', 'EventTask', 'Event');
 
 	public function _eventCompleted($playerId, $eventId) {
 		$playerBefore = $this->Player->findById($playerId);
@@ -47,38 +47,47 @@ class XpLog extends AppModel {
 		$this->_levelUpNotification($playerBefore, $xp);
 	}
 
-	public function _activityReviewed($smId, $activityId) {
-		$developers = $this->Player->developersCount();
+	public function _activityReviewed($action, $playerIdReviewer, $logId) {
+		$log = $this->Log->findById($logId);
+		if (!$log) {
+			throw new Exception('Log not found');
+		}
+		
+		if ($action === 'accept') {
+			$xp = floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER);
+		} else if ($action === 'reject') {
+			$xp = REJECTION_XP_BONUS;
+		}
+		
+		// Minimum of 1XP point
+		if ($xp == 0) $xp = 1;
 
-		if ($developers > 0) {
-			$activity = $this->Activity->findById($activityId);
-			if (!$activity) {
-				throw new Exception('Activity not found');
-			}
+		$this->_add(array(
+			'log_id_reviewed' => $logId,
+			'player_id' => $playerIdReviewer,
+			'created' => date('Y-m-d H:i:s'),
+			'xp' => $xp
+		));
 
-			$smXp = floor($activity['Activity']['xp'] / $developers);
-			// Ganha no mínimo 1 ponto de experiência
-			if ($smXp == 0) $smXp = 1;
-
-			$this->_add(array(
-				'activity_id_reviewed' => $activityId,
-				'player_id' => $smId,
-				'created' => date('Y-m-d H:i:s'),
-				'xp' => $smXp
-			));
-
+		if ($action === 'accept') {
 			$this->Notification->_success(
-				$smId,
-				__('Activity Reviewed'),
-				__('You reviewed an activity and earned %s XP.', $smXp)
+				$playerIdReviewer,
+				__('Activity Reviewed - Accepted'),
+				__('The activity you reviewed was accepted and you earned %s XP.', $xp)
+			);
+		} else {
+			$this->Notification->_success(
+				$playerIdReviewer,
+				__('Activity Reviewed - Rejected'),
+				__('The activity you reviewed was rejected and you earned %s XP.', $xp)
 			);
 		}
 	}
 
-	public function _activityReported($playerId, $activityId, $pair) {
-		$activity = $this->Activity->findById($activityId);
-		if (!$activity) {
-			throw new Exception('Activity not found');
+	public function _activityReported($playerId, $logId) {
+		$log = $this->Log->findById($logId);
+		if (!$log) {
+			throw new Exception('Log not found');
 		}
 
 		$playerBefore = $this->Player->findById($playerId);
@@ -86,14 +95,10 @@ class XpLog extends AppModel {
 			throw new Exception('Player not found');
 		}
 
-		$xp = $activity['Activity']['xp'];
-
-		if ($pair) {
-			$xp *= PAIR_XP_MULTIPLIER;
-		}
+		$xp = $log['Log']['xp'];
 
 		$this->_add(array(
-			'activity_id' => $activityId,
+			'log_id' => $logId,
 			'player_id' => $playerId,
 			'created' => date('Y-m-d H:i:s'),
 			'xp' => $xp

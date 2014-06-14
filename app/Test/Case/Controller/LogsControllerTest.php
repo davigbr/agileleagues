@@ -26,17 +26,4 @@ class LogsControllerTest extends ControllerTestCase {
 	public function testDeleteInvalid() {
 		$this->testAction('/logs/delete/0');
 	}
-
-	public function testReview() {
-		$log = $this->utils->Log->find('first', array('conditions' => array('Log.reviewed IS NULL')));
-		$logId = $log['Log']['id'];
-		$this->testAction('/logs/review/' . $logId);
-		$log = $this->utils->Log->findById($logId);
-		$this->assertTrue($log['Log']['reviewed'] !== null);
-	}
-
-	public function testReviewError() {
-		$this->testAction('/logs/review/0');
-		$this->assertNotNull($this->controller->flashError);
-	}
 }

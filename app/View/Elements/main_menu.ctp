@@ -58,25 +58,24 @@
 					</a>
 				</li>
 				<li data-action="report"><a href="<?= $this->Html->url('/activities/report'); ?>"><i class="entypo-doc"></i><span>Report Activity</span></a></li>
-				<?if ($isScrumMaster): ?>
-					<li data-action="notReviewed">
-						<a href="<?= $this->Html->url('/activities/notReviewed'); ?>">
-							<i class="entypo-help"></i>
-							<span>Activities Not Reviewed</span>
-							<?if($activitiesNotReviewedCount > 0): ?>
-								<span class="badge badge-danger"><?= $activitiesNotReviewedCount?></span>
+				<?if (!$isScrumMaster): ?>
+					<li data-action="team">
+						<a href="<?= $this->Html->url('/activities/team'); ?>">
+							<i class="entypo-users"></i>
+							<span>Team Pending Activities</span>
+							<?if($teamPendingActivities > 0): ?>
+								<span class="badge badge-danger"><?= $teamPendingActivities?></span>
 							<?endif;?>
 						</a>
 					</li>
-				<?elseif ($isDeveloper): ?>
 					<li data-action="calendar">
 						<a href="<?= $this->Html->url('/activities/calendar'); ?>">
 							<i class="entypo-calendar"></i><span>Calendar</span>
 						</a>
 					</li>
-					<li data-action="myreviewed"><a href="<?= $this->Html->url('/activities/myreviewed'); ?>"><i class="entypo-check"></i><span>My Reviewed Activities</span></a></li>
-					<li data-action="mypending">
-						<a href="<?= $this->Html->url('/activities/mypending'); ?>">
+					<li data-action="myAccepted"><a href="<?= $this->Html->url('/activities/myAccepted'); ?>"><i class="entypo-check"></i><span>My Accepted Activities</span></a></li>
+					<li data-action="myPending">
+						<a href="<?= $this->Html->url('/activities/myPending'); ?>">
 							<i class="entypo-clipboard"></i>
 							<span>My Pending Activities </span>
 							<?if($myPendingActivitiesCount > 0): ?>

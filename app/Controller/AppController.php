@@ -51,6 +51,7 @@ class AppController extends Controller {
 		'EventCompleteLog',
 		'EventType',
 		'Log', 
+		'LogVote',
 		'Notification',
 		'Player', 
 		'PlayerActivityCoins',
@@ -92,6 +93,7 @@ class AppController extends Controller {
 		
 		if ($this->Auth->user()) {
 			$playerId = $this->Auth->user('id');
+
 			$this->AccessLog->save(array(
 				'plugin' => $this->request->plugin,
 				'controller' => $this->request->controller,
@@ -117,6 +119,7 @@ class AppController extends Controller {
 			$this->set('myPendingActivitiesCount', $this->Log->countPendingFromPlayer($playerId));
 			$this->set('pendingTasksCount', $this->EventTaskLog->countPendingFromPlayer($playerId));
 			$this->set('activitiesNotReviewedCount', $this->Log->countNotReviewed());
+			$this->set('teamPendingActivities', $this->Log->countPendingFromTeamNotFromPlayer($playerId));
 			$this->set('eventTasksNotReviewedCount', $this->EventTaskLog->countNotReviewed());
 
 			$this->set('allDomains', $this->Domain->allFromOwner($this->scrumMasterId()));	

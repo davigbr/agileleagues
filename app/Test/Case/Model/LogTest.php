@@ -40,10 +40,10 @@ class LogTest extends CakeTestCase {
 		$this->assertEquals($activity['Activity']['xp'], $log['Log']['xp']);
 	}
 
-	public function testReviewedIncrementedActivityReportedCounter() {
+	public function testReviewedAcceptIncrementedActivityReportedCounter() {
 		$log = $this->utils->Log->find('first', array('conditions' => 'Log.reviewed IS NULL'));
 		$this->assertNotEmpty($log);
-		$this->utils->Log->review($log['Log']['id']);
+		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_2, 'accept');
 		$activity = $this->utils->Activity->findById($log['Log']['activity_id']);
 
 		$this->assertEquals($activity['Activity']['reported'], $log['Activity']['reported'] + 1);
@@ -52,7 +52,7 @@ class LogTest extends CakeTestCase {
 	public function testWhenReviewedGeneratedXpLogToPlayer() {
 		$log = $this->utils->Log->find('first', array('conditions' => 'Log.reviewed IS NULL'));
 		$this->assertNotEmpty($log);
-		$this->utils->Log->review($log['Log']['id']);
+		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_2, 'accept');
 
 		$xpLog = $this->utils->XpLog->findByPlayerIdAndActivityId(
 			$log['Log']['player_id'], 
@@ -61,19 +61,26 @@ class LogTest extends CakeTestCase {
 		$this->assertNotNull($xpLog);
 	}
 
-	public function testWhenReviewedGeneratedXpLogToScrumMaster() {
-		$log = $this->utils->Log->find('first', array('conditions' => 'Log.reviewed IS NULL'));
+	public function testReviewAcceptShouldGenerateXpLogToReviewers() {
+		$log = $this->utils->Log->find('first', array('conditions' => array(
+			'Log.reviewed IS NULL',
+			'Log.player_id' => DEVELOPER_ID_1
+		)));
 		$this->assertNotEmpty($log);
-		$this->utils->Log->review($log['Log']['id']);
+		$this->utils->LogVote->save(array(
+			'log_id' => $log['Log']['id'],
+			'vote' => 1,
+			'player_id' => DEVELOPER_ID_2
+		));
 
-		$xpLog = $this->utils->XpLog->findByPlayerIdAndActivityIdReviewed(
-			SCRUMMASTER_ID_1, 
-			$log['Log']['activity_id']
+		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_2, 'accept');
+
+		$xpLog = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(
+			DEVELOPER_ID_2, 
+			$log['Log']['id']
 		);
 
-		$developersCount = $this->utils->Player->developersCount(SCRUMMASTER_ID_1);
-
-		$expectedXp = floor($log['Activity']['xp'] / $developersCount);
+		$expectedXp = floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER);
 		$this->assertEquals($expectedXp, $xpLog['XpLog']['xp']);
 	}
 
@@ -142,17 +149,28 @@ class LogTest extends CakeTestCase {
 		$this->assertEquals(4, count($logs));
 	}
 
-	public function testReviewWithoutId() {
-		$log = $this->utils->Log->findByReviewed(null);
-		$this->assertNull($log['Log']['reviewed']);
-		$this->utils->Log->review();
-		$log = $this->utils->Log->read();
-		$this->assertNotNull($log['Log']['reviewed']);
+	public function testCountNotReviewed() {
+		$count = $this->utils->Log->countNotReviewed();
+		$this->assertEquals(8, $count);
 	}
+
+	public function testCountPendingFromPlayer() {
+		$count = $this->utils->Log->countPendingFromPlayer(1);
+		$this->assertEquals(4, $count);
+	}
+
+	public function testCountPendingFromTeamNotFromPlayer() {
+		$this->assertEquals(4, $this->utils->Log->countPendingFromTeamNotFromPlayer(DEVELOPER_ID_1));
+	}
+
+	public function testAllPendingFromTeamNotFromPlayer() {
+		$this->assertEquals(4, count($this->utils->Log->allPendingFromTeamNotFromPlayer(DEVELOPER_ID_1)));
+	}
+
 
 	public function testReviewNotExists() {
 		try {
-			$this->assertEquals(false, $this->utils->Log->review(1000));
+			$this->assertEquals(false, $this->utils->Log->_review(1000, 0, 'accept'));
 			$this->fail();
 		} catch (Exception $ex) {
 			$this->assertEquals('Log not found', $ex->getMessage());
@@ -163,19 +181,9 @@ class LogTest extends CakeTestCase {
 		$log = $this->utils->Log->findByReviewed(null);
 		$this->assertNull($log['Log']['reviewed']);
 		$id = $log['Log']['id'];
-		$this->utils->Log->review($id);
+		$this->utils->Log->_review($id, DEVELOPER_ID_2, 'accept');
 		$log = $this->utils->Log->read();
 		$this->assertNotNull($log['Log']['reviewed']);
-	}
-
-	public function testCountNotReviewed() {
-		$count = $this->utils->Log->countNotReviewed();
-		$this->assertEquals(8, $count);
-	}
-
-	public function testCountPendingFromPlayer() {
-		$count = $this->utils->Log->countPendingFromPlayer(1);
-		$this->assertEquals(4, $count);
 	}
 
 	public function testReviewFirstTimeActivity() {
@@ -195,7 +203,7 @@ class LogTest extends CakeTestCase {
             'acquired' => date('Y-m-d')
         ));
 
-        $this->utils->Log->review($this->utils->Log->id);
+        $this->utils->Log->_review($this->utils->Log->id, DEVELOPER_ID_2, 'accept');
         $notifications = $this->utils->Notification->find('all', array(
         	'conditions' => array(
         		'Notification.title' => 'First Time Completion'
@@ -216,7 +224,7 @@ class LogTest extends CakeTestCase {
             'acquired' => date('Y-m-d')
         ));
 
-        $this->utils->Log->review($this->utils->Log->id);
+        $this->utils->Log->_review($this->utils->Log->id, DEVELOPER_ID_2, 'accept');
         $notifications = $this->utils->Notification->find('all', array(
         	'conditions' => array(
         		'Notification.title LIKE' => '%first%'

@@ -32,7 +32,7 @@ class ActivitiesController extends AppController {
 		return $this->redirect('/activities');
 	}
 
-	public function myreviewed() {
+	public function myAccepted() {
 		$playerId = (int)$this->Auth->user('id');
 		$logs = $this->PlayerActivityCoins->allFromPlayer($playerId);
 		$this->set('logs', $logs);
@@ -48,7 +48,7 @@ class ActivitiesController extends AppController {
 		$this->set('player', $this->Player->findById($playerId));
 	}
 
-	public function mypending() {
+	public function myPending() {
 		$playerId = (int)$this->Auth->user('id');
 		$logs = $this->Log->allPendingFromPlayer($playerId);
 		$this->set('logs', $logs);
@@ -62,11 +62,33 @@ class ActivitiesController extends AppController {
 		$this->set('player', $this->Player->findById($playerId));
 	}
 
-	public function notReviewed() {
-		if (!$this->isScrumMaster) {
-			return $this->redirect('/activities');
+	public function team() {
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$logVotes = array();
+			foreach (@$this->request->data['Log'] as $id => $log) {
+				$acceptanceComment = @$log['acceptance_comment'];
+				$rejectionComment = @$log['rejection_comment'];
+				$comment = $acceptanceComment? $acceptanceComment : $rejectionComment;
+
+				if ($comment) {
+					$vote = $acceptanceComment? +1 : -1;
+					$logVotes[] = array('LogVote' => array(
+						'vote' => $vote,
+						'comment' => $comment,
+						'player_id' => (int)$this->Auth->user('id'),
+						'log_id' => $id
+					));
+				}
+			}
+			if (!empty($logVotes)){
+				$this->LogVote->saveVotes($logVotes);
+				$this->flashSuccess(__('Activities reviewed successfully!'));
+			}
+			return $this->redirect('/activities/team');
 		}
-		$this->set('logs', $this->Log->allNotReviewed());
+		
+		$logs = $this->Log->allPendingFromTeamNotFromPlayer($this->Auth->user('id'));
+		$this->set('logs', $logs);
 	}
 
 	public function report($activityId = null) {
@@ -78,7 +100,7 @@ class ActivitiesController extends AppController {
 		));
 		$this->set('activitiesById', $this->Activity->allFromOwnerById($this->scrumMasterId()));
 		$this->set('events', $this->Event->simpleActive($this->scrumMasterId()));
-		$this->set('players', $this->Player->simpleVerifiedFromPlayerTeam($this->Auth->user('id')));
+		$this->set('players', $this->Player->simpleTeamMates($this->Auth->user('id')));
 
 		if ($this->request->is('post')) {
 			$log = $this->request->data;
@@ -112,7 +134,6 @@ class ActivitiesController extends AppController {
 		$this->set('domains', $this->Domain->simpleFromOwner($this->scrumMasterId()));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
-            
             $this->request->data['Activity']['player_id_owner'] = $this->Auth->user('id');
 
 			if ($this->Activity->save($this->request->data)) {

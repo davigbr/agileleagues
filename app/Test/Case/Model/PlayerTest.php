@@ -156,16 +156,29 @@ class PlayerTest extends CakeTestCase {
 		$this->assertEquals(false, $this->utils->Player->repeatPasswordRule());
 	}
 
+	public function testSimpleTeamMatesTeamAsDeveloper() {
+		$this->assertEquals(3, count($this->utils->Player->simpleTeamMates(DEVELOPER_ID_1)));
+	}
+
+	public function testSimpleTeamMatesAsScrumMaster() {
+		$this->assertEquals(4, count($this->utils->Player->simpleTeamMates(SCRUMMASTER_ID_1)));
+	}
+
+	public function testSimpleTeamMatesAsProductOwner() {
+		$this->assertEquals(3, count($this->utils->Player->simpleTeamMates(PRODUCT_OWNER_ID)));
+	}
+
 	public function testSimpleVerifiedFromPlayerTeamAsDeveloper() {
 		$this->assertEquals(4, count($this->utils->Player->simpleVerifiedFromPlayerTeam(DEVELOPER_ID_1)));
 	}
 
-	public function testSimpleVerifiedFromPlayerTeamAsScrumMaster() {
+	public function testSimpleVerifiedFromPlayerTeamScrumMaster() {
 		$this->assertEquals(5, count($this->utils->Player->simpleVerifiedFromPlayerTeam(SCRUMMASTER_ID_1)));
 	}
 
-	public function testSimpleVerifiedFromPlayerTeamAsProductOwner() {
+	public function testSimpleVerifiedFromPlayerTeamProductOwner() {
 		$this->assertEquals(4, count($this->utils->Player->simpleVerifiedFromPlayerTeam(PRODUCT_OWNER_ID)));
 	}
+
 
 }

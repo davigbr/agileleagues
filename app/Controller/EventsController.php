@@ -182,7 +182,7 @@ class EventsController extends AppController {
 				if ($event['Event']['event_type_id'] == EVENT_TYPE_MISSION) {
 					$this->flashSuccess(__('Mission joined! Hell yeah!'));
 				} else {
-					$this->flashSuccess(__('Challenge accepted! \m/'));
+					$this->flashSuccess(__('Challenge reviewed! \m/'));
 				}
 			}
 		}

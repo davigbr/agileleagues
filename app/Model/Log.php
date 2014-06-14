@@ -24,15 +24,25 @@ class Log extends AppModel {
 	);
 
 	public $belongsTo = array(
-		'Activity', 'Player', 'Domain', 'Event'
+		'Activity', 'Player', 'Domain', 'Event',
+		'PairedPlayer' => array(
+			'className' => 'Player',
+			'foreignKey' => 'player_id_pair'
+		)
 	);
+
+	public $hasMany = array('LogVote');
 
 	public $uses = array('XpLog', 'Notification');
 
 	public function beforeInsert($options = array()) {
 		$activity = $this->Activity->findById($this->data['Log']['activity_id']);
 		$this->data['Log']['domain_id'] = $activity['Activity']['domain_id'];
-		$this->data['Log']['xp'] = $activity['Activity']['xp'];
+		$xp = $activity['Activity']['xp'];
+		if (isset($this->data['Log']['player_id_pair'])) {
+			$xp *= PAIR_XP_MULTIPLIER;
+		}
+		$this->data['Log']['xp'] = (int)$xp;
 		return true;
 	}
 
@@ -59,58 +69,72 @@ class Log extends AppModel {
 		return true;
 	}
 
-	/**
-	 * Update an activity as reviewed
-	 */	
-	public function review($id = null) {
-		$this->begin();
-		try {
-			if ($id) {
-				$this->id = $id;
+	public function _review($id, $playerIdReviewer, $action) {
+		if (!in_array($action, array('accept', 'reject'))) {
+			throw new ModelException('Invalid action');
+		}
+		$log = $this->find('first', array(
+			'conditions' => array(
+				'Log.id' => $id
+			), 
+			'contain' => array(
+				'Activity',
+				'LogVote',
+				'Player'
+			)
+		));
+		if (!$log) {
+			throw new ModelException('Log not found');
+		}
+
+		$logId = $log['Log']['id'];
+		$activityId = $log['Activity']['id'];
+		$activityName = $log['Activity']['name'];
+		$playerId = $log['Player']['id'];
+		$playerName = $log['Player']['name'];
+
+		// Verifica se esta atividade já foi logada (e revisada)
+		$logged = $this->find('count', array(
+			'conditions'=> array(
+				'Log.activity_id' => $activityId,
+				'Log.reviewed IS NOT NULL'
+			)
+		));
+
+		$logUpdate = array();
+		$logUpdate['id'] = $log['Log']['id'];
+		$logUpdate['reviewed'] = date('Y-m-d H:i:s');
+
+		if ($action === 'accept') {	
+			$logUpdate['accepted'] = date('Y-m-d H:i:s');
+		} else {
+			$logUpdate['rejected'] = date('Y-m-d H:i:s');
+		}
+		if (!$this->save($logUpdate)) {
+			throw new ModelException('Could not update log');
+		}
+
+		$this->query('UPDATE activity SET reported = reported + 1 WHERE id = ?', array($activityId));
+
+		// Gera experiência para o jogador
+		$this->XpLog->_activityReported($playerId, $logId);
+
+		// Generate XP for all players that accepted or rejected this activity
+		// Search all players that accepted or reject
+		foreach ($log['LogVote'] as $logVote) {
+			if (($action === 'accept' && $logVote['vote'] == 1) || 
+				($action === 'reject' && $logVote['vote'] == -1)) {
+				$this->XpLog->_activityReviewed($action, $playerIdReviewer, $logId);
 			}
-			$log = $this->findById($this->id);
-			if (!$log) {
-				throw new ModelException('Log not found');
-			}
-			
-			$activityId = $log['Log']['activity_id'];
-			$activityName = $this->Activity->field('name', array('Activity.id' => $activityId));
-			$playerId = $log['Log']['player_id'];
-			$playerName = $this->Player->field('name', array('Player.id' => $playerId));
-			$smId = $this->Player->scrumMasterId($playerId);
+		}
 
-			// Verifica se esta atividade já foi logada (e revisada)
-			$logged = $this->find('count', array(
-				'conditions'=> array(
-					'Log.activity_id' => $activityId,
-					'Log.reviewed IS NOT NULL'
-				)
-			));
-
-			$this->query('UPDATE log SET reviewed = NOW() WHERE id = ?', array($this->id));
-			$this->query('UPDATE activity SET reported = reported + 1 WHERE id = ?', array($activityId));
-
-			$pairActivity = $log['Log']['player_id_pair'] !== null;
-
-			// Gera experiência para o jogador
-			$this->XpLog->_activityReported($playerId, $activityId, $pairActivity);
-
-			// Gera experiência para o ScrumMaster que revisou a atividade
-			$this->XpLog->_activityReviewed($smId, $activityId);
-
-			// Se foi a primeira vez que esta atividade foi logada, gera uma notificação
-			if (!$logged) {
-				$this->Notification->_broadcast(
-					$playerId,
-					__('First Time Completion'), 
-					__('The %s activity was completed for the first time in this game. Congratulations, %s!', $activityName, $playerName)
-				);
-			}
-
-			$this->commit();
-		} catch (ModelException $ex) {
-			$this->rollback();
-			throw $ex;
+		// Se foi a primeira vez que esta atividade foi logada, gera uma notificação
+		if (!$logged) {
+			$this->Notification->_broadcast(
+				$playerId,
+				__('First Time Completion'), 
+				__('The %s activity was completed for the first time in this game. Congratulations, %s!', $activityName, $playerName)
+			);
 		}
 	}
 
@@ -177,10 +201,57 @@ class Log extends AppModel {
 
 	public function countPendingFromPlayer($playerId) {
 		return $this->find('count', array(
-			'conditions' => array('Log.player_id' => $playerId, 'Log.reviewed IS NULL'),
-			'order' => array('Log.creation' => 'DESC')
+			'conditions' => array('Log.player_id' => $playerId, 'Log.reviewed IS NULL')
 		));
 	}
+
+	public function countPendingFromTeam($teamId) {
+		return $this->find('count', array(
+			'conditions' => array('Player.team_id' => $teamId, 'Log.reviewed IS NULL')
+		));
+	}
+
+	public function countPendingFromTeamNotFromPlayer($playerId) {
+		$player = $this->Player->findById($playerId);
+		if (!$player || !$player['Player']['team_id']) {
+			return 0;
+		}
+		
+		return $this->find('count', array(
+			'conditions' => array(
+				'Player.team_id' => $player['Player']['team_id'], 
+				'Log.player_id <>' => $playerId,
+				'Log.reviewed IS NULL'
+			)
+		));
+	}
+
+	public function allPendingFromTeamNotFromPlayer($playerId, $limit = 50) {
+		$player = $this->Player->findById($playerId);
+		if (!$player || !$player['Player']['team_id']) {
+			return array();
+		}
+		
+		return $this->find('all', array(
+			'conditions' => array(
+				'Player.team_id' => $player['Player']['team_id'], 
+				'Log.player_id <>' => $playerId,
+				'Log.reviewed IS NULL'
+			),
+			'contain' => array(
+				'Domain',
+				'Player',
+				'PairedPlayer',
+				'Activity',
+				'LogVote' => array(
+					'conditions' => array('LogVote.player_id' => $playerId)
+				)
+			),
+			'limit' => $limit,
+			'order' => array('Log.creation' => 'ASC')
+		));
+	}
+
 
 	public function count($playerIdOwner) {
 		return $this->find('count', array(

@@ -67,7 +67,7 @@ class ActivitiesControllerTest extends ControllerTestCase {
 
 		$this->assertEquals(2, count($events));
 		$this->assertEquals(10, count($activities));
-		$this->assertEquals(4, count($players));
+		$this->assertEquals(3, count($players));
 	}
 
 	public function testReportGetNoActivities()  {
@@ -79,7 +79,7 @@ class ActivitiesControllerTest extends ControllerTestCase {
 
 		$this->assertEquals(0, count($events));
 		$this->assertEquals(0, count($activities));
-		$this->assertEquals(2, count($players));
+		$this->assertEquals(1, count($players));
 	}
 
 	public function testReportPost() {
@@ -132,19 +132,6 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->assertEquals(8, count($result['calendarLogs']));
 	}
 
-	public function testNotReviewedNotScrumMaster() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
-		$result = $this->testAction('/activities/notReviewed', array('return' => 'vars'));
-		$this->assertTrue(!isset($result['logs']));
-	}
-
-	public function testNotReviewed() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
-		$result = $this->testAction('/activities/notReviewed', array('return' => 'vars'));
-		$logs = $result['logs'];
-		$this->assertTrue(!empty($logs));
-	}
-
 	public function testAddNotScrumMaster() {
 		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);		
 		$this->setExpectedException('ForbiddenException');
@@ -164,7 +151,9 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$data = array(
 			'Activity' => array(
 				'id' => $id,
-				'name' => $name
+				'name' => $name,
+				'acceptance_votes' => '1',
+				'rejection_votes' => '1'
 			)
 		);
 		$this->testAction("/activities/edit/$id", array('return' => 'vars', 'data' => $data));
@@ -197,13 +186,14 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$data = array(
 			'Activity' => array(
 				'name' => $name,
-				'code' => 123,
-				'domain_id' => 1,
-				'description' => 'blablabla'
+				'domain_id' => '1',
+				'description' => 'blablabla',
+				'acceptance_votes' => '1',
+				'rejection_votes' => '1'
 			)
 		);
 		$this->testAction('/activities/add/', array('return' => 'vars', 'data' => $data));
-		$activity = $this->utils->Activity->find('first', array('order'=> 'Activity.id DESC'));
+		$activity = $this->utils->Activity->findByName($name);
 		$this->assertEquals($activity['Activity']['player_id_owner'], SCRUMMASTER_ID_1);
 	}
 
@@ -213,13 +203,37 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$data = array(
 			'Activity' => array(
 				'name' => 'some name',
-				'code' => 123,
-				'domain_id' => 1,
-				'description' => ''
+				'domain_id' => '1',
+				'description' => '',
+				'acceptance_votes' => '0',
+				'rejection_votes' => '0'
 			)
 		);
 		$this->testAction('/activities/add/', array('return' => 'vars', 'data' => $data));
 		$this->assertNotNull($this->controller->flashError);
+	}
+
+	public function testTeamGet() {
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);		
+		$result = $this->testAction('/activities/team/', array('return' => 'vars', 'method' => 'get'));
+		$this->assertNotEmpty($result['logs']);
+	}
+
+	public function testTeamPost() {
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);		
+		$logs = $this->utils->Log->find('all', array('conditions' => array('Log.reviewed IS NULL')));
+		$data = array('Log' => array());
+		foreach ($logs as $log) {
+			$acceptance = $log['Log']['id'] % 2;
+			$comment = 'some very very very long comment';
+			if ($acceptance) {
+				$data['Log'][$log['Log']['id']]['acceptance_comment'] = $comment;
+			} else {
+				$data['Log'][$log['Log']['id']]['rejection_comment'] = $comment;
+			}
+		}
+		$this->testAction('/activities/team/', array('return' => 'vars', 'data' => $data));
+		$this->assertNotNull($this->controller->flashSuccess);
 	}
 
 }

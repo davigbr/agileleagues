@@ -59,9 +59,6 @@ footer.main {
     pointer-events: auto;
     cursor: default;
 }
-input[data-mask="decimal"] {
-	text-align: right;
-}
 p a {
 	color: #09f;
 }
