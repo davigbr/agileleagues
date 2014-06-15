@@ -109,12 +109,7 @@ class ActivitiesControllerTest extends ControllerTestCase {
 
 	public function testMyPending() {
 		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
-		$result = $this->testAction('/activities/mypending', array('return' => 'vars'));
-	}
-
-	public function testMyReviewed() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
-		$result = $this->testAction('/activities/myreviewed', array('return' => 'vars'));
+		$result = $this->testAction('/activities/myPending', array('return' => 'vars'));
 	}
 
 	public function testDay(){
@@ -234,6 +229,14 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		}
 		$this->testAction('/activities/team/', array('return' => 'vars', 'data' => $data));
 		$this->assertNotNull($this->controller->flashSuccess);
+	}
+
+	public function testMyActivities() {
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);	
+		$result = $this->testAction('/activities/myActivities/', array('return' => 'vars', 'method' => 'get'));
+		$logs = $result['logs'];
+		$this->assertNotEmpty($logs);
+		$this->assertEquals(8, count($logs));
 	}
 
 }

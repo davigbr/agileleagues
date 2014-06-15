@@ -159,7 +159,7 @@ class Log extends AppModel {
 	public function timeline($limit = 100) {
 		return $this->find('all', array(
 			'recursive' => 2,
-			'order' => array('Log.creation' => 'DESC'),
+			'order' => array('Log.created' => 'DESC'),
 			'limit' => $limit
 		));
 	}
@@ -195,7 +195,7 @@ class Log extends AppModel {
 	public function allPendingFromPlayer($playerId) {
 		return $this->find('all', array(
 			'conditions' => array('Log.player_id' => $playerId, 'Log.reviewed IS NULL'),
-			'order' => array('Log.creation' => 'DESC')
+			'order' => array('Log.created' => 'DESC')
 		));
 	}
 
@@ -248,7 +248,7 @@ class Log extends AppModel {
 				)
 			),
 			'limit' => $limit,
-			'order' => array('Log.creation' => 'ASC')
+			'order' => array('Log.created' => 'ASC')
 		));
 	}
 

@@ -17,7 +17,7 @@
 					<i class="<? echo $log['Domain']['icon']?>"></i>
 				</td>
 				<td><? echo $log['Activity']['name']?></td>
-				<td><? echo $log['Log']['creation']?></td>
+				<td><? echo $log['Log']['created']?></td>
 				<td><? echo $log['Log']['reviewed']?></td>
 				<td><? echo $log['Log']['description']?></td>
 		<? endforeach; ?>

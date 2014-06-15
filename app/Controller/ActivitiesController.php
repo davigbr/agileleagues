@@ -4,6 +4,9 @@ App::uses('AppController', 'Controller');
 
 class ActivitiesController extends AppController {
 
+	public $components = array('Paginator');
+	public $helpers = array('Paginator');
+
 	public function index() {
 		$activities = $this->Activity->allActive(
 			$this->Player->scrumMasterId($this->Auth->user('id')));
@@ -32,7 +35,30 @@ class ActivitiesController extends AppController {
 		return $this->redirect('/activities');
 	}
 
-	public function myAccepted() {
+	public function myActivities() {
+		$this->paginate = array(
+			'order' => array('Log.acquired' => 'DESC', 'Log.created' => 'DESC'),
+			'contain' => array(
+				'Activity',
+				'Domain',
+				'Player',
+				'PairedPlayer',
+				'LogVote' => array(
+					'Player',
+					'order' => array('LogVote.creation' => 'DESC')
+				),
+				'Event'
+			),
+			'limit' => 20,
+			'conditions' => array(
+				'Log.player_id' => $this->Auth->user('id')
+			),
+		);
+
+		$this->set('logs', $this->paginate('Log'));
+	}
+
+	public function myCoins() {
 		$playerId = (int)$this->Auth->user('id');
 		$logs = $this->PlayerActivityCoins->allFromPlayer($playerId);
 		$this->set('logs', $logs);

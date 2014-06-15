@@ -249,7 +249,7 @@ class TestUtils {
             array('activity_id' => 7, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
             array('activity_id' => 8, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
         ), array('validate' => false));
-        $result = $this->Log->query('UPDATE log SET reviewed = NOW()');
+        $result = $this->Log->query('UPDATE log SET reviewed = NOW(), accepted = NOW()');
     }
 
     public function generateLogs2() {

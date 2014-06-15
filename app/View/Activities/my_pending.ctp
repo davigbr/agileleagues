@@ -28,7 +28,7 @@
 							<i class="<? echo $log['Domain']['icon']?>"></i>
 						</td>
 						<td><? echo $log['Activity']['name']?></td>
-						<td><? echo $log['Log']['creation']?></td>
+						<td><? echo $log['Log']['created']?></td>
 						<td><? echo $log['Log']['acquired']?></td>
 						<td><? echo h($log['Event']['name']); ?></td>
 						<td><? echo h($log['Log']['description']); ?></td>

@@ -72,3 +72,14 @@ where `activity`.inactive = 0 AND log.accepted IS NOT NULL
 group by `log`.`activity_id`,`log`.`player_id` 
 order by `log`.`player_id`,`activity`.`domain_id`, `activity`.`name`
 
+UPDATE log SET accepted = reviewed WHERE reviewed IS NOT NULL;
+
+ALTER TABLE `log`
+CHANGE COLUMN `creation` `created`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `activity_id`;
+
+ALTER TABLE `event_task_log`
+CHANGE COLUMN `creation` `created`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `player_id`;
+
+ALTER TABLE `log_votes`
+ADD COLUMN `creation`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `comment`;
+

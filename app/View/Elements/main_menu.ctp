@@ -65,6 +65,8 @@
 							<span>Team Pending Activities</span>
 							<?if($teamPendingActivities > 0): ?>
 								<span class="badge badge-danger"><?= $teamPendingActivities?></span>
+							<?else:?>
+								<span class="badge badge-danger">NEW</span>
 							<?endif;?>
 						</a>
 					</li>
@@ -73,7 +75,19 @@
 							<i class="entypo-calendar"></i><span>Calendar</span>
 						</a>
 					</li>
-					<li data-action="myAccepted"><a href="<?= $this->Html->url('/activities/myAccepted'); ?>"><i class="entypo-check"></i><span>My Accepted Activities</span></a></li>
+					<li data-action="myActivities">
+						<a href="<?= $this->Html->url('/activities/myActivities'); ?>">
+							<i class="entypo-flag"></i>
+							<span>My Activities</span>
+							<span class="badge badge-danger">NEW</span>
+						</a>
+					</li>
+					<li data-action="myCoins">
+						<a href="<?= $this->Html->url('/activities/myCoins'); ?>">
+							<i class="entypo-star"></i>
+							<span>My Activity Coins</span>
+						</a>
+					</li>
 					<li data-action="myPending">
 						<a href="<?= $this->Html->url('/activities/myPending'); ?>">
 							<i class="entypo-clipboard"></i>
@@ -199,19 +213,16 @@
 				<a href="#">
 					<i class="entypo-users"></i>
 					<span>Teams</span>
-					<span class="badge badge-danger">NEW</span>
 				</a>
 				<ul>
 					<li data-action="add">
 						<a href="<?= $this->Html->url('/teams/add'); ?>"><i class="entypo-plus"></i>
 							<span>Create</span>
-							<span class="badge badge-danger">NEW</span>
 						</a>
 					</li>
 					<li data-action="index">
 						<a href="<?= $this->Html->url('/teams'); ?>"><i class="entypo-list"></i>
 							<span>List all teams</span>
-							<span class="badge badge-danger">NEW</span>
 						</a>
 					</li>
 				</ul>

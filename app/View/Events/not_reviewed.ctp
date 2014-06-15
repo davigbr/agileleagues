@@ -15,7 +15,7 @@
 		<? foreach ($eventTaskLogs as $log) : ?>
 			<tr>
 				<td><? echo h($log['Player']['name']); ?></td>
-				<td><? echo h($log['EventTaskLog']['creation']); ?></td>
+				<td><? echo h($log['EventTaskLog']['created']); ?></td>
 				<td><? echo h($log['EventTask']['name']); ?></td>
 				<td><? echo h($log['EventTask']['description']); ?></td>
 				<td><? echo number_format($log['EventTask']['xp']); ?></td>

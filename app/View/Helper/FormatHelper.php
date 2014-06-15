@@ -17,6 +17,20 @@ class FormatHelper extends AppHelper {
 		}
 	}
 
+	public function dateTime($sqlDateTime) {
+		if (!$sqlDateTime) return '';
+		if (strlen($sqlDateTime) === 10) {
+			$sqlDateTime .= ' 00:00:00';
+		}
+		$dateTime = new DateTime($sqlDateTime);
+		if (date('Y') === $dateTime->format('Y')) {
+			return $dateTime->format('M jS (D) h:i A');
+		} else {
+			return $dateTime->format('M jS, Y');
+		}
+	}
+
+
 	public function time($sqlDateTime) {
 		if (!$sqlDateTime) return '';
 		$dateTime = new DateTime($sqlDateTime);

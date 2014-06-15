@@ -1,7 +1,7 @@
 <div class="panel panel-primary panel-table">
     <div class="panel-heading">
         <div class="panel-title">
-            <h1>My Accepted Activities</h1>
+            <h1>My Activity Coins</h1>
             <br/>
             <p></p>
         </div>
