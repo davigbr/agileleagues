@@ -127,7 +127,7 @@
 	<div class="col-sm-3">
 		<div class="tile-stats tile-primary">
 			<div class="num" data-start"0" data-end="100" data-delay="0" data-postfix=" Mi" data-duration="1500" >100 Mi</div>
-			<p>construction time of Wikipedia</p>
+			<p>construction time of Wikipedia in hours</p>
 			<h3>= 3 weeks played in Angry Birds</h3>
 		</div>
 	</div>
