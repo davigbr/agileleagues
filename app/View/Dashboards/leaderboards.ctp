@@ -34,7 +34,7 @@
                     <tr>
                         <th title="Position">P</th>
                         <th><strong>Player</strong></th>
-                        <th style="text-align: right"><strong>Activity Coins</strong></th>
+                        <th style="text-align: right"><strong>Activities Completed</strong></th>
                     </tr>
                     <?$i=0?>
                     <?if (empty($rows)):?>

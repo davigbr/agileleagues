@@ -1,7 +1,7 @@
 <?
     $domainId = $domain['Domain']['id'];
     $count = count($domain['Activity']);
-    $different = count($activityCoins);
+    $different = count($activitiesSummary);
     $percentual = @(int)($different / $count*100);
 ?>
 <div class="well">
@@ -26,18 +26,16 @@
             <th>Completed?</th>
             <th>Activity</th>
             <th style="text-align: right">XP</th>
-            <th style="text-align: right">Coins</th>
-            <th style="text-align: right">Spent</th>
-            <th style="text-align: right">Remaining</th>
+            <th style="text-align: right">Times Logged</th>
             <th style="text-align: right">Actions</th>
         </tr>
         <?foreach($domain['Activity'] as $activity): ?>
             <?
-                $coins = isset($activityCoins[$activity['id']])? $activityCoins[$activity['id']]['PlayerActivityCoins']: null;
+                $summary = isset($activitiesSummary[$activity['id']])? $activitiesSummary[$activity['id']]['PlayerActivitySummary']: null;
             ?>
             <tr>
                 <td>
-                    <?if ($coins == null) : ?>
+                    <?if ($summary == null) : ?>
                         <i style="color: red" class="glyphicon glyphicon-remove"></i>
                     <?else:?>
                         <i style="color: green" class="glyphicon glyphicon-ok"></i>
@@ -45,9 +43,7 @@
                 </td>
                 <td><?=h($activity['name']); ?></td>
                 <td style="text-align: right"><?=number_format($activity['xp']); ?></td>
-                <td style="text-align: right"><?=number_format($coins == null? 0 : $coins['coins']); ?></td>
-                <td style="text-align: right"><?=number_format($coins == null? 0 : $coins['spent']); ?></td>
-                <td style="text-align: right"><?=number_format($coins == null? 0 : $coins['remaining']); ?></td>
+                <td style="text-align: right"><?=number_format($summary == null? 0 : $summary['count']); ?></td>
                 <td style="text-align: right"><a class="btn btn-xs btn-info" href="<? echo $this->Html->url('/activities/report/' . $activity['id']); ?>">Report now!</a></td>
             </tr>
         <?endforeach;?>

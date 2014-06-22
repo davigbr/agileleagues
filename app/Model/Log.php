@@ -124,7 +124,7 @@ class Log extends AppModel {
 		foreach ($log['LogVote'] as $logVote) {
 			if (($action === 'accept' && $logVote['vote'] == 1) || 
 				($action === 'reject' && $logVote['vote'] == -1)) {
-				$this->XpLog->_activityReviewed($action, $playerIdReviewer, $logId);
+				$this->XpLog->_activityReviewed($action, $logVote['player_id'], $logId);
 			}
 		}
 

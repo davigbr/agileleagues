@@ -20,7 +20,7 @@
 				<th><strong>Type</strong></th>
 				<th><strong>E-mail</strong></th>
 				<th><strong>Total XP</strong></th>
-				<th><strong>Activity Coins</strong></th>
+				<th><strong>Activities Logged</strong></th>
 				<th><strong>Progress</strong></th>
 				<th><strong>Actions</strong></th>
 			</tr>
@@ -32,7 +32,7 @@
 					<td><? echo h($player['PlayerType']['name']); ?></td>
 					<td><? echo h($player['Player']['email']); ?></td>
 					<td><? echo h($player['Player']['xp']); ?></td>
-					<td><? echo h($player['PlayerTotalActivityCoins']['coins']); ?></td>
+					<td><? echo h($player['Player']['activities']); ?></td>
 					<td style="text-align: center">
 						<span><? echo (int)$player['Player']['progress']?>%</span>
 						

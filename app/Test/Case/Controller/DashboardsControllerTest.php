@@ -72,13 +72,13 @@ class DashboardsControllerTest extends ControllerTestCase {
 		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$domain = $this->utils->Domain->find('first');
 		$result = $this->testAction('/dashboards/activities/' . $domain['Domain']['id'], array('return' => 'vars'));
-		$activityCoins = $result['activityCoins'];
+		$activitiesSummary = $result['activitiesSummary'];
 		$domain = $result['domain'];
-		$this->assertNotEmpty($activityCoins);
+		$this->assertNotEmpty($activitiesSummary);
 		$this->assertNotEmpty($domain);
 		$this->assertTrue(isset($domain['Domain']));
-		foreach ($activityCoins as $coins) {
-			$this->assertTrue(isset($coins['PlayerActivityCoins']));
+		foreach ($activitiesSummary as $summary) {
+			$this->assertTrue(isset($summary['PlayerActivitySummary']));
 		}
 		foreach ($domain['Activity'] as $activity) {
 			$this->assertFalse($activity['inactive']);

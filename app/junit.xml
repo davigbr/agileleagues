@@ -979,10 +979,10 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
         <testcase name="testUnread" class="NotificationTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\NotificationTest.php" line="56" assertions="3" time="0.423813"/>
         <testcase name="testMarkAsRead" class="NotificationTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\NotificationTest.php" line="64" assertions="8" time="0.565449"/>
       </testsuite>
-      <testsuite name="PlayerActivityCoinsTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivityCoinsTest.php" tests="3" assertions="27" failures="0" errors="0" time="2.107469">
-        <testcase name="testAllFromPlayer" class="PlayerActivityCoinsTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivityCoinsTest.php" line="17" assertions="10" time="0.751685"/>
-        <testcase name="testAllFromPlayerWithDomain" class="PlayerActivityCoinsTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivityCoinsTest.php" line="44" assertions="15" time="0.726308"/>
-        <testcase name="testCountFromPlayer" class="PlayerActivityCoinsTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivityCoinsTest.php" line="75" assertions="2" time="0.629476"/>
+      <testsuite name="PlayerActivitySummaryTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivitySummaryTest.php" tests="3" assertions="27" failures="0" errors="0" time="2.107469">
+        <testcase name="testAllFromPlayer" class="PlayerActivitySummaryTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivitySummaryTest.php" line="17" assertions="10" time="0.751685"/>
+        <testcase name="testAllFromPlayerWithDomain" class="PlayerActivitySummaryTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivitySummaryTest.php" line="44" assertions="15" time="0.726308"/>
+        <testcase name="testCountFromPlayer" class="PlayerActivitySummaryTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivitySummaryTest.php" line="75" assertions="2" time="0.629476"/>
       </testsuite>
       <testsuite name="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" tests="8" assertions="15" failures="0" errors="0" time="5.658032">
         <testcase name="testDevelopersCount" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="17" assertions="1" time="0.649788"/>

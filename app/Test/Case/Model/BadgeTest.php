@@ -62,21 +62,6 @@ class BadgeTest extends CakeTestCase {
 		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
 		$this->utils->Badge->claim($playerId, $badgeId);
 		$this->assertNotEmpty($this->utils->BadgeLog->findByPlayerIdAndBadgeId($playerId, $badgeId));
-
-		// Verifica se consumiu as activity coins
-		$logs = $this->utils->Log->find('all', array(
-			'conditions' => array(
-				'Log.spent' => 1
-		)));
-		$activitiesSpent = array();
-		foreach ($logs as $log) {
-			$activitiesSpent[] = (int)$log['Log']['activity_id'];
-		}
-		$activitiesRequired = array();
-		foreach ($badge['ActivityRequisite'] as $activityRequisite) {
-			$activitiesRequired[] = (int)$activityRequisite['activity_id'];
-		}
-		$this->assertEquals($activitiesRequired, $activitiesSpent);
 	}
 
 	public function testClaimWrongPlayerType() {

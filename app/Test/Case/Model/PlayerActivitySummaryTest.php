@@ -2,7 +2,7 @@
 
 App::uses('TestUtils', 'Lib');
 
-class PlayerActivityCoinsTest extends CakeTestCase {
+class PlayerActivitySummaryTest extends CakeTestCase {
 
 	public function setUp() {
 		parent::setUp();
@@ -17,16 +17,14 @@ class PlayerActivityCoinsTest extends CakeTestCase {
 
 	public function testAllFromPlayer() {
 		$playerId = DEVELOPER_ID_1;
-		$result = $this->utils->PlayerActivityCoins->allFromPlayer($playerId);
+		$result = $this->utils->PlayerActivitySummary->allFromPlayer($playerId);
 		$this->assertNotEmpty($result, 'No log data to test');
 		foreach ($result as $row) {
-			$this->assertEquals($row['PlayerActivityCoins']['player_id'], $playerId);
+			$this->assertEquals($row['PlayerActivitySummary']['player_id'], $playerId);
 			$fields = array(
   				'player_id',
 		    	'player_name',
-		    	'coins',
-		    	'spent',
-		    	'remaining',
+		    	'count',
 		    	'activity_id',
 		    	'log_reviewed',
 		    	'activity_name',
@@ -36,7 +34,7 @@ class PlayerActivityCoinsTest extends CakeTestCase {
 		    	'domain_abbr',
 		    	'domain_color'
 			);
-			$this->assertEquals($fields, array_keys($row['PlayerActivityCoins']));
+			$this->assertEquals($fields, array_keys($row['PlayerActivitySummary']));
 		}
 	}
 
@@ -44,17 +42,15 @@ class PlayerActivityCoinsTest extends CakeTestCase {
 		$domain = $this->utils->Domain->find('first');
 		$playerId = DEVELOPER_ID_1;
 		$domainId = $domain['Domain']['id'];
-		$result = $this->utils->PlayerActivityCoins->allFromPlayer($playerId, $domainId);
+		$result = $this->utils->PlayerActivitySummary->allFromPlayer($playerId, $domainId);
 		$this->assertNotEmpty($result, 'No log data to test');
 		foreach ($result as $row) {
-			$this->assertEquals($row['PlayerActivityCoins']['player_id'], $playerId);
-			$this->assertEquals($row['PlayerActivityCoins']['domain_id'], $domainId);
+			$this->assertEquals($row['PlayerActivitySummary']['player_id'], $playerId);
+			$this->assertEquals($row['PlayerActivitySummary']['domain_id'], $domainId);
 			$fields = array(
   				'player_id',
 		    	'player_name',
-		    	'coins',
-		    	'spent',
-		    	'remaining',
+		    	'count',
 		    	'activity_id',
 		    	'log_reviewed',
 		    	'activity_name',
@@ -64,7 +60,7 @@ class PlayerActivityCoinsTest extends CakeTestCase {
 		    	'domain_abbr',
 		    	'domain_color'
 			);
-			$this->assertEquals($fields, array_keys($row['PlayerActivityCoins']));
+			$this->assertEquals($fields, array_keys($row['PlayerActivitySummary']));
 		}
 	}
 
@@ -72,7 +68,7 @@ class PlayerActivityCoinsTest extends CakeTestCase {
 		$player = $this->utils->Player->find('first');
 		$this->assertNotEmpty($player, 'Player not found');
 		$playerId = $player['Player']['id'];
-		$result = $this->utils->PlayerActivityCoins->countFromPlayer($playerId);
+		$result = $this->utils->PlayerActivitySummary->countFromPlayer($playerId);
 		$this->assertEquals(4, $result);
 	}
 

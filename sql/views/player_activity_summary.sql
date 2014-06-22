@@ -1,10 +1,10 @@
 DROP VIEW IF EXISTS player_activity_coins;
-CREATE VIEW player_activity_coins AS 
+
+DROP VIEW IF EXISTS player_activity_summary;
+CREATE VIEW player_activity_summary AS 
 select `log`.`player_id` AS `player_id`,
 `player`.`name` AS `player_name`,
-count(*) AS `coins`,
-sum(log.spent) AS `spent`,
-count(*) - sum(log.spent) AS `remaining`,
+count(*) AS `count`,
 `log`.`activity_id` AS `activity_id`,
 `log`.`reviewed` AS `log_reviewed`,
 `activity`.`name` AS `activity_name`,

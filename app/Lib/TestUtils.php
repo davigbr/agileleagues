@@ -6,8 +6,8 @@ define('TEAM_ID_EMPTY', 3);
 
 define('DEVELOPER_ID_1', 1);
 define('DEVELOPER_ID_2', 2);
-define('DEVELOPER_3_ID', 3);
-define('DEVELOPER_4_ID', 4);
+define('DEVELOPER_ID_3', 3);
+define('DEVELOPER_ID_4', 4);
 define('SCRUMMASTER_ID_1', 5);
 define('SCRUMMASTER_ID_2', 6);
 define('PRODUCT_OWNER_ID', 7);
@@ -43,8 +43,7 @@ class TestUtils {
     );
     
     private $views = array(
-        'PlayerActivityCoins',
-        'PlayerTotalActivityCoins',
+        'PlayerActivitySummary',
         'LastWeekLog',
         'BadgeClaimed',
         'BadgeActivityProgress'
@@ -101,9 +100,9 @@ class TestUtils {
         $this->Player->saveMany(array(
             array('id' => DEVELOPER_ID_1, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 1', 'email' => 'email1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 500, 'verified_in' => date('Y-m-d H:i:s')),
             array('id' => DEVELOPER_ID_2, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 2', 'email' => 'email2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => date('Y-m-d H:i:s')),
-            array('id' => DEVELOPER_3_ID, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 3', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => DEVELOPER_ID_3, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 3', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => date('Y-m-d H:i:s')),
             // Account not verified
-            array('id' => DEVELOPER_4_ID, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 4', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => null),
+            array('id' => DEVELOPER_ID_4, 'player_type_id' => PLAYER_TYPE_DEVELOPER, 'name' => 'Developer 4', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => null),
             array('id' => SCRUMMASTER_ID_1, 'player_type_id' => PLAYER_TYPE_SCRUMMASTER, 'name' => 'ScrumMaster 1', 'email' => 'scrummaster1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'verified_in' => date('Y-m-d H:i:s')),
             array('id' => SCRUMMASTER_ID_2, 'player_type_id' => PLAYER_TYPE_SCRUMMASTER, 'name' => 'ScrumMaster 2', 'email' => 'scrummaster2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'verified_in' => date('Y-m-d H:i:s')),
             array('id' => PRODUCT_OWNER_ID, 'player_type_id' => PLAYER_TYPE_PRODUCT_OWNER, 'name' => 'PO', 'email' => 'po@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'verified_in' => date('Y-m-d H:i:s')),
@@ -120,7 +119,7 @@ class TestUtils {
         );
         $this->Player->updateAll(
             array('team_id' => TEAM_ID_2), 
-            array('Player.id' => array(DEVELOPER_3_ID, DEVELOPER_4_ID))
+            array('Player.id' => array(DEVELOPER_ID_3, DEVELOPER_ID_4))
         );
     }
 

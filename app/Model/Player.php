@@ -8,8 +8,7 @@ class Player extends AppModel {
 	public $useTable = 'player';
     public $order = array('Player.player_type_id' => 'ASC', 'Player.name' => 'ASC');
 	public $belongsTo = array('PlayerType', 'Team');
-    public $hasOne = array('PlayerTotalActivityCoins');
-    public $hasMany = array('PlayerActivityCoins', 'Notification', 'BadgeLog');
+    public $hasMany = array('PlayerActivitySummary', 'Notification', 'BadgeLog');
 
     public $validate = array(
         'name' => 'notEmpty',
@@ -46,6 +45,7 @@ class Player extends AppModel {
         $this->virtualFields['next_level_xp_completed'] = "{$alias}.xp - FLOOR(100 * POW(FLOOR(0.0464159 * POW({$alias}.xp, 2/3)), 3/2))";
         $this->virtualFields['progress'] = "100*({$alias}.xp - FLOOR(100 * POW(FLOOR(0.0464159 * POW({$alias}.xp, 2/3)), 3/2)))/(FLOOR(100 * POW(player_level({$alias}.xp), 3/2)) - FLOOR(100 * POW(-1 + player_level({$alias}.xp), 3/2)))";
         $this->virtualFields['title'] = "SELECT title FROM title WHERE min_level > player_level({$alias}.xp) ORDER BY min_level ASC LIMIT 1";
+        $this->virtualFields['activities'] = "SELECT COUNT(*) FROM log WHERE reviewed IS NOT NULL AND player_id = {$alias}.id";
     }
 
 

@@ -21,7 +21,6 @@ class DashboardsController extends AppController {
                 'contain' => array(
                     'Team',
                     'PlayerType',
-                    'PlayerTotalActivityCoins',
                     'BadgeLog' => array(
                         'Badge' => array(
                             'Domain'
@@ -44,15 +43,15 @@ class DashboardsController extends AppController {
                 'Domain.id' => $id
             )
         ));
-        $activityCoins = $this->PlayerActivityCoins->allFromPlayer($this->Auth->user('id'), $id);
+        $activitiesSummary = $this->PlayerActivitySummary->allFromPlayer($this->Auth->user('id'), $id);
         
         //Torna a propriedade activity_id a chave do array
-        array_replace_keys($activityCoins, function($value){
-            return $value['PlayerActivityCoins']['activity_id'];
+        array_replace_keys($activitiesSummary, function($value){
+            return $value['PlayerActivitySummary']['activity_id'];
         });
 
         $this->set('domain', $domain);
-        $this->set('activityCoins', $activityCoins);
+        $this->set('activitiesSummary', $activitiesSummary);
         return $this->render('/Dashboards/activities_domain_details');
     }
 

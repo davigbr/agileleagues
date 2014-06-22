@@ -82,10 +82,10 @@
 							<span class="badge badge-danger">NEW</span>
 						</a>
 					</li>
-					<li data-action="myCoins">
-						<a href="<?= $this->Html->url('/activities/myCoins'); ?>">
+					<li data-action="summary">
+						<a href="<?= $this->Html->url('/activities/summary'); ?>">
 							<i class="entypo-star"></i>
-							<span>My Activity Coins</span>
+							<span>Activities Summary</span>
 						</a>
 					</li>
 					<li data-action="myPending">

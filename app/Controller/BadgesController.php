@@ -84,8 +84,8 @@ class BadgesController extends AppController {
             if (empty($this->request->data['BadgeRequisite'])) unset($this->request->data['BadgeRequisite']);
 
             if ($id !== null) {
-                $this->BadgeRequisite->query('DELETE FROM badge_requisite WHERE badge_id = ? ', array($badgeId));
-                $this->ActivityRequisite->query('DELETE FROM activity_requisite WHERE badge_id = ? ', array($badgeId));
+                $this->BadgeRequisite->query('DELETE FROM badge_requisite WHERE badge_id = ? ', array($id));
+                $this->ActivityRequisite->query('DELETE FROM activity_requisite WHERE badge_id = ? ', array($id));
             }   
 
             if ($this->Badge->saveAssociated($this->request->data)) {

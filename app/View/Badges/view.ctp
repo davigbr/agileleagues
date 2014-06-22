@@ -22,15 +22,15 @@
 	            	<table class="table table-responsive">
 	            		<tr>
 	            			<th>Activity</th>
-	            			<th>Coins Obtained / Required</th>
+	            			<th>Activities Completed / Required</th>
 	            			<th>Progress</th>
 	            		</tr>
             			<?foreach($requiredActivitiesProgress as $activity): ?>
             				<tr>
         						<td><a href="<? echo $this->Html->url('/activities'); ?>"><? echo h($activity['Activity']['name']); ?></a></td>
         						<td>
-                                    <? echo $activity['BadgeActivityProgress']['coins_obtained']?> /
-        						    <? echo $activity['BadgeActivityProgress']['coins_required']?>
+                                    <? echo $activity['BadgeActivityProgress']['activities_completed']?> /
+        						    <? echo $activity['BadgeActivityProgress']['activities_required']?>
                                     (<? echo $activity['BadgeActivityProgress']['progress']?>%)
                                 </td>
         						<td style="text-align: center">

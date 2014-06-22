@@ -54,8 +54,8 @@
 			<tr>
 				<?foreach ($players as $player): ?>
 					<td>
-						Activity Coins:
-						<strong><?= number_format($player['PlayerTotalActivityCoins']['coins']) ?></strong>
+						Activities Logged:
+						<strong><?= number_format($player['Player']['activities']) ?></strong>
 					</td>
 				<?endforeach;?>
 			</tr>

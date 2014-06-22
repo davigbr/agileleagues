@@ -73,11 +73,11 @@
                                             <i style="color: red" class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;
                                         <?endif;?>
                                         <span title="<?= $activityProgress['Activity']['name']?>">
-                                            <span title="Required"><?= $activityProgress['BadgeActivityProgress']['coins_required']?>x </span>
+                                            <span title="Required"><?= $activityProgress['BadgeActivityProgress']['activities_required']?>x </span>
                                             <?= h($activityProgress['Activity']['name']); ?>
                                             <?if (!$badge['claimed']): ?>
                                                 <span title="You have">
-                                                    (<?= $activityProgress['BadgeActivityProgress']['coins_obtained']?>)
+                                                    (<?= $activityProgress['BadgeActivityProgress']['activities_completed']?>)
                                                 </span>
                                             <?endif;?>
                                         </span>

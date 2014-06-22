@@ -1522,8 +1522,8 @@
       <line num="96" type="stmt" count="1"/>
       <metrics loc="98" ncloc="98" classes="1" methods="7" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="15" elements="43" coveredelements="16"/>
     </file>
-    <file name="C:\wamp\www\agileleagues\app/Model/PlayerActivityCoins.php">
-      <class name="PlayerActivityCoins" namespace="global">
+    <file name="C:\wamp\www\agileleagues\app/Model/PlayerActivitySummary.php">
+      <class name="PlayerActivitySummary" namespace="global">
         <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
       </class>
       <line num="3" type="stmt" count="1"/>

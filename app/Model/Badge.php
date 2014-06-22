@@ -77,14 +77,6 @@ class Badge extends AppModel {
 				}
 			}
 
-			// Consome as activity coins
-			foreach ($badge['ActivityRequisite'] as $activity) {
-				$activityId = (int)$activity['activity_id'];
-				$count = (int)$activity['count'];
-				$this->query('UPDATE log SET spent = 1 WHERE activity_id = ? AND player_id = ? AND spent = 0
-						ORDER BY acquired ASC LIMIT ' . $count, array($activityId, $playerId));
-			}
-
 			$this->BadgeLog->_add(array(
 				'badge_id' => $badgeId,
 				'player_id' => $playerId

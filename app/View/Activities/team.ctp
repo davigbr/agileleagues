@@ -40,11 +40,11 @@
 					<th>Paired With</th>
 					<th>Description</th>
 					<th title="<?=__('The XP bonus for accepting this activity')?>">Bonus</th>
+					<th>%</th>
 					<th>Accept</th>
-					<th>%</th>
 					<th title="<?=__('The XP bonus for rejecting this activity')?>">Bonus</th>
-					<th>Reject</th>
 					<th>%</th>
+					<th>Reject</th>
 
 				</tr>
 				<?if (empty($logs)): ?>
@@ -77,12 +77,12 @@
 									<?endif;?>
 								</td>
 								<td>
+									<?=number_format($log['Log']['acceptance_votes'])?>/<?=number_format($log['Activity']['acceptance_votes'])?>
+								</td>
+								<td>
 									<?if($log['LogVote'][0]['vote'] == 1): ?>
 										<?= h($log['LogVote'][0]['comment'])?>
 									<?endif;?>
-								</td>
-								<td>
-									<?=number_format($log['Log']['acceptance_votes'])?>/<?=number_format($log['Activity']['acceptance_votes'])?>
 								</td>
 								<td>
 									<?if($log['LogVote'][0]['vote'] == -1): ?>
@@ -91,17 +91,20 @@
 									<?endif;?>
 								</td>
 								<td>
+									<?=number_format($log['Log']['rejection_votes'])?>/<?=number_format($log['Activity']['rejection_votes'])?>
+								</td>
+								<td>
 									<?if($log['LogVote'][0]['vote'] == -1): ?>
 										<?= h($log['LogVote'][0]['comment'])?>
 									<?endif;?>
-								</td>
-								<td>
-									<?=number_format($log['Log']['rejection_votes'])?>/<?=number_format($log['Activity']['rejection_votes'])?>
 								</td>
 							<? else: ?>
 								<td>
 									<? $bonus = floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER); ?>
 									<span class="badge">+ <?= $bonus < 1? 1 : $bonus?> XP</span>
+								</td>
+								<td>
+									<?=number_format($log['Log']['acceptance_votes'])?>/<?=number_format($log['Activity']['acceptance_votes'])?>
 								</td>
 								<td>
 									<div style="width: 300px" class="input-group">
@@ -112,12 +115,12 @@
 									</div>
 								</td>
 								<td>
-									<?=number_format($log['Log']['acceptance_votes'])?>/<?=number_format($log['Activity']['acceptance_votes'])?>
-								</td>
-								<td>
 									<span class="badge">
 										+<?= REJECTION_XP_BONUS ?> XP
 									</span>
+								</td>
+								<td>
+									<?=number_format($log['Log']['rejection_votes'])?>/<?=number_format($log['Activity']['rejection_votes'])?>
 								</td>
 								<td>
 									<div style="width: 300px" class="input-group">
@@ -126,9 +129,6 @@
 										</div>
 										<input maxlength="250" name="data[Log][<?=$log['Log']['id']?>][rejection_comment]" type="text" disabled="disabled" class="reject-input form-control" />
 									</div>
-								</td>
-								<td>
-									<?=number_format($log['Log']['rejection_votes'])?>/<?=number_format($log['Activity']['rejection_votes'])?>
 								</td>
 							<? endif; ?>
 						</tr>

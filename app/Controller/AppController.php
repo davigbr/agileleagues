@@ -54,7 +54,7 @@ class AppController extends Controller {
 		'LogVote',
 		'Notification',
 		'Player', 
-		'PlayerActivityCoins',
+		'PlayerActivitySummary',
 		'Timeline', 
 		'Team'
 	);

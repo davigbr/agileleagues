@@ -58,9 +58,9 @@ class ActivitiesController extends AppController {
 		$this->set('logs', $this->paginate('Log'));
 	}
 
-	public function myCoins() {
+	public function summary() {
 		$playerId = (int)$this->Auth->user('id');
-		$logs = $this->PlayerActivityCoins->allFromPlayer($playerId);
+		$logs = $this->PlayerActivitySummary->allFromPlayer($playerId);
 		$this->set('logs', $logs);
 	}
 

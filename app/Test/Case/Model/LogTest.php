@@ -67,21 +67,27 @@ class LogTest extends CakeTestCase {
 			'Log.player_id' => DEVELOPER_ID_1
 		)));
 		$this->assertNotEmpty($log);
-		$this->utils->LogVote->save(array(
-			'log_id' => $log['Log']['id'],
-			'vote' => 1,
-			'player_id' => DEVELOPER_ID_2
+		$this->utils->LogVote->saveMany(array(
+			array(
+				'log_id' => $log['Log']['id'],
+				'vote' => 1,
+				'player_id' => DEVELOPER_ID_2
+			),
+			array(
+				'log_id' => $log['Log']['id'],
+				'vote' => 1,
+				'player_id' => DEVELOPER_ID_3
+			)
 		));
 
-		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_2, 'accept');
+		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_3, 'accept');
 
-		$xpLog = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(
-			DEVELOPER_ID_2, 
-			$log['Log']['id']
-		);
+		$xpLogPlayer2 = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(DEVELOPER_ID_2, $log['Log']['id']);
+		$xpLogPlayer3 = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(DEVELOPER_ID_3, $log['Log']['id']);
 
 		$expectedXp = floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER);
-		$this->assertEquals($expectedXp, $xpLog['XpLog']['xp']);
+		$this->assertEquals($expectedXp, $xpLogPlayer2['XpLog']['xp']);
+		$this->assertEquals($expectedXp, $xpLogPlayer3['XpLog']['xp']);
 	}
 
 	public function testAcquiredFutureRule() {
