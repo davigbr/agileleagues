@@ -18,6 +18,7 @@ define('XP_TO_REACH_LEVEL_20', 8000);
 class TestUtils {
 
     private $models = array(
+        'Tag',
         'Configuration',
         'XpLog',    
         'EventCompleteLog',
@@ -92,6 +93,19 @@ class TestUtils {
                 array('id' => PLAYER_TYPE_PRODUCT_OWNER, 'name' => 'Product Owner'),
             ));
         }
+    }
+
+    public function generateTags() {
+        $this->Tag->saveMany(array(
+            array('id' => 1, 'Tag 1', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 1, 'inactive' => 0),
+            array('id' => 2, 'Tag 2', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 1, 'inactive' => 0),
+            array('id' => 3, 'Tag 3', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 0, 'inactive' => 0),
+            array('id' => 4, 'Tag 4', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 0, 'inactive' => 0),
+            array('id' => 5, 'Tag 5', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 0, 'inactive' => 1),
+            array('id' => 6, 'Tag 6', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 0, 'inactive' => 1),
+            array('id' => 7, 'Tag 7', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 0, 'inactive' => 1),
+            array('id' => 8, 'Tag 8', 'color' => '#000000', 'player_id_owner' => SCRUMMASTER_ID_1, 'new' => 0, 'inactive' => 1)
+        ));
     }
 
     public function generatePlayers() {

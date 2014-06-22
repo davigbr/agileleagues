@@ -10,6 +10,7 @@ class Activity extends AppModel {
 	public $virtualFields = array();
 	public $hasOne = array('LastWeekLog');
 	public $belongsTo = array('Domain');
+
 	public $validate = array(
 		'name' => 'notEmpty',
 		'description' => 'notEmpty',

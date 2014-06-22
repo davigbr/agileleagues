@@ -85,7 +85,7 @@ class AppController extends Controller {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		
+
 		$this->player = null;
 		$this->isDeveloper = false;
 		$this->isScrumMaster = false;

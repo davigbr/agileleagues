@@ -100,6 +100,22 @@
 				<?endif;?>
 			</ul>
 		</li>
+
+		<li data-controller="tags">
+			<a href="#">
+				<i class="entypo-tag"></i>
+				<span>Tags</span>
+			</a>
+			<ul>
+				<li data-action="index">	
+					<a href="<?= $this->Html->url('/tags/'); ?>">
+						<i class="entypo-list"></i>
+						<span>Tags List</span>
+						<span class="badge badge-danger">NEW</span>
+					</a>
+				</li>
+			</ul>
+		</li>
 		<li data-controller="badges">
 			<a href="#">
 				<i class="entypo-trophy"></i>

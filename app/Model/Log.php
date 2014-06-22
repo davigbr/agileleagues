@@ -32,7 +32,8 @@ class Log extends AppModel {
 	);
 
 	public $hasMany = array('LogVote');
-
+	public $hasAndBelongsToMany = array('Tag');
+	
 	public $uses = array('XpLog', 'Notification');
 
 	public function beforeInsert($options = array()) {

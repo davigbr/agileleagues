@@ -57,3 +57,39 @@ CREATE TABLE `tag` (
 	`color`  char(7) NOT NULL ,
 	PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `log_tag` (
+`id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+`log_id`  int(10) UNSIGNED NOT NULL ,
+`tag_id`  int(10) UNSIGNED NOT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `fk_log_tag_log_id` FOREIGN KEY (`log_id`) REFERENCES `log` (`id`),
+CONSTRAINT `fk_log_tag_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
+)
+;
+
+ALTER TABLE `tag`
+ADD COLUMN `inactive`  tinyint(1) UNSIGNED NOT NULL DEFAULT 0 AFTER `color`;
+
+ALTER TABLE `tag`
+ADD COLUMN `new`  tinyint(1) UNSIGNED NOT NULL DEFAULT 0 AFTER `inactive`;
+
+ALTER TABLE `tag`
+MODIFY COLUMN `name`  varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `id`,
+ADD COLUMN `description`  varchar(250) NOT NULL AFTER `name`;
+
+ALTER TABLE `log_tag`
+ADD INDEX `unique` (`log_id`, `tag_id`) ;
+
+ALTER TABLE `tag`
+DROP COLUMN `player_id_owner`,
+ADD COLUMN `player_id_owner`  int(10) UNSIGNED NOT NULL AFTER `new`;
+
+ALTER TABLE `tag` ADD CONSTRAINT `fk_tag_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`);
+
+ALTER TABLE `tag`
+DROP COLUMN `player_id_owner`,
+ADD COLUMN `player_id_owner`  int(10) UNSIGNED NOT NULL AFTER `new`;
+
+ALTER TABLE `tag` ADD CONSTRAINT `fk_tag_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`);
+

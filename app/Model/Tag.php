@@ -1,0 +1,30 @@
+<?php
+
+App::uses('AppModel', 'Model');
+
+class Tag extends AppModel {
+	
+	public $useTable = 'tag';
+	public $order = array('Tag.name' => 'ASC');
+
+	public $validate = array(
+		'name' => 'notEmpty',
+		'color' => array(
+			'notEmpty',
+			'color' => array(
+				'rule' => array('custom', '/\\#[A-Fa-f0-9]{6}/'),
+				'message' => 'Invalid color'
+			)
+		)
+	);
+
+	public function allActive($playerIdOwner) {
+		return $this->find('all', array(
+			'conditions' => array(
+				'Tag.inactive' => 0,
+				'Tag.player_id_owner' => $playerIdOwner
+			)
+		));
+	}
+
+}
