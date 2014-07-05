@@ -87,7 +87,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<?= $this->Html->image('home/hazard.jpg', array('class' => 'img-polaroid', 'style' => 'width: 100%'))?>
+				<?= $this->Html->image('home/hazard-360.jpg', array('class' => 'img-polaroid', 'style' => 'width: 100%'))?>
 				<br/>
 				<br/>
 				<div class="alert alert-warning">
@@ -95,7 +95,7 @@
 					We recommend you to <a href="<?=$this->Html->url('/players/signup')?>">sign up</a> as soon as possible, otherwise they will hate you forever :)
 				</div>
 
-				<?= $this->Html->image('home/team.jpg', array('class' => 'img-polaroid', 'style' => 'width: 100%'))?>
+				<?= $this->Html->image('home/team-360.jpg', array('class' => 'img-polaroid', 'style' => 'width: 100%'))?>
 			</div>
 		</div>
 	</div>

@@ -9,11 +9,11 @@
 					<span>Scrum Gamification</span>
 				</a>
 			</li>
-			<!-- <li class="root-level">
+			<li class="root-level">
 				<a target="_blank" href="http://www.agilegamification.org/gamification-of-xp/">
 					<span>XP Gamification</span>
 				</a>
-			</li> -->
+			</li>
 			<li class="root-level">
 				<a href="mailto:contact@agileleagues.com">
 					<i class="fa fa-envelope"></i><span>&nbsp; contact@agileleagues.com</span>

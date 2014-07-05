@@ -19,7 +19,7 @@
 	<br/><br/>
 	<div class="visible-lg visible-md">
 		<a target="_blank" href="http://www.agilegamification.org/gamification-of-scrum/" class="btn btn-md btn-primary">Gamification of Scrum</a>
-		<!-- <a target="_blank" href="http://www.agilegamification.org/gamification-of-xp/" class="btn btn-md btn-primary">Gamification of Extreme Programming</a> -->
+		<a target="_blank" href="http://www.agilegamification.org/gamification-of-xp/" class="btn btn-md btn-primary">Gamification of Extreme Programming</a>
 		<a target="_blank" href="http://www.agilegamification.org/7-steps-to-successful-agile-gamification/" class="btn btn-md btn-primary">7 steps to successful Agile Gamification</a>
 	</div>
 	<br/>
