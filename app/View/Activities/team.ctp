@@ -36,6 +36,7 @@
 				<tr>
 					<th style="text-align: center" title="Domain">D</th>
 					<th>Name</th>
+					<th>Tags</th>
 					<th>Player</th>
 					<th>Paired With</th>
 					<th>Description</th>
@@ -66,6 +67,7 @@
 								<?= h($log['Activity']['name']) ?>
 								(<?= h($log['Log']['xp']) ?> XP) 
 							</td>
+							<td><?= $this->element('tag', array('tags' => $log['Tags'])); ?></td>
 							<td><?= h($log['Player']['name'])?></td>
 							<td><?= h($log['PairedPlayer']['name'])?></td>
 							<td><?= h($log['Log']['description'])?></td>

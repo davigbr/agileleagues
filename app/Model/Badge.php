@@ -9,8 +9,12 @@ class Badge extends AppModel {
 	public $belongsTo = 'Domain';
 
 	public $hasMany = array(
-		'BadgeRequisite',
-		'ActivityRequisite',
+		'BadgeRequisite' => array(
+			'dependent' => true
+		),
+		'ActivityRequisite' => array(
+			'dependent' => true
+		),
 		'BadgeLog'
 	);
 

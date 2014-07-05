@@ -22,6 +22,7 @@
 				<tr>
 					<th style="text-align: center" title="Domain">D</th>
 					<th>Name</th>
+					<th>Tags</th>
 					<th>Logged</th>
 					<th>Acquired</th>
 					<th>Paired With</th>	
@@ -37,6 +38,7 @@
 							<i class="<?= $log['Domain']['icon']?>"></i>
 						</td>
 						<td><?= $log['Activity']['name']?></td>
+						<td><?= $this->element('tag', array('tags' => $log['Tags'])); ?></td>
 						<td><?= $this->Format->dateTime($log['Log']['created'])?></td>
 						<td><?= $this->Format->dateTime($log['Log']['acquired'])?></td>
 						<td><?= $log['PairedPlayer']['name']?></td>

@@ -74,3 +74,11 @@ a:hover {
 li a:hover, .navbar a:hover {
 	text-decoration: none
 }
+
+.unselectable {
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}

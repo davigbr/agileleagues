@@ -26,5 +26,15 @@ class Tag extends AppModel {
 			)
 		));
 	}
+	
+	public function simpleActive($playerIdOwner) {
+		return $this->find('list', array(
+			'conditions' => array(
+				'Tag.inactive' => 0,
+				'Tag.player_id_owner' => $playerIdOwner
+			)
+		));
+	}
+
 
 }

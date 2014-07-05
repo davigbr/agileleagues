@@ -67,8 +67,6 @@ class BadgesController extends AppController {
             throw new ForbiddenException();
         }
 
-        $this->Badge->recursive = 1;
-        
         if ($this->request->is('post') || $this->request->is('put')) {
 
             $this->request->data['Badge']['player_id_owner'] = $this->Auth->user('id');
@@ -84,10 +82,9 @@ class BadgesController extends AppController {
             if (empty($this->request->data['BadgeRequisite'])) unset($this->request->data['BadgeRequisite']);
 
             if ($id !== null) {
-                $this->BadgeRequisite->query('DELETE FROM badge_requisite WHERE badge_id = ? ', array($id));
-                $this->ActivityRequisite->query('DELETE FROM activity_requisite WHERE badge_id = ? ', array($id));
-            }   
-
+                $this->BadgeRequisite->deleteAll(array('BadgeRequisite.badge_id' => $id), true);
+                $this->ActivityRequisite->deleteAll(array('ActivityRequisite.badge_id' => $id), true);
+            }
             if ($this->Badge->saveAssociated($this->request->data)) {
                 $this->flashSuccess(__('Badge saved successfully!'));
                 return $this->redirect('/badges');
@@ -96,7 +93,18 @@ class BadgesController extends AppController {
             }
         } else {
             if ($id !== null) {
-                $badge = $this->Badge->findById($id);
+                $badge = $this->Badge->find('first', array(
+                    'conditions' => array(
+                        'Badge.id' => $id
+                    ),
+                    'contain' => array(
+                        'Domain',
+                        'BadgeRequisite',
+                        'ActivityRequisite' => array(
+                            'Tags' => array('id')
+                        )
+                    )
+                ));
                 if (!$badge) {
                     throw new NotFoundException();
                 }
@@ -106,6 +114,7 @@ class BadgesController extends AppController {
         $this->set('domain', $this->Domain->findById($domainId));
         $this->set('badges', $this->Badge->simpleFromDomain($domainId));
         $this->set('activities', $this->Activity->simpleFromDomain($domainId));
+        $this->set('tags', $this->Tag->allActive($this->scrumMasterId()));
     }
 
 }

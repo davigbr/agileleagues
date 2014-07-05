@@ -20,4 +20,9 @@ class TagTest extends CakeTestCase {
 		}
 	}
 
+	public function testSimpleActive() {
+		$tags = $this->utils->Tag->simpleActive(SCRUMMASTER_ID_1);
+		$this->assertNotEmpty($tags);
+	}
+
 }

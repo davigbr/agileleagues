@@ -35,6 +35,7 @@ class AppController extends Controller {
 		'AccessLog',
 		'Activity', 
 		'ActivityRequisite', 
+		'ActivityRequisiteSummary',
 		'Badge', 
 		'BadgeActivityProgress',
 		'BadgeClaimed',
@@ -56,6 +57,7 @@ class AppController extends Controller {
 		'Player', 
 		'PlayerActivitySummary',
 		'Timeline', 
+		'Tag',
 		'Team'
 	);
 
@@ -90,7 +92,7 @@ class AppController extends Controller {
 		$this->isDeveloper = false;
 		$this->isScrumMaster = false;
 		$this->isProductOwner = false;
-		
+
 		if ($this->Auth->user()) {
 			$playerId = $this->Auth->user('id');
 

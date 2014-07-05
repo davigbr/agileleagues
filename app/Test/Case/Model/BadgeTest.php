@@ -58,6 +58,11 @@ class BadgeTest extends CakeTestCase {
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
 		$playerId = DEVELOPER_ID_1;
+		// Atualiza a tabela de resumo, pois os logs não foram revisados chamando _review()
+		$this->utils->ActivityRequisiteSummary->updateAll(
+			array('ActivityRequisiteSummary.times' => 1), 
+			array('ActivityRequisiteSummary.id >' => 0)
+		);
 
 		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
 		$this->utils->Badge->claim($playerId, $badgeId);

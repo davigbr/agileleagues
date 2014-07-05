@@ -43,6 +43,7 @@ class ActivitiesController extends AppController {
 				'Domain',
 				'Player',
 				'PairedPlayer',
+				'Tags',
 				'LogVote' => array(
 					'Player',
 					'order' => array('LogVote.creation' => 'DESC')
@@ -127,6 +128,7 @@ class ActivitiesController extends AppController {
 		$this->set('activitiesById', $this->Activity->allFromOwnerById($this->scrumMasterId()));
 		$this->set('events', $this->Event->simpleActive($this->scrumMasterId()));
 		$this->set('players', $this->Player->simpleTeamMates($this->Auth->user('id')));
+		$this->set('tags', $this->Tag->allActive($this->scrumMasterId()));
 
 		if ($this->request->is('post')) {
 			$log = $this->request->data;
@@ -135,8 +137,7 @@ class ActivitiesController extends AppController {
 			$log['Log']['player_id'] = $playerId;
 			$log['Log']['player_id_owner'] = $this->scrumMasterId();
 			$activityId = $log['Log']['activity_id'];
-
-			if ($this->Log->save($log)) {
+			if ($this->Log->saveAll($log)) {
 				$activity = $this->Activity->findById($log['Log']['activity_id']);
 				$this->request->data = array();
 				$this->flashSuccess(__('Activity %s reported successfully!', '<strong>' .$activity['Activity']['name'] . '</strong>'));

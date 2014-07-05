@@ -37,7 +37,7 @@ class TagsController extends AppController {
 	}
 
 	public function index() {
-		$this->set('tags',  $this->Tag->allActive($this->Auth->user('id')));
+		$this->set('tags',  $this->Tag->allActive($this->scrumMasterId()));
 	}
 
 	public function inactivate($id) {

@@ -18,6 +18,7 @@ define('XP_TO_REACH_LEVEL_20', 8000);
 class TestUtils {
 
     private $models = array(
+        'ActivityRequisiteSummary',
         'Tag',
         'Configuration',
         'XpLog',    
@@ -206,10 +207,16 @@ class TestUtils {
 
     public function generateActivityRequisites() {
         $this->ActivityRequisite->saveMany(array(
-            array('badge_id' => 1, 'activity_id' => 1, 'count' => 1),
-            array('badge_id' => 2, 'activity_id' => 2, 'count' => 1),
-            array('badge_id' => 3, 'activity_id' => 3, 'count' => 1),
-            array('badge_id' => 4, 'activity_id' => 4, 'count' => 1)
+            array('id' => 1, 'badge_id' => 1, 'activity_id' => 1, 'count' => 1),
+            array('id' => 2, 'badge_id' => 2, 'activity_id' => 2, 'count' => 1),
+            array('id' => 3, 'badge_id' => 3, 'activity_id' => 3, 'count' => 1),
+            array('id' => 4, 'badge_id' => 4, 'activity_id' => 4, 'count' => 1)
+        ));
+        $this->ActivityRequisiteSummary->saveMany(array(
+            array('id' => 1, 'badge_id' => 1, 'activity_requisite_id' => 1, 'times' => 0),
+            array('id' => 2, 'badge_id' => 2, 'activity_requisite_id' => 2, 'times' => 0),
+            array('id' => 3, 'badge_id' => 3, 'activity_requisite_id' => 3, 'times' => 0),
+            array('id' => 4, 'badge_id' => 4, 'activity_requisite_id' => 4, 'times' => 0)
         ));
     }
 

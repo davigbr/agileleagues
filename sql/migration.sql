@@ -93,3 +93,76 @@ ADD COLUMN `player_id_owner`  int(10) UNSIGNED NOT NULL AFTER `new`;
 
 ALTER TABLE `tag` ADD CONSTRAINT `fk_tag_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`);
 
+CREATE TABLE `activity_requisite_tag` (
+`id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+`activity_requisite_id`  int(10) UNSIGNED NOT NULL ,
+`tag_id`  int(10) UNSIGNED NOT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `fk_activity_requisite_tag_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`),
+CONSTRAINT `fk_activity_requisite_tag_activity_requisite_id` FOREIGN KEY (`activity_requisite_id`) REFERENCES `activity_requisite` (`id`)
+)
+;
+
+CREATE TABLE `activity_requisite_summary` (
+	`id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+	`badge_id`  int(10) UNSIGNED NOT NULL ,
+	`player_id`  int(10) UNSIGNED NOT NULL ,
+	`activity_requisite_id`  int(10) UNSIGNED NOT NULL ,
+	`times`  int(10) UNSIGNED NOT NULL DEFAULT 0 ,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `fk_activity_requisite_summary_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`),
+	CONSTRAINT `fk_activity_requisite_summary_activity_requisite_id` FOREIGN KEY (`activity_requisite_id`) REFERENCES `activity_requisite` (`id`),
+	CONSTRAINT `fk_activity_requisite_summary_badge_id` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`)
+);
+
+ALTER TABLE `activity_requisite_summary`
+ADD UNIQUE INDEX `unique` (`badge_id`, `player_id`, `activity_requisite_id`) ;
+
+DROP VIEW IF EXISTS badge_activity_progress;
+CREATE VIEW badge_activity_progress AS 
+SELECT player.id AS player_id, badge.id AS badge_id, ar.activity_id AS activity_id,
+COALESCE(SUM(ars.times), 0) AS activities_completed,
+COALESCE(ar.count, 0) AS activities_required
+FROM player
+CROSS JOIN badge 
+LEFT JOIN activity_requisite AS ar ON ar.badge_id = badge.id
+LEFT JOIN activity_requisite_summary AS ars ON ar.id = ars.activity_requisite_id AND ars.player_id = player.id
+GROUP BY player.id, badge_id, activity_id
+ORDER BY player.id, badge_id, activity_id;
+
+-- Activities to inactivate
+
+--- Pair testing
+--- PHPUnit test
+--- JUnit test
+--- TDD
+--- Unit Bug Trap
+--- Integration Bug Trap 
+--- Pair Refactoring
+
+-- Change meaning
+--- Pair Problem Solving -> Problem Solving
+
+-- CREATE
+--- Integration Test
+
+-- 43: Pair testing -> X
+-- 40: TDD -> X
+
+-- 45: PHPUnit test -> Unit Test(37) + PHPUnit(14)
+-- 44: JUnit test -> Unit Test(37) + JUnit(15)
+-- 39: Unit Bug Trap -> Unit Test(37) + Bug Trap(20)
+-- 36: Pair Refactoring -> Refactor(23) + Pair(18)
+
+CALL add_tag_to_logs_with_activity(45, 14);
+CALL add_tag_to_logs_with_activity(44, 15);
+CALL add_tag_to_logs_with_activity(39, 20);
+CALL add_tag_to_logs_with_activity(36, 18);
+
+UPDATE log SET activity_id = 37 WHERE activity_id = 45;
+UPDATE log SET activity_id = 37 WHERE activity_id = 44;
+UPDATE log SET activity_id = 37 WHERE activity_id = 39;
+UPDATE log SET activity_id = 23 WHERE activity_id = 36;
+
+-- DO NOT WORRY
+-- 64: Integration Bug Trap -> Integration Test + Bug Trap

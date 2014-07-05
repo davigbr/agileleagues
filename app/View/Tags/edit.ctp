@@ -6,7 +6,7 @@
 			</div>
 			<div class="panel-body">
 				<?= $this->Bootstrap->create('Tag'); ?>
-				<?= $this->Bootstrap->input('id'); ?>
+				<?= $this->Bootstrap->hidden('id'); ?>
 				<? require_once 'form.ctp' ?>
 			</div>
 		</div>

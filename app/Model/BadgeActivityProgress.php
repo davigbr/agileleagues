@@ -9,7 +9,7 @@ class BadgeActivityProgress extends AppModel {
 	public $belongsTo = array('Activity');
 
 	public $virtualFields = array(
-		'progress' => 'IF(activities_completed > activities_required, 100, FLOOR(activities_completed/activities_required*100))'
+		'progress' => 'IF(activities_completed >= activities_required, 100, FLOOR(activities_completed/activities_required*100))'
 	);
 
 	public function allFromPlayerByBadgeIdAndActivityId($playerId) {

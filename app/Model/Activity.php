@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
 class Activity extends AppModel {
 	
 	public $useTable = 'activity';
-	public $order = array('Activity.domain_id' => 'ASC', 'Activity.name' => 'ASC');
+	public $order = array('Activity.inactive' => 'ASC', 'Activity.domain_id' => 'ASC', 'Activity.name' => 'ASC');
 	public $displayField = 'name_xp';
 	public $virtualFields = array();
 	public $hasOne = array('LastWeekLog');
@@ -36,7 +36,7 @@ class Activity extends AppModel {
     public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
         $alias = $this->alias;
-        $this->virtualFields['name_xp'] = "CONCAT({$alias}.name, ' (', {$alias}.xp, ' XP)')";
+        $this->virtualFields['name_xp'] = "IF({$alias}.inactive = 1, CONCAT('(inactive) ', {$alias}.name, ' (', {$alias}.xp, ' XP)'), CONCAT({$alias}.name, ' (', {$alias}.xp, ' XP)'))";
 	}
 
 	public function allFromOwnerById($playerIdOwner) {

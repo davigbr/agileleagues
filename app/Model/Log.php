@@ -31,10 +31,20 @@ class Log extends AppModel {
 		)
 	);
 
-	public $hasMany = array('LogVote');
-	public $hasAndBelongsToMany = array('Tag');
+	public $hasMany = array(
+		'LogVote' => array(
+			'dependent' => true
+		)
+	);
 	
-	public $uses = array('XpLog', 'Notification');
+	public $hasAndBelongsToMany = array(
+		'Tags' => array(
+			'className' => 'Tag',
+			'dependent' => true
+		)
+	);
+	
+	public $uses = array('XpLog', 'Notification', 'ActivityRequisite');
 
 	public function beforeInsert($options = array()) {
 		$activity = $this->Activity->findById($this->data['Log']['activity_id']);
@@ -81,7 +91,8 @@ class Log extends AppModel {
 			'contain' => array(
 				'Activity',
 				'LogVote',
-				'Player'
+				'Player',
+				'Tags'
 			)
 		));
 		if (!$log) {
@@ -101,6 +112,8 @@ class Log extends AppModel {
 				'Log.reviewed IS NOT NULL'
 			)
 		));
+		// Atualiza as tabelas de resumo de progresso
+		$this->ActivityRequisite->_updateActivityRequisiteSummary($log);
 
 		$logUpdate = array();
 		$logUpdate['id'] = $log['Log']['id'];
@@ -195,6 +208,13 @@ class Log extends AppModel {
 
 	public function allPendingFromPlayer($playerId) {
 		return $this->find('all', array(
+			'contain' => array(
+				'Domain',
+				'PairedPlayer',
+				'Tags', 
+				'Activity',
+				'Event'
+			),
 			'conditions' => array('Log.player_id' => $playerId, 'Log.reviewed IS NULL'),
 			'order' => array('Log.created' => 'DESC')
 		));
@@ -244,6 +264,7 @@ class Log extends AppModel {
 				'Player',
 				'PairedPlayer',
 				'Activity',
+				'Tags',
 				'LogVote' => array(
 					'conditions' => array('LogVote.player_id' => $playerId)
 				)

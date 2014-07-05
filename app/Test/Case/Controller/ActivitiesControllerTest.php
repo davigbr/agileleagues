@@ -16,6 +16,7 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->utils->generateLogs();
 		$this->utils->generateLogsNotReviewed();
 		$this->utils->generateEvents();
+		$this->utils->generateTags();
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
 	}
 
@@ -64,10 +65,12 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$activities = $result['activities'];
 		$events = $result['events'];
 		$players = $result['players'];
+		$tags = $result['tags'];
 
 		$this->assertEquals(2, count($events));
 		$this->assertEquals(10, count($activities));
 		$this->assertEquals(3, count($players));
+		$this->assertEquals(4, count($tags));
 	}
 
 	public function testReportGetNoActivities()  {
@@ -96,14 +99,25 @@ class ActivitiesControllerTest extends ControllerTestCase {
 				'description' => $description,
 				'player_id_pair' => DEVELOPER_ID_2
 			),
+			'Tags' => array(
+				'Tags' => array(
+					0 => '1',
+					1 => '2'
+				)
+			),
 			'Event' => array(
 				'id' => '',
 			)
 		);
 		$this->testAction('/activities/report', array('method' => 'POST', 'data' => $data));
-		$log = $this->utils->Log->findByDescription($description);
+		$this->utils->Log->recursive = 2;
+		$log = $this->utils->Log->findById($this->controller->Log->id);
+
 		$this->assertEquals(1, (int)$log['Log']['player_id']);
 		$this->assertEquals(2, (int)$log['Log']['activity_id']);
+		// Check if the tags were saved
+		$this->assertNotEmpty($log['Tags'][0]);
+		$this->assertNotEmpty($log['Tags'][1]);
 		$this->assertEquals(SCRUMMASTER_ID_1, (int)$log['Log']['player_id_owner']);
 	}
 
@@ -216,7 +230,12 @@ class ActivitiesControllerTest extends ControllerTestCase {
 
 	public function testTeamPost() {
 		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);		
-		$logs = $this->utils->Log->find('all', array('conditions' => array('Log.reviewed IS NULL')));
+		$logs = $this->utils->Log->find('all', array(
+			'conditions' => array('Log.reviewed IS NULL'),
+			'contain' => array(
+				'Activity', 'Domain', 'Tags'
+			)
+		));
 		$data = array('Log' => array());
 		foreach ($logs as $log) {
 			$acceptance = $log['Log']['id'] % 2;

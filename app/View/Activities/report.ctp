@@ -1,11 +1,11 @@
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-primary" data-collapsed="0">
-			<div class="panel-heading">
-				<div class="panel-title"><strong>Report Activity</strong></div>
-			</div>
-			<div class="panel-body">
-				<?= $this->Bootstrap->create('Log'); ?>
+<div class="panel panel-primary" data-collapsed="0">
+	<div class="panel-heading">
+		<div class="panel-title"><strong>Report Activity</strong></div>
+	</div>
+	<?= $this->Bootstrap->create('Log'); ?>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
 				<?= $this->Bootstrap->input('activity_id', array(
 					'class' => 'form-control form-control-inline', 
 					'empty' => '-',
@@ -29,18 +29,35 @@
 					'options' => $players, 
 					'after' => ' <a onclick="return false" id="activity-pair" title="' . __('You will earn %s%% additional XP for pair activities.', floor(100 * PAIR_XP_MULTIPLIER - 100)) . '" style="cursor: default" class="hide btn btn-info">+' . floor(100 * PAIR_XP_MULTIPLIER - 100) . '% XP</a>',
 					'class' => 'form-control form-control-inline')); ?>
+				<h3>Tags</h3>
+				<? if(empty($tags)): ?>
+					<p>No tags available :(</p>
+				<? else: ?>
+					<p>Please select the tags that match the activity you are reporting. </p>
+					<table id="tags" class="table table-bordered table-striped table-condensed">
+						<?$i = 0; ?>
+						<?foreach ($tags as $tag): ?>
+							<tr style="cursor: pointer">
+								<td style="width: 24px"><input name="data[Tags][Tags][<?=$i?>]" value="<?= (int)$tag['Tag']['id']?>" type="checkbox"  /></td>
+								<td><?= $this->element('tag', array('tag' => $tag)); ?> <?= h($tag['Tag']['description'])?></td>
+							</tr>
+							<?$i++;?>
+						<?endforeach;?>
+					</table>
+				<? endif; ?>
 				<div class="alert alert-warning">
 					<strong>Warning:</strong> activities peformed more than week day ago cannot be reported :(
 				</div>
-				<button type="submit" class="btn btn-success">Report</button>
-				<?= $this->Bootstrap->end(); ?>
 			</div>
 		</div>
+		<button type="submit" class="btn btn-success">Report</button>
 	</div>
+	<?= $this->Bootstrap->end(); ?>
 </div>
 <script type="text/javascript">
 	$(function(){
 		var activities = <?= json_encode($activitiesById); ?>;
+
 		$('#LogActivityId').change(function(){
 			var activityId = $(this).val();
 			if (activityId) {
@@ -53,6 +70,7 @@
 				$('#activity-xp').addClass('hide');
 			}
 		}).change();
+		
 		$('#LogPlayerIdPair').change(function() {
 			if ($(this).val()) {
 				$('#activity-pair').removeClass('hide');
@@ -60,6 +78,14 @@
 				$('#activity-pair').addClass('hide');
 			}
 		}).change();
+
+		$('#tags input').click(function(event){
+			event.stopPropagation();
+		});
+
+		$('#tags tr').click(function(){
+			$('input', $(this)).click();
+		});
 	});
 </script>
 	

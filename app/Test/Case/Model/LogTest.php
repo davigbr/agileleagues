@@ -14,6 +14,7 @@ class LogTest extends CakeTestCase {
 		$this->utils->generateActivities();
 		$this->utils->generateLogs();
 		$this->utils->generateLogsNotReviewed();
+		$this->utils->Log->recursive = 2;
 	}
 
 	public function testCount() {
@@ -45,7 +46,6 @@ class LogTest extends CakeTestCase {
 		$this->assertNotEmpty($log);
 		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_2, 'accept');
 		$activity = $this->utils->Activity->findById($log['Log']['activity_id']);
-
 		$this->assertEquals($activity['Activity']['reported'], $log['Activity']['reported'] + 1);
 	}
 
