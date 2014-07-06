@@ -27,14 +27,14 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <h3><?= $title?></h3>
-                        <span>Activity coins acquisition ranking.</span>    
+                        <span>Activities accepted ranking.</span>    
                     </div>
                 </div>
                 <table class="table table-responsive">
                     <tr>
                         <th title="Position">P</th>
                         <th><strong>Player</strong></th>
-                        <th style="text-align: right"><strong>Activities Completed</strong></th>
+                        <th title="Activities Accepted" style="text-align: right"><strong>A.C.</strong></th>
                     </tr>
                     <?$i=0?>
                     <?if (empty($rows)):?>
