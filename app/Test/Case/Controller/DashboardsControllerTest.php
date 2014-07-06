@@ -21,7 +21,7 @@ class DashboardsControllerTest extends ControllerTestCase {
 	}
 
 	public function testActivities() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/dashboards/activities', array('return' => 'vars'));
 		
 		$activitiesNeverReported = $result['neverReportedActivities'];
@@ -34,18 +34,18 @@ class DashboardsControllerTest extends ControllerTestCase {
 		
 		$this->assertEquals(4, $result['averageActivitiesLogged']);
 		$this->assertEquals(8, $result['activitiesLogged']);
-		$this->assertEquals(14, $result['totalActivities']);
+		$this->assertEquals(12, $result['totalActivities']);
 		$this->assertEquals(4, $result['badgesCompletedCount']);
 		$this->assertEquals(4, $result['activitiesCompletedCount']);
-		$this->assertEquals(14, $result['totalActivitiesCount']);
+		$this->assertEquals(12, $result['totalActivitiesCount']);
 		$this->assertEquals(4, $result['totalDifferentActivitiesCompleted']);
 		$this->assertEquals(2, count($result['domains']));
 		$this->assertEquals(1, count($result['differentActivitiesCompleted']));
-		$this->assertEquals(4, count($result['activitiesCount']));
+		$this->assertEquals(3, count($result['activitiesCount']));
 	}
 
-	public function testActivitiesScrumMaster2() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_2);
+	public function testActivitiesGameMaster2() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_2);
 		$result = $this->testAction('/dashboards/activities', array('return' => 'vars'));
 		
 		$activitiesNeverReported = $result['neverReportedActivities'];
@@ -69,7 +69,7 @@ class DashboardsControllerTest extends ControllerTestCase {
 	}
 
 	public function testActivitiesDomainDetails() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$domain = $this->utils->Domain->find('first');
 		$result = $this->testAction('/dashboards/activities/' . $domain['Domain']['id'], array('return' => 'vars'));
 		$activitiesSummary = $result['activitiesSummary'];
@@ -87,12 +87,12 @@ class DashboardsControllerTest extends ControllerTestCase {
 
 
 	public function testBadges() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/dashboards/badges', array('return' => 'vars'));
 	}
 
 	public function testLeaderboards() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/dashboards/leaderboards', array('return' => 'vars'));
         $this->assertNotEmpty($result['activityLeaderboardsEver']);
         $this->assertNotEmpty($result['activityLeaderboardsThisWeek']);
@@ -102,7 +102,7 @@ class DashboardsControllerTest extends ControllerTestCase {
 	}
 
 	public function testLeaderboardsSM2() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_2);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_2);
 		$result = $this->testAction('/dashboards/leaderboards', array('return' => 'vars'));
         $this->assertEmpty($result['activityLeaderboardsEver']);
         $this->assertEmpty($result['activityLeaderboardsThisWeek']);
@@ -112,10 +112,10 @@ class DashboardsControllerTest extends ControllerTestCase {
 	}
 
 	public function testPlayers() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/dashboards/players', array('return' => 'vars'));
 		$players = $result['players'];
-		$this->assertEquals(3, count($players));
+		$this->assertEquals(2, count($players));
 	}
 
 }

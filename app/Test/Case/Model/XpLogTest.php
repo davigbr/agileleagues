@@ -20,7 +20,7 @@ class XpLogTest extends CakeTestCase {
 	}
 	
 	public function testSaveAddedXP(){
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$xp = 10;
 
 		$data = array(
@@ -38,7 +38,7 @@ class XpLogTest extends CakeTestCase {
 	}
 
 	public function testEventTaskReported() {
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 		$eventTask = $this->utils->EventTaskLog->find('first');
 		$eventTaskId = $eventTask['EventTask']['id'];
 		$this->utils->XpLog->_eventTaskReported($playerId, $eventTaskId);		
@@ -49,14 +49,14 @@ class XpLogTest extends CakeTestCase {
 	public function testEventTaskReviewed() {
 		$eventTask = $this->utils->EventTaskLog->find('first');
 		$eventTaskId = $eventTask['EventTask']['id'];
-		$this->utils->XpLog->_eventTaskReviewed(SCRUMMASTER_ID_1, $eventTaskId);		
-		$xpLog = $this->utils->XpLog->findByEventTaskIdReviewedAndPlayerId($eventTaskId, SCRUMMASTER_ID_1);
+		$this->utils->XpLog->_eventTaskReviewed(GAME_MASTER_ID_1, $eventTaskId);		
+		$xpLog = $this->utils->XpLog->findByEventTaskIdReviewedAndPlayerId($eventTaskId, GAME_MASTER_ID_1);
 		$this->assertNotEmpty($xpLog);
 	}
 
 	public function testEventTaskReviewedEventTaskNotFound() {
 		try {
-			$this->utils->XpLog->_eventTaskReviewed(SCRUMMASTER_ID_1, 0);		
+			$this->utils->XpLog->_eventTaskReviewed(GAME_MASTER_ID_1, 0);		
 			$this->fail();
 		} catch (Exception $ex) {
 			$this->assertEquals('EventTask not found',  $ex->getMessage());
@@ -64,7 +64,7 @@ class XpLogTest extends CakeTestCase {
 	}
 
 	public function testEventTaskReportedEventTaskNotFound() {
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 		try {
 			$this->utils->XpLog->_eventTaskReported($playerId, 0);		
 			$this->fail();
@@ -85,12 +85,12 @@ class XpLogTest extends CakeTestCase {
 	}
 
 	public function testActivityReported() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$log = $this->utils->Log->find('first');
 		$logId = $log['Log']['id'];
 
 		$playerBefore = $this->utils->Player->findById($playerId);
-		$countPlayers = 4;
+		$countPlayers = 3;
 
 		$this->utils->XpLog->_activityReported($playerId, $logId);
 
@@ -111,7 +111,7 @@ class XpLogTest extends CakeTestCase {
 	}
 
 	public function testActivityReportedUnlockedMissions() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 
 		$log = $this->utils->Log->findByXp(XP_TO_REACH_LEVEL_10);
 		$logId = $log['Log']['id'];
@@ -133,11 +133,11 @@ class XpLogTest extends CakeTestCase {
 				'Player.id <>' => $playerId
 			)
 		));
-		$this->assertEquals(3, count ($otherPlayersNotifications));
+		$this->assertEquals(2, count ($otherPlayersNotifications));
 	}
 
 	public function testActivityReportedUnlockedChallenges() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$log = $this->utils->Log->findByXp(XP_TO_REACH_LEVEL_20);
 		$logId = $log['Log']['id'];
 
@@ -157,7 +157,7 @@ class XpLogTest extends CakeTestCase {
 				'Player.id <>' => $playerId
 			)
 		));
-		$this->assertEquals(3, count ($otherPlayersNotifications));
+		$this->assertEquals(2, count ($otherPlayersNotifications));
 	}
 
 	public function testActivityReportedPlayerNotFound() {
@@ -173,7 +173,7 @@ class XpLogTest extends CakeTestCase {
 
 	public function testActivityReportedLogNotFound() {
 		try {
-			$this->utils->XpLog->_activityReported(DEVELOPER_ID_1, 0);
+			$this->utils->XpLog->_activityReported(PLAYER_ID_1, 0);
 			$this->fail();
 		} catch (Exception $ex) {
 			$this->assertEquals('Log not found', $ex->getMessage());
@@ -181,24 +181,24 @@ class XpLogTest extends CakeTestCase {
 	}
 
 	public function testEventJoined() {
-		$event = $this->utils->Event->allActive(SCRUMMASTER_ID_1)[0];
+		$event = $this->utils->Event->allActive(GAME_MASTER_ID_1)[0];
 		$eventId = $event['Event']['id'];
-		$this->utils->XpLog->_eventJoined(DEVELOPER_ID_1, $eventId);
-		$xpLog = $this->utils->XpLog->findByPlayerIdAndEventIdJoined(DEVELOPER_ID_1, $eventId);
+		$this->utils->XpLog->_eventJoined(PLAYER_ID_1, $eventId);
+		$xpLog = $this->utils->XpLog->findByPlayerIdAndEventIdJoined(PLAYER_ID_1, $eventId);
 		$this->assertEquals(EVENT_JOIN_XP, $xpLog['XpLog']['xp']);
 	}
 
 	public function testEventCompleted() {
-		$event = $this->utils->Event->allActive(SCRUMMASTER_ID_1)[0];
+		$event = $this->utils->Event->allActive(GAME_MASTER_ID_1)[0];
 		$eventId = $event['Event']['id'];
-		$this->utils->XpLog->_eventCompleted(DEVELOPER_ID_1, $eventId);
-		$xpLog = $this->utils->XpLog->findByPlayerIdAndEventIdCompleted(DEVELOPER_ID_1, $eventId);
+		$this->utils->XpLog->_eventCompleted(PLAYER_ID_1, $eventId);
+		$xpLog = $this->utils->XpLog->findByPlayerIdAndEventIdCompleted(PLAYER_ID_1, $eventId);
 		$this->assertEquals($event['Event']['xp'], $xpLog['XpLog']['xp']);
 	}
 
 	public function testEventCompletedEventNotFound() {
 		try {
-			$this->utils->XpLog->_eventCompleted(DEVELOPER_ID_1, 0);
+			$this->utils->XpLog->_eventCompleted(PLAYER_ID_1, 0);
 			$this->fail();
 		} catch (ModelException $ex) {
 			$this->assertEquals('Event not found.', $ex->getMessage());
@@ -208,7 +208,7 @@ class XpLogTest extends CakeTestCase {
 	public function testActivityReviewedAccepted() {
 		$log = $this->utils->Log->find('first');
 		$logId = $log['Log']['id'];
-		$this->utils->XpLog->_activityReviewed('accept', DEVELOPER_ID_1, $logId);
+		$this->utils->XpLog->_activityReviewed('accept', PLAYER_ID_1, $logId);
 		$xpLog = $this->utils->XpLog->findByLogIdReviewed($logId);
 		$this->assertEquals(floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER), $xpLog['XpLog']['xp']);
 		$this->assertNotNull($xpLog['XpLog']['log_id_reviewed']);
@@ -217,7 +217,7 @@ class XpLogTest extends CakeTestCase {
 	public function testActivityReviewedRejected() {
 		$log = $this->utils->Log->find('first');
 		$logId = $log['Log']['id'];
-		$this->utils->XpLog->_activityReviewed('reject', DEVELOPER_ID_1, $logId);
+		$this->utils->XpLog->_activityReviewed('reject', PLAYER_ID_1, $logId);
 		$xpLog = $this->utils->XpLog->findByLogIdReviewed($logId);
 		$this->assertEquals(REJECTION_XP_BONUS, $xpLog['XpLog']['xp']);
 		$this->assertNotNull($xpLog['XpLog']['log_id_reviewed']);
@@ -225,7 +225,7 @@ class XpLogTest extends CakeTestCase {
 
 	public function testActivityReviewedNotFound() {
 		try {
-			$this->utils->XpLog->_activityReviewed('accept', DEVELOPER_ID_1, 0);
+			$this->utils->XpLog->_activityReviewed('accept', PLAYER_ID_1, 0);
 			$this->fail();	
 		} catch (Exception $ex) {
 			$this->assertEquals('Log not found', $ex->getMessage());
@@ -233,7 +233,7 @@ class XpLogTest extends CakeTestCase {
 	}
 
 	public function testLevelUpNotification() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$playerBefore = $this->utils->Player->findById($playerId);
 		$xp = 20;
 		// Raise the player xp points (to level 5)

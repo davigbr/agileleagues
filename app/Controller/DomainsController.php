@@ -6,7 +6,7 @@ class DomainsController extends AppController {
 
 	public function index() {
 		$this->set('domains', $this->Domain->allFromOwner(
-            $this->Player->scrumMasterId($this->Auth->user('id'))));
+            $this->Player->gameMasterId($this->Auth->user('id'))));
 	}
 
     public function add() {
@@ -18,7 +18,7 @@ class DomainsController extends AppController {
     }
 
     public function _save($id = null) {
-        if (!$this->isScrumMaster) {
+        if (!$this->isGameMaster) {
             throw new ForbiddenException();
         }
         

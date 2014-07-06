@@ -9,12 +9,12 @@ class ActivitiesController extends AppController {
 
 	public function index() {
 		$activities = $this->Activity->allActive(
-			$this->Player->scrumMasterId($this->Auth->user('id')));
+			$this->Player->gameMasterId($this->Auth->user('id')));
 		$this->set('activities', $activities);
 	}
 
 	public function inactivate($id) {
-		if (!$this->isScrumMaster) {
+		if (!$this->isGameMaster) {
 			return $this->redirect('/activities');
 		}
 
@@ -131,20 +131,20 @@ class ActivitiesController extends AppController {
 		$playerTypeId = $this->Auth->user('player_type_id');
 
 		$this->set('activities', $this->Activity->simpleActiveFromPlayerType(
-			$this->scrumMasterId(), 
+			$this->gameMasterId(), 
 			$playerTypeId
 		));
-		$this->set('activitiesById', $this->Activity->allFromOwnerById($this->scrumMasterId()));
-		$this->set('events', $this->Event->simpleActive($this->scrumMasterId()));
+		$this->set('activitiesById', $this->Activity->allFromOwnerById($this->gameMasterId()));
+		$this->set('events', $this->Event->simpleActive($this->gameMasterId()));
 		$this->set('players', $this->Player->simpleTeamMates($this->Auth->user('id')));
-		$this->set('tags', $this->Tag->allActive($this->scrumMasterId()));
+		$this->set('tags', $this->Tag->allActive($this->gameMasterId()));
 
 		if ($this->request->is('post')) {
 			$log = $this->request->data;
 
 			$playerId = $this->Auth->user('id');
 			$log['Log']['player_id'] = $playerId;
-			$log['Log']['player_id_owner'] = $this->scrumMasterId();
+			$log['Log']['player_id_owner'] = $this->gameMasterId();
 			$activityId = $log['Log']['activity_id'];
 
 			// Validad o primeiro log apenas
@@ -180,11 +180,11 @@ class ActivitiesController extends AppController {
 	}
 
 	public function _save($id = null) {
-		if (!$this->isScrumMaster) {
+		if (!$this->isGameMaster) {
 			throw new ForbiddenException();
 		}
 
-		$this->set('domains', $this->Domain->simpleFromOwner($this->scrumMasterId()));
+		$this->set('domains', $this->Domain->simpleFromOwner($this->gameMasterId()));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
             $this->request->data['Activity']['player_id_owner'] = $this->Auth->user('id');

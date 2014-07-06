@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class BadgesController extends AppController {
 
 	public function index() {
-        $smId = $this->scrumMasterId();
+        $smId = $this->gameMasterId();
 		$this->set('activitiesById', $this->Activity->allFromOwnerById($smId));
 		$this->set('badgesById', $this->Badge->allFromOwnerById($smId));
 		$this->Badge->recursive = 1;
@@ -63,7 +63,7 @@ class BadgesController extends AppController {
     }
 
     public function _save($domainId, $id = null) {
-        if (!$this->isScrumMaster) {
+        if (!$this->isGameMaster) {
             throw new ForbiddenException();
         }
 
@@ -114,7 +114,7 @@ class BadgesController extends AppController {
         $this->set('domain', $this->Domain->findById($domainId));
         $this->set('badges', $this->Badge->simpleFromDomain($domainId));
         $this->set('activities', $this->Activity->simpleFromDomain($domainId));
-        $this->set('tags', $this->Tag->allActive($this->scrumMasterId()));
+        $this->set('tags', $this->Tag->allActive($this->gameMasterId()));
     }
 
 }

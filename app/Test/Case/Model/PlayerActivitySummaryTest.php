@@ -16,7 +16,7 @@ class PlayerActivitySummaryTest extends CakeTestCase {
 	}
 
 	public function testAllFromPlayer() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$result = $this->utils->PlayerActivitySummary->allFromPlayer($playerId);
 		$this->assertNotEmpty($result, 'No log data to test');
 		foreach ($result as $row) {
@@ -40,7 +40,7 @@ class PlayerActivitySummaryTest extends CakeTestCase {
 
 	public function testAllFromPlayerWithDomain() {
 		$domain = $this->utils->Domain->find('first');
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$domainId = $domain['Domain']['id'];
 		$result = $this->utils->PlayerActivitySummary->allFromPlayer($playerId, $domainId);
 		$this->assertNotEmpty($result, 'No log data to test');

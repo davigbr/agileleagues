@@ -15,9 +15,9 @@ class BadgeLogTest extends CakeTestCase {
 	}
 
 	public function testPlayerCount(){
-		$logs = $this->utils->BadgeLog->playerCount(DEVELOPER_ID_1);
+		$logs = $this->utils->BadgeLog->playerCount(PLAYER_ID_1);
 		$this->assertEquals(4, $logs);
-		$logs = $this->utils->BadgeLog->playerCount(DEVELOPER_ID_2);
+		$logs = $this->utils->BadgeLog->playerCount(PLAYER_ID_2);
 		$this->assertEquals(4, $logs);
 	}
 

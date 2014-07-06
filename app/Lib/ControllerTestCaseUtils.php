@@ -41,7 +41,7 @@ class ControllerTestCaseUtils {
             }));
     }
 
-    public function mockAuthUser($userId = DEVELOPER_ID_1) {
+    public function mockAuthUser($userId = PLAYER_ID_1) {
         $player = array('id' => $userId);
 
         $that = $this->controllerTestCase;

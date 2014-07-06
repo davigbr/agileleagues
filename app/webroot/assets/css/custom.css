@@ -82,3 +82,7 @@ li a:hover, .navbar a:hover {
    -ms-user-select: none;
    user-select: none;
 }
+.tag {
+	margin: 2px !important; 
+	display: inline-block; 
+}

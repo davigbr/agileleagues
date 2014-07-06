@@ -43,7 +43,7 @@
 							<?endforeach;?>
 						</td>
 						<td>
-							<?if ($isScrumMaster): ?>
+							<?if ($isGameMaster): ?>
 								<div class="btn-group">
 									<a href="<? echo $this->Html->url('/badges/edit/' . $badge['Badge']['domain_id'] . '/' . $badge['Badge']['id']); ?>" class="btn btn-primary btn-sm">
 										<i class="glyphicon glyphicon-edit"></i>

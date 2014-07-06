@@ -6,7 +6,7 @@ class TeamsController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		if (!$this->isScrumMaster) {
+		if (!$this->isGameMaster) {
 			throw new ForbiddenException();
 		} 
 	}
@@ -17,8 +17,8 @@ class TeamsController extends AppController {
 
 	private function _save($id = null) {
 		if ($this->request->is('post') || $this->request->is('put')) {
-			// Enforces the logged ScrumMaster
-			$this->request->data['Team']['player_id_scrummaster'] = $this->Auth->user('id');
+			// Enforces the logged GameMaster
+			$this->request->data['Team']['player_id_owner'] = $this->Auth->user('id');
 
 			if ($this->Team->save($this->request->data)) {
 				$this->flashSuccess(__('Team saved successfully.'));
@@ -46,13 +46,13 @@ class TeamsController extends AppController {
 		$team = $this->Team->find('first', array(
 			'conditions' => array('Team.id' => $id),
 			'contain' => array(
-				'Developers' => array('id')
+				'Players' => array('id')
 			)
 		));
 		if (!$team) {
 			throw new NotFoundException();
 		}
-		if (count($team['Developers']) > 0) {
+		if (count($team['Players']) > 0) {
 			$this->flashError('It is not possible to remove this team because it has some players assigned. Please remove  or unassign the players first. ');
 		} else {
 			if ($this->Team->delete($id)) {

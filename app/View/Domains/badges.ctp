@@ -92,7 +92,7 @@
         </div>
     <?endforeach;?>
 </div>
-<?if ($isScrumMaster): ?>
+<?if ($isGameMaster): ?>
     <div class="btn-group">
         <a href="<? echo $this->Html->url('/badges/add/' . $domain['Domain']['id']); ?>" class="btn btn-success btn-lg">
             <i class="glyphicon glyphicon-plus"></i> Create Badge

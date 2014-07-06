@@ -18,7 +18,7 @@ class EventTest extends CakeTestCase {
 	}
 
 	public function testCompleteCannotBeCompletedYet() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$event = $this->utils->Event->find('first');
 		$eventId = $event['Event']['id'];
 		try {
@@ -31,7 +31,7 @@ class EventTest extends CakeTestCase {
 
 	public function testCompleteAlreadyCompleted() {
 		$this->utils->generateEventActivityLogs();
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 		$event = $this->utils->Event->find('first');
 		$eventId = $event['Event']['id'];
 		$this->utils->EventCompleteLog->_log($playerId, $eventId);
@@ -46,7 +46,7 @@ class EventTest extends CakeTestCase {
 	public function testComplete() {
 		$this->utils->generateEventActivityLogs();
 		$this->utils->generateEventTaskLogs();
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 		$event = $this->utils->Event->find('first', array('order' => array('Event.id' => 'ASC')));
 		$eventId = $event['Event']['id'];
 		$this->utils->Event->complete($playerId, $eventId);
@@ -56,7 +56,7 @@ class EventTest extends CakeTestCase {
 
 	public function testPlayerProgress() {
 		$this->utils->generateEventActivityLogs();
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 		$event = $this->utils->Event->find('first', array('order' => array('Event.id' => 'ASC')));
 		$eventId = $event['Event']['id'];
 		$event = $this->utils->Event->playerProgress($playerId, $eventId);
@@ -64,7 +64,7 @@ class EventTest extends CakeTestCase {
 	}
 
 	public function testPlayerProgressEventNotFound() {
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 		$event = $this->utils->Event->find('first');
 		$eventId = $event['Event']['id'];
 		try {
@@ -75,17 +75,17 @@ class EventTest extends CakeTestCase {
 	}
 
 	public function testSimpleActive() {
-		$events = $this->utils->Event->simpleActive(SCRUMMASTER_ID_1);
+		$events = $this->utils->Event->simpleActive(GAME_MASTER_ID_1);
 		foreach ($events as $key => $value) {
 			$this->assertTrue(is_int($key));
 			$this->assertTrue(is_string($value));
 		}
 		$this->assertEquals(2, count($events));
-		$this->assertEquals(0, count($this->utils->Event->simpleActive(SCRUMMASTER_ID_2)));
+		$this->assertEquals(0, count($this->utils->Event->simpleActive(GAME_MASTER_ID_2)));
 	}
 
 	public function testAllActive() {
-		$events = $this->utils->Event->allActive(SCRUMMASTER_ID_1, 1);
+		$events = $this->utils->Event->allActive(GAME_MASTER_ID_1, 1);
 		$this->assertNotEmpty($events);
 		$this->assertEquals(1, count($events));
 		foreach ($events as $event) {
@@ -95,11 +95,11 @@ class EventTest extends CakeTestCase {
 			$this->assertTrue($start <= $now);
 			$this->assertTrue($end >= $now);
 		}
-		$this->assertEmpty($this->utils->Event->allActive(SCRUMMASTER_ID_2, 1));
+		$this->assertEmpty($this->utils->Event->allActive(GAME_MASTER_ID_2, 1));
 	}
 
 	public function testAllPast() {
-		$events = $this->utils->Event->allPast(SCRUMMASTER_ID_1, 1);
+		$events = $this->utils->Event->allPast(GAME_MASTER_ID_1, 1);
 		$this->assertNotEmpty($events);
 		$this->assertEquals(1, count($events));
 		foreach ($events as $event) {
@@ -109,11 +109,11 @@ class EventTest extends CakeTestCase {
 			$this->assertTrue($start < $now);
 			$this->assertTrue($end < $now);
 		}
-		$this->assertEmpty($this->utils->Event->allFuture(SCRUMMASTER_ID_2, 1));
+		$this->assertEmpty($this->utils->Event->allFuture(GAME_MASTER_ID_2, 1));
 	}
 
 	public function testAllFuture() {
-		$events = $this->utils->Event->allFuture(SCRUMMASTER_ID_1, 1);
+		$events = $this->utils->Event->allFuture(GAME_MASTER_ID_1, 1);
 		$this->assertNotEmpty($events);
 		$this->assertEquals(1, count($events));
 		foreach ($events as $event) {
@@ -123,7 +123,7 @@ class EventTest extends CakeTestCase {
 			$this->assertTrue($start > $now);
 			$this->assertTrue($end > $now);
 		}
-		$this->assertEmpty($this->utils->Event->allFuture(SCRUMMASTER_ID_2, 1));
+		$this->assertEmpty($this->utils->Event->allFuture(GAME_MASTER_ID_2, 1));
 	}
 
 }

@@ -5,9 +5,9 @@ App::uses('AppController', 'Controller');
 class EventsController extends AppController {
 
 	public function index() {
-		$this->set('activeEvents', $this->Event->allActive($this->scrumMasterId(), 10));
-		$this->set('pastEvents', $this->Event->allPast($this->scrumMasterId(), 5));
-		$this->set('futureEvents', $this->Event->allFuture($this->scrumMasterId(), 5));
+		$this->set('activeEvents', $this->Event->allActive($this->gameMasterId(), 10));
+		$this->set('pastEvents', $this->Event->allPast($this->gameMasterId(), 5));
+		$this->set('futureEvents', $this->Event->allFuture($this->gameMasterId(), 5));
 	}
 
 	public function notReviewed() {
@@ -52,8 +52,8 @@ class EventsController extends AppController {
 	}
 
 	public function report() {
-		$this->set('events', $this->Event->simpleActive($this->scrumMasterId()));
-		$this->set('allEvents', $this->Event->allActive($this->scrumMasterId(), false));
+		$this->set('events', $this->Event->simpleActive($this->gameMasterId()));
+		$this->set('allEvents', $this->Event->allActive($this->gameMasterId(), false));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 			
@@ -81,12 +81,12 @@ class EventsController extends AppController {
 	}
 
 	private function _save($id = null) {
-		if (!$this->isScrumMaster) {
+		if (!$this->isGameMaster) {
 			throw new ForbiddenException();
 		}
 
 		$this->set('eventTypes', $this->EventType->simple());
-		$this->set('activities', $this->Activity->simpleActive($this->scrumMasterId()));
+		$this->set('activities', $this->Activity->simpleActive($this->gameMasterId()));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 			

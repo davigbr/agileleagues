@@ -48,7 +48,7 @@
 						<a class="btn btn-primary" href="<? echo $this->Html->url('/activities/calendar/' . $player['Player']['id']); ?>">
 							<i class="entypo-calendar"></i> Activities
 						</a>
-						<?if ($isScrumMaster): ?>
+						<?if ($isGameMaster): ?>
 							<a title="<?= __('Change team')?>" class="btn btn-info" href="<? echo $this->Html->url('/players/team/' . $player['Player']['id']); ?>">
 								<i class="entypo-users"></i> Team
 							</a>

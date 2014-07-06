@@ -108,15 +108,15 @@ class XpLog extends AppModel {
 	}
 
 	public function _eventTaskReviewed($smId, $eventTaskId) {
-		$developers = $this->Player->developersCount();
+		$players = $this->Player->playersCount();
 
-		if ($developers > 0) {
+		if ($players > 0) {
 			$eventTask = $this->EventTask->findById($eventTaskId);
 			if (!$eventTask) {
 				throw new Exception('EventTask not found');
 			}
 
-			$smXp = floor($eventTask['EventTask']['xp'] / $developers);
+			$smXp = floor($eventTask['EventTask']['xp'] / $players);
 			// Ganha no mínimo 1 ponto de experiência
 			if ($smXp == 0) $smXp = 1;
 

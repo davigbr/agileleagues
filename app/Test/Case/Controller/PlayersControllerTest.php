@@ -32,7 +32,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'name' => 'Name',
 			'email' => 'email@email.com',
 			'hash' => $hash,
-			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+			'player_type_id' => PLAYER_TYPE_PLAYER,
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();
@@ -51,7 +51,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'email' => 'email@email.com',
 			'password' => md5('123456'), 
 			'hash' => $hash,
-			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+			'player_type_id' => PLAYER_TYPE_PLAYER,
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();
@@ -69,7 +69,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'name' => 'Name',
 			'email' => 'email@email.com',
 			'hash' => $hash,
-			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+			'player_type_id' => PLAYER_TYPE_PLAYER,
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();
@@ -96,7 +96,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'name' => 'Name',
 			'email' => 'email@email.com',
 			'hash' => $hash,
-			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+			'player_type_id' => PLAYER_TYPE_PLAYER,
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();
@@ -124,7 +124,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'email' => 'email@email.com',
 			'hash' => $hash,
 			'verified_in' => date('Y-m-d H:i:s'),
-			'player_type_id' => PLAYER_TYPE_DEVELOPER
+			'player_type_id' => PLAYER_TYPE_PLAYER
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();
@@ -135,40 +135,24 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testInviteGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
 		$this->assertTrue(isset($vars['playerTypes']));
 	}
 
-	public function testInviteNotScrumMaster() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+	public function testInviteNotGameMaster() {
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$this->setExpectedException('ForbiddenException');
 		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
 	}
 
-	public function testInvitePostSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+	public function testInvitePostGameMaster() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$data = array(
 			'Player' => array(
 				'name' => 'A team',
 				'email' => 'email@email.com',
-				'player_type_id' => PLAYER_TYPE_PRODUCT_OWNER,
-				'team_id' => '1'
-			)
-		);
-		$this->testAction('/players/invite', array('data' => $data));
-		$player = $this->utils->Player->findByEmail('email@email.com');
-		$this->assertNotEmpty($player['Player']['hash']);
-		$this->assertNotNull($this->controller->flashSuccess);
-	}
-
-	public function testInvitePostScrumMaster() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
-		$data = array(
-			'Player' => array(
-				'name' => 'A team',
-				'email' => 'email@email.com',
-				'player_type_id' => PLAYER_TYPE_SCRUMMASTER,
+				'player_type_id' => PLAYER_TYPE_GAME_MASTER,
 				'team_id' => '1'
 			)
 		);
@@ -180,12 +164,12 @@ class PlayersControllerTest extends ControllerTestCase {
 
 
 	public function testInvitePostValidationError() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$data = array(
 			'Player' => array(
 				'name' => '',
 				'email' => 'email@email.com',
-				'player_type_id' => PLAYER_TYPE_PRODUCT_OWNER,
+				'player_type_id' => PLAYER_TYPE_PLAYER,
 				'team_id' => '1'
 			)
 		);
@@ -197,7 +181,7 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testTeamGet() {
-		$id = DEVELOPER_ID_1;
+		$id = PLAYER_ID_1;
 		$vars = $this->testAction('/players/team/' . $id, array('method' => 'get', 'return' => 'vars'));
 		$this->assertTrue(isset($vars['teams']));
 	}
@@ -208,7 +192,7 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testTeamPost() {
-		$id = DEVELOPER_ID_1;
+		$id = PLAYER_ID_1;
 		$teamId = TEAM_ID_EMPTY;
 		$data = array('Player' => array(
 			'id' => $id,
@@ -345,7 +329,7 @@ class PlayersControllerTest extends ControllerTestCase {
 		$this->testAction('/players/signup', array('data' => $data));
 		$player = $this->utils->Player->findByEmail('email@email.com');
 		$this->assertNotEmpty($player['Player']['hash']);
-		$this->assertEquals(PLAYER_TYPE_SCRUMMASTER, $player['Player']['player_type_id']);
+		$this->assertEquals(PLAYER_TYPE_GAME_MASTER, $player['Player']['player_type_id']);
 		$this->assertNotNull($this->controller->flashSuccess);
 	}
 
@@ -379,7 +363,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'email' => 'email@email.com',
 			'hash' => $hash,
 			'verified_in' => date('Y-m-d H:i:s'),
-			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+			'player_type_id' => PLAYER_TYPE_PLAYER,
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();
@@ -396,7 +380,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'email' => 'email@email.com',
 			'hash' => $hash,
 			'verified_in' => date('Y-m-d H:i:s'),
-			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+			'player_type_id' => PLAYER_TYPE_PLAYER,
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();
@@ -424,7 +408,7 @@ class PlayersControllerTest extends ControllerTestCase {
 			'email' => 'email@email.com',
 			'hash' => $hash,
 			'verified_in' => date('Y-m-d H:i:s'),
-			'player_type_id' => PLAYER_TYPE_DEVELOPER,
+			'player_type_id' => PLAYER_TYPE_PLAYER,
 		));
 		unset($this->utils->Player->validate);
 		$this->utils->Player->create();

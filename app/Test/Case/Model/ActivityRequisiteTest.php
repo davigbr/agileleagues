@@ -25,7 +25,7 @@ class ActivityRequisiteTest extends CakeTestCase {
 	public function testUpdateActivityRequisiteSummaryAlreadyExists() {
 		$this->generateActivityRequisite();
 		$this->utils->ActivityRequisiteSummary->save(array(
-			'player_id' => DEVELOPER_ID_1,
+			'player_id' => PLAYER_ID_1,
 			'badge_id' => $this->badgeId,
 			'activity_requisite_id' => $this->utils->ActivityRequisite->id,
 			'times' => 1
@@ -58,7 +58,7 @@ class ActivityRequisiteTest extends CakeTestCase {
 		));
 		$this->log = array(
 			'Log' => array(
-				'player_id' => DEVELOPER_ID_1,
+				'player_id' => PLAYER_ID_1,
 				'activity_id' => $this->activityId
 			),
 			'Tags' => array(

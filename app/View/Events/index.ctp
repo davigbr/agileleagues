@@ -73,7 +73,7 @@
 						</td>
 						<td style="text-align: center;">
 							<div class="btn-group">
-								<?if ($isDeveloper): ?>
+								<?if ($isPlayer): ?>
 									<?if ($joined): ?>
 										<a href="#" class="disabled btn btn-success btn-sm">
 											<i class="glyphicon glyphicon-ok"></i> Joined
@@ -94,7 +94,7 @@
 										</a>
 									<?endif;?>
 								<?endif;?>
-								<?if ($isScrumMaster): ?>
+								<?if ($isGameMaster): ?>
 									<a title="Edit" href="<? echo $this->Html->url('/events/edit/' . $event['Event']['id']); ?>" class="btn btn-primary btn-sm">
 										<i class="glyphicon glyphicon-edit"></i>
 									</a>
@@ -131,7 +131,7 @@
 							<th>Type</th>
 							<th>Start</th>
 							<th>End</th>
-							<?if ($isScrumMaster): ?>
+							<?if ($isGameMaster): ?>
 								<th style="text-align: center">Actions</th>
 							<?endif;?>
 						</tr>
@@ -141,7 +141,7 @@
 								<td><? echo h($event['EventType']['name']); ?></td>
 								<td><? echo $this->Format->date($event['Event']['start']); ?></td>
 								<td><? echo $this->Format->date($event['Event']['end']); ?></td>
-								<?if ($isScrumMaster): ?>
+								<?if ($isGameMaster): ?>
 									<td style="text-align: center;">
 										<div class="btn-group">
 											<a href="<? echo $this->Html->url('/events/edit/' . $event['Event']['id']); ?>" class="btn btn-primary btn-sm">

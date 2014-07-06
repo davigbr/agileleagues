@@ -15,25 +15,25 @@ class TagsControllerTest extends ControllerTestCase {
 	}
 
 	public function testAddNotGA() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$this->setExpectedException('ForbiddenException');
 		$this->testAction('/tags/add');
 	}
 
 	public function testIndex() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$vars = $this->testAction('/tags/', array('return' => 'vars'));
 		$this->assertNotEmpty($vars['tags']);
 	}
 
 	public function testInactivateNotFound() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$this->testAction('/tags/inactivate/0', array('return' => 'vars'));
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testInactivateSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$this->testAction('/tags/inactivate/1', array('return' => 'vars'));
 		$tag = $this->utils->Tag->findById(1);
 		$this->assertEquals(true, (bool)$tag['Tag']['inactive']);
@@ -41,12 +41,12 @@ class TagsControllerTest extends ControllerTestCase {
 	}
 
 	public function testAddGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);		
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);		
 		$this->testAction('/tags/add/', array('return' => 'vars', 'method' => 'GET'));
 	}
 
 	public function testAddPostSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);		
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);		
 		$name = 'name new tag';
 		$data = array(
 			'Tag' => array(
@@ -58,11 +58,11 @@ class TagsControllerTest extends ControllerTestCase {
 		);
 		$this->testAction('/tags/add/', array('return' => 'vars', 'data' => $data));
 		$tag = $this->utils->Tag->findByName($name);
-		$this->assertEquals($tag['Tag']['player_id_owner'], SCRUMMASTER_ID_1);
+		$this->assertEquals($tag['Tag']['player_id_owner'], GAME_MASTER_ID_1);
 	}
 
 	public function testAddPostValidationError() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);		
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);		
 		$id = 1;
 		$data = array(
 			'Tag' => array(
@@ -77,13 +77,13 @@ class TagsControllerTest extends ControllerTestCase {
 	}
 
 	public function testEditGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);		
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);		
 		$this->testAction('/tags/edit/1', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotEmpty($this->controller->request->data['Tag']);
 	}
 
 	public function testEditPostSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);		
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);		
 		$id = 1;
 		$name = 'name changed';
 		$data = array(
@@ -99,7 +99,7 @@ class TagsControllerTest extends ControllerTestCase {
 	}
 
 	public function testEditPostValidationError() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);		
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);		
 		$id = 1;
 		$name = 'name changed';
 		$data = array(

@@ -17,13 +17,13 @@ class BadgeTest extends CakeTestCase {
 	}
 
 	public function testAllFromOwner() {
-		$this->assertEquals(4, count($this->utils->Badge->allFromOwner(SCRUMMASTER_ID_1)));
-		$this->assertEquals(0, count($this->utils->Badge->allFromOwner(SCRUMMASTER_ID_2)));
+		$this->assertEquals(4, count($this->utils->Badge->allFromOwner(GAME_MASTER_ID_1)));
+		$this->assertEquals(0, count($this->utils->Badge->allFromOwner(GAME_MASTER_ID_2)));
 	}
 
 	public function testAllFromOwnerById() {
-		$this->assertEquals(4, count($this->utils->Badge->allFromOwnerById(SCRUMMASTER_ID_1)));
-		$this->assertEquals(0, count($this->utils->Badge->allFromOwnerById(SCRUMMASTER_ID_2)));
+		$this->assertEquals(4, count($this->utils->Badge->allFromOwnerById(GAME_MASTER_ID_1)));
+		$this->assertEquals(0, count($this->utils->Badge->allFromOwnerById(GAME_MASTER_ID_2)));
 	}
 	
 	public function testAllFromDomainById(){
@@ -57,7 +57,7 @@ class BadgeTest extends CakeTestCase {
 		$this->utils->Badge->recursive = 1;
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		// Insere as informações na tabela de resumo, 
 		// pois os logs não foram revisados chamando _review()
 		$this->utils->ActivityRequisiteSummary->updateAll(
@@ -77,7 +77,7 @@ class BadgeTest extends CakeTestCase {
 		$this->utils->Badge->recursive = 1;
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = SCRUMMASTER_ID_1;
+		$playerId = GAME_MASTER_ID_1;
 
 		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
 		try {
@@ -94,7 +94,7 @@ class BadgeTest extends CakeTestCase {
 
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		try {
 			$this->utils->Badge->claim($playerId, $badgeId);
 			$this->fail();
@@ -104,7 +104,7 @@ class BadgeTest extends CakeTestCase {
 	}
 
 	public function testClaimBadgeNotFound() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		try {
 			$this->utils->Badge->claim($playerId, 0);
 			$this->fail();
@@ -119,7 +119,7 @@ class BadgeTest extends CakeTestCase {
 
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 
 		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
 
@@ -139,7 +139,7 @@ class BadgeTest extends CakeTestCase {
 
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 
 		$this->utils->BadgeLog->query('DELETE FROM badge_log');
 

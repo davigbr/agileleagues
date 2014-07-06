@@ -13,7 +13,7 @@ class EventCompleteLogTest extends CakeTestCase {
 	}
 
 	public function testLog() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$event = $this->utils->Event->find('first');
 		$eventId = $event['Event']['id'];
 		$this->utils->EventCompleteLog->_log($playerId, $eventId);

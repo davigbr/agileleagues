@@ -12,13 +12,13 @@ class TeamTest extends CakeTestCase {
 		$this->utils->generatePlayers();
 	}
 
-	public function testSimpleFromScrumMaster() {
-		$teams = $this->utils->Team->simpleFromScrumMaster(SCRUMMASTER_ID_1);
+	public function testSimpleFromGameMaster() {
+		$teams = $this->utils->Team->simpleFromGameMaster(GAME_MASTER_ID_1);
 		$this->assertEquals(2, count($teams));
 	}
 
 	public function testAllFromOwner() {
-		$this->assertEquals(2, count($this->utils->Team->allFromOwner(SCRUMMASTER_ID_1)));
-		$this->assertEquals(0, count($this->utils->Team->allFromOwner(SCRUMMASTER_ID_2)));
+		$this->assertEquals(2, count($this->utils->Team->allFromOwner(GAME_MASTER_ID_1)));
+		$this->assertEquals(0, count($this->utils->Team->allFromOwner(GAME_MASTER_ID_2)));
 	}
 }

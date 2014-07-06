@@ -11,12 +11,12 @@
 					<?= $this->Bootstrap->input('password', array('autocomplete' => 'off', 'type' => 'password', 'class' => 'form-control')); ?>
 					<?= $this->Bootstrap->input('player_type_id', array('class' => 'form-control', 'readonly' => 'readonly')); ?>
 					<div class="alert alert-warning">
-						You are going to sign up as a <strong>ScrumMaster</strong>. If you want to join an existing team, you should ask a ScrumMaster to invite you. 
+						You are going to sign up as a <strong>Game Master</strong>. If you want to join an existing team, you should ask a Game Master to invite you. 
 						Also remember that you can sign up as only one role per email address. 
 					</div>
 					<div class="alert alert-info">
-						The <strong>ScrumMaster</strong> is responsible for managing the gamification program.
-						He/she can create domains, activities, badges, manage teams and invite Developers and Product Owners.
+						The <strong>Game Master</strong> is responsible for managing the gamification program.
+						He/she can create domains, activities, badges, manage teams and invite Players.
 					</div>
 				</div>
 				<div class="panel-footer">

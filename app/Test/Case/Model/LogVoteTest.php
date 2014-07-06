@@ -22,7 +22,7 @@ class LogVoteTest extends CakeTestCase {
 		foreach ($logs as $log) {
 			$votes[] = array('LogVote' => array(
 				'log_id' => (int)$log['Log']['id'],
-				'player_id' => DEVELOPER_ID_1,
+				'player_id' => PLAYER_ID_1,
 				'vote' => $log['Log']['id'] % 2? '1' : '-1',
 				'comment' => 'some very very very long comment'
 			));

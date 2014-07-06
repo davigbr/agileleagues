@@ -7,7 +7,7 @@
     <?if (empty($tags)): ?>
 	    <div class="panel-body">
 		    <p>No tags found :( </p>
-		    <?if ($isScrumMaster): ?>
+		    <?if ($isGameMaster): ?>
 				<a href="<?= $this->Html->url('/tags/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Tag </a>
 			<?endif;?>
 	    </div>
@@ -18,7 +18,7 @@
 					<th>Name</th>
 					<th>Description</th>
 					<th>Symbol</th>
-					<?if ($isScrumMaster): ?>
+					<?if ($isGameMaster): ?>
 						<th>
 							<a href="<?= $this->Html->url('/tags/add'); ?>" class="btn btn-lg btn-success"><i class="glyphicon glyphicon-plus"></i> New </a>
 						</th>
@@ -43,7 +43,7 @@
 							<td>
 								<?= $this->element('tag', array('tag' => $tag)); ?>
 							</td>
-							<?if ($isScrumMaster): ?>
+							<?if ($isGameMaster): ?>
 								<td>
 									<a href="<?= $this->Html->url('/tags/edit/' . $tag['Tag']['id']); ?>" class="btn btn-primary btn-sm">
 										<i class="glyphicon glyphicon-edit"></i>

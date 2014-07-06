@@ -31,12 +31,12 @@ class LogTest extends CakeTestCase {
 	}
 
 	public function testCount() {
-		$this->assertEquals(16, $this->utils->Log->count(SCRUMMASTER_ID_1));
-		$this->assertEquals(0, $this->utils->Log->count(SCRUMMASTER_ID_2));
+		$this->assertEquals(16, $this->utils->Log->count(GAME_MASTER_ID_1));
+		$this->assertEquals(0, $this->utils->Log->count(GAME_MASTER_ID_2));
 	}
 
 	public function testBeforeSave() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 		$activity = $this->utils->Activity->find('first');
 		$data = array(
 			'Log' => array(
@@ -57,7 +57,7 @@ class LogTest extends CakeTestCase {
 	public function testReviewedAcceptIncrementedActivityReportedCounter() {
 		$log = $this->utils->Log->find('first', array('conditions' => 'Log.reviewed IS NULL'));
 		$this->assertNotEmpty($log);
-		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_2, 'accept');
+		$this->utils->Log->_review($log['Log']['id'], PLAYER_ID_2, 'accept');
 		$activity = $this->utils->Activity->findById($log['Log']['activity_id']);
 		$this->assertEquals($activity['Activity']['reported'], $log['Activity']['reported'] + 1);
 	}
@@ -65,7 +65,7 @@ class LogTest extends CakeTestCase {
 	public function testWhenReviewedGeneratedXpLogToPlayer() {
 		$log = $this->utils->Log->find('first', array('conditions' => 'Log.reviewed IS NULL'));
 		$this->assertNotEmpty($log);
-		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_2, 'accept');
+		$this->utils->Log->_review($log['Log']['id'], PLAYER_ID_2, 'accept');
 
 		$xpLog = $this->utils->XpLog->findByPlayerIdAndActivityId(
 			$log['Log']['player_id'], 
@@ -77,26 +77,26 @@ class LogTest extends CakeTestCase {
 	public function testReviewAcceptShouldGenerateXpLogToReviewers() {
 		$log = $this->utils->Log->find('first', array('conditions' => array(
 			'Log.reviewed IS NULL',
-			'Log.player_id' => DEVELOPER_ID_1
+			'Log.player_id' => PLAYER_ID_1
 		)));
 		$this->assertNotEmpty($log);
 		$this->utils->LogVote->saveMany(array(
 			array(
 				'log_id' => $log['Log']['id'],
 				'vote' => 1,
-				'player_id' => DEVELOPER_ID_2
+				'player_id' => PLAYER_ID_2
 			),
 			array(
 				'log_id' => $log['Log']['id'],
 				'vote' => 1,
-				'player_id' => DEVELOPER_ID_3
+				'player_id' => PLAYER_ID_3
 			)
 		));
 
-		$this->utils->Log->_review($log['Log']['id'], DEVELOPER_ID_3, 'accept');
+		$this->utils->Log->_review($log['Log']['id'], PLAYER_ID_3, 'accept');
 
-		$xpLogPlayer2 = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(DEVELOPER_ID_2, $log['Log']['id']);
-		$xpLogPlayer3 = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(DEVELOPER_ID_3, $log['Log']['id']);
+		$xpLogPlayer2 = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(PLAYER_ID_2, $log['Log']['id']);
+		$xpLogPlayer3 = $this->utils->XpLog->findByPlayerIdAndLogIdReviewed(PLAYER_ID_3, $log['Log']['id']);
 
 		$expectedXp = floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER);
 		$this->assertEquals($expectedXp, $xpLogPlayer2['XpLog']['xp']);
@@ -144,12 +144,12 @@ class LogTest extends CakeTestCase {
 	}
 
 	public function testAverage() {
-		$avg = $this->utils->Log->average(SCRUMMASTER_ID_1);
+		$avg = $this->utils->Log->average(GAME_MASTER_ID_1);
 		$this->assertEquals(4.0, $avg);
 	}
 
 	public function testAverageSM2() {
-		$avg = $this->utils->Log->average(SCRUMMASTER_ID_2);
+		$avg = $this->utils->Log->average(GAME_MASTER_ID_2);
 		$this->assertEquals(0, $avg);
 	}
 
@@ -179,11 +179,11 @@ class LogTest extends CakeTestCase {
 	}
 
 	public function testCountPendingFromTeamNotFromPlayer() {
-		$this->assertEquals(4, $this->utils->Log->countPendingFromTeamNotFromPlayer(DEVELOPER_ID_1));
+		$this->assertEquals(4, $this->utils->Log->countPendingFromTeamNotFromPlayer(PLAYER_ID_1));
 	}
 
 	public function testAllPendingFromTeamNotFromPlayer() {
-		$this->assertEquals(4, count($this->utils->Log->allPendingFromTeamNotFromPlayer(DEVELOPER_ID_1)));
+		$this->assertEquals(4, count($this->utils->Log->allPendingFromTeamNotFromPlayer(PLAYER_ID_1)));
 	}
 
 
@@ -200,14 +200,14 @@ class LogTest extends CakeTestCase {
 		$log = $this->utils->Log->findByReviewed(null);
 		$this->assertNull($log['Log']['reviewed']);
 		$id = $log['Log']['id'];
-		$this->utils->Log->_review($id, DEVELOPER_ID_2, 'accept');
+		$this->utils->Log->_review($id, PLAYER_ID_2, 'accept');
 		$log = $this->utils->Log->read();
 		$this->assertNotNull($log['Log']['reviewed']);
 	}
 
 	public function testReviewFirstTimeActivity() {
         $activityId = 99;
-        $playerId = DEVELOPER_ID_1;
+        $playerId = PLAYER_ID_1;
         $this->utils->Activity->save(array(
         	'id' => $activityId, 
         	'name' => 'Activity 99', 
@@ -222,17 +222,17 @@ class LogTest extends CakeTestCase {
             'acquired' => date('Y-m-d')
         ));
 
-        $this->utils->Log->_review($this->utils->Log->id, DEVELOPER_ID_2, 'accept');
+        $this->utils->Log->_review($this->utils->Log->id, PLAYER_ID_2, 'accept');
         $notifications = $this->utils->Notification->find('all', array(
         	'conditions' => array(
         		'Notification.title' => 'First Time Completion'
     		)
     	));
-        $this->assertEquals(4, count($notifications));
+        $this->assertEquals(3, count($notifications));
 	}
 
 	public function testReviewNotFirstTimeActivity() {
-        $playerId = DEVELOPER_ID_1;
+        $playerId = PLAYER_ID_1;
         $log = $this->utils->Log->findByPlayerId($playerId);
         $this->assertNotEmpty($log);
         $activityId = $log['Log']['activity_id'];
@@ -244,7 +244,7 @@ class LogTest extends CakeTestCase {
             'description' => 'hahaha'
         ));
 
-        $this->utils->Log->_review($this->utils->Log->id, DEVELOPER_ID_2, 'accept');
+        $this->utils->Log->_review($this->utils->Log->id, PLAYER_ID_2, 'accept');
         $notifications = $this->utils->Notification->find('all', array(
         	'conditions' => array(
         		'Notification.title LIKE' => '%first%'

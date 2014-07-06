@@ -89,9 +89,8 @@ class AppController extends Controller {
 		parent::beforeFilter();
 
 		$this->player = null;
-		$this->isDeveloper = false;
-		$this->isScrumMaster = false;
-		$this->isProductOwner = false;
+		$this->isPlayer = false;
+		$this->isGameMaster = false;
 
 		if ($this->Auth->user()) {
 			$playerId = $this->Auth->user('id');
@@ -114,9 +113,8 @@ class AppController extends Controller {
 				$this->set('notificationsUnread', $notifications);
 			}
 			
-			$this->isDeveloper = $this->player['Player']['player_type_id'] == PLAYER_TYPE_DEVELOPER;
-			$this->isScrumMaster = $this->player['Player']['player_type_id'] == PLAYER_TYPE_SCRUMMASTER;
-			$this->isProductOwner = $this->player['Player']['player_type_id'] == PLAYER_TYPE_PRODUCT_OWNER;
+			$this->isPlayer = $this->player['Player']['player_type_id'] == PLAYER_TYPE_PLAYER;
+			$this->isGameMaster = $this->player['Player']['player_type_id'] == PLAYER_TYPE_GAME_MASTER;
 
 			$this->set('myPendingActivitiesCount', $this->Log->countPendingFromPlayer($playerId));
 			$this->set('pendingTasksCount', $this->EventTaskLog->countPendingFromPlayer($playerId));
@@ -124,19 +122,18 @@ class AppController extends Controller {
 			$this->set('teamPendingActivities', $this->Log->countPendingFromTeamNotFromPlayer($playerId));
 			$this->set('eventTasksNotReviewedCount', $this->EventTaskLog->countNotReviewed());
 
-			$this->set('allDomains', $this->Domain->allFromOwner($this->scrumMasterId()));	
+			$this->set('allDomains', $this->Domain->allFromOwner($this->gameMasterId()));	
 		}
 
-		$this->set('isDeveloper', $this->isDeveloper);
-		$this->set('isScrumMaster', $this->isScrumMaster);
-		$this->set('isProductOwner', $this->isProductOwner);
+		$this->set('isPlayer', $this->isPlayer);
+		$this->set('isGameMaster', $this->isGameMaster);
 		$this->set('loggedPlayer', $this->player);
 		$this->set('collapseSidebar', false);
 	}
 
-	protected function scrumMasterId() {
+	protected function gameMasterId() {
 		if (!$this->smId) {
-			$this->smId = $this->Player->scrumMasterId($this->Auth->user('id'));
+			$this->smId = $this->Player->gameMasterId($this->Auth->user('id'));
 		}
 		return $this->smId;
 	}

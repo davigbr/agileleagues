@@ -24,7 +24,7 @@ class PlayersController extends AppController {
 			// Ignore repeat password validation rule
 			unset($this->Player->validate['repeat_password']);
 
-			$this->request->data['Player']['player_type_id'] = PLAYER_TYPE_SCRUMMASTER;
+			$this->request->data['Player']['player_type_id'] = PLAYER_TYPE_GAME_MASTER;
 
 			if ($this->Player->save($this->request->data)) {
 
@@ -56,7 +56,7 @@ class PlayersController extends AppController {
 			}
 		}
 
-		$this->set('playerTypes', array(PLAYER_TYPE_SCRUMMASTER => 'ScrumMaster'));
+		$this->set('playerTypes', array(PLAYER_TYPE_GAME_MASTER => 'GameMaster'));
 	}
 
 	private function verify($player) {
@@ -110,7 +110,7 @@ class PlayersController extends AppController {
 	public function invite() {
 		$this->set('title_for_layout', 'Invite');
 
-		if (!$this->isScrumMaster) {
+		if (!$this->isGameMaster) {
 			throw new ForbiddenException();
 		}
 
@@ -121,25 +121,25 @@ class PlayersController extends AppController {
 
 			$this->Player->validate['team_id'] = 'notEmpty';
 
-			if ($this->request->data['Player']['player_type_id'] == PLAYER_TYPE_SCRUMMASTER) {
-				$this->flashError(__('You cannot create other ScrumMasters.'));
+			if ($this->request->data['Player']['player_type_id'] == PLAYER_TYPE_GAME_MASTER) {
+				$this->flashError(__('You cannot create other Game Masters.'));
 			} else if ($this->Player->save($this->request->data)) {
 
 				$email = $this->request->data['Player']['email'];
 				$team = $this->Team->findById($this->request->data['Player']['team_id']);
-				$scrumMasterName = $this->Auth->user('name');
+				$gameMasterName = $this->Auth->user('name');
 				$teamName = $team['Team']['name'];
 				
 				$hash = $this->Utils->playerHash($this->Player->id);
 
 				$this->Email->template(
-					'scrummaster_invitation', array(
-						'scrumMasterName' => $scrumMasterName, 
+					'game_master_invitation', array(
+						'gameMasterName' => $gameMasterName, 
 						'teamName' => $teamName,
 						'hash' => $hash
 					)
 				);
-				$this->Email->subject(__('%s invited you to join %s on Agile Leagues', $scrumMasterName, $teamName));
+				$this->Email->subject(__('%s invited you to join %s on Agile Leagues', $gameMasterName, $teamName));
 				$this->Email->send($email);
 				
 				// Update the player record with the hash
@@ -158,10 +158,9 @@ class PlayersController extends AppController {
 		}
 
 		$this->set('playerTypes', array(
-			PLAYER_TYPE_DEVELOPER => 'Developer',
-			PLAYER_TYPE_PRODUCT_OWNER => 'Product Owner'
+			PLAYER_TYPE_PLAYER => 'Player'
 		));
-		$this->set('teams', $this->Team->simpleFromScrumMaster($this->Auth->user('id')));
+		$this->set('teams', $this->Team->simpleFromGameMaster($this->Auth->user('id')));
 	}
 
 	public function signin() {

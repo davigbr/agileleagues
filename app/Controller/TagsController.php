@@ -7,7 +7,7 @@ class TagsController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 
-		if ($this->request->action !== 'index' && !$this->isScrumMaster) {
+		if ($this->request->action !== 'index' && !$this->isGameMaster) {
 			throw new ForbiddenException();
 		}
 	}
@@ -37,7 +37,7 @@ class TagsController extends AppController {
 	}
 
 	public function index() {
-		$this->set('tags',  $this->Tag->allActive($this->scrumMasterId()));
+		$this->set('tags',  $this->Tag->allActive($this->gameMasterId()));
 	}
 
 	public function inactivate($id) {

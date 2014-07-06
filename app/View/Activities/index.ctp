@@ -7,7 +7,7 @@
     <?if (empty($activities)): ?>
 	    <div class="panel-body">
 		    <p>No activities found :( </p>
-		    <?if ($isScrumMaster): ?>
+		    <?if ($isGameMaster): ?>
 				<a href="<?= $this->Html->url('/activities/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Activity </a>
 			<?endif;?>
 	    </div>
@@ -22,7 +22,7 @@
 					<th title="<?=__('Required Votes for Rejection')?>">R. Votes</th>
 					<th>Description</th>
 					<th>Last Week Logs</th>
-					<?if ($isScrumMaster): ?>
+					<?if ($isGameMaster): ?>
 						<th>
 							<a href="<?= $this->Html->url('/activities/add'); ?>" class="btn btn-lg btn-success"><i class="glyphicon glyphicon-plus"></i> New </a>
 						</th>
@@ -63,7 +63,7 @@
 									<?= $activity['LastWeekLog']['logs']?>
 								</span>
 							</td>
-							<?if ($isScrumMaster): ?>
+							<?if ($isGameMaster): ?>
 								<td>
 									<a href="<?= $this->Html->url('/activities/edit/' . $activity['Activity']['id']); ?>" class="btn btn-primary btn-sm">
 										<i class="glyphicon glyphicon-edit"></i>

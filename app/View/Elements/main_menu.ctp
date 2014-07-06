@@ -58,7 +58,7 @@
 					</a>
 				</li>
 				<li data-action="report"><a href="<?= $this->Html->url('/activities/report'); ?>"><i class="entypo-doc"></i><span>Report Activity</span></a></li>
-				<?if (!$isScrumMaster): ?>
+				<?if (!$isGameMaster): ?>
 					<li data-action="team">
 						<a href="<?= $this->Html->url('/activities/team'); ?>">
 							<i class="entypo-users"></i>
@@ -135,7 +135,7 @@
 				<span>Domains</span>
 			</a>
 			<ul>
-				<?if ($isScrumMaster): ?>
+				<?if ($isGameMaster): ?>
 					<li data-action="add">
 						<a href="<?= $this->Html->url('/domains/add'); ?>"><i class="entypo-plus"></i>
 							<span>Create</span>
@@ -158,7 +158,7 @@
 				<span>Players</span>
 			</a>
 			<ul>
-				<?if ($isScrumMaster): ?>
+				<?if ($isGameMaster): ?>
 					<li data-action="invite">
 						<a href="<?= $this->Html->url('/players/invite'); ?>"><i class="entypo-plus"></i>
 							<span>Invite</span>
@@ -172,7 +172,7 @@
 				</li>
 			</ul>
 		</li>
-		<li data-controller="events">
+		<!-- <li data-controller="events">
 			<a href="#">
 				<i class="entypo-calendar"></i>
 				<span>Events</span>
@@ -188,7 +188,7 @@
 						<i class="entypo-doc"></i><span>Report Event Task</span>
 					</a>
 				</li>
-				<?if ($isScrumMaster): ?>
+				<?if ($isGameMaster): ?>
 					<li data-action="create">
 						<a href="<?= $this->Html->url('/events/create'); ?>"><i class="entypo-plus"></i>
 							<span>Create</span>
@@ -205,7 +205,7 @@
 					</li>
 				<?endif;?>
 			</ul>
-		</li>
+		</li> -->
 		<li data-controller="notifications">
 			<a href="#">
 				<i class="entypo-mail"></i>
@@ -224,7 +224,7 @@
 				</li>
 			</ul>
 		</li>
-		<?if ($isScrumMaster): ?>
+		<?if ($isGameMaster): ?>
 			<li data-controller="teams">
 				<a href="#">
 					<i class="entypo-users"></i>

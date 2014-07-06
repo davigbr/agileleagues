@@ -20,7 +20,7 @@
 				<td><? echo h($log['EventTask']['description']); ?></td>
 				<td><? echo number_format($log['EventTask']['xp']); ?></td>
 				<td>
-					<?if($isScrumMaster): ?>
+					<?if($isGameMaster): ?>
 						<div class="btn-group">
 							<a class="btn btn-success btn-sm" href="<? echo $this->Html->url('/events/review/' . $log['EventTaskLog']['id']); ?>">
 								<i class="glyphicon glyphicon-ok"></i>

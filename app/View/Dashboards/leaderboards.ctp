@@ -38,7 +38,7 @@
                     </tr>
                     <?$i=0?>
                     <?if (empty($rows)):?>
-                        <tr><td colspan="2">No data yet.</td></tr>
+                        <tr><td colspan="3">No data yet.</td></tr>
                     <?endif;?>
                     <?foreach ($rows as $row): ?>
                         <tr class="<?= $i == 0?'warning':''?>">

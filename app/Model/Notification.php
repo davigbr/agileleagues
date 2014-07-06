@@ -90,9 +90,9 @@ class Notification extends AppModel {
 
 	public function _broadcast($playerIdSender, $title, $text, $type = 'success') {
 		// Broadcast messages only to related players
-		// For example, if it is a ScrumMaster, broadcast the message to all players from all his teams
-		// If it is a Developer or Product Owner, broadcast the message to all players from the same team, including the SM
-		$players = $this->Player->simpleVerifiedFromPlayerTeam($playerIdSender);
+		// For example, if it is a GameMaster, broadcast the message to all players from all his teams
+		// If it is a Player, broadcast the message to all players from the same team, including the SM
+		$players = $this->Player->simpleVerifiedFromPlayerTeam($playerIdSender, true);
 		
 		$notifications = array();
 		foreach ($players as $id => $name) {

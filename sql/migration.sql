@@ -62,3 +62,11 @@ LEFT JOIN log ON player.id = log.player_id AND (
 )
 GROUP BY player.id, player_id_owner
 ORDER BY count DESC;
+
+ALTER TABLE `team`
+CHANGE COLUMN `player_id_scrummaster` `player_id_owner`  int(10) UNSIGNED NULL DEFAULT NULL AFTER `name`;
+
+ALTER TABLE `team` DROP FOREIGN KEY `fk_team_player_id_scrummaster`;
+
+ALTER TABLE `team` ADD CONSTRAINT `fk_team_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+

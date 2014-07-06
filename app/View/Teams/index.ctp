@@ -8,9 +8,8 @@
 		<table class="table table-striped table-bordered table-condensed">
 			<tr>
 				<th>Name</th>
-				<th>ScrumMaster</th>
-				<th>Product Owners</th>
-				<th>Developers</th>
+				<th>Game Master</th>
+				<th>Players</th>
 				<th>
 					<a href="<? echo $this->Html->url('/teams/add'); ?>" class="btn btn-large btn-success"><i class="glyphicon glyphicon-plus"></i> Create </a>
 				</th>
@@ -25,14 +24,8 @@
 				<? foreach ($teams as $team) : ?>
 					<tr>
 						<td><?= h($team['Team']['name'])?></td>
-						<td><?= h($team['ScrumMaster']['name'])?></td>
-						<td>
-							<?foreach ($team['ProductOwners'] as $po): ?>
-								<?= h($po['name']) ?>; 
-							<?endforeach;?>
-						</td>
-						<td>
-							<?foreach ($team['Developers'] as $dev): ?>
+						<td><?= h($team['GameMaster']['name'])?></td>
+							<?foreach ($team['Players'] as $dev): ?>
 								<?= h($dev['name']) ?>; 
 							<?endforeach;?>
 						</td>

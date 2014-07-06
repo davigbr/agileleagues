@@ -20,7 +20,7 @@ class EventsControllerTest extends ControllerTestCase {
 	}
 
 	public function testComplete() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$event = $this->utils->Event->find('first', array('order' => 'Event.id'));
 		$eventId = $event['Event']['id'];
 		// Remove as tarefas do evento
@@ -30,33 +30,33 @@ class EventsControllerTest extends ControllerTestCase {
 	}
 
 	public function testCompleteError() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/events/complete/0', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testNotReviewed() {
 		$this->utils->generateEventTaskLogs();
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$result = $this->testAction('/events/notReviewed/', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotEmpty($result['eventTaskLogs']);
 	}
 
 	public function testDeleteTaskError() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_2);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_2);
 		$result = $this->testAction('/events/deleteTask/0', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testReviewTaskError() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_2);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_2);
 		$result = $this->testAction('/events/review/0', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testReviewTask() {
 		$this->utils->generateEventTaskLogs();
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_2);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_2);
 		$log = $this->utils->EventTaskLog->find('first', array('order'=>'EventTaskLog.id'));
 		$result = $this->testAction('/events/review/' . $log['EventTaskLog']['id'], array('return' => 'vars', 'method' => 'GET'));
 		$log = $this->utils->EventTaskLog->findById($log['EventTaskLog']['id']);
@@ -65,7 +65,7 @@ class EventsControllerTest extends ControllerTestCase {
 
 	public function testDeleteTask() {
 		$this->utils->generateEventTaskLogs();
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_2);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_2);
 		$log = $this->utils->EventTaskLog->find('first', array('order'=>'EventTaskLog.id'));
 		$result = $this->testAction('/events/deleteTask/' . $log['EventTaskLog']['id'], array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotNull($this->controller->flashSuccess);
@@ -73,20 +73,20 @@ class EventsControllerTest extends ControllerTestCase {
 
 	public function testPending() {
 		$this->utils->generateEventTaskLogs();
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_2);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_2);
 		$result = $this->testAction('/events/pending/', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotEmpty($result['eventTaskLogs']);
 	}
 
 	public function testReportGet() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/events/report/', array('return' => 'vars', 'method' => 'GET'));
 		$this->assertNotEmpty($result['events']);
 		$this->assertNotEmpty($result['allEvents']);
 	}
 
 	public function testReportPostSuccess() {
-		$playerId = DEVELOPER_ID_2;
+		$playerId = PLAYER_ID_2;
 
 		$this->controllerUtils->mockAuthUser($playerId);
 		$event = $this->utils->Event->find('first', array('recursive' => 1, 'order' => 'Event.id'));
@@ -105,7 +105,7 @@ class EventsControllerTest extends ControllerTestCase {
 	}
 
 	public function testReportPostNotJoined() {
-		$playerId = DEVELOPER_ID_1;
+		$playerId = PLAYER_ID_1;
 
 		$this->controllerUtils->mockAuthUser($playerId);
 		$event = $this->utils->Event->find('first', array('recursive' => 1, 'order' => 'Event.id'));
@@ -122,20 +122,20 @@ class EventsControllerTest extends ControllerTestCase {
 		$log = $this->utils->EventTaskLog->findByEventTaskIdAndPlayerId($task['id'], $playerId);
 		$this->assertEmpty($log);
 	}
-	public function testCreateNotScrumMaster() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+	public function testCreateNotGameMaster() {
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$this->setExpectedException('ForbiddenException');
 		$this->testAction('/events/create/', array('method' => 'GET'));
 	}
 
 	public function testCreateGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$result = $this->testAction('/events/create', array('method' => 'GET', 'return' => 'vars'));
 		$this->assertNotEmpty($result['activities']);
 	}
 
 	public function testCreatePostSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$data = array();
 		$data['Event']['event_type_id']= '1';
 		$data['Event']['name']= 'Mission';
@@ -193,11 +193,11 @@ class EventsControllerTest extends ControllerTestCase {
 		$this->assertNotEmpty($event);
 		$this->assertEquals(2, count($event['EventTask']));
 		$this->assertEquals(2, count($event['EventActivity']));
-		$this->assertEquals(SCRUMMASTER_ID_1, $event['Event']['player_id_owner']);
+		$this->assertEquals(GAME_MASTER_ID_1, $event['Event']['player_id_owner']);
 	}
 
 	public function testCreatePostError() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$data = array(
 			'Event' => array(
 				'name' => ''
@@ -210,7 +210,7 @@ class EventsControllerTest extends ControllerTestCase {
 	}
 
 	public function testEditGet() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$event = $this->utils->Event->find('first');
 		$id = $event['Event']['id'];
 		$result = $this->testAction('/events/edit/' . $id, array('method' => 'GET'));
@@ -218,13 +218,13 @@ class EventsControllerTest extends ControllerTestCase {
 	}
 
 	public function testEditGetNotFound() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$this->setExpectedException('NotFoundException');
 		$result = $this->testAction('/events/edit/0', array('method' => 'GET'));
 	}
 
 	public function testEditPostSuccess() {
-		$this->controllerUtils->mockAuthUser(SCRUMMASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$data = array();
 		$id = 1;
 		$data['Event']['id']= 1;
@@ -284,12 +284,12 @@ class EventsControllerTest extends ControllerTestCase {
 		$this->assertNotEmpty($event);
 		$this->assertEquals(2, count($event['EventTask']));
 		$this->assertEquals(2, count($event['EventActivity']));
-		$this->assertEquals(SCRUMMASTER_ID_1, $event['Event']['player_id_owner']);
+		$this->assertEquals(GAME_MASTER_ID_1, $event['Event']['player_id_owner']);
 	}
 
 
 	public function testIndex() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/events/', array('return' => 'vars'));
 		$activeEvents = $result['activeEvents'];
 		$pastEvents = $result['pastEvents'];
@@ -300,7 +300,7 @@ class EventsControllerTest extends ControllerTestCase {
 	}
 
 	public function testDetails() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$event = $this->utils->Event->find('first');
 		$id = $event['Event']['id'];
 		$result = $this->testAction('/events/details/' . $id, array('return' => 'vars'));
@@ -308,66 +308,66 @@ class EventsControllerTest extends ControllerTestCase {
 	}
 
 	public function testDetailsNotFound() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/events/details/0', array('return' => 'vars'));
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testJoinInvalidEvent() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$this->testAction('/events/join/0');
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testJoinMissionFailuredLowLevel() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$event = $this->utils->Event->find('first', array('conditions' => array('Event.event_type_id' => EVENT_TYPE_MISSION)));
 		$id = $event['Event']['id'];
 		$this->testAction('/events/join/' . $id);
-		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(DEVELOPER_ID_1, $id);
+		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(PLAYER_ID_1, $id);
 		$this->assertEmpty($joinLog);
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testJoinChallengeFailuredLowLevel() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$event = $this->utils->Event->find('first', array('conditions' => array('Event.event_type_id' => EVENT_TYPE_CHALLENGE)));
 		$id = $event['Event']['id'];
 		$this->testAction('/events/join/' . $id);
-		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(DEVELOPER_ID_1, $id);
+		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(PLAYER_ID_1, $id);
 		$this->assertEmpty($joinLog);
 		$this->assertNotNull($this->controller->flashError);
 	}
 
 	public function testJoinMissionSuccess() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		//Avança o jogador para um nível alto
-		$this->utils->XpLog->save(array('player_id' => DEVELOPER_ID_1, 'xp' => 10000));
+		$this->utils->XpLog->save(array('player_id' => PLAYER_ID_1, 'xp' => 10000));
 		$event = $this->utils->Event->find('first', array('conditions' => array('Event.event_type_id' => EVENT_TYPE_MISSION)));
 		$id = $event['Event']['id'];
 		$this->testAction('/events/join/' . $id);
-		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(DEVELOPER_ID_1, $id);
+		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(PLAYER_ID_1, $id);
 		$this->assertNotEmpty($joinLog);
 	}
 
 	public function testJoinChallengeSuccess() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		//Avança o jogador para um nível alto
-		$this->utils->XpLog->save(array('player_id' => DEVELOPER_ID_1, 'xp' => 10000));
+		$this->utils->XpLog->save(array('player_id' => PLAYER_ID_1, 'xp' => 10000));
 		$event = $this->utils->Event->find('first', array('conditions' => array('Event.event_type_id' => EVENT_TYPE_CHALLENGE)));
 		$id = $event['Event']['id'];
 		$this->testAction('/events/join/' . $id);
-		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(DEVELOPER_ID_1, $id);
+		$joinLog = $this->utils->EventJoinLog->findByPlayerIdAndEventId(PLAYER_ID_1, $id);
 		$this->assertNotEmpty($joinLog);
 	}
 
 	public function testJoinTwice() {
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$event = $this->utils->Event->find('first');
 		$id = $event['Event']['id'];
 		$this->utils->EventJoinLog->save(array(
 			'event_id' => $id,
-			'player_id' => DEVELOPER_ID_1
+			'player_id' => PLAYER_ID_1
 		));
 		$this->testAction('/events/join/' . $id);
 		$this->assertNotNull($this->controller->flashError);

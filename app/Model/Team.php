@@ -9,16 +9,10 @@ class Team extends AppModel {
 	public $order = array('Team.name' => 'ASC');
 
 	public $hasMany = array(
-		'Developers' => array(
+		'Players' => array(
 			'className' => 'Player',
 			'conditions' => array(
-				'Developers.player_type_id' => PLAYER_TYPE_DEVELOPER
-			)
-		),
-		'ProductOwners' => array(
-			'className' => 'Player',
-			'conditions' => array(
-				'ProductOwners.player_type_id' => PLAYER_TYPE_PRODUCT_OWNER
+				'Players.player_type_id' => PLAYER_TYPE_PLAYER
 			)
 		)
 	);
@@ -28,25 +22,24 @@ class Team extends AppModel {
 	);
 
 	public $belongsTo = array(
-		'ScrumMaster' => array(
+		'GameMaster' => array(
 			'className' => 'Player',
-			'foreignKey' => 'player_id_scrummaster'
+			'foreignKey' => 'player_id_owner'
 		)
 	);
 
-	public function simpleFromScrumMaster($scrumMasterId) {
-		return $this->simple(array('Team.player_id_scrummaster'=> $scrumMasterId));
+	public function simpleFromGameMaster($gameMasterId) {
+		return $this->simple(array('Team.player_id_owner'=> $gameMasterId));
 	}
 
 	public function allFromOwner($playerIdOwner) {
 		return $this->find('all', array(
 			'conditions' => array(
-				'Team.player_id_scrummaster' => $playerIdOwner
+				'Team.player_id_owner' => $playerIdOwner
 			),
 			'contain' => array(
-				'ScrumMaster' => array('id', 'name'), 
-				'ProductOwners' => array('id', 'name'), 
-				'Developers' => array('id', 'name')
+				'GameMaster' => array('id', 'name'), 
+				'Players' => array('id', 'name')
 			)
 		));
 	}

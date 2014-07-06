@@ -28,7 +28,7 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:207
 C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
 </error>
         </testcase>
-        <testcase name="testInactivateNotScrumMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="36" assertions="3" time="1.558562"/>
+        <testcase name="testInactivateNotGameMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="36" assertions="3" time="1.558562"/>
         <testcase name="testInactivateNotFound" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="41" assertions="4" time="1.139894"/>
         <testcase name="testInactivateSuccess" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="47" assertions="5" time="0.992186"/>
         <testcase name="testReportGet" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="55" assertions="2" time="1.251027">
@@ -163,7 +163,7 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:207
 C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
 </error>
         </testcase>
-        <testcase name="testNotReviewedNotScrumMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="112" assertions="4" time="1.687695"/>
+        <testcase name="testNotReviewedNotGameMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="112" assertions="4" time="1.687695"/>
         <testcase name="testNotReviewed" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="118" assertions="2" time="2.227900">
           <error type="PHPUnit_Framework_Error_Notice">ActivitiesControllerTest::testNotReviewed
 Undefined variable: log
@@ -189,8 +189,8 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:207
 C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
 </error>
         </testcase>
-        <testcase name="testEditNotScrumMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="125" assertions="1" time="1.105814">
-          <failure type="PHPUnit_Framework_ExpectationFailedException">ActivitiesControllerTest::testEditNotScrumMaster
+        <testcase name="testEditNotGameMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="125" assertions="1" time="1.105814">
+          <failure type="PHPUnit_Framework_ExpectationFailedException">ActivitiesControllerTest::testEditNotGameMaster
 Failed asserting that 3 matches expected 1.
 
 C:\wamp\www\agileleagues\app\Lib\ControllerTestCaseUtils.php:33
@@ -268,8 +268,8 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:207
 C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
 </error>
         </testcase>
-        <testcase name="testAddNotScrumMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="167" assertions="1" time="0.953746">
-          <failure type="PHPUnit_Framework_ExpectationFailedException">ActivitiesControllerTest::testAddNotScrumMaster
+        <testcase name="testAddNotGameMaster" class="ActivitiesControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\ActivitiesControllerTest.php" line="167" assertions="1" time="0.953746">
+          <failure type="PHPUnit_Framework_ExpectationFailedException">ActivitiesControllerTest::testAddNotGameMaster
 Failed asserting that 3 matches expected 1.
 
 C:\wamp\www\agileleagues\app\Lib\ControllerTestCaseUtils.php:33
@@ -620,8 +620,8 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:207
 C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
 </failure>
         </testcase>
-        <testcase name="testCreateNotScrumMaster" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="108" assertions="1" time="0.887494">
-          <failure type="PHPUnit_Framework_ExpectationFailedException">EventsControllerTest::testCreateNotScrumMaster
+        <testcase name="testCreateNotGameMaster" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="108" assertions="1" time="0.887494">
+          <failure type="PHPUnit_Framework_ExpectationFailedException">EventsControllerTest::testCreateNotGameMaster
 Failed asserting that 3 matches expected 1.
 
 C:\wamp\www\agileleagues\app\Lib\ControllerTestCaseUtils.php:33
@@ -663,7 +663,7 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
         </testcase>
         <testcase name="testCreatePost" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="119" assertions="6" time="1.325372"/>
         <testcase name="testCreatePostError" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="180" assertions="5" time="1.900655"/>
-        <testcase name="testEditNotScrumMaster" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="195" assertions="3" time="1.062400"/>
+        <testcase name="testEditNotGameMaster" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="195" assertions="3" time="1.062400"/>
         <testcase name="testEditGet" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="202" assertions="4" time="0.986634"/>
         <testcase name="testEditGetNotFound" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="210" assertions="4" time="0.905924"/>
         <testcase name="testEditPost" class="EventsControllerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Controller\EventsControllerTest.php" line="216" assertions="6" time="1.175948"/>
@@ -953,7 +953,7 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
         <testcase name="testBeforeSave" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="18" assertions="2" time="0.963307"/>
         <testcase name="testReviewedIncrementedActivityReportedCounter" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="37" assertions="2" time="1.087662"/>
         <testcase name="testWhenReviewedGeneratedXpLogToPlayer" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="46" assertions="2" time="0.878734"/>
-        <testcase name="testWhenReviewedGeneratedXpLogToScrumMaster" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="58" assertions="2" time="1.025836"/>
+        <testcase name="testWhenReviewedGeneratedXpLogToGameMaster" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="58" assertions="2" time="1.025836"/>
         <testcase name="testAcquiredFutureRule" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="78" assertions="1" time="0.867530"/>
         <testcase name="testAcquiredPastRule" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="87" assertions="1" time="0.730970"/>
         <testcase name="testAllNotReviewed" class="LogTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\LogTest.php" line="96" assertions="8" time="0.965846"/>
@@ -985,9 +985,9 @@ C:\wamp\www\agileleagues\lib\Cake\Console\ShellDispatcher.php:66
         <testcase name="testCountFromPlayer" class="PlayerActivitySummaryTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerActivitySummaryTest.php" line="75" assertions="2" time="0.629476"/>
       </testsuite>
       <testsuite name="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" tests="8" assertions="15" failures="0" errors="0" time="5.658032">
-        <testcase name="testDevelopersCount" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="17" assertions="1" time="0.649788"/>
-        <testcase name="testScrumMaster" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="22" assertions="2" time="0.716792"/>
-        <testcase name="testScrumMasterNotFound" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="28" assertions="1" time="0.654921"/>
+        <testcase name="testPlayersCount" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="17" assertions="1" time="0.649788"/>
+        <testcase name="testGameMaster" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="22" assertions="2" time="0.716792"/>
+        <testcase name="testGameMasterNotFound" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="28" assertions="1" time="0.654921"/>
         <testcase name="testBeforeSave" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="40" assertions="1" time="0.821410"/>
         <testcase name="testVirtualFields" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="50" assertions="5" time="0.689326"/>
         <testcase name="testDifferentActivitiesCompleted" class="PlayerTest" file="C:\wamp\www\agileleagues\app\Test\Case\Model\PlayerTest.php" line="59" assertions="2" time="0.771903"/>

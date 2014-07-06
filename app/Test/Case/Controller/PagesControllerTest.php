@@ -11,7 +11,7 @@ class PagesControllerTest extends ControllerTestCase {
 		$this->utils->clearDatabase();
 		$this->utils->generatePlayers();
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
-		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 	}
 
 	public function testHome() {
