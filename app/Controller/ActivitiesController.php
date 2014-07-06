@@ -146,12 +146,30 @@ class ActivitiesController extends AppController {
 			$log['Log']['player_id'] = $playerId;
 			$log['Log']['player_id_owner'] = $this->scrumMasterId();
 			$activityId = $log['Log']['activity_id'];
-			if ($this->Log->saveAll($log)) {
-				$activity = $this->Activity->findById($log['Log']['activity_id']);
-				$this->request->data = array();
-				$this->flashSuccess(__('Activity %s reported successfully!', '<strong>' .$activity['Activity']['name'] . '</strong>'));
+
+			// Validad o primeiro log apenas
+			$firstLog = $log;
+			$firstLog['Log']['description'] = $firstLog['Log']['description'][0];
+			$this->Log->set($firstLog);
+
+			if ($this->Log->validates()) {
+				$logsToSave = array();
+				foreach ($log['Log']['description'] as $description) {
+					if ($description) {
+						$logToSave = $log;
+						$logToSave['Log']['description'] = $description;
+						$logsToSave[] = $logToSave;
+					}
+				}
+				if ($this->Log->saveMany($logsToSave)) {
+					$activity = $this->Activity->findById($log['Log']['activity_id']);
+					$this->request->data = array();
+					$this->flashSuccess(__('Activity %s reported successfully!', '<strong>' .$activity['Activity']['name'] . '</strong>'));
+				} else {
+					$this->flashError(__('Error while trying to report activity.'));
+				}
 			} else {
-				$this->flashError(__('Error while trying to report activity.'));
+				$this->flashError(__('There are validation errors.'));
 			}
 		} else {
 			$this->request->data = array(
@@ -160,7 +178,6 @@ class ActivitiesController extends AppController {
 			));
 		}
 	}
-
 
 	public function _save($id = null) {
 		if (!$this->isScrumMaster) {

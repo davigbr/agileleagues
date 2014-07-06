@@ -16,7 +16,15 @@
 					<div id="activity-description">
 					</div>
 				</div>
-				<?= $this->Bootstrap->input('description', array('class'=>'form-control')); ?>
+				<?= $this->Bootstrap->input('description', array(
+					'class' => 'form-control log-description',
+					'style' => 'margin-bottom: 2px',
+					'name' => 'data[Log][description][]'
+				)); ?>
+				<a id="report-more" class="btn btn-success btn-md"><i class="glyphicon-plus"></i>&nbsp; Report more activities of the same type</a>
+				<br/>
+				<br/>
+
 				<?= $this->Bootstrap->input('acquired', array('class'=>'form-control form-control-inline')); ?>
 				<?= $this->Bootstrap->input('event_id', array(
 					'label' => 'Event', 
@@ -85,6 +93,13 @@
 
 		$('#tags tr').click(function(){
 			$('input', $(this)).click();
+		});
+		$('#report-more').click(function(){
+			$('.log-description:first')
+				.clone()
+				.removeAttr('required')
+				.val('')
+				.insertAfter('.log-description:last');
 		});
 	});
 </script>

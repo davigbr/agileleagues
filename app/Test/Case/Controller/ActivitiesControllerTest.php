@@ -85,7 +85,7 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->assertEquals(1, count($players));
 	}
 
-	public function testReportPost() {
+	public function testReportPostSingle() {
 		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$description = 'Some random and unique description';
 		$data = array(
@@ -96,7 +96,7 @@ class ActivitiesControllerTest extends ControllerTestCase {
 					'month' => date('m'),
 					'year' => date('Y'),
 				),
-				'description' => $description,
+				'description' => array($description),
 				'player_id_pair' => DEVELOPER_ID_2
 			),
 			'Tags' => array(
@@ -119,6 +119,54 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->assertNotEmpty($log['Tags'][0]);
 		$this->assertNotEmpty($log['Tags'][1]);
 		$this->assertEquals(SCRUMMASTER_ID_1, (int)$log['Log']['player_id_owner']);
+	}
+
+	public function testReportPostMultiple() {
+		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
+		$description = 'Some random and unique description';
+		$data = array(
+			'Log' => array(
+				'activity_id' => 2,
+				'acquired' => array(
+					'day' => date('d'),
+					'month' => date('m'),
+					'year' => date('Y'),
+				),
+				'description' => array(
+					$description . ' 1',
+					$description . ' 2',
+					'' // empty description should be ignored
+				),
+				'player_id_pair' => DEVELOPER_ID_2
+			),
+			'Tags' => array(
+				'Tags' => array(
+					0 => '1',
+					1 => '2'
+				)
+			),
+			'Event' => array(
+				'id' => '',
+			)
+		);
+		$this->testAction('/activities/report', array('method' => 'POST', 'data' => $data));
+		$this->utils->Log->recursive = 2;
+		$logs = $this->utils->Log->find('all' , array('conditions' => array(
+			'Log.description LIKE' => $description . '%'
+		)));
+		
+		$this->assertEquals(2, count($logs));
+
+		foreach ($logs as $log) {
+			$log = $this->utils->Log->findById($this->controller->Log->id);
+
+			$this->assertEquals(1, (int)$log['Log']['player_id']);
+			$this->assertEquals(2, (int)$log['Log']['activity_id']);
+			// Check if the tags were saved
+			$this->assertNotEmpty($log['Tags'][0]);
+			$this->assertNotEmpty($log['Tags'][1]);
+			$this->assertEquals(SCRUMMASTER_ID_1, (int)$log['Log']['player_id_owner']);
+		}
 	}
 
 	public function testMyPending() {
