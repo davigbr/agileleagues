@@ -4,6 +4,9 @@
             <h1>Activities</h1>
         </div>
     </div>
+    <div class="panel-body">
+    	<p><?= __('Activities are actions that the players will perform and report.')?></p>
+    </div>
     <?if (empty($activities)): ?>
 	    <div class="panel-body">
 		    <p>No activities found :( </p>

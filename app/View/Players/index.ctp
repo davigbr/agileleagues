@@ -20,7 +20,6 @@
 				<th style="text-align: center"><strong>Avatar</strong></th>
 				<th><strong>Name</strong></th>
 				<th><strong>Team</strong></th>
-				<th><strong>Type</strong></th>
 				<th><strong>E-mail</strong></th>
 				<th><strong>Total XP</strong></th>
 				<th><strong>Activities Logged</strong></th>
@@ -32,7 +31,6 @@
 					<td style="text-align: center"><img src="<? echo $this->Gravatar->get($player['Player']['email'], 60) ?>" alt="" class="img-rounded" width="60"></td>
 					<td><? echo h($player['Player']['name']); ?>, <? echo h($player['Player']['title']); ?></td>
 					<td><? echo h($player['Team']['name']); ?></td>
-					<td><? echo h($player['PlayerType']['name']); ?></td>
 					<td><? echo h($player['Player']['email']); ?></td>
 					<td><? echo h($player['Player']['xp']); ?></td>
 					<td><? echo h($player['Player']['activities']); ?></td>
