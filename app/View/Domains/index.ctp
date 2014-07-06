@@ -4,6 +4,14 @@
             <h1>Domains</h1>
         </div>
     </div>
+    <div class="panel-body">
+    	<p>
+			Domains are areas of knowledge or groups of technical skills that you want to boost. 
+			<?if ($isGameMaster): ?>
+				Use them as a way of grouping activities into categories.
+			<? endif; ?>
+    	</p>
+    </div>
     <?if (empty($domains)): ?>
 	    <div class="panel-body">
 		    <p>No domains found :( </p>
@@ -12,7 +20,6 @@
     <?endif;?>
 </div>
 <div class="row">
-
 	<? foreach ($domains as $domain) : ?>
 		<div class="col-sm-3">
 			<div class="tile-title" style="height: 220px; background-color: <?= $domain['Domain']['color']?>">

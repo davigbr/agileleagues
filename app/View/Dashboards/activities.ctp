@@ -4,20 +4,17 @@
             <h1>Activities Dashboard</h1>
         </div>
     </div>
-    <div class="panel-body">
-        <p>Only domains from the <strong>logged player type</strong> will be shown.</p>
-        <p>If you want to see the complete list of available domains, check the <a href="<?= $this->Html->url('/domains')?>">Domain List</a>.</p>
-        <?if (empty($domains)): ?>
-            <br/>
-            <p>No domains found :( </p>
-        <?endif;?>
-    </div>
+    <?if (empty($domains)): ?>
+        <div class="panel-body">
+                <p>No domains found :( </p>
+        </div>
+    <?endif;?>
 </div>
 <?if (!empty($domains)): ?>
     <div class="row">
         <?foreach ($domains as $domainId => $domain): ?>
             <div class="col-lg-3 col-sm-6">
-                <div class="tile-progress tile-red" style="height: 260px; background-color: <? echo $domain['Domain']['color']?>">
+                <div class="tile-progress tile-red" style="height: 300px; background-color: <? echo $domain['Domain']['color']?>">
                     <div class="tile-header">
                         <a href="<? echo $this->Html->url('/dashboards/activities/' . $domainId); ?>">
                             <h3><? echo $domain['Domain']['name'] ?></h3>

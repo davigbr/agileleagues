@@ -167,8 +167,12 @@ class Player extends AppModel {
     }
 
     public function allFromPlayerTeam($playerId, $options = array()) {
+        $teams = $this->visibleTeams($playerId);
+        if (empty($teams)) {
+            return array();
+        }
         $conditions = array( 
-            'Player.team_id' => $this->visibleTeams($playerId),
+            'Player.team_id' => $teams,
             'Player.verified_in IS NOT NULL'
         );
         return $this->findAll('id', array_merge(

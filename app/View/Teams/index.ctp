@@ -7,26 +7,28 @@
     <div class="panel-body">
     	<p><?=__('Teams are group of players that work together. Agile Leagues encourages collaboration between team members and competition across different teams.')?></p>
     </div>
-    <div class="panel-body with-table">
-		<table class="table table-striped table-bordered table-condensed">
-			<tr>
-				<th><?=__('Name')?></th>
-				<th><?=__('Players')?></th>
-				<th>
-					<a href="<?= $this->Html->url('/teams/add'); ?>" class="btn btn-large btn-success"><i class="glyphicon glyphicon-plus"></i> Create </a>
-				</th>
-			</tr>
-			<?if (empty($teams)): ?>
+	<?if (empty($teams)): ?>
+	    <div class="panel-body">
+			<p>No teams :(</p>
+		    <a class="btn btn-md btn-success" href="<?= $this->Html->url('/teams/add')?>"><i class="glyphicon glyphicon-plus"></i> Create New Team</a>
+    	</div>
+	<?else:?>
+	    <div class="panel-body with-table">
+			<table class="table table-striped table-bordered table-condensed">
 				<tr>
-					<td colspan="4">
-						<p style="text-align: center">No teams :(</p>
-					</td>
+					<th><?=__('Name')?></th>
+					<th><?=__('Players')?></th>
+					<th>
+						<a href="<?= $this->Html->url('/teams/add'); ?>" class="btn btn-large btn-success"><i class="glyphicon glyphicon-plus"></i> Create </a>
+					</th>
 				</tr>
-			<?else:?>
 				<? foreach ($teams as $team) : ?>
 					<tr>
 						<td><?= h($team['Team']['name'])?></td>
 						<td>
+							<? if (empty($team['Players'])): ?>
+								<a class="btn btn-md btn-info" href="<?= $this->Html->url('/players/invite')?>">Invite some players!</a>
+							<?endif;?>
 							<?foreach ($team['Players'] as $dev): ?>
 								<?= h($dev['name']) ?>; 
 							<?endforeach;?>
@@ -39,7 +41,7 @@
 						</td>
 					</tr>
 				<? endforeach; ?>
-			<?endif;?>
-		</table>
-    </div>
+			</table>
+	    </div>
+	<?endif;?>
 </div>

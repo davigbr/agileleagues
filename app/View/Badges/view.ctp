@@ -27,15 +27,15 @@
 	            		</tr>
             			<?foreach($requiredActivitiesProgress as $activity): ?>
             				<tr>
-        						<td><a href="<? echo $this->Html->url('/activities'); ?>"><? echo h($activity['Activity']['name']); ?></a></td>
+        						<td><a href="<?= $this->Html->url('/activities'); ?>"><?= h($activity['Activity']['name']); ?></a></td>
         						<td>
-                                    <? echo $activity['BadgeActivityProgress']['activities_completed']?> /
-        						    <? echo $activity['BadgeActivityProgress']['activities_required']?>
-                                    (<? echo $activity['BadgeActivityProgress']['progress']?>%)
+                                    <?= $activity['BadgeActivityProgress']['activities_completed']?> /
+        						    <?= $activity['BadgeActivityProgress']['activities_required']?>
+                                    (<?= $activity['BadgeActivityProgress']['progress']?>%)
                                 </td>
         						<td style="text-align: center">
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-success" style="width: <? echo $activity['BadgeActivityProgress']['progress']?>%">
+                                        <div class="progress-bar progress-bar-success" style="width: <?= $activity['BadgeActivityProgress']['progress']?>%">
                                         </div>
                                     </div>
                                 </td>
@@ -64,16 +64,16 @@
                             <th>Badge</th>
                         </tr>
                         <?foreach($badge['BadgeRequisite'] as $badgeRequisite): ?>
-                            <? $badge = $badgesClaimed[$badgeRequisite['badge_id_requisite']]?>
+                            <? $b = $badgesClaimed[$badgeRequisite['badge_id_requisite']]?>
                             <tr>
                                 <td>
-                                    <?if($badge['BadgeClaimed']['claimed']):?>
+                                    <?if($b['BadgeClaimed']['claimed']):?>
                                         <i style="color: green" class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;
                                     <?else:?>
                                         <i style="color: red" class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;
                                     <?endif;?>
                                 </td>
-                                <td><a href="<? echo $this->Html->url('/badges'); ?>"><? echo h($badge['Badge']['name']); ?></a></td>
+                                <td><a href="<?= $this->Html->url('/badges'); ?>"><?= h($b['Badge']['name']); ?></a></td>
                             </tr>
                         <?endforeach;?>
 	            	</table>
@@ -87,7 +87,7 @@
         <?if ($claimed): ?>
             <p>Congratulations, you already have claimed this badge!</p>
         <?elseif ($canClaim): ?>
-            <a href="<? echo $this->Html->url('/badges/claim/' . $badge['Badge']['id']); ?>" class="btn btn-lg btn-green">Claim this badge now!</a>
+            <a href="<?= $this->Html->url('/badges/claim/' . $badge['Badge']['id']); ?>" class="btn btn-lg btn-green">Claim this badge now!</a>
         <?endif;?>
     </div>
 <?endif;?>

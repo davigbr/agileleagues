@@ -20,7 +20,8 @@ class Badge extends AppModel {
 
 	public $validate = array(
 		'name' => 'notEmpty',
-		'abbr' => 'notEmpty'
+		'abbr' => 'notEmpty',
+		'icon' => 'notEmpty'
 	);
 
 	public $uses = array(

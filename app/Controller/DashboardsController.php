@@ -9,6 +9,10 @@ class DashboardsController extends AppController {
         $this->Auth->allow('players', 'leaderboards');
     }
 
+    public function index() {
+        
+    }
+
     public function badges() {
         
     }
@@ -69,6 +73,10 @@ class DashboardsController extends AppController {
     }
 
     public function activities($domainId = null) {
+        if ($this->isGameMaster) {
+            return $this->redirect('/domains');
+        }
+
         if ($domainId != null) {
             return $this->domainDetails($domainId);
         }

@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-sm-4">
 				<h2>Badges</h2>
-				<p>Domains and Activities are nice, but you want more. Add badges to the game so that the players now have some targets.</p>
+				<p>Domains and Activities are nice, but you probably want more. Add badges to the game so that the players now have some targets.</p>
 				<?= $this->Html->image('home/badge.png', array('style' => 'max-width: 100%', 'class' => 'img-polaroid'))?>
 			</div>
 		</div>
@@ -132,5 +132,3 @@
 		</div>
 	</div>
 </div>
-
-

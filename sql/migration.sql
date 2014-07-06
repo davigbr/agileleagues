@@ -74,3 +74,10 @@ DELETE FROM `player_type` WHERE (`id`='3');
 
 UPDATE `player_type` SET `name`='Game Master' WHERE (`id`='2');
 UPDATE `player_type` SET `name`='Player' WHERE (`id`='1');
+
+ALTER TABLE `badge`
+DROP COLUMN `code`,
+DROP COLUMN `abbr`,
+MODIFY COLUMN `name`  varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `id`,
+MODIFY COLUMN `new`  tinyint(1) UNSIGNED NOT NULL DEFAULT 1 AFTER `domain_id`;
+

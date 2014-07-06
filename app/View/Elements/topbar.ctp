@@ -37,6 +37,9 @@
 		</div>
 		<div class="col-md-6 col-sm-4 clearfix hidden-xs">
 			<div class="pull-right btn-group" style="margin-top: 5px">
+				<? if($isGameMaster): ?>
+					<a class="btn btn-md btn-info" href="<?= $this->Html->url('/pages/welcome')?>">Welcome!</a>
+				<?endif;?>
 				<a class="btn btn-md btn-success" title="<?=__('Agile Gamification')?>" target="_blank" href="http://www.agilegamification.org/">
 					<i class="entypo-book-open"></i> 
 					<span class="hidden-sm hidden-md"><?=__('Agile Gamification')?></span>

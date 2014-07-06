@@ -7,6 +7,7 @@
     <?if (empty($badges)): ?>
 	    <div class="panel-body">
 		    <p>No badges found :( </p>
+	    	<p><?= __('If you want to create new badges, please access the corresponding Domain.')?></p>
 	    </div>
     <?else:?>
 	    <div class="panel-body with-table">

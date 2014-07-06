@@ -24,6 +24,7 @@ class DomainsController extends AppController {
         
         if ($this->request->is('post') || $this->request->is('put')) {
             
+            $this->request->data['Domain']['player_type_id'] = PLAYER_TYPE_PLAYER;
             $this->request->data['Domain']['player_id_owner'] = $this->Auth->user('id');
 
             if ($this->Domain->save($this->request->data)) {
@@ -38,8 +39,6 @@ class DomainsController extends AppController {
                 throw new NotFoundException();
             }
         }
-
-        $this->set('playerTypes', $this->Player->PlayerType->simple());
     }
 
     public function badges($domainId) {
@@ -53,14 +52,13 @@ class DomainsController extends AppController {
         $badges = $this->Badge->allFromDomainById($domainId);
         $playerBadgesById = $this->BadgeLog->allFromPlayerByBadgeId($playerId);
         $badgeActivitiesProgress = $this->BadgeActivityProgress->allFromPlayerByBadgeIdAndActivityId($playerId);
-
         foreach ($badges as $badgeId => $badge) {
             $claimed =  isset($playerBadgesById[$badgeId]);
             $badges[$badgeId]['claimed'] = $claimed;
             // Caso o jogador não possua uma das badges de pré-requisito, remove a badge da lista
             // Ou seja, só exibe as badges "próximas"
             foreach ($badge['BadgeRequisite'] as $badgeRequisiteIndex => $badgeRequisite) {
-                if (!@$playerBadgesById[$badgeRequisite['badge_id']]) {
+                if (!@$playerBadgesById[$badgeRequisite['badge_id_requisite']]) {
                     unset($badges[$badgeId]);
                     continue 2;
                 }

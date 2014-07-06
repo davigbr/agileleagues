@@ -143,15 +143,13 @@
 					</li>
 				<?endif;?>
 				<li data-action="index"><a href="<?= $this->Html->url('/domains/'); ?>"><span><i class="entypo-list"></i>Domains List</span></a></li>
-				<?if ($isPlayer): ?>
-					<?foreach ($allDomains as $domain): ?>
-						<li data-action="badges">
-							<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>">
-								<span><i class="<?= h($domain['Domain']['icon'])?>"></i><?= h($domain['Domain']['name'])?> Badges</span>
-							</a>
-						</li>
-					<?endforeach;?>
-				<?endif;?>
+				<?foreach ($allDomains as $domain): ?>
+					<li data-action="badges">
+						<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>">
+							<span><i class="<?= h($domain['Domain']['icon'])?>"></i><?= h($domain['Domain']['name'])?> Badges</span>
+						</a>
+					</li>
+				<?endforeach;?>
 			</ul>
 		</li>
 		<li data-controller="players">

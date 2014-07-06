@@ -4,6 +4,9 @@
             <h1>Tags</h1>
         </div>
     </div>
+    <div class="panel-body">
+    	<p><?=__('Tags are modifiers that the players can choose while reporting activities. ')?></p>
+    </div>
     <?if (empty($tags)): ?>
 	    <div class="panel-body">
 		    <p>No tags found :( </p>
@@ -45,10 +48,10 @@
 							</td>
 							<?if ($isGameMaster): ?>
 								<td>
-									<a href="<?= $this->Html->url('/tags/edit/' . $tag['Tag']['id']); ?>" class="btn btn-primary btn-sm">
+									<a title="<?=__('Edit')?>" href="<?= $this->Html->url('/tags/edit/' . $tag['Tag']['id']); ?>" class="btn btn-primary btn-sm">
 										<i class="glyphicon glyphicon-edit"></i>
 									</a>
-									<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/tags/inactivate/' . $tag['Tag']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this tag?')) ?>
+									<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/tags/inactivate/' . $tag['Tag']['id'], $options = array('escape' => false, 'title' => __('Inactivate'), 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this tag?')) ?>
 								</td>
 							<?endif;?>
 						</tr>

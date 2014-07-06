@@ -65,7 +65,13 @@ class PlayersController extends AppController {
 			$this->flashSuccess(__('Account verified successfully!'));
 			$player = $this->Player->findById($player['Player']['id']);
 			$this->Auth->login($player['Player']);
-			return $this->redirect($this->Auth->redirectUrl());
+			switch ($player['Player']['player_type_id']) {
+				case PLAYER_TYPE_PLAYER:
+					return $this->redirect($this->Auth->redirectUrl());
+				case PLAYER_TYPE_GAME_MASTER:
+				default :
+					return $this->redirect('/pages/welcome');
+			}
 		} else {
 			$this->flashError(__('There are validation errors.'));
 		}
@@ -84,6 +90,7 @@ class PlayersController extends AppController {
 			throw new NotFoundException();
 		} else if ($player['Player']['verified_in']) {
 			$this->flashError(__('This account has already been verified.'));
+			return $this->redirect('/');
 		} else {
 			$id = $player['Player']['id'];
 
