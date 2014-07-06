@@ -8,7 +8,14 @@ class Player extends AppModel {
 	public $useTable = 'player';
     public $order = array('Player.player_type_id' => 'ASC', 'Player.name' => 'ASC');
 	public $belongsTo = array('PlayerType', 'Team');
-    public $hasMany = array('PlayerActivitySummary', 'Notification', 'BadgeLog');
+    public $hasMany = array('PlayerActivitySummary', 'Notification', 
+        'BadgeLog' => array(
+            'order' => array(
+                'BadgeLog.domain_id' => 'ASC',
+                'BadgeLog.creation' => 'ASC'
+            )
+        )
+    );
 
     public $validate = array(
         'name' => 'notEmpty',
@@ -170,10 +177,7 @@ class Player extends AppModel {
 
     public function allFromPlayerTeam($playerId, $options = array()) {
         $conditions = array( 
-            'OR' => array(
-                'Player.team_id' => $this->visibleTeams($playerId),
-                'Player.id' => $this->scrumMasterId($playerId)
-            ),
+            'Player.team_id' => $this->visibleTeams($playerId),
             'Player.verified_in IS NOT NULL'
         );
         return $this->findAll('id', array_merge(

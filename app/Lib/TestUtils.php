@@ -260,14 +260,14 @@ class TestUtils {
         $lastMonth = $lastMonth->format('Y-m-d');
 
         $this->Log->saveMany(array(
-            array('activity_id' => 1, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 2, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 3, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
-            array('activity_id' => 4, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
-            array('activity_id' => 5, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 6, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
-            array('activity_id' => 7, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
-            array('activity_id' => 8, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 1, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 2, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 3, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 4, 'player_id' => DEVELOPER_ID_1, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 5, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 6, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $currentDate),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 7, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastWeek),
+            array('description' => 'random description ' . md5(rand()), 'activity_id' => 8, 'player_id' => DEVELOPER_ID_2, 'player_id_owner' => SCRUMMASTER_ID_1, 'acquired' => $lastMonth),
         ), array('validate' => false));
         $result = $this->Log->query('UPDATE log SET reviewed = NOW(), accepted = NOW()');
     }

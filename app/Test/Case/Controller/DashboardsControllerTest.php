@@ -115,7 +115,7 @@ class DashboardsControllerTest extends ControllerTestCase {
 		$this->controllerUtils->mockAuthUser(DEVELOPER_ID_1);
 		$result = $this->testAction('/dashboards/players', array('return' => 'vars'));
 		$players = $result['players'];
-		$this->assertEquals(4, count($players));
+		$this->assertEquals(3, count($players));
 	}
 
 }

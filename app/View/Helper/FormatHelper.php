@@ -5,7 +5,7 @@ App::uses('AppHelper', 'View/Helper');
 class FormatHelper extends AppHelper {
 
 	public function date($sqlDateTime) {
-		if (!$sqlDateTime) return '';
+		if (!$sqlDateTime || $sqlDateTime === '0000-00-00' || $sqlDateTime === '0000-00-00 00:00:00') return '';
 		if (strlen($sqlDateTime) === 10) {
 			$sqlDateTime .= ' 00:00:00';
 		}

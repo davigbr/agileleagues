@@ -58,9 +58,10 @@ class BadgeTest extends CakeTestCase {
 		$badge = $this->utils->Badge->findById(2);
 		$badgeId = $badge['Badge']['id'];
 		$playerId = DEVELOPER_ID_1;
-		// Atualiza a tabela de resumo, pois os logs não foram revisados chamando _review()
+		// Insere as informações na tabela de resumo, 
+		// pois os logs não foram revisados chamando _review()
 		$this->utils->ActivityRequisiteSummary->updateAll(
-			array('ActivityRequisiteSummary.times' => 1), 
+			array('ActivityRequisiteSummary.times' => 1, 'ActivityRequisiteSummary.player_id' => $playerId), 
 			array('ActivityRequisiteSummary.id >' => 0)
 		);
 

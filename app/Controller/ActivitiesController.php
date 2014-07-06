@@ -115,6 +115,15 @@ class ActivitiesController extends AppController {
 		}
 		
 		$logs = $this->Log->allPendingFromTeamNotFromPlayer($this->Auth->user('id'));
+
+		foreach ($logs as &$log) {
+			foreach ($log['LogVote'] as $vote) {
+				if ($vote['player_id'] === $this->Auth->user('id')) {
+					$log['MyVote'] = $vote;
+				}
+			}
+		}
+
 		$this->set('logs', $logs);
 	}
 

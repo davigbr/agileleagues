@@ -71,9 +71,9 @@
 							<td><?= h($log['Player']['name'])?></td>
 							<td><?= h($log['PairedPlayer']['name'])?></td>
 							<td><?= h($log['Log']['description'])?></td>
-							<? if ($log['LogVote']): ?>
+							<? if (isset($log['MyVote'])): ?>
 								<td>
-									<?if($log['LogVote'][0]['vote'] == 1): ?>
+									<?if($log['MyVote']['vote'] == 1): ?>
 										<? $bonus = floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER); ?>
 										<span class="badge badge-success">+ <?= $bonus < 1? 1 : $bonus?> XP</span>
 									<?endif;?>
@@ -82,12 +82,12 @@
 									<?=number_format($log['Log']['acceptance_votes'])?>/<?=number_format($log['Activity']['acceptance_votes'])?>
 								</td>
 								<td>
-									<?if($log['LogVote'][0]['vote'] == 1): ?>
-										<?= h($log['LogVote'][0]['comment'])?>
+									<?if($log['MyVote']['vote'] == 1): ?>
+										<?= h($log['MyVote']['comment'])?>
 									<?endif;?>
 								</td>
 								<td>
-									<?if($log['LogVote'][0]['vote'] == -1): ?>
+									<?if($log['MyVote']['vote'] == -1): ?>
 										<span class="badge badge-danger">
 										+<?= REJECTION_XP_BONUS ?> XP</span>
 									<?endif;?>
@@ -96,8 +96,8 @@
 									<?=number_format($log['Log']['rejection_votes'])?>/<?=number_format($log['Activity']['rejection_votes'])?>
 								</td>
 								<td>
-									<?if($log['LogVote'][0]['vote'] == -1): ?>
-										<?= h($log['LogVote'][0]['comment'])?>
+									<?if($log['MyVote']['vote'] == -1): ?>
+										<?= h($log['MyVote']['comment'])?>
 									<?endif;?>
 								</td>
 							<? else: ?>
@@ -134,6 +134,30 @@
 								</td>
 							<? endif; ?>
 						</tr>
+						<? if(isset($log['LogVote'])): ?>
+						<tr>
+							<td></td>
+							<td colspan="5">
+								<? foreach ($log['LogVote'] as $vote) : ?>
+									<?if ($vote['vote'] > 0): ?>
+										<p>
+											<span class="badge badge-success">+1</span>
+											<strong><?= h($vote['Player']['name'])?></strong> accepted your activity
+											in <?= $this->Format->dateTime($vote['creation'])?>
+											and commented: <em><?= h($vote['comment'])?></em>
+										</p>
+									<?else:?>
+										<p>
+											<span class="badge badge-danger">-1</span>
+											<strong><?= h($vote['Player']['name'])?></strong> rejected your activity
+											in <?= $this->Format->dateTime($vote['creation'])?>
+											and commented: <em><?= h($vote['comment'])?></em>
+										</p>
+									<?endif;?>
+								<? endforeach;?>
+							</td>
+						</tr>
+					<? endif; ?>
 					<? endforeach; ?>
 				<?endif;?>
 			</table>

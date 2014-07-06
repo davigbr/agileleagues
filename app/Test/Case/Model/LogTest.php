@@ -17,6 +17,19 @@ class LogTest extends CakeTestCase {
 		$this->utils->Log->recursive = 2;
 	}
 
+	public function testHash() {
+		$log = array('Log' => array(
+			'activity_id' => 1,
+			'description' => 'blablablabla',
+			'acquired' => '2014-01-01',
+			'player_id' => 1,
+		));
+
+		$this->assertEquals(
+			'f6fa053a259675905d60930c24ef411cf53666395564b551fa7e71f0acc70ff7', 
+			$this->utils->Log->hash($log));
+	}
+
 	public function testCount() {
 		$this->assertEquals(16, $this->utils->Log->count(SCRUMMASTER_ID_1));
 		$this->assertEquals(0, $this->utils->Log->count(SCRUMMASTER_ID_2));
@@ -227,7 +240,8 @@ class LogTest extends CakeTestCase {
     	$this->utils->Log->save(array(
             'activity_id' => $activityId, 
             'player_id' => $playerId, 
-            'acquired' => date('Y-m-d')
+            'acquired' => date('Y-m-d'),
+            'description' => 'hahaha'
         ));
 
         $this->utils->Log->_review($this->utils->Log->id, DEVELOPER_ID_2, 'accept');

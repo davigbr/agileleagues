@@ -20,7 +20,13 @@ class Log extends AppModel {
 				'message' => 'Activities should be executed before reported. '
 			)
 		),
-		'description' => array('notEmpty'),
+		'description' => array(
+			'notEmpty',
+			'duplicated' => array(
+				'rule' => 'duplicated',
+				'message' => 'It seems this activity has already been reported today with exactly the same information (activity, description, player, event).'
+			)
+		),
 	);
 
 	public $belongsTo = array(
@@ -54,7 +60,17 @@ class Log extends AppModel {
 			$xp *= PAIR_XP_MULTIPLIER;
 		}
 		$this->data['Log']['xp'] = (int)$xp;
+		$this->data['Log']['hash'] = $this->hash($this->data);
 		return true;
+	}
+
+	public function hash($log) {
+		$data = isset($log['Log']['activity_id'])? $log['Log']['activity_id'] : '?';
+		$data .= isset($log['Log']['description'])? $log['Log']['description'] : '?';
+		$data .= isset($log['Log']['acquired'])? $log['Log']['acquired'] : '?';
+		$data .= isset($log['Log']['player_id'])? $log['Log']['player_id'] : '?';
+		$data .= isset($log['Log']['event_id'])? $log['Log']['event_id'] : '?';
+		return Security::hash($data, 'sha256', true);
 	}
 
 	public function acquiredFutureRule() {
@@ -66,6 +82,15 @@ class Log extends AppModel {
 			}
 		}
 		return true;
+	}
+
+	public function duplicated() {
+		$hash = $this->hash($this->data);
+		if ($this->find('count', array('conditions' => array('Log.hash' => $hash)))) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public function acquiredPastRule() {
@@ -252,7 +277,6 @@ class Log extends AppModel {
 		if (!$player || !$player['Player']['team_id']) {
 			return array();
 		}
-		
 		return $this->find('all', array(
 			'conditions' => array(
 				'Player.team_id' => $player['Player']['team_id'], 
@@ -266,7 +290,7 @@ class Log extends AppModel {
 				'Activity',
 				'Tags',
 				'LogVote' => array(
-					'conditions' => array('LogVote.player_id' => $playerId)
+					'Player'
 				)
 			),
 			'limit' => $limit,

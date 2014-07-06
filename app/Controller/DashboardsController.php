@@ -30,6 +30,7 @@ class DashboardsController extends AppController {
             )
         );
         $this->set('players', $players);
+        $this->set('domains', $this->Domain->allFromOwner($this->scrumMasterId()));
         $this->set('collapseSidebar', true);
     }
 
