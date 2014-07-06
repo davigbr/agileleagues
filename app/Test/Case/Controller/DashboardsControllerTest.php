@@ -118,4 +118,10 @@ class DashboardsControllerTest extends ControllerTestCase {
 		$this->assertEquals(2, count($players));
 	}
 
+	public function testPlayersWithTeamId() {
+		$result = $this->testAction('/dashboards/players/' . TEAM_ID_1, array('return' => 'vars'));
+		$players = $result['players'];
+		$this->assertEquals(2, count($players));
+	}
+
 }

@@ -13,22 +13,34 @@ class DashboardsController extends AppController {
         
     }
 
-    public function players() {
-        $players = $this->Player->allFromPlayerTeam(
-            $this->Auth->user('id'), 
-            array(
-                'order' => array('Player.xp' => 'DESC'),
-                'contain' => array(
-                    'Team',
-                    'PlayerType',
-                    'BadgeLog' => array(
-                        'Badge' => array(
-                            'Domain'
-                        )
+    public function players($teamId = null) {
+        $options = array(
+            'order' => array('Player.xp' => 'DESC'),
+            'contain' => array(
+                'Team',
+                'PlayerType',
+                'BadgeLog' => array(
+                    'Badge' => array(
+                        'Domain'
                     )
                 )
             )
         );
+        $players = array();
+        if ($teamId !== null) {
+            $options['conditions'] = array(
+                'Player.team_id' => $teamId
+            );
+            $players = $this->Player->find('all', $options);
+        } else if ($this->Auth->user()) {
+            $players = $this->Player->allFromPlayerTeam(
+                $this->Auth->user('id'), 
+                $options
+            );
+        } else {
+            throw new NotFoundException('Team not found');
+        }
+
         $this->set('players', $players);
         $this->set('domains', $this->Domain->allFromOwner($this->gameMasterId()));
         $this->set('collapseSidebar', true);

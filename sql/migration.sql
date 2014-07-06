@@ -70,3 +70,7 @@ ALTER TABLE `team` DROP FOREIGN KEY `fk_team_player_id_scrummaster`;
 
 ALTER TABLE `team` ADD CONSTRAINT `fk_team_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
+DELETE FROM `player_type` WHERE (`id`='3');
+
+UPDATE `player_type` SET `name`='Game Master' WHERE (`id`='2');
+UPDATE `player_type` SET `name`='Player' WHERE (`id`='1');

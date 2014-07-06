@@ -32,7 +32,7 @@
 					<span>Leaderboards</span>
 				</a>
 			</li>
-			<?if ($loggedPlayer): ?>
+			<?if ($loggedPlayer && $isPlayer): ?>
 				<li data-action="activities">
 					<a href="<?= $this->Html->url('/dashboards/activities'); ?>">
 						<i class="entypo-flag"></i>
@@ -57,8 +57,8 @@
 						<span>Activities List</span>
 					</a>
 				</li>
-				<li data-action="report"><a href="<?= $this->Html->url('/activities/report'); ?>"><i class="entypo-doc"></i><span>Report Activity</span></a></li>
 				<?if (!$isGameMaster): ?>
+					<li data-action="report"><a href="<?= $this->Html->url('/activities/report'); ?>"><i class="entypo-doc"></i><span>Report Activity</span></a></li>
 					<li data-action="team">
 						<a href="<?= $this->Html->url('/activities/team'); ?>">
 							<i class="entypo-users"></i>
@@ -143,13 +143,15 @@
 					</li>
 				<?endif;?>
 				<li data-action="index"><a href="<?= $this->Html->url('/domains/'); ?>"><span><i class="entypo-list"></i>Domains List</span></a></li>
-				<?foreach ($allDomains as $domain): ?>
-					<li data-action="badges">
-						<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>">
-							<span><i class="<?= h($domain['Domain']['icon'])?>"></i><?= h($domain['Domain']['name'])?> Badges</span>
-						</a>
-					</li>
-				<?endforeach;?>
+				<?if ($isPlayer): ?>
+					<?foreach ($allDomains as $domain): ?>
+						<li data-action="badges">
+							<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>">
+								<span><i class="<?= h($domain['Domain']['icon'])?>"></i><?= h($domain['Domain']['name'])?> Badges</span>
+							</a>
+						</li>
+					<?endforeach;?>
+				<?endif;?>
 			</ul>
 		</li>
 		<li data-controller="players">

@@ -120,10 +120,9 @@ class PlayersController extends AppController {
 			unset($this->Player->validate['repeat_password']);
 
 			$this->Player->validate['team_id'] = 'notEmpty';
+			$this->request->data['Player']['player_type_id'] = PLAYER_TYPE_PLAYER;
 
-			if ($this->request->data['Player']['player_type_id'] == PLAYER_TYPE_GAME_MASTER) {
-				$this->flashError(__('You cannot create other Game Masters.'));
-			} else if ($this->Player->save($this->request->data)) {
+			if ($this->Player->save($this->request->data)) {
 
 				$email = $this->request->data['Player']['email'];
 				$team = $this->Team->findById($this->request->data['Player']['team_id']);
@@ -157,9 +156,6 @@ class PlayersController extends AppController {
 			}
 		}
 
-		$this->set('playerTypes', array(
-			PLAYER_TYPE_PLAYER => 'Player'
-		));
 		$this->set('teams', $this->Team->simpleFromGameMaster($this->Auth->user('id')));
 	}
 

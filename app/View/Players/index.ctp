@@ -11,6 +11,9 @@
             <h1>Players</h1>
         </div>
     </div>
+    <div class="panel-body">
+		<p><?= __('You can reassign players to other teams by clicking on the Team button.')?></p>
+    </div>
     <div class="panel-body with-table">
 		<table class="table table-striped table-bordered table-condensed">
 			<tr>

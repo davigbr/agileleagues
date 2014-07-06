@@ -137,7 +137,7 @@ class PlayersControllerTest extends ControllerTestCase {
 	public function testInviteGet() {
 		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
-		$this->assertTrue(isset($vars['playerTypes']));
+		$this->assertTrue(isset($vars['teams']));
 	}
 
 	public function testInviteNotGameMaster() {
@@ -146,30 +146,12 @@ class PlayersControllerTest extends ControllerTestCase {
 		$vars = $this->testAction('/players/invite', array('method' => 'get', 'return' => 'vars'));
 	}
 
-	public function testInvitePostGameMaster() {
-		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
-		$data = array(
-			'Player' => array(
-				'name' => 'A team',
-				'email' => 'email@email.com',
-				'player_type_id' => PLAYER_TYPE_GAME_MASTER,
-				'team_id' => '1'
-			)
-		);
-		$this->testAction('/players/invite', array('data' => $data));
-		$player = $this->utils->Player->findByEmail('email@email.com');
-		$this->assertEmpty($player);
-		$this->assertNotNull($this->controller->flashError);
-	}
-
-
 	public function testInvitePostValidationError() {
 		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$data = array(
 			'Player' => array(
 				'name' => '',
 				'email' => 'email@email.com',
-				'player_type_id' => PLAYER_TYPE_PLAYER,
 				'team_id' => '1'
 			)
 		);
