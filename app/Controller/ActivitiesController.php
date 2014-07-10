@@ -90,6 +90,8 @@ class ActivitiesController extends AppController {
 	}
 
 	public function team() {
+		$this->set('collapseSidebar', true);
+		
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$logVotes = array();
 			foreach (@$this->request->data['Log'] as $id => $log) {

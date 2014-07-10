@@ -38,7 +38,7 @@
 					<th>Name</th>
 					<th>Tags</th>
 					<th>Player</th>
-					<th>Paired With</th>
+					<th>Acquired</th>
 					<th>Description</th>
 					<th title="<?=__('The XP bonus for accepting this activity')?>">Bonus</th>
 					<th>%</th>
@@ -64,12 +64,15 @@
 								<?if ($log['Activity']['new']): ?>
 									<span class="badge badge-danger">NEW</span>
 								<?endif;?>
-								<?= h($log['Activity']['name']) ?>
+								<span data-toggle="tooltip" title="<?= h($log['Activity']['description'])?>"><?= h($log['Activity']['name']) ?></span>
 								(<?= h($log['Log']['xp']) ?> XP) 
 							</td>
 							<td><?= $this->element('tag', array('tags' => $log['Tags'])); ?></td>
-							<td><?= h($log['Player']['name'])?></td>
-							<td><?= h($log['PairedPlayer']['name'])?></td>
+							<td>
+								<?= h($log['Player']['name'])?>
+								<?= isset($log['PairedPlayer']['name'])? (' + ' .  h($log['PairedPlayer']['name'])) : ''?>
+							</td>
+							<td><?= $this->Format->date($log['Log']['acquired'])?></td>
 							<td><?= h($log['Log']['description'])?></td>
 							<? if (isset($log['MyVote'])): ?>
 								<td>
@@ -109,7 +112,7 @@
 									<?=number_format($log['Log']['acceptance_votes'])?>/<?=number_format($log['Activity']['acceptance_votes'])?>
 								</td>
 								<td>
-									<div style="width: 300px" class="input-group">
+									<div style="min-width: 100px; max-width: 400px" class="input-group">
 										<div class="accept-activity input-group-addon">
 											<i style="color: green" class="entypo-thumbs-up"></i></a>
 										</div>
@@ -125,7 +128,7 @@
 									<?=number_format($log['Log']['rejection_votes'])?>/<?=number_format($log['Activity']['rejection_votes'])?>
 								</td>
 								<td>
-									<div style="width: 300px" class="input-group">
+									<div style="min-width: 100px; max-width: 400px" class="input-group">
 										<div class="reject-activity input-group-addon">
 											<i style="color: red" class="entypo-thumbs-down"></i></a>
 										</div>
@@ -134,7 +137,7 @@
 								</td>
 							<? endif; ?>
 						</tr>
-						<? if(isset($log['LogVote'])): ?>
+						<? if(!empty($log['LogVote'])): ?>
 						<tr>
 							<td></td>
 							<td colspan="5">
