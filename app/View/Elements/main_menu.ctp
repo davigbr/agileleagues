@@ -22,6 +22,11 @@
 			<span>Dashboards</span>
 		</a>
 		<ul>
+			<li data-action="stats">
+				<a href="<?= $this->Html->url('/dashboards/stats'); ?>"><i class="entypo-chart-bar"></i>
+					<span>Stats</span>
+				</a>
+			</li>
 			<li data-action="players">
 				<a href="<?= $this->Html->url('/dashboards/players'); ?>"><i class="entypo-user"></i>
 					<span>Players</span>

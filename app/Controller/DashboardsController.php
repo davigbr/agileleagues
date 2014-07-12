@@ -17,6 +17,48 @@ class DashboardsController extends AppController {
         
     }
 
+    public function stats() {
+        $activitiesReported = $this->Log->query(
+            'SELECT COUNT(*) AS count, UNIX_TIMESTAMP(acquired) AS acquired FROM log ' .
+            'WHERE acquired >= CURRENT_DATE - INTERVAL 30 DAY ' .
+            'GROUP BY acquired');
+        $activitiesReportedJSON = array();
+        foreach ($activitiesReported as $day) {
+            $activitiesReportedJSON[] = array(
+                (int)$day[0]['acquired']*1000,
+                (int)$day[0]['count']
+            );
+        }
+
+        $badgesClaimed = $this->Log->query(
+            'SELECT COUNT(*) AS count, UNIX_TIMESTAMP(DATE(creation)) AS creation FROM badge_log ' .
+            'WHERE creation >= CURRENT_DATE - INTERVAL 30 DAY ' .
+            'GROUP BY DATE(creation)');
+        $badgesClaimedJSON = array();
+        foreach ($badgesClaimed as $day) {
+            $badgesClaimedJSON[] = array(
+                (int)$day[0]['creation']*1000,
+                (int)$day[0]['count']
+            );
+        }
+
+        $comments = $this->Log->query(
+            'SELECT COUNT(*) AS count, UNIX_TIMESTAMP(DATE(creation)) AS creation FROM log_votes ' .
+            'WHERE creation >= CURRENT_DATE - INTERVAL 30 DAY ' .
+            'GROUP BY DATE(creation)');
+        $commentsJSON = array();
+        foreach ($comments as $day) {
+            $commentsJSON[] = array(
+                (int)$day[0]['creation']*1000,
+                (int)$day[0]['count']
+            );
+        }
+
+        $this->set('activitiesReported', $activitiesReportedJSON);
+        $this->set('badgesClaimed', $badgesClaimedJSON);
+        $this->set('commentsAdded', $commentsJSON);
+    }
+
     public function players($teamId = null) {
         $options = array(
             'order' => array('Player.xp' => 'DESC'),
