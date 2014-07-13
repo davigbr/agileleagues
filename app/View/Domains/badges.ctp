@@ -1,4 +1,3 @@
-<? $compatible = $loggedPlayer['Player']['player_type_id'] == $domain['Domain']['player_type_id']; ?>
 <div class="panel panel-primary panel-table">
     <div class="panel-heading">
         <div class="panel-title">
@@ -15,12 +14,10 @@
             <div class="tile-title" style="height: 330px; <?= $badge['claimed']? 'background-color: ' . $badge['Domain']['color']:''?>">           
                 <div class="icon">
                     <a href="<?= $this->Html->url('/badges/view/' . $badgeId); ?>">
-                        <?if($badge['claimed']):?>
+                        <?if($isGameMaster || $badge['claimed']):?>
                             <i class="<?= $badge['Badge']['icon']? h($badge['Badge']['icon']) : 'fa fa-question'?>"></i>
-                        <?elseif ($compatible): ?>
+                        <?else: ?>
                             <i class="glyphicon glyphicon-lock"></i>
-                        <?else:?>
-                            <i class="glyphicon glyphicon-ban-circle"></i>
                         <?endif;?>
                     </a>
                 </div>
@@ -29,9 +26,7 @@
                         <h3>
                             <?= h($badge['Badge']['name']); ?>&nbsp;
                         </h3>
-                        <?if (!$compatible): ?>
-                            <p>This badge is <strong style="color: red">not compatible</strong> with your player type.</p>
-                        <?elseif(!$badge['claimed'] && $badge['progress'] === 100):?>
+                        <?if(!$badge['claimed'] && $badge['progress'] === 100):?>
                             <p>All required activities have been <strong style="color: green">completed</strong>. Claim now!</p>
                         <?else:?>
                             <p>(<?=(int)$badge['progress']?>%)</p>
@@ -61,30 +56,28 @@
                             <?endforeach;?>
                         </div>
                         <div class="tile-footer" style="height: 100px; text-align: center">
-                            <?if ($compatible): ?>
-                                <div class="row">
-                                    <?if (empty($activitiesProgress)): ?>
-                                        <i style="color: green" class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;<span>No activities required.</span>
+                            <div class="row">
+                                <?if (empty($activitiesProgress)): ?>
+                                    <i style="color: green" class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;<span>No activities required.</span>
+                                <?endif;?>
+                                <?foreach($activitiesProgress as $activityProgress): ?>
+                                    <?if($badge['claimed'] || $activityProgress['BadgeActivityProgress']['progress'] == 100):?>
+                                        <i style="color: green" class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;
+                                    <?else:?>
+                                        <i style="color: red" class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;
                                     <?endif;?>
-                                    <?foreach($activitiesProgress as $activityProgress): ?>
-                                        <?if($badge['claimed'] || $activityProgress['BadgeActivityProgress']['progress'] == 100):?>
-                                            <i style="color: green" class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;
-                                        <?else:?>
-                                            <i style="color: red" class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;
+                                    <span title="<?= $activityProgress['Activity']['name']?>">
+                                        <span title="Required"><?= $activityProgress['BadgeActivityProgress']['activities_required']?>x </span>
+                                        <?= h($activityProgress['Activity']['name']); ?>
+                                        <?if (!$badge['claimed']): ?>
+                                            <span title="You have">
+                                                (<?= $activityProgress['BadgeActivityProgress']['activities_completed']?>)
+                                            </span>
                                         <?endif;?>
-                                        <span title="<?= $activityProgress['Activity']['name']?>">
-                                            <span title="Required"><?= $activityProgress['BadgeActivityProgress']['activities_required']?>x </span>
-                                            <?= h($activityProgress['Activity']['name']); ?>
-                                            <?if (!$badge['claimed']): ?>
-                                                <span title="You have">
-                                                    (<?= $activityProgress['BadgeActivityProgress']['activities_completed']?>)
-                                                </span>
-                                            <?endif;?>
-                                        </span>
-                                        <br/>
-                                    <?endforeach;?>
-                                </div>
-                            <?endif;?>
+                                    </span>
+                                    <br/>
+                                <?endforeach;?>
+                            </div>
                         </div>
                     </div>
                 </div>
