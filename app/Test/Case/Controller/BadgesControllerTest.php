@@ -75,7 +75,6 @@ class BadgesControllerTest extends ControllerTestCase {
 		$this->assertTrue(isset($vars['domain']));
 	}
 
-
 	public function testEditNotFound() {
 		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$domain = $this->utils->Domain->find('first');

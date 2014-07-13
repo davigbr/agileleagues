@@ -31,6 +31,11 @@
 		echo $this->fetch('script');
 	?>
 	<?= $this->element('meta') ?>
+	<script type="text/javascript">
+		$(function(){
+			$('#form-submit').click(function(){$(this).addClass('disabled')});
+		});
+	</script>
 </head>
 <body class="page-body gray">
 	<div class="page-container <?= $collapseSidebar? 'sidebar-collapsed' : '' ?>">

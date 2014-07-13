@@ -81,11 +81,7 @@ class BadgesController extends AppController {
             if (empty($this->request->data['ActivityRequisite'])) unset($this->request->data['ActivityRequisite']);
             if (empty($this->request->data['BadgeRequisite'])) unset($this->request->data['BadgeRequisite']);
 
-            if ($id !== null) {
-                $this->BadgeRequisite->deleteAll(array('BadgeRequisite.badge_id' => $id), true);
-                $this->ActivityRequisite->deleteAll(array('ActivityRequisite.badge_id' => $id), true);
-            }
-            if ($this->Badge->saveAssociated($this->request->data)) {
+            if ($this->Badge->saveBadge($id, $this->request->data, $this->gameMasterId())) {
                 $this->flashSuccess(__('Badge saved successfully!'));
                 return $this->redirect('/badges');
             } else {

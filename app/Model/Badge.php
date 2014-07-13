@@ -29,7 +29,9 @@ class Badge extends AppModel {
 		'BadgeClaimed', 
 		'BadgeLog', 
 		'Player', 
-		'Notification'
+		'Notification',
+		'Log',
+		'ActivityRequisiteSummary'
 	);
 
 	public function allFromOwner($playerIdOwner) {
@@ -50,6 +52,43 @@ class Badge extends AppModel {
 
 	public function simpleFromDomain($domainId) {
 		return $this->simple(array('Badge.domain_id' => $domainId));
+	}
+
+	public function saveBadge($id, $data, $playerIdOwner) {
+		$this->begin();
+		try {
+			if ($id !== null) {
+	            $this->ActivityRequisiteSummary->deleteAll(array('ActivityRequisiteSummary.id >' => 0), true);
+
+	            $this->BadgeRequisite->deleteAll(array('BadgeRequisite.badge_id' => $id), true);
+	            $this->ActivityRequisite->deleteAll(array('ActivityRequisite.badge_id' => $id), true);
+
+	            // Rebuild activity requisite summary
+	            $logs = $this->Log->find('all', array(
+					'conditions' => array(
+						'Log.accepted IS NOT NULL',
+						'Log.player_id_owner' => $playerIdOwner
+					),
+					'contain' => array(
+						'Tags'
+					)
+				));
+
+				foreach ($logs as $log) {
+					$this->ActivityRequisite->_updateActivityRequisiteSummary($log);
+				}
+	        }
+	        if ($this->saveAssociated($data)) {
+        		$this->commit();
+	        	return true;
+	        } else {
+	        	$this->rollback();
+	        	return false;
+	        }
+        } catch (Exception $ex) {
+        	$this->rollback();
+			throw $ex;        	
+        }
 	}
 
 	public function claim($playerId, $badgeId) {

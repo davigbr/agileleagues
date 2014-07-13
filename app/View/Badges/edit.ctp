@@ -5,10 +5,16 @@
 				<div class="panel-title"><strong>Edit Badge - <?= h($domain['Domain']['name'])?> Domain</strong></div>
 			</div>
 			<div class="panel-body">
-				<? echo $this->Bootstrap->create('Badge'); ?>
-				<? echo $this->Bootstrap->hidden('id'); ?>
+				<?= $this->Bootstrap->create('Badge'); ?>
+				<div class="alert alert-info">
+					Please only make slight changes to badges. Sometimes it is better to inactivate and create another one.
+				</div>
+				<div class="alert alert-warning">
+					It may take a while to edit a bagde because all player progress must be recalculated.
+				</div>
+				<?= $this->Bootstrap->hidden('id'); ?>
 				<? require_once 'form.ctp'; ?>
-				<? echo $this->Bootstrap->end(); ?>
+				<?= $this->Bootstrap->end(); ?>
 			</div>
 		</div>
 	</div>
