@@ -83,7 +83,7 @@ class AppController extends Controller {
 	    )
 	);
 
-	public $helpers = array('Form', 'Bootstrap', 'Format', 'Notifications');
+	public $helpers = array('Form', 'Bootstrap', 'Notifications');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -91,6 +91,10 @@ class AppController extends Controller {
 		$this->player = null;
 		$this->isPlayer = false;
 		$this->isGameMaster = false;
+
+		$this->helpers['Format'] = array(
+			'timezone' => $this->Auth->user('timezone')
+		);
 
 		if ($this->Auth->user()) {
 			$playerId = $this->Auth->user('id');
@@ -124,7 +128,6 @@ class AppController extends Controller {
 
 			$this->set('allDomains', $this->Domain->allFromOwner($this->gameMasterId()));	
 		}
-
 		$this->set('isPlayer', $this->isPlayer);
 		$this->set('isGameMaster', $this->isGameMaster);
 		$this->set('loggedPlayer', $this->player);

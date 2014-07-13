@@ -1,8 +1,22 @@
 <?php
 
 App::uses('AppHelper', 'View/Helper');
+App::uses('TimeHelper', 'View/Helper');
 
 class FormatHelper extends AppHelper {
+
+	private $Time = null;
+
+	public function __construct(View $View, $settings = array()) {
+		parent::__construct($View, $settings);
+		$this->Time = new TimeHelper($View, $settings);
+		if (isset($settings['timezone'])) {
+			$this->timezone = $settings['timezone'];
+		} else {
+			$this->timezone = 'UTC';
+		}
+		$this->timezone = 'America/Sao_Paulo';
+	}
 
 	public function date($sqlDateTime) {
 		if (!$sqlDateTime || $sqlDateTime === '0000-00-00' || $sqlDateTime === '0000-00-00 00:00:00') return '';
@@ -11,9 +25,9 @@ class FormatHelper extends AppHelper {
 		}
 		$dateTime = new DateTime($sqlDateTime);
 		if (date('Y') === $dateTime->format('Y')) {
-			return $dateTime->format('M jS (D)');
+			return $this->Time->format('M jS (D)', $sqlDateTime, null, $this->timezone);
 		} else {
-			return $dateTime->format('M jS, Y');
+			return $this->Time->format('M jS, Y', $sqlDateTime, null, $this->timezone);
 		}
 	}
 
@@ -24,17 +38,16 @@ class FormatHelper extends AppHelper {
 		}
 		$dateTime = new DateTime($sqlDateTime);
 		if (date('Y') === $dateTime->format('Y')) {
-			return $dateTime->format('M jS (D) h:i A');
+			return $this->Time->format('M jS (D) h:i A', $sqlDateTime, null, $this->timezone);
 		} else {
-			return $dateTime->format('M jS, Y');
+			return $this->Time->format('M jS, Y', $sqlDateTime, null, $this->timezone);
 		}
 	}
 
 
 	public function time($sqlDateTime) {
 		if (!$sqlDateTime) return '';
-		$dateTime = new DateTime($sqlDateTime);
-		return $dateTime->format('h:i A');
+		return $this->Time->format('h:i A', $sqlDateTime, null, $this->timezone);
 	}
 
 	public function trunc($text, $size = 20, $ellipsis = true) {

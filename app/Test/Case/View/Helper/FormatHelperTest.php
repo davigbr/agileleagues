@@ -9,7 +9,9 @@ class FormatHelperTest extends CakeTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->Format = new FormatHelper(new View(new Controller()));
+        $this->Format = new FormatHelper(new View(new Controller()), array(
+            'timezone' => 'America/Sao_Paulo'
+        ));
     }
 
     public function testTrunc() {
@@ -25,17 +27,17 @@ class FormatHelperTest extends CakeTestCase {
     }
 
     public function testDateWithDateOnly() {
-        $date = $this->Format->date('2000-01-01');
+        $date = $this->Format->date('2000-01-02');
         $this->assertEquals('Jan 1st, 2000', $date);
     }
 
     public function testDateWithSameYear() {
-        $date = $this->Format->date(date('Y') . '-01-01');
+        $date = $this->Format->date(date('Y') . '-01-02');
         $this->assertEquals('Jan 1st (Wed)', $date);
     }
 
     public function testTime() {
-        $time = $this->Format->time('2000-01-01 23:59:00');
-        $this->assertEquals('11:59 PM', $time);
+        $time = $this->Format->time('2000-01-02 23:59:00');
+        $this->assertEquals('09:59 PM', $time);
     }
 }

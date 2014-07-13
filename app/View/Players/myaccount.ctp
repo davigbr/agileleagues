@@ -29,6 +29,7 @@
 						<?= $this->Bootstrap->input('email', array('autocomplete' => 'off', 'type' => 'email', 'class' => 'form-control')); ?>
 						<?= $this->Bootstrap->input('password', array('label' => 'Change Password', 'autocomplete' => 'off', 'type' => 'password', 'class' => 'form-control')); ?>
 						<?= $this->Bootstrap->input('repeat_password', array('type' => 'password', 'class' => 'form-control')); ?>
+						<?= $this->Bootstrap->input('timezone', array('type' => 'select', 'options' => array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers()), 'class' => 'form-control'))?>
 						<button type="submit" class="btn btn-success">Save</button>
 					</div>
 				</div>
