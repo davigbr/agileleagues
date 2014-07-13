@@ -11,7 +11,26 @@ class DomainTest extends CakeTestCase {
 		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
+		$this->utils->generateBadges();
 		$this->utils->generateActivities();
+	}
+
+	public function testInactivate() {
+		$domain = $this->utils->Domain->find('first');
+		$domainId = $domain['Domain']['id'];
+		$this->utils->Domain->inactivate($domain['Domain']['id']);
+		$domainAfter = $this->utils->Domain->findById($domainId);
+		$activities = $this->utils->Activity->findAllByDomainId($domainId);
+		$badges = $this->utils->Badge->findAllByDomainId($domainId);
+		$this->assertEquals(1, (int)$domainAfter['Domain']['inactive']);
+		$this->assertNotEmpty($activities);
+		$this->assertNotEmpty($badges);
+		foreach ($activities as $activity) {
+			$this->assertEquals(1, (int)$activity['Activity']['inactive']);
+		}
+		foreach ($badges as $badge) {
+			$this->assertEquals(1, (int)$badge['Badge']['inactive']);
+		}
 	}
 
 	public function testAllFromOwner() {

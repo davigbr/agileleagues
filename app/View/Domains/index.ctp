@@ -38,7 +38,9 @@
 							<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>" title="View Domain Badges" class="btn btn-primary btn-md">
 								<i class="entypo-trophy"></i> 
 							</a>
-							<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/domains/inactivate/' . $domain['Domain']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-md'), __('Are you sure you want to inactivate this domain?')) ?>
+							<a href="<?= $this->Html->url('/domains/inactivate/' . $domain['Domain']['id']); ?>" title="Inactivate Domain" class="btn btn-danger btn-md">
+								<i class="glyphicon glyphicon-trash"></i> 
+							</a>
 						</div>
 						<p></p>
 					<?endif;?>

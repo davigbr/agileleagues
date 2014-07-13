@@ -9,6 +9,31 @@ class DomainsController extends AppController {
             $this->Player->gameMasterId($this->Auth->user('id'))));
 	}
 
+    public function inactivate($domainId, $confirm = false) {
+        if (!$this->isGameMaster) {
+            throw new ForbiddenException();
+        }
+        $domain = $this->Domain->findById($domainId);
+        if (!$domain) {
+            throw new NotFoundException();
+        }
+
+        if ($confirm) {
+            $data = array(
+                'id' => $domainId,
+                'inactive' => 1
+            );
+            if ($this->Domain->save($data)) {
+                $this->flashSuccess(__('Domain inactivated successfully!'));
+            } else {
+                $this->flashError(__('Error while trying to inactivate the Domain.'));
+            }
+            return $this->redirect('/domains');
+        } 
+
+        $this->set('domain', $domain);
+    }
+
     public function add() {
         $this->_save();
     }

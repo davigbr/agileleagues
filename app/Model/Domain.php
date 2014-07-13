@@ -31,6 +31,20 @@ class Domain extends AppModel {
 		)
 	);
 
+	public function inactivate($domainId) {
+		$this->begin();
+		try {
+			$this->updateAll(array('Domain.inactive' => 1), array('Domain.id' => $domainId));
+			$this->Activity->updateAll(array('Activity.inactive' => 1), array('Activity.domain_id' => $domainId));
+			$this->Badge->updateAll(array('Badge.inactive' => 1), array('Badge.domain_id' => $domainId));
+
+			$this->commit();
+		} catch (Exception $ex) {
+			$this->rollback();
+			throw $ex;
+		}
+	}
+
 	public function allFromOwner($playerIdOwner) {
 		return $this->all(array(
 			'Domain.player_id_owner' => $playerIdOwner

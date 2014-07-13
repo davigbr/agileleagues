@@ -14,6 +14,28 @@ class DomainsControllerTest extends ControllerTestCase {
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
 	}
 
+	public function testInactivateNotGameMaster() {
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
+		$this->setExpectedException('ForbiddenException');
+		$this->testAction('/domains/inactivate/0');
+	}
+
+	public function testInactivateInvalidBadge() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$this->setExpectedException('NotFoundException');
+		$this->testAction('/domains/inactivate/0');
+	}
+
+	public function testInactivateNotConfirmed() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$domain = $this->utils->Domain->find('first');
+		$domainId = $domain['Domain']['id'];
+		$result = $this->testAction('/domains/inactivate/' . $domainId, array('return' => 'vars'));
+		$this->assertEquals($domainId, $result['domain']['Domain']['id']);
+		$domainAfter = $this->utils->Domain->findById($domainId);
+		$this->assertEquals(0, (int)$domainAfter['Domain']['inactive']);
+	}
+
 	public function testNotGameMaster() {
 		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$this->setExpectedException('ForbiddenException');
