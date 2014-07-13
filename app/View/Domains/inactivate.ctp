@@ -11,7 +11,7 @@
 					<br/>
 					<p><strong>Important:</strong> This operation CANNOT be undone.</p>
 					<p>All Activities from this domain are going to be <strong>inactivated</strong>.</p>
-					<p>All Badges from this domain are going to be <strong>ianctivated</strong>.</p>
+					<p>All Badges from this domain are going to be <strong>inactivated</strong>.</p>
 					<br/>
 					<a href="<?= $this->Html->url('/domains/inactivate/' . $domain['Domain']['id'] . '/true')?>" class="btn btn-danger">Inactivate this Domain, all its Badges and Activities</a>
 					<a href="<?= $this->Html->url('/domains/')?>" class="btn btn-default">Cancel, I have changed my mind</a>

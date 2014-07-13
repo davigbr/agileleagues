@@ -24,9 +24,12 @@ class Domain extends AppModel {
 	);
 
 	public $hasMany = array(
-		'Badge',
+		'Badge' => array(
+			'conditions' => array('Badge.inactive' => 0),
+			'order' => 'Badge.name'
+		),
 		'Activity' => array(
-			'conditions' => array('Activity.inactive' => false),
+			'conditions' => array('Activity.inactive' => 0),
 			'order' => 'Activity.name'
 		)
 	);
@@ -37,7 +40,6 @@ class Domain extends AppModel {
 			$this->updateAll(array('Domain.inactive' => 1), array('Domain.id' => $domainId));
 			$this->Activity->updateAll(array('Activity.inactive' => 1), array('Activity.domain_id' => $domainId));
 			$this->Badge->updateAll(array('Badge.inactive' => 1), array('Badge.domain_id' => $domainId));
-
 			$this->commit();
 		} catch (Exception $ex) {
 			$this->rollback();
@@ -47,12 +49,14 @@ class Domain extends AppModel {
 
 	public function allFromOwner($playerIdOwner) {
 		return $this->all(array(
+			'Domain.inactive' => 0,
 			'Domain.player_id_owner' => $playerIdOwner
 		));
 	}
 
 	public function simpleFromOwner($playerIdOwner) {
 		return $this->simple(array(
+			'Domain.inactive' => 0,
 			'Domain.player_id_owner' => $playerIdOwner
 		));
 	}

@@ -140,6 +140,7 @@ class DashboardsController extends AppController {
 
         // Bring only the domains from the logged in player type
         $domains = $this->Domain->all(array(
+            'Domain.inactive' => 0,
             'Domain.player_id_owner' => $this->gameMasterId(),
             'Domain.player_type_id' => $this->Auth->user('player_type_id')
         ), 'id');

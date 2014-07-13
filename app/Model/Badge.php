@@ -36,6 +36,7 @@ class Badge extends AppModel {
 
 	public function allFromOwner($playerIdOwner) {
 		return $this->all(array(
+			'Badge.inactive' => 0,
 			'Badge.player_id_owner' => $playerIdOwner
 		));
 	}
@@ -47,11 +48,17 @@ class Badge extends AppModel {
 	}
 
 	public function allFromDomainById($domainId) {
-		return $this->all(array('Badge.domain_id' => $domainId), 'id');
+		return $this->all(array(
+			'Badge.inactive' => 0,
+			'Badge.domain_id' => $domainId
+		), 'id');
 	}
 
 	public function simpleFromDomain($domainId) {
-		return $this->simple(array('Badge.domain_id' => $domainId));
+		return $this->simple(array(
+			'Badge.inactive' => 0,
+			'Badge.domain_id' => $domainId
+		));
 	}
 
 	public function saveBadge($id, $data, $playerIdOwner) {

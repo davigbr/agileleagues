@@ -19,15 +19,8 @@ class DomainsController extends AppController {
         }
 
         if ($confirm) {
-            $data = array(
-                'id' => $domainId,
-                'inactive' => 1
-            );
-            if ($this->Domain->save($data)) {
-                $this->flashSuccess(__('Domain inactivated successfully!'));
-            } else {
-                $this->flashError(__('Error while trying to inactivate the Domain.'));
-            }
+            $this->Domain->inactivate($domainId);
+            $this->flashSuccess(__('Domain inactivated successfully!'));
             return $this->redirect('/domains');
         } 
 
