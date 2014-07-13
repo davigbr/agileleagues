@@ -27,6 +27,37 @@ class BadgesControllerTest extends ControllerTestCase {
 		}
 	}
 
+	public function testInactivateNotGameMaster() {
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
+		$this->setExpectedException('ForbiddenException');
+		$this->testAction('/badges/inactivate/0');
+	}
+
+	public function testInactivateInvalidBadge() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$this->setExpectedException('NotFoundException');
+		$this->testAction('/badges/inactivate/0');
+	}
+
+	public function testInactivateNotConfirmed() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$badge = $this->utils->Badge->find('first');
+		$badgeId = $badge['Badge']['id'];
+		$result = $this->testAction('/badges/inactivate/' . $badgeId, array('return' => 'vars'));
+		$this->assertEquals($badgeId, $result['badge']['Badge']['id']);
+		$badgeAfter = $this->utils->Badge->findById($badgeId);
+		$this->assertEquals(0, (int)$badgeAfter['Badge']['inactive']);
+	}
+
+	public function testInactivateConfirmed() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$badge = $this->utils->Badge->find('first');
+		$badgeId = $badge['Badge']['id'];
+		$this->testAction('/badges/inactivate/' . $badgeId . '/true');
+		$badgeAfter = $this->utils->Badge->findById($badgeId);
+		$this->assertEquals(1, (int)$badgeAfter['Badge']['inactive']);
+	}
+
 	public function testClaimSuccess() {
 		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$badge = $this->utils->Badge->findById(1);

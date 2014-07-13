@@ -12,6 +12,31 @@ class BadgesController extends AppController {
 		$this->set('badges', $this->Badge->allFromOwner($smId));
 	}
 
+    public function inactivate($badgeId, $confirm = false) {
+        if (!$this->isGameMaster) {
+            throw new ForbiddenException();
+        }
+        $badge = $this->Badge->findById($badgeId);
+        if (!$badge) {
+            throw new NotFoundException();
+        }
+
+        if ($confirm) {
+            $data = array(
+                'id' => $badgeId,
+                'inactive' => 1
+            );
+            if ($this->Badge->save($data)) {
+                $this->flashSuccess(__('Badge inactivated successfully!'));
+            } else {
+                $this->flashError(__('Error while trying to inactivate badge.'));
+            }
+            return $this->redirect('/badges');
+        } 
+
+        $this->set('badge', $badge);
+    }
+
     public function view($badgeId) {
     	$playerId = $this->Auth->user('id');
     	$requiredActivitiesProgress = $this->BadgeActivityProgress->allFromBadgeAndPlayer($badgeId, $playerId);

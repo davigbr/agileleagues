@@ -6,13 +6,13 @@
     </div>
     <div class="panel-body">
     	<p><?= __('Activities are actions that the players will perform and report.')?></p>
+	    <?if ($isGameMaster): ?>
+			<a href="<?= $this->Html->url('/activities/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Activity </a>
+		<?endif;?>
     </div>
     <?if (empty($activities)): ?>
 	    <div class="panel-body">
 		    <p>No activities found :( </p>
-		    <?if ($isGameMaster): ?>
-				<a href="<?= $this->Html->url('/activities/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Activity </a>
-			<?endif;?>
 	    </div>
     <?else:?>
 	    <div class="panel-body with-table">
@@ -26,9 +26,7 @@
 					<th>Description</th>
 					<th>Last Week Logs</th>
 					<?if ($isGameMaster): ?>
-						<th>
-							<a href="<?= $this->Html->url('/activities/add'); ?>" class="btn btn-lg btn-success"><i class="glyphicon glyphicon-plus"></i> New </a>
-						</th>
+						<th>Actions</th>
 					<?endif;?>
 				</tr>
 				<?if (empty($activities)): ?>
@@ -68,10 +66,12 @@
 							</td>
 							<?if ($isGameMaster): ?>
 								<td>
-									<a href="<?= $this->Html->url('/activities/edit/' . $activity['Activity']['id']); ?>" class="btn btn-primary btn-sm">
-										<i class="glyphicon glyphicon-edit"></i>
-									</a>
-									<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/activities/inactivate/' . $activity['Activity']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this activity?')) ?>
+									<div class="btn-group">
+										<a href="<?= $this->Html->url('/activities/edit/' . $activity['Activity']['id']); ?>" class="btn btn-primary btn-sm">
+											<i class="glyphicon glyphicon-edit"></i>
+										</a>
+										<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/activities/inactivate/' . $activity['Activity']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this activity?')) ?>
+									</div>
 								</td>
 							<?endif;?>
 						</tr>

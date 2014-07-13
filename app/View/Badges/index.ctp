@@ -4,6 +4,9 @@
             <h1>Badges</h1>
         </div>
     </div>
+    <div class="panel-body">
+    	<p>If you want to create new Badges, please access the <a href="<?= $this->Html->url('/domains')?>">Domains</a>.</p>
+    </div>
     <?if (empty($badges)): ?>
 	    <div class="panel-body">
 		    <p>No badges found :( </p>
@@ -46,9 +49,14 @@
 						<td>
 							<?if ($isGameMaster): ?>
 								<div class="btn-group">
-									<a href="<?= $this->Html->url('/badges/edit/' . $badge['Badge']['domain_id'] . '/' . $badge['Badge']['id']); ?>" class="btn btn-primary btn-sm">
-										<i class="glyphicon glyphicon-edit"></i>
-									</a>
+									<div class="btn-group">
+										<a title="Edit Badge" href="<?= $this->Html->url('/badges/edit/' . $badge['Badge']['domain_id'] . '/' . $badge['Badge']['id']); ?>" class="btn btn-primary btn-sm">
+											<i class="glyphicon glyphicon-edit"></i>
+										</a>
+										<a title="Inactivate Badge" href="<?= $this->Html->url('/badges/inactivate/' . $badge['Badge']['id']); ?>" class="btn btn-danger btn-sm">
+											<i class="glyphicon glyphicon-trash"></i>
+										</a>
+									</div>
 								</div>
 							<?endif;?>
 						</td>

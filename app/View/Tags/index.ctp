@@ -6,13 +6,13 @@
     </div>
     <div class="panel-body">
     	<p><?=__('Tags are modifiers that the players can choose while reporting activities. ')?></p>
+	    <?if ($isGameMaster): ?>
+			<a href="<?= $this->Html->url('/tags/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Tag </a>
+		<?endif;?>
     </div>
     <?if (empty($tags)): ?>
 	    <div class="panel-body">
 		    <p>No tags found :( </p>
-		    <?if ($isGameMaster): ?>
-				<a href="<?= $this->Html->url('/tags/add'); ?>" class="btn btn-md btn-success"><i class="glyphicon glyphicon-plus"></i> Create New Tag </a>
-			<?endif;?>
 	    </div>
     <?else:?>
 	    <div class="panel-body with-table">
@@ -22,9 +22,7 @@
 					<th>Description</th>
 					<th>Symbol</th>
 					<?if ($isGameMaster): ?>
-						<th>
-							<a href="<?= $this->Html->url('/tags/add'); ?>" class="btn btn-lg btn-success"><i class="glyphicon glyphicon-plus"></i> New </a>
-						</th>
+						<th>Actions</th>
 					<?endif;?>
 				</tr>
 				<?if (empty($tags)): ?>
@@ -48,10 +46,12 @@
 							</td>
 							<?if ($isGameMaster): ?>
 								<td>
-									<a title="<?=__('Edit')?>" href="<?= $this->Html->url('/tags/edit/' . $tag['Tag']['id']); ?>" class="btn btn-primary btn-sm">
-										<i class="glyphicon glyphicon-edit"></i>
-									</a>
-									<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/tags/inactivate/' . $tag['Tag']['id'], $options = array('escape' => false, 'title' => __('Inactivate'), 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this tag?')) ?>
+									<div class="btn-group">
+										<a title="<?=__('Edit')?>" href="<?= $this->Html->url('/tags/edit/' . $tag['Tag']['id']); ?>" class="btn btn-primary btn-sm">
+											<i class="glyphicon glyphicon-edit"></i>
+										</a>
+										<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/tags/inactivate/' . $tag['Tag']['id'], $options = array('escape' => false, 'title' => __('Inactivate'), 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this tag?')) ?>
+									</div>
 								</td>
 							<?endif;?>
 						</tr>
