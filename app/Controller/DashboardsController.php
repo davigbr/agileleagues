@@ -10,11 +10,9 @@ class DashboardsController extends AppController {
     }
 
     public function index() {
-        
     }
 
     public function badges() {
-        
     }
 
     public function stats() {

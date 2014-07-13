@@ -44,30 +44,6 @@ class DashboardsControllerTest extends ControllerTestCase {
 		$this->assertEquals(3, count($result['activitiesCount']));
 	}
 
-	public function testActivitiesGameMaster2() {
-		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_2);
-		$result = $this->testAction('/dashboards/activities', array('return' => 'vars'));
-		
-		$activitiesNeverReported = $result['neverReportedActivities'];
-		$activitiesLeastReported = $result['leastReportedActivities'];
-		$activitiesMostReported = $result['mostReportedActivities'];
-
-		$this->assertEmpty($activitiesNeverReported);
-		$this->assertEmpty($activitiesLeastReported);
-		$this->assertEmpty($activitiesMostReported);
-		
-		$this->assertEquals(0, $result['averageActivitiesLogged']);
-		$this->assertEquals(0, $result['activitiesLogged']);
-		$this->assertEquals(0, $result['totalActivities']);
-		$this->assertEquals(0, $result['badgesCompletedCount']);
-		$this->assertEquals(0, $result['activitiesCompletedCount']);
-		$this->assertEquals(0, $result['totalActivitiesCount']);
-		$this->assertEquals(0, $result['totalDifferentActivitiesCompleted']);
-		$this->assertEquals(0, count($result['domains']));
-		$this->assertEquals(0, count($result['differentActivitiesCompleted']));
-		$this->assertEquals(0, count($result['activitiesCount']));
-	}
-
 	public function testActivitiesDomainDetails() {
 		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$domain = $this->utils->Domain->find('first');
