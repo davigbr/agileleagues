@@ -17,6 +17,20 @@ class BadgesControllerTest extends ControllerTestCase {
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
 	}
 
+	public function testClaimedNotGameMaster() {
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
+		$this->setExpectedException('ForbiddenException');
+		$result = $this->testAction('/badges/claimed');
+	}
+
+	public function testClaimed() {
+		$this->utils->generateBadgeLogs();
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$result = $this->testAction('/badges/claimed', array('return' => 'vars'));
+		$badgeLogs = $result['logs'];
+		$this->assertNotEmpty($badgeLogs);
+	}
+
 	public function testIndex() {
 		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/badges/index', array('return' => 'vars'));
@@ -119,6 +133,7 @@ class BadgesControllerTest extends ControllerTestCase {
 		$data = array();
 		$data['Badge']['name']= 'Glossarier';
 		$data['Badge']['icon']= 'entypo entypo-users';
+		$data['Badge']['credly_badge_id'] = '';
 		$data['BadgeRequisite'][0]['badge_id_requisite']= '';
 		$data['BadgeRequisite'][1]['badge_id_requisite']= '';
 		$data['BadgeRequisite'][2]['badge_id_requisite']= '';
@@ -147,6 +162,7 @@ class BadgesControllerTest extends ControllerTestCase {
 		$data = array();
 		$data['Badge']['name']= '';
 		$data['Badge']['icon']= 'entypo entypo-users';
+		$data['Badge']['credly_badge_id'] = '';
 		$data['BadgeRequisite'][0]['badge_id_requisite']= '';
 		$data['BadgeRequisite'][1]['badge_id_requisite']= '';
 		$data['BadgeRequisite'][2]['badge_id_requisite']= '';

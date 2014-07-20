@@ -224,13 +224,13 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testMyAccountGet() {
-		$this->controllerUtils->mockAuthUser();
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$result = $this->testAction('/players/myaccount', array('method' => 'GET', 'return' => 'vars'));
 		$this->assertNotNull($this->controller->request->data);
 	}
 
 	public function testMyAccountPostSuccess() {
-		$this->controllerUtils->mockAuthUser();
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$player = $this->utils->Player->findById(1);
 		$data = array(
 			'Player' => array(
@@ -245,7 +245,7 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testMyAccountPostFailure() {
-		$this->controllerUtils->mockAuthUser();
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$player = $this->utils->Player->findById(1);
 		$data = array(
 			'Player' => array(

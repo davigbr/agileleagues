@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class PlayersController extends AppController {
 
 	public $uses = array('Team');
-	public $components = array('Email', 'Utils');
+	public $components = array('Email', 'Utils', 'Credly');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -14,6 +14,68 @@ class PlayersController extends AppController {
 
 	public function index() {
 		$this->set('players', $this->Player->allFromPlayerTeam($this->Auth->user('id')));
+	}
+
+	public function credly() {
+		if ($this->request->is('post') || $this->request->is('put')) {
+			// Validation is not necessary
+			unset($this->Player->validate);
+			$data = $this->request->data['Credly'];
+
+			if ($this->isGameMaster) {
+				if (!$data['accept']) {
+					$this->flashError(__('You must authorize Agile Leagues to give credits using your Credly account in order to procede with the integration.'));
+					return; 
+				}
+				try {
+					$tokens = $this->Credly->token($data['credly_email'], $data['credly_password']);
+					if (!$tokens) {
+						$this->flashError(__('Unable to authenticate. Please be sure that your email and password are correct.'));
+						return;
+					}
+					$member = $this->Credly->findMemberByEmail($tokens['access_token'], $data['credly_email']);
+
+					$player = array(
+						'id' => $this->Auth->user('id'),
+						'credly_id' => $member->id,
+						'credly_email' => $data['credly_email'],
+						'credly_access_token' => $tokens['access_token'],
+						'credly_refresh_token' => $tokens['refresh_token']
+					);
+
+					$this->Player->save($player);
+					$this->flashSuccess(__('Credly account setup successfully!'));
+					return $this->redirect('/players/myaccount');
+
+				} catch (Exception $ex) {
+					error_log($ex->getMessage());
+					$this->flashError(__('An error occured while trying to get your token. Please try again later.'));
+				}
+			} else {
+				try {
+					$gameMaster = $this->gameMaster();
+					$token = $gameMaster['Player']['credly_access_token'];
+					$member = $this->Credly->findMemberByEmail(
+						$token, 
+						$data['credly_email']
+					);
+
+					$player = array(
+						'id' => $this->Auth->user('id'),
+						'credly_id' => $member->id,
+						'credly_email' => $data['credly_email']
+					);
+
+					$this->Player->save($player);
+					$this->flashSuccess(__('Credly account setup successfully!'));
+					return $this->redirect('/players/myaccount');
+
+				} catch (Exception $ex) {
+					error_log($ex->getMessage());
+					$this->flashError(__('An error occured while trying to communicate with Credly. Please try again later.'));
+				}
+			}
+		}
 	}
 
 	public function signup() {
@@ -226,6 +288,15 @@ class PlayersController extends AppController {
 	}
 
 	public function myaccount() {
+		$this->gameMasterCredlyAccountSetup = false;
+		if (!$this->isGameMaster) {
+			$gameMaster = $this->gameMaster();
+			if ($gameMaster['Player']['credly_email']) {
+				$this->gameMasterCredlyAccountSetup = true;
+			}
+		}
+		$this->set('gameMasterCredlyAccountSetup', $this->gameMasterCredlyAccountSetup);
+
 		$this->set('title_for_layout', 'Account');
 
 		if ($this->request->is('get')) {

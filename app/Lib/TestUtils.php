@@ -106,13 +106,13 @@ class TestUtils {
         $this->generatePlayerTypes();
 
         $this->Player->saveMany(array(
-            array('id' => PLAYER_ID_1, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 1', 'email' => 'email1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 500, 'verified_in' => date('Y-m-d H:i:s')),
-            array('id' => PLAYER_ID_2, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 2', 'email' => 'email2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => date('Y-m-d H:i:s')),
-            array('id' => PLAYER_ID_3, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 3', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => PLAYER_ID_1, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 1', 'email' => 'email1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 500, 'credly_id' => null, 'credly_email' => null, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => PLAYER_ID_2, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 2', 'email' => 'email2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'credly_id' => null, 'credly_email' => null, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => PLAYER_ID_3, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 3', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'credly_id' => null, 'credly_email' => null, 'verified_in' => date('Y-m-d H:i:s')),
             // Account not verified
-            array('id' => PLAYER_ID_4, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 4', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'verified_in' => null),
-            array('id' => GAME_MASTER_ID_1, 'player_type_id' => PLAYER_TYPE_GAME_MASTER, 'name' => 'GameMaster 1', 'email' => 'scrummaster1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'verified_in' => date('Y-m-d H:i:s')),
-            array('id' => GAME_MASTER_ID_2, 'player_type_id' => PLAYER_TYPE_GAME_MASTER, 'name' => 'GameMaster 2', 'email' => 'scrummaster2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'verified_in' => date('Y-m-d H:i:s'))
+            array('id' => PLAYER_ID_4, 'player_type_id' => PLAYER_TYPE_PLAYER, 'name' => 'Player 4', 'email' => 'email3@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 100, 'credly_id' => null, 'credly_email' => null, 'verified_in' => null),
+            array('id' => GAME_MASTER_ID_1, 'player_type_id' => PLAYER_TYPE_GAME_MASTER, 'name' => 'GameMaster 1', 'email' => 'scrummaster1@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'credly_id' => null, 'credly_email' => null, 'verified_in' => date('Y-m-d H:i:s')),
+            array('id' => GAME_MASTER_ID_2, 'player_type_id' => PLAYER_TYPE_GAME_MASTER, 'name' => 'GameMaster 2', 'email' => 'scrummaster2@email.com', 'password' => '123456', 'repeat_password' => '123456', 'xp' => 999, 'credly_id' => null, 'credly_email' => null, 'verified_in' => date('Y-m-d H:i:s'))
         ));
 
         $this->Team->updateAll(

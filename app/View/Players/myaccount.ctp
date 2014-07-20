@@ -12,17 +12,26 @@
 						<br/>
 						<p>
 							<strong>
-							<?= $loggedPlayer['Player']['name']?>
+							<?= h($loggedPlayer['Player']['name'])?>
 							<? if ($isPlayer): ?>
-								- <?= $loggedPlayer['Player']['title']?>
+								- <?= h($loggedPlayer['Player']['title'])?>
 							<? endif;?>
 							</strong>
 						</p>
-						<p>
-							<small><a target="_blank" href="http://gravatar.com">Change your picture at gravatar.com</a></small>
-						</p>
+						<p><a target="_blank" href="http://gravatar.com">Change your picture at gravatar.com</a></p>
+						<? if ($isGameMaster || (!$isGameMaster && $gameMasterCredlyAccountSetup)): ?>
+							<hr/>
+							<p><strong>Credly</strong></p>
+							<? if ($loggedPlayer['Player']['credly_email']): ?>
+								<p>Your Credly account is setup!</p>	
+								<p>Member Id: <?= h($loggedPlayer['Player']['credly_id'])?></p>				
+								<p>Email: <?= h($loggedPlayer['Player']['credly_email'])?></p>				
+							<?endif;?>
+							<p><a href="<?= $this->Html->url('/players/credly')?>">Setup or change Credly account</a></p>
+						<? endif;?>
 					</div>
 					<div class="col-sm-9">
+						<h2>Profile</h2>
 						<?= $this->Bootstrap->create('Player'); ?>
 						<?= $this->Bootstrap->hidden('id'); ?>
 						<?= $this->Bootstrap->input('name', array('autocomplete' => 'off', 'type' => 'text', 'class' => 'form-control')); ?>

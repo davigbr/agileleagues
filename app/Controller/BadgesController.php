@@ -4,6 +4,8 @@ App::uses('AppController', 'Controller');
 
 class BadgesController extends AppController {
 
+    public $components = array('Credly');
+
 	public function index() {
         $smId = $this->gameMasterId();
 		$this->set('activitiesById', $this->Activity->allFromOwnerById($smId));
@@ -11,6 +13,71 @@ class BadgesController extends AppController {
 		$this->Badge->recursive = 1;
 		$this->set('badges', $this->Badge->allFromOwner($smId));
 	}
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $gameMaster = $this->gameMaster();
+        $this->set('gameMasterCredlyAccountSetup', (bool)$gameMaster['Player']['credly_id']);
+    }
+
+    public function credlyGive($badgeLogId) {
+        if (!$this->isGameMaster) {
+            throw new ForbiddenException();
+        }
+        $badgeLog = $this->BadgeLog->findById($badgeLogId);
+        if (!$badgeLog) {
+            throw new NotFoundException();
+        }
+        try {
+            $gameMaster = $this->gameMaster();
+            $token = $gameMaster['Player']['credly_access_token'];
+            $memberId = $badgeLog['Player']['credly_id'];
+            $badgeId = $badgeLog['Badge']['credly_badge_id'];
+
+            $data = $this->Credly->giveCreditById($token, $memberId, $badgeId);
+            $this->BadgeLog->save(array(
+                'id' => $badgeLogId,
+                'credly_given' =>  1
+            ));
+            $this->flashSuccess(__('Credly Badge successfully given!'));
+        } catch (Exception $ex) {
+            error_log($ex->getMessage());
+            $this->flashError(__('Error while trying to give credit. Please try again later.'));
+            
+        }
+        return $this->redirect('/badges/claimed');
+    }
+
+    public function credlyUpdate($badgeId, $credlyBadgeId = null, $redirect = true) {
+        if (!$this->isGameMaster) {
+            throw new ForbiddenException();
+        }
+        if ($credlyBadgeId === null) {
+            $badge = $this->Badge->findById($badgeId);
+            if (!$badge) {
+                throw new NotFoundException();
+            }
+            $credlyBadgeId = $badge['Badge']['credly_badge_id'];
+        }
+
+        try {
+            $gameMaster = $this->gameMaster();
+            $token = $gameMaster['Player']['credly_access_token'];
+            $data = $this->Credly->badgeData($token, $credlyBadgeId);
+            $badgeUpdate = array(
+                'id' => $badgeId,
+                'credly_badge_name' => $data->title,
+                'credly_badge_image_url' => $data->image_url
+            );
+            $this->Badge->save($badgeUpdate);
+            if ($redirect) {
+                $this->flashSuccess(__('Credly data updated successfully!'));
+                return $this->redirect('/badges/claimed');
+            }
+        } catch (Exception $ex) {
+            $this->flashWarning(__('Could not find Credly badge data.'));
+        }
+    }
 
     public function inactivate($badgeId, $confirm = false) {
         if (!$this->isGameMaster) {
@@ -80,14 +147,32 @@ class BadgesController extends AppController {
     }
 
     public function add($domainId) {
-        $this->_save($domainId);
+        $this->save($domainId);
     }
 
     public function edit($domainId, $id) {
-        $this->_save($domainId, $id);
+        $this->save($domainId, $id);
     }
 
-    public function _save($domainId, $id = null) {
+    // List all claimed badges
+    public function claimed() {
+        if (!$this->isGameMaster) {
+            throw new ForbiddenException();
+        }
+        $this->set('logs', $this->BadgeLog->find('all', array(
+            'conditions' => array(
+                'Badge.player_id_owner' => $this->gameMasterId(),
+            ),
+            'contain' => array(
+                'Badge' => array(
+                    'Domain'
+                ),
+                'Player'
+            )
+        )));
+    }
+
+    private function save($domainId, $id = null) {
         if (!$this->isGameMaster) {
             throw new ForbiddenException();
         }
@@ -107,6 +192,11 @@ class BadgesController extends AppController {
             if (empty($this->request->data['BadgeRequisite'])) unset($this->request->data['BadgeRequisite']);
 
             if ($this->Badge->saveBadge($id, $this->request->data, $this->gameMasterId())) {
+                // Search for Credly data
+                $credlyBadgeId = $this->request->data['Badge']['credly_badge_id'];
+                if ($credlyBadgeId) {
+                    $this->credlyUpdate($id, $credlyBadgeId, false);
+                }
                 $this->flashSuccess(__('Badge saved successfully!'));
                 return $this->redirect('/badges');
             } else {

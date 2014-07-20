@@ -176,7 +176,7 @@ CREATE TABLE `activity_requisite` (
   KEY `prerequisite_activity_id` (`activity_id`),
   CONSTRAINT `prerequisite_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`),
   CONSTRAINT `prerequisite_badge_id` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=165 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=169 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +199,7 @@ CREATE TABLE `activity_requisite_summary` (
   CONSTRAINT `fk_activity_requisite_summary_activity_requisite_id` FOREIGN KEY (`activity_requisite_id`) REFERENCES `activity_requisite` (`id`),
   CONSTRAINT `fk_activity_requisite_summary_badge_id` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`id`),
   CONSTRAINT `fk_activity_requisite_summary_player_id` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=940 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=1672 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,6 +237,9 @@ CREATE TABLE `badge` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `player_id_owner` int(10) unsigned NOT NULL,
   `inactive` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `credly_badge_id` int(10) DEFAULT NULL,
+  `credly_badge_name` varchar(255) DEFAULT NULL,
+  `credly_badge_image_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `badge_domain_id` (`domain_id`),
   KEY `badge_player_id_owner` (`player_id_owner`),
@@ -711,6 +714,10 @@ CREATE TABLE `player` (
   `hash` char(64) DEFAULT NULL,
   `verified_in` timestamp NULL DEFAULT NULL,
   `timezone` varchar(200) NOT NULL DEFAULT 'UTC',
+  `credly_id` varchar(20) DEFAULT NULL,
+  `credly_email` varchar(255) DEFAULT NULL,
+  `credly_access_token` varchar(200) DEFAULT NULL,
+  `credly_refresh_token` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_verification_hash` (`hash`) USING HASH,
   KEY `fk_player_type_id` (`player_type_id`),
@@ -1255,4 +1262,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-13 14:01:58
+-- Dump completed on 2014-07-20  9:57:23

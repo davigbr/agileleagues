@@ -3,6 +3,8 @@
 <br/>
 <div class="row">
 	<div class="col-sm-8">
+
+
 		<h4><strong>Activity Requisites</strong></h4>
 
 		<table class="table table-bordered table-striped">
@@ -96,6 +98,19 @@
 	</div>
 </div>
 <?= $this->Bootstrap->input('new'); ?>
+<? if ($gameMasterCredlyAccountSetup): ?>
+	<h4><strong>Credly Integration</strong></h4>
+	<?= $this->Bootstrap->input('credly_badge_id', array(
+		'label' => 'Credly Badge Id',
+		'type' => 'number', 
+		'pattern' => '\d*', 
+		'placeholder' => 'Plase type the id of your Credly badge',
+		'min' => 0, 
+		'max' => 20000000, 
+		'class' => 'form-control'
+	)); ?>
+<?endif;?>
+<br/>
 <button id="form-submit" type="submit" class="btn btn-success">Save</button>
 
 <script type="text/javascript">

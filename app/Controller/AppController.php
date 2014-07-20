@@ -135,10 +135,14 @@ class AppController extends Controller {
 	}
 
 	protected function gameMasterId() {
-		if (!$this->smId) {
-			$this->smId = $this->Player->gameMasterId($this->Auth->user('id'));
+		if (!$this->gmId) {
+			$this->gmId = $this->Player->gameMasterId($this->Auth->user('id'));
 		}
-		return $this->smId;
+		return $this->gmId;
+	}
+
+	protected function gameMaster() {
+		return $this->Player->findById($this->gameMasterId());
 	}
 
 	public function flashSuccess($message) {
