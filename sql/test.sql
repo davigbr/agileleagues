@@ -293,6 +293,7 @@ CREATE TABLE `badge_log` (
   `player_id` int(10) unsigned NOT NULL,
   `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `domain_id` int(10) unsigned NOT NULL,
+  `credly_given` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique` (`badge_id`,`player_id`) USING HASH,
   KEY `fk_badge_log_player_id` (`player_id`),
@@ -1262,4 +1263,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-20  9:57:23
+-- Dump completed on 2014-07-20 17:31:24

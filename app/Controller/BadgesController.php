@@ -146,7 +146,7 @@ class BadgesController extends AppController {
 		return $this->redirect('/badges');
     }
 
-    public function add($domainId) {
+    public function add($domainId = null) {
         $this->save($domainId);
     }
 
@@ -203,6 +203,8 @@ class BadgesController extends AppController {
                 $this->flashError(__('Error while trying to edit badge.'));
             }
         } else {
+            $this->request->data['Badge']['domain_id'] = $domainId;
+            
             if ($id !== null) {
                 $badge = $this->Badge->find('first', array(
                     'conditions' => array(
@@ -226,6 +228,7 @@ class BadgesController extends AppController {
         $this->set('badges', $this->Badge->simpleFromDomain($domainId));
         $this->set('activities', $this->Activity->simpleFromDomain($domainId));
         $this->set('tags', $this->Tag->allActive($this->gameMasterId()));
+        $this->set('domains', $this->Domain->simpleFromOwner($this->gameMasterId()));
     }
 
 }

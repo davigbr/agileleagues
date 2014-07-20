@@ -138,7 +138,7 @@ class Badge extends AppModel {
 
             $this->Notification->_broadcast(
                 'New Badge', 
-                __('It seems someone has gotten the <strong>%s</strong> badge! Congratulations, <strong>%s</strong>!', $badgeName, $playerName), 
+                __('It seems someone has gotten the %s badge! Congratulations, %s!', $badgeName, $playerName), 
                 'warning'
             );
 

@@ -1,12 +1,10 @@
+<?= $this->Bootstrap->input('domain_id', array('class' => 'form-control')); ?>
 <?= $this->Bootstrap->input('name', array('type' => 'text', 'class' => 'form-control')); ?>
 <?= $this->Bootstrap->input('icon', array('type' => 'text', 'readonly' => 'readonly', 'class' => 'form-control')); ?>
 <br/>
 <div class="row">
 	<div class="col-sm-8">
-
-
 		<h4><strong>Activity Requisites</strong></h4>
-
 		<table class="table table-bordered table-striped">
 			<tr>
 				<th>Times</th>

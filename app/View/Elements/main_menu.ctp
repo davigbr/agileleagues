@@ -56,6 +56,13 @@
 				<span>Activities</span>
 			</a>
 			<ul>
+				<?if ($isGameMaster): ?>
+					<li data-action="add">
+						<a href="<?= $this->Html->url('/activities/add'); ?>"><i class="entypo-plus"></i>
+							<span>Create</span>
+						</a>
+					</li>
+				<?endif;?>
 				<li data-action="index">	
 					<a href="<?= $this->Html->url('/activities/'); ?>">
 						<i class="entypo-list"></i>
@@ -112,6 +119,13 @@
 				<span>Tags</span>
 			</a>
 			<ul>
+				<?if ($isGameMaster): ?>
+					<li data-action="add">
+						<a href="<?= $this->Html->url('/tags/add'); ?>"><i class="entypo-plus"></i>
+							<span>Create</span>
+						</a>
+					</li>
+				<?endif;?>
 				<li data-action="index">	
 					<a href="<?= $this->Html->url('/tags/'); ?>">
 						<i class="entypo-list"></i>
@@ -127,6 +141,13 @@
 				<span>Badges</span>
 			</a>
 			<ul>
+				<?if ($isGameMaster): ?>
+					<li data-action="add">
+						<a href="<?= $this->Html->url('/badges/add'); ?>"><i class="entypo-plus"></i>
+							<span>Create</span>
+						</a>
+					</li>
+				<?endif;?>
 				<li data-action="index">
 					<a href="<?= $this->Html->url('/badges/'); ?>">
 						<span><i class="entypo-list"></i>Badges List</span>

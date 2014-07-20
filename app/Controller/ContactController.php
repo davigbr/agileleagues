@@ -24,7 +24,7 @@ class ContactController extends AppController {
 			$this->Email->subject($type);
 			$this->Email->send('davi.gbr@gmail.com');
 			$this->flashSuccess('Your request was sent successfully. Thank you!');
-			return $this->redirect('/');
+			return $this->redirect($this->referer());
 		}
 	}
 

@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-primary" data-collapsed="0">
 			<div class="panel-heading">
-				<div class="panel-title"><strong>Create Badge - <?= h($domain['Domain']['name'])?> Domain</strong></div>
+				<div class="panel-title"><strong>Create Badge</strong></div>
 			</div>
 			<div class="panel-body">
 				<? echo $this->Bootstrap->create('Badge'); ?>
