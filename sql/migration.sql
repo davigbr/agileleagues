@@ -1,16 +1,6 @@
-ALTER TABLE `player`
-ADD COLUMN `credly_access_token`  varchar(200) NULL DEFAULT NULL AFTER `timezone`,
-ADD COLUMN `credly_refresh_token`  varchar(200) NULL DEFAULT NULL AFTER `credly_access_token`;
+ALTER TABLE `activity_requisite_summary`
+ADD COLUMN `player_id_owner`  int(10) UNSIGNED NULL AFTER `times`;
 
-ALTER TABLE `player`
-ADD COLUMN `credly_id`  varchar(20) NULL DEFAULT NULL AFTER `timezone`,
-ADD COLUMN `credly_email`  varchar(255) NULL DEFAULT NULL AFTER `credly_profile_id`;
+ALTER TABLE `activity_requisite_summary` ADD CONSTRAINT `fk_activity_requisite_summary_player_id_owner` FOREIGN KEY (`player_id_owner`) REFERENCES `player` (`id`);
 
-ALTER TABLE `badge`
-ADD COLUMN `credly_badge_id`  int(10) NULL DEFAULT NULL AFTER `inactive`,
-ADD COLUMN `credly_badge_name`  varchar(255) NULL DEFAULT NULL AFTER `credly_badge_id`,
-ADD COLUMN `credly_badge_image_url`  varchar(255) NULL DEFAULT NULL AFTER `credly_badge_name`;
-
-ALTER TABLE `badge_log`
-ADD COLUMN `credly_given`  tinyint(1) UNSIGNED NOT NULL DEFAULT 0 AFTER `domain_id`;
-
+UPDATE activity_requisite_summary SET player_id_owner = (SELECT player_id_owner FROM badge WHERE badge.id = badge_id);

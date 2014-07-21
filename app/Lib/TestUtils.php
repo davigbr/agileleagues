@@ -202,10 +202,10 @@ class TestUtils {
             array('id' => 4, 'badge_id' => 4, 'activity_id' => 4, 'count' => 1)
         ));
         $this->ActivityRequisiteSummary->saveMany(array(
-            array('id' => 1, 'badge_id' => 1, 'activity_requisite_id' => 1, 'times' => 0),
-            array('id' => 2, 'badge_id' => 2, 'activity_requisite_id' => 2, 'times' => 0),
-            array('id' => 3, 'badge_id' => 3, 'activity_requisite_id' => 3, 'times' => 0),
-            array('id' => 4, 'badge_id' => 4, 'activity_requisite_id' => 4, 'times' => 0)
+            array('id' => 1, 'badge_id' => 1, 'activity_requisite_id' => 1, 'times' => 0, 'player_id_owner' => GAME_MASTER_ID_1),
+            array('id' => 2, 'badge_id' => 2, 'activity_requisite_id' => 2, 'times' => 0, 'player_id_owner' => GAME_MASTER_ID_1),
+            array('id' => 3, 'badge_id' => 3, 'activity_requisite_id' => 3, 'times' => 0, 'player_id_owner' => GAME_MASTER_ID_1),
+            array('id' => 4, 'badge_id' => 4, 'activity_requisite_id' => 4, 'times' => 0, 'player_id_owner' => GAME_MASTER_ID_1)
         ));
     }
 

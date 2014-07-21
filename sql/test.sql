@@ -192,6 +192,7 @@ CREATE TABLE `activity_requisite_summary` (
   `player_id` int(10) unsigned NOT NULL,
   `activity_requisite_id` int(10) unsigned NOT NULL,
   `times` int(10) unsigned NOT NULL DEFAULT '0',
+  `player_id_owner` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique` (`badge_id`,`player_id`,`activity_requisite_id`),
   KEY `fk_activity_requisite_summary_activity_requisite_id` (`activity_requisite_id`),
@@ -1263,4 +1264,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-20 17:31:24
+-- Dump completed on 2014-07-20 21:15:54

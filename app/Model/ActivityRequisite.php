@@ -29,7 +29,8 @@ class ActivityRequisite extends AppModel {
 					'activity_requisite_id' => $activityRequisiteId,
 					'badge_id' => $badgeId,
 					'player_id' => $log['Log']['player_id'],
-					'times' => 1
+					'times' => 1,
+					'player_id_owner' => $log['Log']['player_id_owner']
 				);
 				$this->ActivityRequisiteSummary->create();
 				$this->ActivityRequisiteSummary->save($summary);

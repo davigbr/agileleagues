@@ -65,7 +65,9 @@ class Badge extends AppModel {
 		$this->begin();
 		try {
 			if ($id !== null) {
-	            $this->ActivityRequisiteSummary->deleteAll(array('ActivityRequisiteSummary.id >' => 0), true);
+	            $this->ActivityRequisiteSummary->deleteAll(array(
+	            	'ActivityRequisiteSummary.player_id_owner' => $playerIdOwner
+            	), true);
 
 	            $this->BadgeRequisite->deleteAll(array('BadgeRequisite.badge_id' => $id), true);
 	            $this->ActivityRequisite->deleteAll(array('ActivityRequisite.badge_id' => $id), true);
@@ -79,7 +81,7 @@ class Badge extends AppModel {
 					'contain' => array(
 						'Tags'
 					)
-				));
+				));	
 
 				foreach ($logs as $log) {
 					$this->ActivityRequisite->_updateActivityRequisiteSummary($log);

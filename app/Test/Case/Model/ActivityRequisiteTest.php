@@ -59,7 +59,8 @@ class ActivityRequisiteTest extends CakeTestCase {
 		$this->log = array(
 			'Log' => array(
 				'player_id' => PLAYER_ID_1,
-				'activity_id' => $this->activityId
+				'activity_id' => $this->activityId,
+				'player_id_owner' => GAME_MASTER_ID_1
 			),
 			'Tags' => array(
 				array('id' => $this->tagId1),
