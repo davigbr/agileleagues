@@ -1,4 +1,3 @@
-<?= $this->Bootstrap->input('domain_id', array('class' => 'form-control')); ?>
 <?= $this->Bootstrap->input('name', array('type' => 'text', 'class' => 'form-control')); ?>
 <?= $this->Bootstrap->input('icon', array('type' => 'text', 'readonly' => 'readonly', 'class' => 'form-control')); ?>
 <br/>
@@ -129,9 +128,8 @@
 			}
 		});
 		$('#form-submit').click(function(){
-
 			$('#form-submit').unbind().click();
 			return false;
-		})
+		});
 	});
 </script>

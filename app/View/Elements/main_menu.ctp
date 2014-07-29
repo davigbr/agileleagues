@@ -153,11 +153,13 @@
 						<span><i class="entypo-list"></i>Badges List</span>
 					</a>
 				</li>
-				<li data-action="claimed">
-					<a href="<?= $this->Html->url('/badges/claimed'); ?>">
-						<span><i class="entypo-thumbs-up"></i>Claimed Badges</span>
-					</a>
-				</li>
+				<?if ($isGameMaster): ?>
+					<li data-action="claimed">
+						<a href="<?= $this->Html->url('/badges/claimed'); ?>">
+							<span><i class="entypo-thumbs-up"></i>Claimed Badges</span>
+						</a>
+					</li>
+				<?endif;?>
 			</ul>
 		</li>
 		<li data-controller="domains">

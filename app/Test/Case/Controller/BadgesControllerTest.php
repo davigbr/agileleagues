@@ -98,6 +98,14 @@ class BadgesControllerTest extends ControllerTestCase {
 		$this->assertEquals(false, $result['canClaim']);
 	}
 
+	public function testAddWithoutDomain() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$domain = $this->utils->Domain->find('first');
+		$domainId = $domain['Domain']['id'];
+		$vars = $this->testAction('/badges/add/', array('method' => 'get', 'return' => 'vars'));
+		$this->assertTrue(isset($vars['domains']));
+	}
+
 	public function testAddGet() {
 		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
 		$domain = $this->utils->Domain->find('first');

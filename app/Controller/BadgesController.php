@@ -147,7 +147,16 @@ class BadgesController extends AppController {
     }
 
     public function add($domainId = null) {
-        $this->save($domainId);
+        if ($domainId === null) {
+            if ($this->request->is('post') || $this->request->is('put')) {
+                $domainId = $this->request->data['Badge']['domain_id'];
+                return $this->redirect('/badges/add/' . $domainId);
+            }
+            $this->set('domains', $this->Domain->simpleFromOwner($this->gameMasterId()));
+            $this->render('domain');
+        } else {
+            $this->save($domainId);
+        }
     }
 
     public function edit($domainId, $id) {
