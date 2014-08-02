@@ -5,11 +5,11 @@ AgileLeagues is a gamification tool for boosting the performance of self-organiz
 
 Principles
 ----------
-* Self-organization;
-* Delegation (fewer management responsibilities);
-* Emergent leadership;
-* Trust;
-* Fun;
+* Self-organization
+* Delegation (fewer management responsibilities)
+* Emergent leadership
+* Trust
+* Fun
 
 Components
 ----------
