@@ -21,4 +21,5 @@ Components
 
 Mechanics
 ---------
-* [Pear Activity Review](http://www.agilegamification.org/peer-activity-review/);
+* [Pear Activity Review](http://www.agilegamification.org/peer-activity-review/)
+
