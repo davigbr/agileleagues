@@ -5,6 +5,7 @@ if (!defined('RDS_HOSTNAME')) {
  	define('RDS_PASSWORD', $_SERVER['RDS_PASSWORD']);
  	define('RDS_DB_NAME', $_SERVER['RDS_DB_NAME']);
 }
+die(var_dump(RDS_DB_NAME));
 					
 class DATABASE_CONFIG {
 					
@@ -20,4 +21,3 @@ class DATABASE_CONFIG {
   	);
 }
 
-die('ok');
