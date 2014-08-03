@@ -10,8 +10,8 @@
 /build
 /dist
 /tags
-/app/Config/core.php
-/app/Config/database.php
+#/app/Config/core.php
+#/app/Config/database.php
 /app/webroot/coverage
 
 # OS generated files #
@@ -29,3 +29,4 @@ Thumbs.db
 ######################
 *.sublime-workspace
 *.sublime-project
+.elasticbeanstalk/
