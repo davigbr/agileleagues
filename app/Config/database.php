@@ -13,9 +13,9 @@ class DATABASE_CONFIG {
 	    'host' => RDS_HOSTNAME,
 	    'login' => RDS_USERNAME,
 	    'password' => RDS_PASSWORD,
-	    'database' => 'agileleagues',
+	    'database' => RDS_DB_NAME, //'agileleagues',
 	    'prefix' => '',
-	    'encoding' => 'utf8',
+	    //'encoding' => 'utf8',
   	);
 }
 
