@@ -89,7 +89,7 @@ class Activity extends AppModel {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_last_week AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-			WHERE player_id_owner = ?
+			WHERE player_id_owner = ? ORDER BY count DESC
 		', array($playerIdOwner));
 	}
 	
@@ -97,7 +97,7 @@ class Activity extends AppModel {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_last_month AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-			WHERE player_id_owner = ?
+			WHERE player_id_owner = ? ORDER BY count DESC
 		', array($playerIdOwner));
 	}
 	
@@ -105,7 +105,7 @@ class Activity extends AppModel {
 		return $this->query('
 			SELECT * FROM activity_leaderboards AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-			WHERE player_id_owner = ?
+			WHERE player_id_owner = ? ORDER BY count DESC
 		', array($playerIdOwner));
 	}
 	
@@ -113,7 +113,7 @@ class Activity extends AppModel {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_this_week AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-			WHERE player_id_owner = ?
+			WHERE player_id_owner = ? ORDER BY count DESC
 		', array($playerIdOwner));
 	}
 
@@ -121,7 +121,7 @@ class Activity extends AppModel {
 		return $this->query('
 			SELECT * FROM activity_leaderboards_this_month AS Leaderboards
 			INNER JOIN player AS Player ON Player.id = Leaderboards.player_id
-			WHERE player_id_owner = ?
+			WHERE player_id_owner = ? ORDER BY count DESC
 		', array($playerIdOwner));
 	}
 
