@@ -35,7 +35,6 @@
 					'label' => 'Paired With', 
 					'empty' => '-', 
 					'options' => $players, 
-					'after' => ' <a onclick="return false" id="activity-pair" title="' . __('You will earn %s%% additional XP for pair activities.', floor(100 * PAIR_XP_MULTIPLIER - 100)) . '" style="cursor: default" class="hide btn btn-info">+' . floor(100 * PAIR_XP_MULTIPLIER - 100) . '% XP</a>',
 					'class' => 'form-control form-control-inline')); ?>
 				<h3>Tags</h3>
 				<? if(empty($tags)): ?>
@@ -79,14 +78,6 @@
 			}
 		}).change();
 		
-		$('#LogPlayerIdPair').change(function() {
-			if ($(this).val()) {
-				$('#activity-pair').removeClass('hide');
-			} else {
-				$('#activity-pair').addClass('hide');
-			}
-		}).change();
-
 		$('#tags input').click(function(event){
 			event.stopPropagation();
 		});

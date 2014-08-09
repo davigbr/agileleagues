@@ -10,7 +10,6 @@ define('EVENT_JOIN_XP', 5);
 
 define('MAX_PLAYERS_PER_TEAM', 24);
 
-define('PAIR_XP_MULTIPLIER', 1.2);
 define('ACCEPTANCE_XP_MULTIPLIER', 0.1); //10% XP
 define('REJECTION_XP_BONUS', 1); //+1XP
 

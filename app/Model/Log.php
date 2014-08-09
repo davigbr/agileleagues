@@ -56,9 +56,6 @@ class Log extends AppModel {
 		$activity = $this->Activity->findById($this->data['Log']['activity_id']);
 		$this->data['Log']['domain_id'] = $activity['Activity']['domain_id'];
 		$xp = $activity['Activity']['xp'];
-		if (isset($this->data['Log']['player_id_pair'])) {
-			$xp *= PAIR_XP_MULTIPLIER;
-		}
 		$this->data['Log']['xp'] = (int)$xp;
 		$this->data['Log']['hash'] = $this->hash($this->data);
 		return true;
