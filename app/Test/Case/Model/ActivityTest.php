@@ -90,18 +90,18 @@ class ActivityTest extends CakeTestCase {
 	}
 
 	public function testNeverReported() {
-		$neverReported = $this->utils->Activity->neverReported(PLAYER_TYPE_PLAYER, 1);
+		$neverReported = $this->utils->Activity->neverReported(GAME_MASTER_ID_1, 1);
 		$this->assertEquals(1, count($neverReported));
 		$this->assertEquals(0, (int)$neverReported[0]['Activity']['reported']);
 	}
 
 	public function testLeastReported() {
-		$leastReported = $this->utils->Activity->leastReported(PLAYER_TYPE_PLAYER, 1);
+		$leastReported = $this->utils->Activity->leastReported(GAME_MASTER_ID_1, 1);
 		$this->assertEquals(1, count($leastReported));
 	}
 
 	public function testMostReported() {
-		$mostReported = $this->utils->Activity->mostReported(PLAYER_TYPE_PLAYER, 1);
+		$mostReported = $this->utils->Activity->mostReported(GAME_MASTER_ID_1, 1);
 		$this->assertEquals(1, count($mostReported));
 	}
 

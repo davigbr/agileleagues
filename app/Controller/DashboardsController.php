@@ -158,9 +158,9 @@ class DashboardsController extends AppController {
         $this->set('totalActivities', $this->Activity->count($this->gameMasterId()));
         $this->set('activitiesLogged', $this->Log->count($this->gameMasterId()));
         $this->set('averageActivitiesLogged', $this->Log->average($this->gameMasterId()));
-        $this->set('neverReportedActivities', $this->Activity->neverReported($this->Auth->user('player_type_id')));
-        $this->set('leastReportedActivities', $this->Activity->leastReported($this->Auth->user('player_type_id')));
-        $this->set('mostReportedActivities', $this->Activity->mostReported($this->Auth->user('player_type_id')));
+        $this->set('neverReportedActivities', $this->Activity->neverReported($this->gameMasterId()));
+        $this->set('leastReportedActivities', $this->Activity->leastReported($this->gameMasterId()));
+        $this->set('mostReportedActivities', $this->Activity->mostReported($this->gameMasterId()));
     }
 
     public function leaderboards() {

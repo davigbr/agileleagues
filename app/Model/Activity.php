@@ -125,36 +125,36 @@ class Activity extends AppModel {
 		', array($playerIdOwner));
 	}
 
-	public function leastReported($playerTypeId, $limit = 20) {
+	public function leastReported($gameMasterId, $limit = 20) {
 		return $this->find('all', array(
 			'conditions' => array(
 				'Activity.inactive' => 0,
 				'Activity.reported <>' => 0,
-				'Domain.player_type_id' => $playerTypeId
+				'Activity.player_id_owner' => $gameMasterId
 			),
 			'limit' => $limit,
 			'order' => 'Activity.reported ASC'
 		));
 	}
 
-	public function mostReported($playerTypeId, $limit = 20) {
+	public function mostReported($gameMasterId, $limit = 20) {
 		return $this->find('all', array(
 			'conditions' => array(
 				'Activity.inactive' => 0,
 				'Activity.reported <>' => 0,
-				'Domain.player_type_id' => $playerTypeId
+				'Activity.player_id_owner' => $gameMasterId
 			),
 			'limit' => $limit,
 			'order' => 'Activity.reported DESC'
 		));
 	}
 
-	public function neverReported($playerTypeId, $limit = 20) {
+	public function neverReported($gameMasterId, $limit = 20) {
 		return $this->find('all', array(
 			'conditions' => array(
 				'Activity.inactive' => 0,
 				'Activity.reported' => 0,
-				'Domain.player_type_id' => $playerTypeId
+				'Activity.player_id_owner' => $gameMasterId
 			),
 			'limit' => $limit
 		));

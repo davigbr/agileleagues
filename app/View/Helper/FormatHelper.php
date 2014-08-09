@@ -15,7 +15,6 @@ class FormatHelper extends AppHelper {
 		} else {
 			$this->timezone = 'UTC';
 		}
-		$this->timezone = 'America/Sao_Paulo';
 	}
 
 	public function date($sqlDateTime) {
