@@ -142,4 +142,13 @@ class PlayerTest extends CakeTestCase {
 		$this->assertEquals(3, count($this->utils->Player->simpleVerifiedFromPlayerTeam(GAME_MASTER_ID_1)));
 	}
 
+	public function testAllNotVerified() {
+		$players = $this->utils->Player->allNotVerified(GAME_MASTER_ID_1);
+		$this->assertEquals(1, count($players));
+		foreach ($players as $player) {
+			$this->assertEqual(null, $player['Player']['verified_in']);
+			$this->assertEqual(GAME_MASTER_ID_1, (int)$player['Team']['player_id_owner']);
+		}
+	}
+
 }

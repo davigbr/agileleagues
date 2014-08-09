@@ -180,6 +180,11 @@
 							<span>Invite</span>
 						</a>
 					</li>
+					<li data-action="invited">
+						<a href="<?= $this->Html->url('/players/invited'); ?>">
+							<span><i class="entypo-mail"></i>Invitations</span>
+						</a>
+					</li>
 				<?endif;?>
 				<li data-action="index">
 					<a href="<?= $this->Html->url('/players/'); ?>">

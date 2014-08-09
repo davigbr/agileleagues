@@ -9,8 +9,8 @@ class PlayersControllerTest extends ControllerTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
-		$this->utils->generatePlayers();
 		$this->utils->generateTeams();
+		$this->utils->generatePlayers();
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
 	}
 
@@ -184,6 +184,18 @@ class PlayersControllerTest extends ControllerTestCase {
 		$player = $this->utils->Player->findById($id);
 		$this->assertEquals($teamId, (int)$player['Player']['team_id']);
 	}
+
+	public function testInvited() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+
+		$result = $this->testAction('/players/invited', array('return' => 'vars'));
+		$players = $result['players'];
+		$this->assertNotEmpty($players);
+		foreach ($players as $player) {
+			$this->assertTrue(isset($player['Player']['name']));
+		}
+	}
+
 
 	public function testIndex() {
 		$this->controllerUtils->mockAuthUser();

@@ -166,6 +166,16 @@ class Player extends AppModel {
         return array();
     }
 
+    public function allNotVerified($playerId) {
+        $teams = $this->visibleTeams($playerId);
+        return $this->find('all', array(
+            'conditions' => array(
+                'Player.team_id' => $teams,
+                'verified_in IS NULL'
+            )
+        ));
+    }
+
     public function allFromPlayerTeam($playerId, $options = array()) {
         $teams = $this->visibleTeams($playerId);
         if (empty($teams)) {

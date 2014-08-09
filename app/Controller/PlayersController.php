@@ -16,6 +16,10 @@ class PlayersController extends AppController {
 		$this->set('players', $this->Player->allFromPlayerTeam($this->Auth->user('id')));
 	}
 
+	public function invited() {
+		$this->set('players', $this->Player->allNotVerified($this->Auth->user('id')));
+	}
+
 	public function credly() {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			// Validation is not necessary
@@ -176,6 +180,32 @@ class PlayersController extends AppController {
 		}
 	}
 
+	public function resendInvitation($playerId) {
+		$this->_sendInvitationMessage($playerId);
+		return $this->redirect('/players/invited');
+	}
+
+	private function _sendInvitationMessage($playerId) {
+		$player = $this->Player->findById($playerId);
+
+		$team = $this->Team->findById($player['Player']['team_id']);
+		$gameMasterName = $this->Auth->user('name');
+		$teamName = $team['Team']['name'];
+		$email = $player['Player']['email'];
+
+		$hash = $this->Utils->playerHash($this->Player->id);
+		$this->Email->template(
+			'game_master_invitation', array(
+				'gameMasterName' => $gameMasterName, 
+				'teamName' => $teamName,
+				'hash' => $hash
+			)
+		);
+		$this->Email->subject(__('%s invited you to join %s on Agile Leagues', $gameMasterName, $teamName));
+		$this->Email->send($email);
+		$this->flashSuccess(__('Player invited successfully! An account verification email message was sent to %s.', $email));
+	}
+
 	public function invite() {
 		$this->set('title_for_layout', 'Invite');
 
@@ -192,33 +222,7 @@ class PlayersController extends AppController {
 			$this->request->data['Player']['player_type_id'] = PLAYER_TYPE_PLAYER;
 
 			if ($this->Player->save($this->request->data)) {
-
-				$email = $this->request->data['Player']['email'];
-				$team = $this->Team->findById($this->request->data['Player']['team_id']);
-				$gameMasterName = $this->Auth->user('name');
-				$teamName = $team['Team']['name'];
-				
-				$hash = $this->Utils->playerHash($this->Player->id);
-
-				$this->Email->template(
-					'game_master_invitation', array(
-						'gameMasterName' => $gameMasterName, 
-						'teamName' => $teamName,
-						'hash' => $hash
-					)
-				);
-				$this->Email->subject(__('%s invited you to join %s on Agile Leagues', $gameMasterName, $teamName));
-				$this->Email->send($email);
-				
-				// Update the player record with the hash
-				$this->Player->save(array(
-					'Player' => array(
-						'id' => $this->Player->id,
-						'hash' => $hash
-					)
-				));
-
-				$this->flashSuccess(__('Player invited successfully! An account verification email message was sent to %s.', $email));
+				$this->_sendInvitationMessage($this->Player->id);
 				return $this->redirect('/players');
 			} else {
 				$this->flashError(__('There are validation errors.'));
