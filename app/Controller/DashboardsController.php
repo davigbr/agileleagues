@@ -18,8 +18,8 @@ class DashboardsController extends AppController {
     public function stats() {
         $activitiesReported = $this->Log->query(
             'SELECT COUNT(*) AS count, UNIX_TIMESTAMP(acquired) AS acquired FROM log ' .
-            'WHERE acquired >= CURRENT_DATE - INTERVAL 30 DAY ' .
-            'GROUP BY acquired');
+            'WHERE acquired >= CURRENT_DATE - INTERVAL 30 DAY AND player_id_owner = ? ' .
+            'GROUP BY acquired', array($this->gameMasterId()));
         $activitiesReportedJSON = array();
         foreach ($activitiesReported as $day) {
             $activitiesReportedJSON[] = array(
@@ -30,8 +30,9 @@ class DashboardsController extends AppController {
 
         $badgesClaimed = $this->Log->query(
             'SELECT COUNT(*) AS count, UNIX_TIMESTAMP(DATE(creation)) AS creation FROM badge_log ' .
-            'WHERE creation >= CURRENT_DATE - INTERVAL 30 DAY ' .
-            'GROUP BY DATE(creation)');
+            'INNER JOIN domain ON domain.id = badge_log.domain_id ' . 
+            'WHERE creation >= CURRENT_DATE - INTERVAL 30 DAY AND domain.player_id_owner = ? ' .
+            'GROUP BY DATE(creation)', array($this->gameMasterId()));
         $badgesClaimedJSON = array();
         foreach ($badgesClaimed as $day) {
             $badgesClaimedJSON[] = array(
@@ -42,8 +43,9 @@ class DashboardsController extends AppController {
 
         $comments = $this->Log->query(
             'SELECT COUNT(*) AS count, UNIX_TIMESTAMP(DATE(creation)) AS creation FROM log_votes ' .
-            'WHERE creation >= CURRENT_DATE - INTERVAL 30 DAY ' .
-            'GROUP BY DATE(creation)');
+            'INNER JOIN log ON log.id = log_votes.log_id ' .
+            'WHERE creation >= CURRENT_DATE - INTERVAL 30 DAY AND log.player_id_owner = ? ' .
+            'GROUP BY DATE(creation)', array($this->gameMasterId()));
         $commentsJSON = array();
         foreach ($comments as $day) {
             $commentsJSON[] = array(
