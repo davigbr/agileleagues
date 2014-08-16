@@ -14,6 +14,9 @@
 #/app/Config/database.php
 /app/webroot/coverage
 
+# Bat Files
+*.bat
+
 # OS generated files #
 ######################
 .DS_Store

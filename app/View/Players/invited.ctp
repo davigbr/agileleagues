@@ -14,7 +14,6 @@
 	<?if (empty($players)):?>
 	    <div class="panel-body">
     		<p>No players found :(</p>
-    		<a class="btn btn-lg btn-success" href="<?= $this->Html->url('/players/invite')?>">Invite some!</a>
     	</div>
 	<?else:?>
 	    <div class="panel-body">
