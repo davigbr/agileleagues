@@ -36,8 +36,18 @@ class FormatHelperTest extends CakeTestCase {
         $this->assertEquals('Jan 2nd (Thu)', $date);
     }
 
+    public function testDateTime() {
+        $date = $this->Format->dateTime('2001-01-02');
+        $this->assertEquals('Jan 1st, 2001', $date);
+    }
+
+    public function testDateTimeWithSameYear() {
+        $date = $this->Format->dateTime(date('Y') . '-01-02');
+        $this->assertEquals('Jan 1st (Wed) 10:00 PM', $date);
+    }
+
     public function testTime() {
         $time = $this->Format->time('2000-01-02 23:59:00');
-        $this->assertEquals('11:59 PM', $time);
+        $this->assertEquals('09:59 PM', $time);
     }
 }

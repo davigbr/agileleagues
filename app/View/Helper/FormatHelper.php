@@ -24,9 +24,9 @@ class FormatHelper extends AppHelper {
 		}
 		$dateTime = new DateTime($sqlDateTime);
 		if (date('Y') === $dateTime->format('Y')) {
-			return $this->Time->format('M jS (D)', $sqlDateTime, null, $this->timezone);
+			return $this->Time->format('M jS (D)', $sqlDateTime, null);
 		} else {
-			return $this->Time->format('M jS, Y', $sqlDateTime, null, $this->timezone);
+			return $this->Time->format('M jS, Y', $sqlDateTime, null);
 		}
 	}
 

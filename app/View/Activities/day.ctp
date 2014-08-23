@@ -25,9 +25,9 @@
 							<i class="<?= h($log['Domain']['icon'])?>"></i>
 						</td>
 						<td><?= h($log['Activity']['name'])?></td>
-						<td><?= h($log['Log']['created'])?></td>
-						<td><?= h($log['Log']['acquired'])?></td>
-						<td><?= h($log['Log']['reviewed'])?></td>
+						<td><?= $this->Format->dateTime($log['Log']['created'])?></td>
+						<td><?= $this->Format->date($log['Log']['acquired'])?></td>
+						<td><?= $this->Format->dateTime($log['Log']['reviewed'])?></td>
 						<td><?= h($log['Log']['description'])?></td>
 					</tr>
 				<? endforeach; ?>
