@@ -10,8 +10,9 @@
 /build
 /dist
 /tags
-#/app/Config/core.php
-#/app/Config/database.php
+/app/Config/core.php*
+/app/Config/database.php*
+/app/Config/email.php*
 /app/webroot/coverage
 
 # Bat Files
