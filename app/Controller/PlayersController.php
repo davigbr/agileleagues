@@ -201,6 +201,9 @@ class PlayersController extends AppController {
 				'hash' => $hash
 			)
 		);
+		// Update player hash
+		$this->Player->save(array('id' => $playerId, 'hash' => $hash));
+
 		$this->Email->subject(__('%s invited you to join %s on Agile Leagues', $gameMasterName, $teamName));
 		$this->Email->send($email);
 		$this->flashSuccess(__('Player invited successfully! An account verification email message was sent to %s.', $email));

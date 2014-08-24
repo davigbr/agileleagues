@@ -162,6 +162,22 @@ class PlayersControllerTest extends ControllerTestCase {
 		$this->assertNotNull($this->controller->flashError);
 	}
 
+	public function testInvitePostSuccess() {
+		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$data = array(
+			'Player' => array(
+				'name' => 'Player name',
+				'email' => 'email@email.com',
+				'team_id' => '1'
+			)
+		);
+		$playersBefore = $this->utils->Player->find('count');
+		$this->testAction('/players/invite', array('data' => $data));
+		$player = $this->utils->Player->findByEmail('email@email.com');
+		$this->assertNotNull($player['Player']['hash']);
+		$this->assertNotNull($this->controller->flashSuccess);
+	}
+
 	public function testTeamGet() {
 		$id = PLAYER_ID_1;
 		$vars = $this->testAction('/players/team/' . $id, array('method' => 'get', 'return' => 'vars'));
