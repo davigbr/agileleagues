@@ -58,7 +58,8 @@ class AppController extends Controller {
 		'PlayerActivitySummary',
 		'Timeline', 
 		'Tag',
-		'Team'
+		'Team',
+		'XpLog'
 	);
 
 	public $components = array(

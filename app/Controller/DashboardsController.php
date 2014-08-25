@@ -15,6 +15,60 @@ class DashboardsController extends AppController {
     public function badges() {
     }
 
+    public function xp($ownerEmail = null) {
+        $player = null;
+        if ($ownerEmail) {
+            $player = $this->Player->findByEmail($ownerEmail);
+        } else {
+            $player = $this->gameMaster();
+        }
+
+        if (!$player) {
+            throw new NotFoundException();
+        }
+
+        $logs = $this->XpLog->query(
+            'SELECT Player.*, DATE(XpLog.created) AS day, SUM(XpLog.xp) AS xp ' .
+            'FROM xp_log AS XpLog ' .
+            'INNER JOIN player AS Player ON Player.id = XpLog.player_id ' . 
+            'INNER JOIN team AS Team ON team.id = Player.team_id ' .
+            'WHERE Team.player_id_owner = ? ' .
+            'GROUP BY player_id, DATE(XpLog.created)',
+            array($player['Player']['id'])
+        );
+        // Group logs by player and date
+        $logsGrouped = array();
+        $players = array();
+        $dates = array();
+        foreach ($logs as $log) {
+            $day = $log[0]['day'];
+            $dates[$day] = $day;
+            $playerId = $log['Player']['id'];
+            $players[$playerId] = $log['Player'];
+            $logsGrouped[$day][] = array(
+                'XpLog' => array('xp' => $log[0]['xp']),
+                'Player' => $log['Player']
+            );
+        }
+        krsort($logsGrouped);
+
+        function sortByXP($a, $b) {
+            if ($a['XpLog']['xp'] == $b['XpLog']['xp']) {
+                return 0;
+            }
+            return ($a['XpLog']['xp'] > $b['XpLog']['xp']) ? -1 : 1;
+        }
+
+        foreach ($dates as $day) {
+            usort($logsGrouped[$day], 'sortByXP');
+        }
+        $logsGrouped = array_slice($logsGrouped, 0, 20);
+
+        $this->set('players', $players);
+        $this->set('dates', $dates);
+        $this->set('logs', $logsGrouped);
+    }
+
     public function stats() {
         $activitiesReported = $this->Log->query(
             'SELECT COUNT(*) AS count, UNIX_TIMESTAMP(acquired) AS acquired FROM log ' .

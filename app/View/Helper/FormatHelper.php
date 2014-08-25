@@ -17,16 +17,18 @@ class FormatHelper extends AppHelper {
 		}
 	}
 
-	public function date($sqlDateTime) {
+	public function date($sqlDateTime, $format = null) {
 		if (!$sqlDateTime || $sqlDateTime === '0000-00-00' || $sqlDateTime === '0000-00-00 00:00:00') return '';
 		if (strlen($sqlDateTime) === 10) {
 			$sqlDateTime .= ' 00:00:00';
 		}
 		$dateTime = new DateTime($sqlDateTime);
 		if (date('Y') === $dateTime->format('Y')) {
-			return $this->Time->format('M jS (D)', $sqlDateTime, null);
+			if ($format === null) $format = 'M jS (D)';
+			return $this->Time->format($format, $sqlDateTime, null);
 		} else {
-			return $this->Time->format('M jS, Y', $sqlDateTime, null);
+			if ($format === null) $format = 'M jS, Y'; 
+			return $this->Time->format($format, $sqlDateTime, null);
 		}
 	}
 
