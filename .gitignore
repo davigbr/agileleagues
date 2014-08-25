@@ -15,8 +15,12 @@
 /app/Config/email.php*
 /app/webroot/coverage
 
-# Bat Files
+# Bat and SH Files
 *.bat
+/sql/update_test.sh
+
+# Others
+/sql/test.sql
 
 # OS generated files #
 ######################

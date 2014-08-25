@@ -202,7 +202,7 @@ class PlayersController extends AppController {
 			)
 		);
 		// Update player hash
-		$this->Player->save(array('id' => $playerId, 'hash' => $hash));
+		$this->Player->query('UPDATE player SET hash = ? WHERE id = ?', array($hash, $playerId));
 
 		$this->Email->subject(__('%s invited you to join %s on Agile Leagues', $gameMasterName, $teamName));
 		$this->Email->send($email);
