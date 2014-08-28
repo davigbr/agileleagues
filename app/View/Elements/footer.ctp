@@ -15,12 +15,14 @@
 <footer class="main">
 	&copy; 2013 <strong><a href="<?= Router::url('/')?>">Agile Leagues</a></strong>: Agile Software Development Gamification Tool</a><br/>
 	<br/>
-	<a target="_blank" href="http://www.agilegamification.org/"> www.agilegamification.org : Gamification applied to Agile Software Development</a>
+	<a target="_blank" href="http://www.agilegamification.org/"><i class="fa fa-globe"></i> www.agilegamification.org : Gamification applied to Agile Software Development</a>
+	<br/>
+	<a target="_blank" href="https://github.com/davigbr/agileleagues"><i class="fa fa-github"></i> github.com/davigbr/agileleagues : Agile Leagues is open-source and licensed under Apache 2.0</a>
 	<br/><br/>
 	<div class="visible-lg visible-md">
 		<a target="_blank" href="http://www.agilegamification.org/gamification-of-scrum/" class="btn btn-md btn-primary">Gamification of Scrum</a>
 		<a target="_blank" href="http://www.agilegamification.org/gamification-of-xp/" class="btn btn-md btn-primary">Gamification of Extreme Programming</a>
-		<a target="_blank" href="http://www.agilegamification.org/7-steps-to-successful-agile-gamification/" class="btn btn-md btn-primary">7 steps to successful Agile Gamification</a>
+		<a target="_blank" href="https://github.com/davigbr/agileleagues" class="btn btn-md btn-blue"><?= Configure::read('version') ?></a>
 	</div>
 	<br/>
 	<!-- AddThis Button BEGIN -->
