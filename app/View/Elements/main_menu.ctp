@@ -20,6 +20,14 @@
 					<span>Leaderboards</span>
 				</a>
 			</li>
+			<?if ($loggedPlayer): ?>
+				<li data-action="leaderboards">
+					<a href="<?= $this->Html->url('/dashboards/xp'); ?>"><i class="glyphicon glyphicon-usd"></i>
+						<span>Daily XP</span>
+						<span class="badge badge-danger">NEW</span>
+					</a>
+				</li>
+			<?endif;?>
 			<?if ($loggedPlayer && $isPlayer): ?>
 				<li data-action="activities">
 					<a href="<?= $this->Html->url('/dashboards/activities'); ?>">
@@ -49,7 +57,7 @@
 				<li data-action="index">	
 					<a href="<?= $this->Html->url('/activities/'); ?>">
 						<i class="entypo-list"></i>
-						<span>Activities List</span>
+						<span>Activity List</span>
 					</a>
 				</li>
 				<?if (!$isGameMaster): ?>
@@ -60,8 +68,6 @@
 							<span>Team Pending Activities</span>
 							<?if($teamPendingActivities > 0): ?>
 								<span class="badge badge-danger"><?= $teamPendingActivities?></span>
-							<?else:?>
-								<span class="badge badge-danger">NEW</span>
 							<?endif;?>
 						</a>
 					</li>
@@ -112,8 +118,7 @@
 				<li data-action="index">	
 					<a href="<?= $this->Html->url('/tags/'); ?>">
 						<i class="entypo-list"></i>
-						<span>Tags List</span>
-						<span class="badge badge-danger">NEW</span>
+						<span>Tag List</span>
 					</a>
 				</li>
 			</ul>
@@ -133,7 +138,7 @@
 				<?endif;?>
 				<li data-action="index">
 					<a href="<?= $this->Html->url('/badges/'); ?>">
-						<span><i class="entypo-list"></i>Badges List</span>
+						<span><i class="entypo-list"></i>Badge List</span>
 					</a>
 				</li>
 				<?if ($isGameMaster): ?>
@@ -158,7 +163,7 @@
 						</a>
 					</li>
 				<?endif;?>
-				<li data-action="index"><a href="<?= $this->Html->url('/domains/'); ?>"><span><i class="entypo-list"></i>Domains List</span></a></li>
+				<li data-action="index"><a href="<?= $this->Html->url('/domains/'); ?>"><span><i class="entypo-list"></i>Domain List</span></a></li>
 				<?foreach ($allDomains as $domain): ?>
 					<li data-action="badges">
 						<a href="<?= $this->Html->url('/domains/badges/' . $domain['Domain']['id']); ?>">
@@ -188,7 +193,7 @@
 				<?endif;?>
 				<li data-action="index">
 					<a href="<?= $this->Html->url('/players/'); ?>">
-						<span><i class="entypo-list"></i>Players List</span>
+						<span><i class="entypo-list"></i>Player List</span>
 					</a>
 				</li>
 			</ul>
