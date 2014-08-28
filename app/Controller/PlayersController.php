@@ -151,6 +151,7 @@ class PlayersController extends AppController {
 		}
 
 		$player = $this->Player->findByHash($hash);
+		$this->set('player', $player);
 
 		if (!$player) {
 			throw new NotFoundException();
@@ -193,7 +194,7 @@ class PlayersController extends AppController {
 		$teamName = $team['Team']['name'];
 		$email = $player['Player']['email'];
 
-		$hash = $this->Utils->playerHash($this->Player->id);
+		$hash = $this->Utils->playerHash($playerId);
 		$this->Email->template(
 			'game_master_invitation', array(
 				'gameMasterName' => $gameMasterName, 

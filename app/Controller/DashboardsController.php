@@ -31,7 +31,7 @@ class DashboardsController extends AppController {
             'SELECT Player.*, DATE(XpLog.created) AS day, SUM(XpLog.xp) AS xp ' .
             'FROM xp_log AS XpLog ' .
             'INNER JOIN player AS Player ON Player.id = XpLog.player_id ' . 
-            'INNER JOIN team AS Team ON team.id = Player.team_id ' .
+            'INNER JOIN team AS Team ON Team.id = Player.team_id ' .
             'WHERE Team.player_id_owner = ? ' .
             'GROUP BY player_id, DATE(XpLog.created)',
             array($player['Player']['id'])
