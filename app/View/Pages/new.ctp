@@ -28,6 +28,9 @@
 				<strong>Daily XP dashboard</strong> has been added. This screen is a weak leaderboard where the ammount of 
 				XP earned by each player daily is displayed.
 			</li>
+			<li>
+				Activities now contain <strong>details and restrictions</strong>. 
+			</li>
 		</ol>	
 
 		<p><span class="badge badge-danger">Bugs Fixed</span></p>

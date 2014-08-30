@@ -10,6 +10,8 @@
 				<?= $this->Bootstrap->input('domain_id', array('class' => 'form-control')); ?>
 				<?= $this->Bootstrap->input('name', array('type' => 'text', 'class' => 'form-control')); ?>
 				<?= $this->Bootstrap->input('description', array('class' => 'form-control')); ?>
+				<?= $this->Bootstrap->input('details', array('class' => 'form-control')); ?>
+				<?= $this->Bootstrap->input('restrictions', array('class' => 'form-control')); ?>
 				<?= $this->Bootstrap->input('xp', array('data-mask' => 'decimal', 'type'=>'text', 'class'=>'form-control')); ?>
 				<?= $this->Bootstrap->input('acceptance_votes', array('data-mask' => 'decimal', 'type'=>'text', 'class'=>'form-control')); ?>
 				<?= $this->Bootstrap->input('rejection_votes', array('data-mask' => 'decimal', 'type'=>'text', 'class'=>'form-control')); ?>

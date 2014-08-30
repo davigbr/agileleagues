@@ -23,3 +23,7 @@ ORDER BY player.id, badge_id, activity_requisite_id;
 ALTER TABLE tag
 ADD COLUMN `bonus_type` CHAR(1) DEFAULT '+' NOT NULL,
 ADD COLUMN `bonus_value` INT(10) UNSIGNED DEFAULT 0 NOT NULL;
+
+ALTER TABLE activity
+ADD COLUMN `details` TEXT DEFAULT '' NOT NULL,
+ADD COLUMN `restrictions` TEXT DEFAULT '' NOT NULL;

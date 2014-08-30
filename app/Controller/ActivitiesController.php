@@ -13,6 +13,14 @@ class ActivitiesController extends AppController {
 		$this->set('activities', $activities);
 	}
 
+	public function view($id) {
+		$activity = $this->Activity->findById($id);
+		if (!$activity) {
+			throw new NotFoundException();
+		}
+		$this->set('activity', $activity);
+	}
+
 	public function inactivate($id) {
 		if (!$this->isGameMaster) {
 			return $this->redirect('/activities');
@@ -199,6 +207,11 @@ class ActivitiesController extends AppController {
 			}
 		} else if ($id !== null) {
 			$this->request->data = $this->Activity->findById($id);
+		} else {
+			// Default values
+			$this->request->data = array('Activity' => array(
+				'new' => true
+			));
 		}
 	}
 

@@ -23,11 +23,8 @@
 					<th>XP</th>
 					<th title="<?=__('Required Votes for Acceptance')?>">A. Votes</th>
 					<th title="<?=__('Required Votes for Rejection')?>">R. Votes</th>
-					<th>Description</th>
 					<th>Last Week Logs</th>
-					<?if ($isGameMaster): ?>
-						<th>Actions</th>
-					<?endif;?>
+					<th>Actions</th>
 				</tr>
 				<?if (empty($activities)): ?>
 					<tr>
@@ -41,7 +38,7 @@
 							<td title="<?= h($activity['Domain']['name']); ?>" style="width: 35px; text-align: center; background-color: <?= $activity['Domain']['color']?>; color: white">
 								<i class="<?= h($activity['Domain']['icon']); ?>"></i>
 							</td>
-							<td>
+							<td title="<?= h($activity['Activity']['description']) ?>">
 								<?if ($activity['Activity']['new']): ?>
 									<span class="badge badge-danger">NEW</span>
 								<?endif;?>
@@ -58,22 +55,24 @@
 									?><i style="color: red" class="entypo-down"></i><?
 								}?>
 							</td>
-							<td><?= h($activity['Activity']['description']) ?></td>
 							<td>
 								<span class="last-week-logs">
 									<?= $activity['LastWeekLog']['logs']?>
 								</span>
 							</td>
-							<?if ($isGameMaster): ?>
-								<td>
-									<div class="btn-group">
+							<td>
+								<div class="btn-group">
+									<a href="<?= $this->Html->url('/activities/view/' . $activity['Activity']['id']); ?>" class="btn btn-primary btn-sm">
+										<i class="glyphicon glyphicon-search"></i>
+									</a>
+									<?if ($isGameMaster): ?>
 										<a href="<?= $this->Html->url('/activities/edit/' . $activity['Activity']['id']); ?>" class="btn btn-primary btn-sm">
 											<i class="glyphicon glyphicon-edit"></i>
 										</a>
 										<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/activities/inactivate/' . $activity['Activity']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to inactivate this activity?')) ?>
-									</div>
-								</td>
-							<?endif;?>
+									<?endif;?>
+								</div>
+							</td>
 						</tr>
 					<? endforeach; ?>
 				<?endif;?>
