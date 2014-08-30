@@ -13,11 +13,13 @@
 	}
 </style>
 <footer class="main">
-	&copy; 2013 <strong><a href="<?= Router::url('/')?>">Agile Leagues</a></strong>: Agile Software Development Gamification Tool</a><br/>
+	&copy; 2013 Davi Gabriel da Silva - <strong><a href="<?= Router::url('/')?>">Agile Leagues</a></strong> - Agile Software Development Gamification Tool</a><br/>
 	<br/>
-	<a target="_blank" href="http://www.agilegamification.org/"><i class="fa fa-globe"></i> www.agilegamification.org : Gamification applied to Agile Software Development</a>
+	<a target="_blank" href="http://www.agilegamification.org/"><i class="fa fa-globe"></i> Agile Gamification: Gamification applied to Agile Software Development</a>
 	<br/>
-	<a target="_blank" href="https://github.com/davigbr/agileleagues"><i class="fa fa-github"></i> github.com/davigbr/agileleagues : Agile Leagues is open-source and licensed under Apache 2.0</a>
+	<a target="_blank" href="https://github.com/davigbr/agileleagues"><i class="fa fa-github"></i> GitHub: Agile Leagues is open-source and licensed under Apache 2.0</a>
+	<br/>
+	<a target="_blank" href="https://trello.com/b/0Y6rJLQB"><i class="fa fa-trello"></i> Trello: vote on features</a>
 	<br/><br/>
 	<div class="visible-lg visible-md">
 		<a target="_blank" href="http://www.agilegamification.org/gamification-of-scrum/" class="btn btn-md btn-primary">Gamification of Scrum</a>

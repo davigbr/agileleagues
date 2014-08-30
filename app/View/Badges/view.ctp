@@ -22,20 +22,26 @@
 	            	<table class="table table-responsive">
 	            		<tr>
 	            			<th>Activity</th>
+                            <th>Tags</th>
 	            			<th>Activities Completed / Required</th>
 	            			<th>Progress</th>
 	            		</tr>
-            			<?foreach($requiredActivitiesProgress as $activity): ?>
+            			<?foreach($requiredActivitiesProgress as $requiredAct): ?>
             				<tr>
-        						<td><a href="<?= $this->Html->url('/activities'); ?>"><?= h($activity['Activity']['name']); ?></a></td>
+        						<td><a href="<?= $this->Html->url('/activities'); ?>"><?= h($requiredAct['Activity']['name']); ?></a></td>
+                                <td>
+                                    <? foreach ($requiredAct['ActivityRequisite']['Tags'] as $tag): ?>
+                                        <?= $this->element('tag', array('tag' => $tag)); ?>
+                                    <? endforeach; ?>
+                                </td>
         						<td>
-                                    <?= $activity['BadgeActivityProgress']['activities_completed']?> /
-        						    <?= $activity['BadgeActivityProgress']['activities_required']?>
-                                    (<?= $activity['BadgeActivityProgress']['progress']?>%)
+                                    <?= $requiredAct['BadgeActivityProgress']['activities_completed']?> /
+        						    <?= $requiredAct['BadgeActivityProgress']['activities_required']?>
+                                    (<?= $requiredAct['BadgeActivityProgress']['progress']?>%)
                                 </td>
         						<td style="text-align: center">
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-success" style="width: <?= $activity['BadgeActivityProgress']['progress']?>%">
+                                        <div class="progress-bar progress-bar-success" style="width: <?= $requiredAct['BadgeActivityProgress']['progress']?>%">
                                         </div>
                                     </div>
                                 </td>

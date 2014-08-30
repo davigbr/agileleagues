@@ -64,7 +64,9 @@
 								<?if ($log['Activity']['new']): ?>
 									<span class="badge badge-danger">NEW</span>
 								<?endif;?>
-								<span data-toggle="tooltip" title="<?= h($log['Activity']['description'])?>"><?= h($log['Activity']['name']) ?></span>
+								<a href="<?= $this->Html->url('/activities/view/' . $log['Activity']['id'] ) ?>">
+									<span data-toggle="tooltip" title="<?= h($log['Activity']['description'])?>"><?= h($log['Activity']['name']) ?></span>
+								</a>
 								(<?= h($log['Log']['xp']) ?> XP) 
 							</td>
 							<td><?= $this->element('tag', array('tags' => $log['Tags'])); ?></td>

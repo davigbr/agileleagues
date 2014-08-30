@@ -36,15 +36,31 @@
 						<td>
 							<?foreach($badge['BadgeRequisite'] as $badgeRequisite): ?>
 								<? $requiredBadge = $badgesById[$badgeRequisite['badge_id_requisite']];?>
-								<?= $requiredBadge['Badge']['name']?>; 
+								<?= h($requiredBadge['Badge']['name'])?>; 
 							<?endforeach;?>
 						</td>
 						<td>	
-							<?foreach($badge['ActivityRequisite'] as $activityRequisite): ?>
-								<? $activity = $activitiesById[$activityRequisite['activity_id']];?>
-								<?= $activityRequisite['count']?>x 
-								<?= $activity['Activity']['name']?>; 
-							<?endforeach;?>
+							<?
+								$activitiesText = '';
+								foreach($badge['ActivityRequisite'] as $activityRequisite) {
+									$activity = $activitiesById[$activityRequisite['activity_id']];
+									$activitiesText .= $activityRequisite['count'] . 'x ';
+									$activitiesText .= $activity['Activity']['name'];
+
+									if (!empty($activityRequisite['Tags'])) {
+										$tagsText = '';
+										foreach ($activityRequisite['Tags'] as $tag) {
+											if ($tagsText !== '') {
+												$tagsText .= ', ';
+											}
+											$tagsText .= '+' . $tag['name'];
+										}
+										$activitiesText .= ' (' . $tagsText . ')';
+									}
+									$activitiesText .= '; ';
+								}
+							?>
+							<?= h($activitiesText) ?>
 						</td>
 						<td>
 							<?if ($isGameMaster): ?>

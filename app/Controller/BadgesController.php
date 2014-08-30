@@ -7,11 +7,10 @@ class BadgesController extends AppController {
     public $components = array('Credly');
 
 	public function index() {
-        $smId = $this->gameMasterId();
-		$this->set('activitiesById', $this->Activity->allFromOwnerById($smId));
-		$this->set('badgesById', $this->Badge->allFromOwnerById($smId));
-		$this->Badge->recursive = 1;
-		$this->set('badges', $this->Badge->allFromOwner($smId));
+        $gameMasterId = $this->gameMasterId();
+		$this->set('activitiesById', $this->Activity->allFromOwnerById($gameMasterId));
+		$this->set('badgesById', $this->Badge->allFromOwnerById($gameMasterId));
+		$this->set('badges', $this->Badge->allFromOwner($gameMasterId));
 	}
 
     public function beforeFilter() {

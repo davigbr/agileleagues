@@ -17,8 +17,33 @@ class XpLogTest extends CakeTestCase {
 		$this->utils->generateEventTasks();
 		$this->utils->generateEventTaskLogs();
 		$this->utils->generateEventJoinLogs();
+		$this->utils->generateTags();
 	}
 	
+	public function testApplyTagModifiers() {
+		$log = array(
+			'Log' => array(
+				'xp' => 33,
+			),
+			'Tags' => array(
+				array(
+					'bonus_type' => '+',
+					'bonus_value' => 200
+				),
+				array(
+					'bonus_type' => '%',
+					'bonus_value' => 20
+				),
+				array(
+					'bonus_type' => '%',
+					'bonus_value' => 20
+				)
+			)
+		);
+
+		$this->assertEquals(246, $this->utils->XpLog->_applyTagModifiers($log));
+	}
+
 	public function testSaveAddedXP(){
 		$playerId = PLAYER_ID_1;
 		$xp = 10;
@@ -108,6 +133,27 @@ class XpLogTest extends CakeTestCase {
 			)
 		));
 		$this->assertEquals($countPlayers - 1, count ($otherPlayersNotifications));
+	}
+
+	public function testActivityReportedWithTags() {
+		$playerId = PLAYER_ID_1;
+		$log = $this->utils->Log->find('first');
+		$logId = $log['Log']['id'];
+
+		// Adiciona tags
+		$this->utils->Log->saveAssociated(array(
+			'Log' => array('id' => $logId),
+			'Tags' => array(
+				'Tags' => array(1, 2) // Tag 1 and 2
+			)
+		));
+
+		$this->utils->XpLog->_activityReported($playerId, $logId);
+		$xpLog = $this->utils->XpLog->findByPlayerId($playerId);
+
+		$xp = $log['Log']['xp'];
+
+		$this->assertEquals((int)($xp * 1.2 + 20), (int)$xpLog['XpLog']['xp']);
 	}
 
 	public function testActivityReportedUnlockedMissions() {
@@ -212,6 +258,24 @@ class XpLogTest extends CakeTestCase {
 		$xpLog = $this->utils->XpLog->findByLogIdReviewed($logId);
 		$this->assertEquals(floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER), $xpLog['XpLog']['xp']);
 		$this->assertNotNull($xpLog['XpLog']['log_id_reviewed']);
+	}
+
+	public function testActivityReviewedAcceptedWithTags() {
+		$log = $this->utils->Log->find('first');
+		$logId = $log['Log']['id'];
+		// Adiciona tags
+		$this->utils->Log->saveAssociated(array(
+			'Log' => array('id' => $logId),
+			'Tags' => array(
+				'Tags' => array(1, 2) // Tag 1 and 2
+			)
+		));
+		$this->utils->XpLog->_activityReviewed('accept', PLAYER_ID_1, $logId);
+		$xpLog = $this->utils->XpLog->findByLogIdReviewed($logId);
+
+		$xp = $log['Log']['xp'];
+
+		$this->assertEquals((int)(($xp * 1.2 + 20) * ACCEPTANCE_XP_MULTIPLIER), (int)$xpLog['XpLog']['xp']);
 	}
 
 	public function testActivityReviewedRejected() {

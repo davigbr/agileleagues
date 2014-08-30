@@ -69,7 +69,7 @@ class DomainsController extends AppController {
         $playerId = $this->Auth->user('id');
         $badges = $this->Badge->allFromDomainById($domainId);
         $playerBadgesById = $this->BadgeLog->allFromPlayerByBadgeId($playerId);
-        $badgeActivitiesProgress = $this->BadgeActivityProgress->allFromPlayerByBadgeIdAndActivityId($playerId);
+        $badgeActivitiesProgress = $this->BadgeActivityProgress->allFromPlayerByBadgeId($playerId);
         foreach ($badges as $badgeId => $badge) {
             $claimed =  isset($playerBadgesById[$badgeId]);
             $badges[$badgeId]['claimed'] = $claimed;
@@ -101,7 +101,6 @@ class DomainsController extends AppController {
             if ($a['progress'] == $b['progress']) return 0;
             else return ($a['progress'] > $b['progress']) ? -1: 1;
         });
-
         $this->set('badgeActivitiesProgress', $badgeActivitiesProgress);
         $this->set('domain', $this->Domain->findById($domainId));
         $this->set('badges', $badges);

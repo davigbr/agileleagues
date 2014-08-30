@@ -24,6 +24,11 @@ class TagsController extends AppController {
 			}
 		} else if ($id !== null) {
 			$this->request->data = $this->Tag->findById($id);
+		} else {
+			// Default values
+			$this->request->data['Tag']['bonus_type'] = '+';
+			$this->request->data['Tag']['bonus_value'] = 0;
+			$this->request->data['Tag']['new'] = true;
 		}
 	}
 

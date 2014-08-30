@@ -35,10 +35,21 @@ class Badge extends AppModel {
 	);
 
 	public function allFromOwner($playerIdOwner) {
-		return $this->all(array(
-			'Badge.inactive' => 0,
-			'Badge.player_id_owner' => $playerIdOwner
+		$badges = $this->find('all', array(
+			'conditions' => array(
+				'Badge.inactive' => 0,
+				'Badge.player_id_owner' => $playerIdOwner
+			),
+			'contain' => array(
+				'Domain',
+				'ActivityRequisite' => array(
+					'Activity',
+					'Tags'
+				),
+				'BadgeRequisite'
+			)
 		));
+		return $badges;
 	}
 
 	public function allFromOwnerById($playerIdOwner) {

@@ -18,8 +18,8 @@ class BadgeActivityProgressTest extends CakeTestCase {
 		$this->utils->generateBadgeLogs();
 	}
 
-	public function testAllFromPlayerByBadgeIdAndActivityId() {
-		$all = $this->utils->BadgeActivityProgress->allFromPlayerByBadgeIdAndActivityId(1);
+	public function testAllFromPlayerByBadgeId() {
+		$all = $this->utils->BadgeActivityProgress->allFromPlayerByBadgeId(1);
 		$this->assertNotEmpty($all);
 	}
 

@@ -115,7 +115,7 @@ class DashboardsController extends AppController {
 
     public function players($teamId = null) {
         $options = array(
-            'order' => array('Player.xp' => 'DESC'),
+            'order' => array('Player.name' => 'ASC'),
             'contain' => array(
                 'Team',
                 'PlayerType',

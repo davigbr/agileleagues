@@ -12,8 +12,12 @@
 					'options' => $activities,
 					'after' => ' <a onclick="return false" id="activity-xp" style="cursor: default" class="hide btn btn-success">-</a>'
 				)); ?>
-				<div class="hide alert alert-info">
+				<div class="hide alert alert-info" id="activity-info">
 					<div id="activity-description">
+					</div>
+					<div id="activity-details">
+					</div>
+					<div id="activity-restrictions">
 					</div>
 				</div>
 				<?= $this->Bootstrap->input('description', array(
@@ -68,12 +72,27 @@
 		$('#LogActivityId').change(function(){
 			var activityId = $(this).val();
 			if (activityId) {
-				$('#activity-description').html(activities[activityId].Activity.description);
-				$('#activity-description').parent().removeClass('hide');
+				var description = activities[activityId].Activity.description;
+				var details = activities[activityId].Activity.details;
+				var restrictions = activities[activityId].Activity.restrictions;
+
+				if (details) {
+					details = '<br/><strong>Details: </strong>' + details; 
+				}
+				if (restrictions) {
+					restrictions = '<br/><strong>Restrictions: </strong>' + restrictions; 
+				}
+
+				$('#activity-description').html(description);
+				$('#activity-details').html(details);
+				$('#activity-restrictions').html(restrictions);
+				
+				$('#activity-info').removeClass('hide');
+
 				$('#activity-xp').html('+' + activities[activityId].Activity.xp + ' XP');
 				$('#activity-xp').removeClass('hide');
 			} else {
-				$('#activity-description').parent().addClass('hide');
+				$('#activity-info').addClass('hide');
 				$('#activity-xp').addClass('hide');
 			}
 		}).change();

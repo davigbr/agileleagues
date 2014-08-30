@@ -37,6 +37,7 @@
 		</div>
 		<div class="col-md-6 col-sm-4 clearfix hidden-xs">
 			<div class="pull-right btn-group" style="margin-top: 5px">
+				<a class="btn btn-md btn-blue" href="<?= $this->Html->url('/pages/new')?>"><i class="glyphicon glyphicon-gift"></i> New Stuff</a>
 				<? if($isGameMaster): ?>
 					<a class="btn btn-md btn-info" href="<?= $this->Html->url('/pages/welcome')?>">Welcome!</a>
 				<?endif;?>

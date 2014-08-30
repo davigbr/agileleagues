@@ -21,6 +21,7 @@
 					<th>Name</th>
 					<th>Description</th>
 					<th>Symbol</th>
+					<th>Bonus</th>
 					<?if ($isGameMaster): ?>
 						<th>Actions</th>
 					<?endif;?>
@@ -43,6 +44,13 @@
 							<td><?= h($tag['Tag']['description']) ?></td>
 							<td>
 								<?= $this->element('tag', array('tag' => $tag)); ?>
+							</td>
+							<td>
+								<? if ($tag['Tag']['bonus_type'] === '+'): ?>
+									+<?= number_format($tag['Tag']['bonus_value']) ?> XP
+								<? else : ?>
+									<?= number_format(100 + $tag['Tag']['bonus_value']) ?>% XP
+								<? endif; ?>
 							</td>
 							<?if ($isGameMaster): ?>
 								<td>
