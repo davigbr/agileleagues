@@ -91,14 +91,14 @@ class TestUtils {
 
     public function generateTags() {
         $this->Tag->saveMany(array(
-            array('id' => 1, 'Tag 1', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 1, 'inactive' => 0),
-            array('id' => 2, 'Tag 2', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 1, 'inactive' => 0),
-            array('id' => 3, 'Tag 3', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 0),
-            array('id' => 4, 'Tag 4', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 0),
-            array('id' => 5, 'Tag 5', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1),
-            array('id' => 6, 'Tag 6', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1),
-            array('id' => 7, 'Tag 7', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1),
-            array('id' => 8, 'Tag 8', 'color' => '#000000', 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1)
+            array('id' => 1, 'Tag 1', 'color' => '#000000', 'bonus_type' => '+', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 1, 'inactive' => 0),
+            array('id' => 2, 'Tag 2', 'color' => '#000000', 'bonus_type' => '%', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 1, 'inactive' => 0),
+            array('id' => 3, 'Tag 3', 'color' => '#000000', 'bonus_type' => '+', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 0),
+            array('id' => 4, 'Tag 4', 'color' => '#000000', 'bonus_type' => '%', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 0),
+            array('id' => 5, 'Tag 5', 'color' => '#000000', 'bonus_type' => '+', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1),
+            array('id' => 6, 'Tag 6', 'color' => '#000000', 'bonus_type' => '%', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1),
+            array('id' => 7, 'Tag 7', 'color' => '#000000', 'bonus_type' => '+', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1),
+            array('id' => 8, 'Tag 8', 'color' => '#000000', 'bonus_type' => '%', 'bonus_value' => 20, 'player_id_owner' => GAME_MASTER_ID_1, 'new' => 0, 'inactive' => 1)
         ));
     }
 

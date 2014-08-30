@@ -48,13 +48,22 @@ class XpLog extends AppModel {
 	}
 
 	public function _activityReviewed($action, $playerIdReviewer, $logId) {
-		$log = $this->Log->findById($logId);
+		$log = $this->Log->find('first', array(
+			'conditions' => array(
+				'Log.id' => $logId
+			),
+			'contain' => array(
+				'Tags'
+			)
+		));
 		if (!$log) {
 			throw new Exception('Log not found');
 		}
-		
+
+		$xp = $this->_applyTagModifiers($log);
+
 		if ($action === 'accept') {
-			$xp = floor($log['Log']['xp'] * ACCEPTANCE_XP_MULTIPLIER);
+			$xp = (int)($xp * ACCEPTANCE_XP_MULTIPLIER);
 		} else if ($action === 'reject') {
 			$xp = REJECTION_XP_BONUS;
 		}
@@ -84,8 +93,33 @@ class XpLog extends AppModel {
 		}
 	}
 
+	public function _applyTagModifiers($log) {
+		$xp = (int)$log['Log']['xp'];
+		$percentualModifiers = 100;
+		$additionModifiers = 0;
+
+		foreach ($log['Tags'] as $tag) {
+			if ($tag['bonus_type'] === '%') {
+				$percentualModifiers += (int)$tag['bonus_value'];
+			} else if ($tag['bonus_type'] === '+') {
+				$additionModifiers += (int)$tag['bonus_value'];
+			}
+		}
+
+		$xp *= $percentualModifiers/100;
+		$xp += $additionModifiers;
+		return (int)$xp;
+	}
+
 	public function _activityReported($playerId, $logId) {
-		$log = $this->Log->findById($logId);
+		$log = $this->Log->find('first', array(
+			'conditions' => array(
+				'Log.id' => $logId
+			),
+			'contain' => array(
+				'Tags'
+			)
+		));
 		if (!$log) {
 			throw new Exception('Log not found');
 		}
@@ -95,7 +129,7 @@ class XpLog extends AppModel {
 			throw new Exception('Player not found');
 		}
 
-		$xp = $log['Log']['xp'];
+		$xp = $this->_applyTagModifiers($log);
 
 		$this->_add(array(
 			'log_id' => $logId,

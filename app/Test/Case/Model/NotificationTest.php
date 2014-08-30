@@ -97,8 +97,13 @@ class NotificationTest extends CakeTestCase {
 	public function testSendException() {
 		$this->utils->Notification->query('DELETE FROM notification');
 		$playerId = PLAYER_ID_1;
-		$this->setExpectedException('Exception');
-		$this->utils->Notification->send(PLAYER_ID_1, '', '', 'success', $playerId);	
+
+		try {
+			$this->utils->Notification->send(PLAYER_ID_1, '', '', 'success', $playerId);	
+			$this->fails();
+		} catch (Exception $ex) {
+			$this->assertEquals('Could not save notification', $ex->getMessage());
+		}
 	}
 
 }

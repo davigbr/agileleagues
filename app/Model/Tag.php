@@ -15,7 +15,9 @@ class Tag extends AppModel {
 				'rule' => array('custom', '/\\#[A-Fa-f0-9]{6}/'),
 				'message' => 'Invalid color'
 			)
-		)
+		),
+		'bonus_type' => 'notEmpty',
+		'bonus_value' => 'notEmpty'
 	);
 
 	public function allActive($playerIdOwner) {

@@ -19,3 +19,7 @@ CROSS JOIN badge
 LEFT JOIN activity_requisite AS ar ON ar.badge_id = badge.id
 GROUP BY player.id, badge_id, activity_requisite_id
 ORDER BY player.id, badge_id, activity_requisite_id;
+
+ALTER TABLE tag
+ADD COLUMN `bonus_type` CHAR(1) DEFAULT '+' NOT NULL,
+ADD COLUMN `bonus_value` INT(10) UNSIGNED DEFAULT 0 NOT NULL;
