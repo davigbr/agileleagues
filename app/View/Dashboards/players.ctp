@@ -43,7 +43,7 @@
 			<tr>
 				<?foreach ($players as $player): ?>
 					<td>
-						<span class="big-text"><?= number_format($player['Player']['xp']) ?></span>
+						<strong><?= number_format($player['Player']['xp']) ?></strong>
 						<br/>
 						<small>Experience Points</small>
 						<br/>
