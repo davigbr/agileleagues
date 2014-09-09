@@ -34,7 +34,7 @@
                     <tr>
                         <th title="Position">P</th>
                         <th><strong>Player</strong></th>
-                        <th title="Activities Accepted" style="text-align: right"><strong>A.C.</strong></th>
+                        <th title="Activities Accepted" style="text-align: right"><strong>A.A.</strong></th>
                     </tr>
                     <?$i=0?>
                     <?if (empty($rows)):?>
