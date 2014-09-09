@@ -1,5 +1,3 @@
-DROP VIEW IF EXISTS player_activity_coins;
-
 DROP VIEW IF EXISTS player_activity_summary;
 CREATE VIEW player_activity_summary AS 
 select `log`.`player_id` AS `player_id`,
@@ -19,4 +17,4 @@ from (((`log`
 	join `domain` on((`domain`.`id` = `activity`.`domain_id`))) 
 where `activity`.inactive = 0 AND log.accepted IS NOT NULL
 group by `log`.`activity_id`,`log`.`player_id` 
-order by `log`.`player_id`,`activity`.`domain_id`, `activity`.`name`
+order by `log`.`player_id`,`activity`.`domain_id`, `activity`.`name`;
