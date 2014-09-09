@@ -275,7 +275,7 @@ class PlayersController extends AppController {
 	public function team($id) {
 		$this->set('title_for_layout', 'Change Team');
 
-		$this->set('teams', $this->Team->simple());
+		$this->set('teams', $this->Team->simpleFromGameMaster($this->gameMasterId()));
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Player->save($this->request->data)) {

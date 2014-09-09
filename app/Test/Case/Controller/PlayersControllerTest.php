@@ -179,9 +179,11 @@ class PlayersControllerTest extends ControllerTestCase {
 	}
 
 	public function testTeamGet() {
+		$this->controllerUtils->mockAuthUser();
 		$id = PLAYER_ID_1;
 		$vars = $this->testAction('/players/team/' . $id, array('method' => 'get', 'return' => 'vars'));
-		$this->assertTrue(isset($vars['teams']));
+		$teams = $vars['teams'];
+		$this->assertEquals(2, count($teams));
 	}
 
 	public function testTeamNotFound() {

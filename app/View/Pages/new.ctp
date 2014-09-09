@@ -22,7 +22,7 @@
 				The Tag <strong>bonuses</strong> also apply to the XP earned by the players who 
 				<strong>accept</strong> the activities.
 				Don't forget the players who accept earn 10% of the XP earned by the player who
-				reported teh activity.
+				reported the activity.
 			</li>
 			<li>
 				<strong>Daily XP dashboard</strong> has been added. This screen is a weak leaderboard where the ammount of 
