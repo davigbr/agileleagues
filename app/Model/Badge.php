@@ -156,6 +156,7 @@ class Badge extends AppModel {
             $playerName = $player['Player']['name'];
 
             $this->Notification->_broadcast(
+            	$playerId,
                 'New Badge', 
                 __('It seems someone has gotten the %s badge! Congratulations, %s!', $badgeName, $playerName), 
                 'warning'

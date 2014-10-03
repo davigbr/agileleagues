@@ -19,7 +19,7 @@
 		<ol>
 			<li>Last notifications was showing messages from other teams;</li>
 			<li>Players were able to access and claim badges (with no requisites) from other GMs;</li>
-			<li></li>
+			<li>A strange notification ("It seems someone has gotten th") sometimes appeared;</li>
 		</ol>
 		
 		<p><span class="badge badge-info">General Improvements</span></p>

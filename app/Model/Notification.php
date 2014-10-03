@@ -103,6 +103,10 @@ class Notification extends AppModel {
 	}
 
 	public function _broadcast($playerIdSender, $title, $text, $type = 'success') {
+		if (!is_numeric($playerIdSender)) {
+			throw new ModelException('Invalid sender!');
+		}
+
 		// Broadcast messages only to related players
 		// For example, if it is a GameMaster, broadcast the message to all players from all his teams
 		// If it is a Player, broadcast the message to all players from the same team, including the SM

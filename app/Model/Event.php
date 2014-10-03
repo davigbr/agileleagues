@@ -79,6 +79,7 @@ class Event extends AppModel {
 			$this->EventCompleteLog->_log($playerId, $id);
 			$this->XpLog->_eventCompleted($playerId, $id);
 			$this->Notification->_broadcast(
+				$playerId,
 				__('%s Completed', $eventType),
 				__('%s completed the %s %s. <br/>Come on, guys!', $playerName, $eventName, $eventType),
 				'success'
