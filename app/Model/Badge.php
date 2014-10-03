@@ -119,9 +119,15 @@ class Badge extends AppModel {
 			if (!$badge) {
 				throw new ModelException('Badge not found.');
 			}
+			$this->Player->recursive = 1;
 			$player = $this->Player->findById($playerId);
+
 			if ($badge['Domain']['player_type_id'] != $player['Player']['player_type_id']) {
 				throw new ModelException('Badge not compatible with player type.');
+			}
+
+			if ($badge['Badge']['player_id_owner'] != $player['Team']['player_id_owner']) {
+				throw new ModelException('You cannot claim badges from other GAs.');
 			}
 
 			$badgesClaimed = $this->BadgeClaimed->allFromPlayerByBadgeId($playerId);

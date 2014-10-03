@@ -61,11 +61,12 @@ class DomainsController extends AppController {
 
     public function badges($domainId) {
         $this->Domain->id = $domainId;
-        if (!$this->Domain->exists()) {
-            throw new NotFoundException('Domain not found');
+        $domain = $this->Domain->findByIdAndPlayerIdOwner($domainId, $this->gameMasterId());
+        if (!$domain) {
+            throw new NotFoundException('Domain not found!');
         }
-        $this->Badge->recursive = 1;
 
+        $this->Badge->recursive = 1;
         $playerId = $this->Auth->user('id');
         $badges = $this->Badge->allFromDomainById($domainId);
         $playerBadgesById = $this->BadgeLog->allFromPlayerByBadgeId($playerId);

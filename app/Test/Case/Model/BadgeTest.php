@@ -8,6 +8,7 @@ class BadgeTest extends CakeTestCase {
 		parent::setUp();
 		$this->utils = new TestUtils();
 		$this->utils->clearDatabase();
+		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
@@ -68,6 +69,28 @@ class BadgeTest extends CakeTestCase {
 		$this->utils->BadgeLog->query('DELETE FROM badge_log WHERE player_id = ? AND badge_id = ?', array($playerId, $badgeId));
 		$this->utils->Badge->claim($playerId, $badgeId);
 		$this->assertNotEmpty($this->utils->BadgeLog->findByPlayerIdAndBadgeId($playerId, $badgeId));
+	}
+
+	public function testClaimOtherGA() {
+		$this->utils->generateBadgeLogs();
+		$this->utils->generateLogs();
+
+		$this->utils->Badge->recursive = 1;
+		$badge = $this->utils->Badge->findById(2);
+		$badgeId = $badge['Badge']['id'];
+		$playerId = PLAYER_ID_1;
+
+		$this->utils->Badge->save(array(
+			'id' => $badgeId,
+			'player_id_owner' => GAME_MASTER_ID_2 // Changes the badge owner to provoke an error
+		));
+
+		try {
+			$this->utils->Badge->claim($playerId, $badgeId);
+			$this->fail();
+		} catch (ModelException $ex) {
+			$this->assertEquals('You cannot claim badges from other GAs.', $ex->getMessage());
+		}
 	}
 
 	public function testClaimWrongPlayerType() {

@@ -18,6 +18,7 @@
 		<p><span class="badge badge-danger">Bugs Fixed</span></p>
 		<ol>
 			<li>Last notifications was showing messages from other teams;</li>
+			<li>Players were able to access and claim badges (with no requisites) from other GMs;</li>
 			<li></li>
 		</ol>
 		

@@ -15,7 +15,7 @@ class NotificationsControllerTest extends ControllerTestCase {
 	}
 
 	public function testIndex() {
-		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_1);
+		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/notifications', array('return' => 'vars'));
 		$notifications = $result['notifications'];
 		$this->assertNotEmpty($notifications);
