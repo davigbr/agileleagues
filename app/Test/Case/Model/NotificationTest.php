@@ -13,6 +13,36 @@ class NotificationTest extends CakeTestCase {
 		$this->utils->generateNotifications();
 	}
 
+	public function testAllFromSenderOrRecipient() {
+		$playerId = PLAYER_ID_1;
+		$anotherPlayerId = PLAYER_ID_2;
+
+		$this->utils->Notification->saveAll(array(
+			array(
+				'player_id' => $playerId,
+				'player_id_sender' => $anotherPlayerId,
+				'title' => 'bla',
+				'text' => 'blablabla',
+				'type' => 'success'
+			),
+			array(
+				'player_id' => $anotherPlayerId,
+				'player_id_sender' => $playerId,
+				'title' => 'bla',
+				'text' => 'blablabla',
+				'type' => 'success'
+			),
+		));
+
+		$notifications = $this->utils->Notification->allFromSenderOrRecipient($playerId);
+		$this->assertNotEmpty($notifications);
+		foreach ($notifications as $notification) {
+			$recipientId = (int)$notification['Notification']['player_id'];
+			$senderId = (int)$notification['Notification']['player_id_sender'];
+			$this->assertTrue($recipientId === $playerId || $senderId === $playerId);
+		}
+	}
+
 	public function testBroadcastAsPlayer() {
 		$countBefore = $this->utils->Notification->find('count');
 		$this->utils->Notification->_broadcast(PLAYER_ID_1, 'título', 'texto', 'success');

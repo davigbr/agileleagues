@@ -26,6 +26,8 @@
 				</ol>
 			</div>
 		</div>
+		<p>In short, we want to:</p>
+		<strong><em>Help self-organized creative teams drive behaviors, amplify feedback, and increase progress visibility.</em></strong>
 
 		<div class="row">
 			<div class="col-sm-4">

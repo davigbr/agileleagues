@@ -22,6 +22,20 @@ class Notification extends AppModel {
 		'type' => 'notEmpty'
 	);
 
+	public function allFromSenderOrRecipient($playerId, $limit = 100) {
+		return $this->find('all', array(
+			'recursive' => 1,
+			'limit' => $limit,
+			'conditions' => array(
+				'OR' => array(
+					'Notification.player_id' => $playerId,
+					'Notification.player_id_sender' => $playerId
+				)
+			)
+		));
+	}
+
+
 	public function unread($playerId, $limit = 5) {
 		$this->recursive = -1;
 		return $this->find('all', array(

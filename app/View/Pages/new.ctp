@@ -2,11 +2,36 @@
 <hr/>
 
 <div class="row">
+
 	<div class="col-lg-6">
-		<h2>Global Scrum Gathering Berlim Release 1.6</h2>
+		<h2>+Adoption Release 1.7</h2>
+		<p>
+			Global Scrum Gathering Berlin was tremendously successful and we are now going to present the Agile Gamification lecture at the Agile Brazil 2014!
+			Because of that we couldn't resist to release some exciting new features :)
+		</p>
+		<p><span class="badge badge-success">Features Implemented</span></p>
+		<ol>
+			<li></li>
+			<li></li>
+		</ol>
+
+		<p><span class="badge badge-danger">Bugs Fixed</span></p>
+		<ol>
+			<li>Last notifications was showing messages from other teams;</li>
+			<li></li>
+		</ol>
+		
+		<p><span class="badge badge-info">General Improvements</span></p>
+		<ol>
+			<li>The GitHub README.md file now contains some installation instructions in case you want to setup Agile Leagues in your own environment;</li>
+			<li></li>
+		</ol>
+	</div>
+	<div class="col-lg-6">
+		<h2>Global Scrum Gathering Berlin Release 1.6</h2>
 		<p>
 			Welcome to AL 1.6. We just released some precious stuff because Agile Leagues is going to 
-			Global Scrum Gathering Berlim 2014! You can read more 
+			Global Scrum Gathering Berlin 2014! You can read more 
 			<a href="http://www.agilegamification.org/global-scrum-gathering-berlin-2014/">here</a>.
 		</p>
 

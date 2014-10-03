@@ -5,13 +5,7 @@ App::uses('AppController', 'Controller');
 class NotificationsController extends AppController {
 
 	public function index() {
-		$this->set('notifications', $this->Notification->find('all', array(
-			'contain' => array(
-				'Player', 
-				'PlayerSender'
-			),
-			'limit' => 100,
-		)));
+		$this->set('notifications', $this->Notification->allFromSenderOrRecipient($this->Auth->user('id')), 100);
 	}
 
 	public function send() {

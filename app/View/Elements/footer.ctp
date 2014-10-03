@@ -27,6 +27,8 @@
 		<a target="_blank" href="https://github.com/davigbr/agileleagues" class="btn btn-md btn-blue"><?= Configure::read('version') ?></a>
 	</div>
 	<br/>
+	<em>Our goal: Help self-organized creative teams drive behaviors, amplify feedback, and increase progress visibility.</em>
+	<br/><br/>	
 	<!-- AddThis Button BEGIN -->
 	<div class="addthis_label">Share</div>
 	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
