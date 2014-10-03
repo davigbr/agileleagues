@@ -138,7 +138,7 @@ class DashboardsController extends AppController {
                 $options
             );
         } else {
-            throw new NotFoundException('Team not found');
+            return $this->redirect($this->Auth->loginAction);
         }
 
         $this->set('players', $players);
