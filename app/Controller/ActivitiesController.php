@@ -77,7 +77,15 @@ class ActivitiesController extends AppController {
 		if (!$playerId) {
 			$playerId = (int)$this->Auth->user('id');
 		}
-		$logs = $this->Log->findAllByPlayerIdAndAcquired($playerId, $date);
+		$logs = $this->Log->find('all', array(
+			'conditions' => array(
+				'player_id' => $playerId,
+				'acquired' => $date
+			),
+			'contain' => array(
+				'Activity', 'Domain', 'Tags'
+			) 
+		));
 		$this->set('date', $date);
 		$this->set('logs', $logs);
 		$this->set('player', $this->Player->findById($playerId));

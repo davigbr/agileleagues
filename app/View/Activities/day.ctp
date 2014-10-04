@@ -14,6 +14,7 @@
 				<tr>
 					<th style="text-align: center" title="Domain">D</th>
 					<th>Name</th>
+					<th>Tags</th>
 					<th>Logged</th>
 					<th>Acquired</th>
 					<th>Reviewed</th>
@@ -25,6 +26,7 @@
 							<i class="<?= h($log['Domain']['icon'])?>"></i>
 						</td>
 						<td><?= h($log['Activity']['name'])?></td>
+						<td><?= $this->element('tag', array('tags' => $log['Tags'])); ?></td>
 						<td><?= $this->Format->dateTime($log['Log']['created'])?></td>
 						<td><?= $this->Format->date($log['Log']['acquired'])?></td>
 						<td><?= $this->Format->dateTime($log['Log']['reviewed'])?></td>
