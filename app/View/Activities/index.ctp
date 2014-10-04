@@ -23,6 +23,8 @@
 					<th>XP</th>
 					<th title="<?=__('Required Votes for Acceptance')?>">A. Votes</th>
 					<th title="<?=__('Required Votes for Rejection')?>">R. Votes</th>
+					<th>Times Reported</th>
+					<th>Reports per Day</th>
 					<th>Last Week Logs</th>
 					<th>Actions</th>
 				</tr>
@@ -54,6 +56,12 @@
 								<? for($i = 0; $i < $activity['Activity']['rejection_votes']; $i++) { 
 									?><i style="color: red" class="entypo-down"></i><?
 								}?>
+							</td>
+							<td>
+								<?= number_format($activity['Activity']['times_reported']) ?>
+							</td>
+							<td>
+								<?= number_format($activity['Activity']['reports_per_day'], 2) ?>
 							</td>
 							<td>
 								<span class="last-week-logs">

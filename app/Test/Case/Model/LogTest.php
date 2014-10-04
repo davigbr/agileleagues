@@ -231,6 +231,31 @@ class LogTest extends CakeTestCase {
         $this->assertEquals(3, count($notifications));
 	}
 
+	public function testReport() {
+		$logs = array(
+			array('Log' => array(
+				'activity_id' => 1,
+				'player_id' => PLAYER_ID_1
+			)),
+			array('Log' => array(
+				'activity_id' => 2,
+				'player_id' => PLAYER_ID_1
+			))
+		);
+
+		$this->utils->Log->report($logs);
+		$activities = $this->utils->Activity->findAllById(array(1, 2));
+		$this->assertNotEmpty($activities);
+
+		foreach ($activities as $activity) {
+			$this->assertTrue($activity['Activity']['first_report'] !== null);
+			$this->assertTrue($activity['Activity']['last_report'] !== null);
+			$this->assertTrue($activity['Activity']['first_report'] !== null);
+			$this->assertEquals((int)$activity['Activity']['times_reported'], 1);
+			$this->assertEquals((int)$activity['Activity']['reports_per_day'], 1);
+		}
+	}
+
 	public function testReviewNotFirstTimeActivity() {
         $playerId = PLAYER_ID_1;
         $log = $this->utils->Log->findByPlayerId($playerId);

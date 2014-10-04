@@ -304,4 +304,45 @@ class Log extends AppModel {
 		);
 	}
 
+	public function report($logs) {
+		$this->begin();
+		try {
+			// Save each log
+			// Update corresponding activity
+			foreach ($logs as $log) {
+				$activity = $this->Activity->findById($log['Log']['activity_id']);
+				if (!$activity) {
+					throw new Exception('Activity not found.');
+				}
+				$now = date('Y-m-d H:i:s');
+				$firstReport = $activity['Activity']['first_report'] ? $activity['Activity']['first_report'] : $now; 
+				$lastReport = $now;
+				$timesReported = (int)$activity['Activity']['times_reported'] + 1;
+				$created = new DateTime(substr($activity['Activity']['created'], 0, 10) . ' 00:00:00');
+				$today = new DateTime(date('Y-m-d') . ' 00:00:00');
+				$days = 1 + (int)(($today->format('U') - $created->format('U')) / 86400);
+				$reportsPerDay = $days > 0 ? $timesReported / $days : 0; 
+
+				$activityUpdate = array(
+					'id' => $activity['Activity']['id'],
+					'first_report' => $firstReport,
+					'last_report' => $lastReport,
+					'reports_per_day' => $reportsPerDay,
+					'times_reported' => $timesReported
+				);
+				$activitySaved = $this->Activity->save($activityUpdate);
+				$logSaved = $this->saveAssociated($log);
+				if (!$activitySaved) {
+					throw new Exception('Activity could not be saved.');
+				}
+				if (!$logSaved) {
+					throw new Exception('Log could not be saved.');
+				}
+			}
+			$this->commit();
+		} catch (Exception $ex) {
+			$this->rollback();
+			throw $ex;
+		}
+	}
 }

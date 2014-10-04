@@ -171,13 +171,10 @@ class ActivitiesController extends AppController {
 						$logsToSave[] = $logToSave;
 					}
 				}
-				if ($this->Log->saveMany($logsToSave)) {
-					$activity = $this->Activity->findById($log['Log']['activity_id']);
-					$this->request->data = array();
-					$this->flashSuccess(__('Activity %s reported successfully!', '<strong>' .$activity['Activity']['name'] . '</strong>'));
-				} else {
-					$this->flashError(__('Error while trying to report activity.'));
-				}
+				$this->Log->report($logsToSave);
+				$activity = $this->Activity->findById($log['Log']['activity_id']);
+				$this->request->data = array();
+				$this->flashSuccess(__('Activity %s reported successfully!', '<strong>' .$activity['Activity']['name'] . '</strong>'));
 			} else {
 				$this->flashError(__('There are validation errors.'));
 			}
