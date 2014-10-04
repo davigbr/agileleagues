@@ -11,13 +11,11 @@
 <div class="panel panel-primary panel-table">
     <div class="panel-heading">
         <div class="panel-title">
-            <h1>Team Pending Activities</h1>
+            <h1>Peer Activity Review</h1>
             <br/>
             <p>
 	            Review your teammate's reported activities by clicking 
-	            on the <a href="#" onclick="return false" class="btn btn-default"><i class="entypo-thumbs-up"></i></a> 
-	            or <a href="#" onclick="return false" class="btn btn-default"><i class="entypo-thumbs-down"></i></a>
-	            and typing a comment. After you're done, hit the 
+	            on the checkboxes and typing a comment. After you're done, hit the 
 	            <a href="#" onclick="return false" class="btn btn-default">Review all commented activities!</a>
 	            button. 
             </p>
@@ -39,13 +37,13 @@
 					<th>Tags</th>
 					<th>Player</th>
 					<th>Acquired</th>
-					<th>Description</th>
+					<th title="<?=__('Description')?>">Desc.</th>
 					<th title="<?=__('The XP bonus for accepting this activity')?>">Bonus</th>
 					<th>%</th>
-					<th>Accept</th>
+					<th>Accept <i style="color: green" class="entypo-thumbs-up"></i></a></th>
 					<th title="<?=__('The XP bonus for rejecting this activity')?>">Bonus</th>
 					<th>%</th>
-					<th>Reject</th>
+					<th>Reject <i style="color: red" class="entypo-thumbs-down"></i></th>
 
 				</tr>
 				<?if (empty($logs)): ?>
@@ -75,7 +73,9 @@
 								<?= isset($log['PairedPlayer']['name'])? (' + ' .  h($log['PairedPlayer']['name'])) : ''?>
 							</td>
 							<td><?= $this->Format->date($log['Log']['acquired'])?></td>
-							<td><?= h($log['Log']['description'])?></td>
+							<td>
+								<span class="btn" data-toggle="tooltip" title="<?= h($log['Log']['description'])?>"><i class="glyphicon glyphicon-list"></i></span>
+							</td>
 							<? if (isset($log['MyVote'])): ?>
 								<td>
 									<?if($log['MyVote']['vote'] == 1): ?>
@@ -116,7 +116,9 @@
 								<td>
 									<div style="min-width: 100px; max-width: 400px" class="input-group">
 										<div class="accept-activity input-group-addon">
-											<i style="color: green" class="entypo-thumbs-up"></i></a>
+											<label class="checkbox-inline">
+  												<input class="accept-check" type="checkbox"/>
+											</label>
 										</div>
 										<input maxlength="250" name="data[Log][<?=$log['Log']['id']?>][acceptance_comment]" type="text" disabled="disabled" class="accept-input form-control" />
 									</div>
@@ -132,7 +134,9 @@
 								<td>
 									<div style="min-width: 100px; max-width: 400px" class="input-group">
 										<div class="reject-activity input-group-addon">
-											<i style="color: red" class="entypo-thumbs-down"></i></a>
+											<label class="checkbox-inline">
+  												<input class="reject-check" type="checkbox"/>
+											</label>
 										</div>
 										<input maxlength="250" name="data[Log][<?=$log['Log']['id']?>][rejection_comment]" type="text" disabled="disabled" class="reject-input form-control" />
 									</div>
@@ -178,35 +182,39 @@
 <script type="text/javascript">
 	$(function(){
 		var onClick = function() {
-			var $inputGroup = $(this).parent();
+			var $check = $(this);
+			var $inputGroup = $(this).parent().parent().parent();
 			var $tr = $inputGroup.parent().parent();
-			var $input = $('input', $inputGroup);
-			var isAccept = $(this).hasClass('accept-activity');
-			console.log(isAccept);
+			var $input = $('input[type=text]', $inputGroup);
+			var isAccept = $(this).parent().parent().hasClass('accept-activity');
+			var $oppositeInput, $oppositeCheck;
 
-			if ($input.attr('disabled')) {
+			if ($check.is(':checked')) {
 				$input.removeAttr('disabled');
 				$input.attr('placeholder', 'Please type a comment');
 
 				if (isAccept) {
-					var $oppositeInput = $('input.reject-input', $tr);
+					$oppositeInput = $('input.reject-input', $tr);
+					$oppositeCheck = $('input.reject-check', $tr);
 				} else {
-					var $oppositeInput = $('input.accept-input', $tr);
+					$oppositeInput = $('input.accept-input', $tr);
+					$oppositeCheck = $('input.accept-check', $tr);
 				}
 				$oppositeInput.removeAttr('placeholder');
 				$oppositeInput.attr('disabled', 'disabled');
 				$oppositeInput.val('');
+				$oppositeCheck.removeAttr('checked');
 			} else {
 				$input.attr('disabled', 'disabled');
 				$input.removeAttr('placeholder');
 				$input.val('');
 			}
 			$input.focus();
-			return false;
+			return true;
 		};
 
-		$('.accept-activity').click(onClick);
-		$('.reject-activity').click(onClick);
+		$('.accept-activity input').click(onClick);
+		$('.reject-activity input').click(onClick);
 
 	});
 </script>

@@ -12,7 +12,7 @@
 		<p><span class="badge badge-success">Features Implemented</span></p>
 		<ol>
 			<li>Information added to the activities list: total reports and average reports per day;</li>
-			<li>Tags added to the calendar (day view);</li>
+			<li>Tags added to the calendar day view;</li>
 			<li></li>
 		</ol>
 
@@ -26,6 +26,7 @@
 		<p><span class="badge badge-info">General Improvements</span></p>
 		<ol>
 			<li>The GitHub README.md file now contains some installation instructions in case you want to setup Agile Leagues in your own environment;</li>
+			<li>Team Pending Activities renamed to Peer Activity Review</li>
 		</ol>
 	</div>
 	<div class="col-lg-6">

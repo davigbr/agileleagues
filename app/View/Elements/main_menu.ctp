@@ -65,7 +65,7 @@
 					<li data-action="team">
 						<a href="<?= $this->Html->url('/activities/team'); ?>">
 							<i class="entypo-users"></i>
-							<span>Team Pending Activities</span>
+							<span>Peer Activity Review</span>
 							<?if($teamPendingActivities > 0): ?>
 								<span class="badge badge-danger"><?= $teamPendingActivities?></span>
 							<?endif;?>
