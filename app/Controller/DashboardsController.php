@@ -15,6 +15,37 @@ class DashboardsController extends AppController {
     public function badges() {
     }
 
+    public function personal($id = null) {
+        if (!$id) {
+            $id = $this->Auth->user('id');
+        }
+        if (!$id) {
+            return $this->redirect($this->Auth->loginAction);
+        }
+        $player = $this->Player->find('first', array(
+            'conditions' => array(
+                'id' => $id
+            ),
+            'contain' => array(
+                'BadgeLog' => array('Badge' => array('Domain'))
+            )
+        ));
+
+        if (!$player) {
+            throw new NotFoundException('Player not found.');
+        }
+
+        $domains = $this->Domain->topFromPlayer($id);
+        $activities = $this->Activity->topFromPlayer($id);
+        $tags = $this->Tag->topFromPlayer($id);
+
+        $this->set('domains', $domains);
+        $this->set('activities', $activities);
+        $this->set('tags', $tags);
+        $this->set('player', $player);
+        $this->set('collapseSidebar', true);
+    }
+
     public function xp($ownerEmail = null) {
         $player = null;
         if ($ownerEmail) {

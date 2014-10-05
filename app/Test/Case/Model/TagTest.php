@@ -25,4 +25,19 @@ class TagTest extends CakeTestCase {
 		$this->assertNotEmpty($tags);
 	}
 
+	public function testTopFromPlayer() {
+		$this->utils->generatePlayers();
+		$this->utils->generateTeams();
+		$this->utils->generateDomains();
+		$this->utils->generateActivities();
+		$this->utils->generateLogs();
+		$this->utils->generateLogTags();
+
+		$tags = $this->utils->Tag->topFromPlayer(PLAYER_ID_1);
+		$this->assertNotEmpty($tags);
+		foreach ($tags as $tag) {
+			$this->assertTrue(isset($tag['Tag']['reports']));
+		}
+	}
+
 }

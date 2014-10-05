@@ -39,4 +39,20 @@ class Tag extends AppModel {
 	}
 
 
+	public function topFromPlayer($playerId, $limit = 10) {
+		$tags = $this->query(
+			'SELECT COUNT(Log.id) as reports, Tag.* ' .  
+			'FROM log_tag AS LogTag ' .
+			'INNER JOIN tag AS Tag ON Tag.id = LogTag.tag_id ' .
+			'INNER JOIN log AS Log ON LogTag.log_id = Log.id ' . 
+			'WHERE player_id = ? ' . 
+			'GROUP BY tag_id ' . 
+			'ORDER BY reports DESC ' . 
+			'LIMIT ' . $limit, array($playerId));
+		foreach ($tags as &$tag) {
+			$tag['Tag']['reports'] = $tag[0]['reports'];
+			unset($tag[0]);
+		}
+		return $tags;
+	} 
 }

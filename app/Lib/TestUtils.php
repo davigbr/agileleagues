@@ -40,7 +40,8 @@ class TestUtils {
         'EventType',
         'Team',
         'Player',
-        'PlayerType'
+        'PlayerType',
+        'LogTag'
     );
     
     private $views = array(
@@ -88,6 +89,19 @@ class TestUtils {
             ));
         }
     }
+
+    public function generateLogTags() {
+        $this->LogTag->saveMany(array(
+            array('log_id' => 1, 'tag_id' => 1),
+            array('log_id' => 2, 'tag_id' => 2),
+            array('log_id' => 3, 'tag_id' => 3),
+            array('log_id' => 4, 'tag_id' => 4),
+            array('log_id' => 5, 'tag_id' => 5),
+            array('log_id' => 6, 'tag_id' => 6),
+            array('log_id' => 7, 'tag_id' => 7),
+            array('log_id' => 8, 'tag_id' => 8)
+        ));
+    }   
 
     public function generateTags() {
         $this->Tag->saveMany(array(
@@ -249,14 +263,14 @@ class TestUtils {
         $lastMonth = $lastMonth->format('Y-m-d');
 
         $this->Log->saveMany(array(
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 1, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 2, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 3, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastWeek),
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 4, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastMonth),
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 5, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 6, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 7, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastWeek),
-            array('description' => 'random description ' . md5(rand()), 'activity_id' => 8, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastMonth),
+            array('id' => 1, 'description' => 'random description ' . md5(rand()), 'domain_id' => 1, 'activity_id' => 1, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
+            array('id' => 2, 'description' => 'random description ' . md5(rand()), 'domain_id' => 1, 'activity_id' => 2, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
+            array('id' => 3, 'description' => 'random description ' . md5(rand()), 'domain_id' => 1, 'activity_id' => 3, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastWeek),
+            array('id' => 4, 'description' => 'random description ' . md5(rand()), 'domain_id' => 1, 'activity_id' => 4, 'player_id' => PLAYER_ID_1, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastMonth),
+            array('id' => 5, 'description' => 'random description ' . md5(rand()), 'domain_id' => 2, 'activity_id' => 5, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
+            array('id' => 6, 'description' => 'random description ' . md5(rand()), 'domain_id' => 2, 'activity_id' => 6, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $currentDate),
+            array('id' => 7, 'description' => 'random description ' . md5(rand()), 'domain_id' => 2, 'activity_id' => 7, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastWeek),
+            array('id' => 8, 'description' => 'random description ' . md5(rand()), 'domain_id' => 2, 'activity_id' => 8, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => $lastMonth),
         ), array('validate' => false));
         $result = $this->Log->query('UPDATE log SET reviewed = NOW(), accepted = NOW()');
     }

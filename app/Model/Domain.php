@@ -73,4 +73,19 @@ class Domain extends AppModel {
 		}
 		return $list;
 	}
+
+	public function topFromPlayer($playerId) {
+		$domains = $this->query(
+			'SELECT Domain.*, COUNT(*) AS reports ' . 
+			'FROM log ' . 
+			'INNER JOIN domain AS Domain ON Domain.id = log.domain_id ' . 
+			'WHERE player_id = ? ' . 
+			'GROUP BY domain_id ' . 
+			'ORDER BY reports DESC', array($playerId));
+		foreach ($domains as &$domain) {
+			$domain['Domain']['reports'] = $domain[0]['reports'];
+			unset($domain[0]);
+		}
+		return $domains;
+	}
 }

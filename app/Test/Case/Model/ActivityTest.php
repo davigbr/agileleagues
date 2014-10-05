@@ -126,4 +126,12 @@ class ActivityTest extends CakeTestCase {
 		$this->assertEmpty($this->utils->Activity->leaderboardsThisMonth(GAME_MASTER_ID_2));
 	}
 
+	public function testTopFromPlayer() {
+		$activities = $this->utils->Activity->topFromPlayer(PLAYER_ID_1);
+		$this->assertNotEmpty($activities);
+		foreach ($activities as $activity) {
+			$this->assertTrue(isset($activity['Activity']['reports']));
+		}
+	}
+
 }

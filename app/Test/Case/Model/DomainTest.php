@@ -11,8 +11,9 @@ class DomainTest extends CakeTestCase {
 		$this->utils->generateTeams();
 		$this->utils->generatePlayers();
 		$this->utils->generateDomains();
-		$this->utils->generateBadges();
 		$this->utils->generateActivities();
+		$this->utils->generateBadges();
+		$this->utils->generateLogs();
 	}
 
 	public function testInactivate() {
@@ -64,5 +65,13 @@ class DomainTest extends CakeTestCase {
 	public function testActivitiesCountGM2(){
 		$this->assertEmpty($this->utils->Domain->activitiesCount(GAME_MASTER_ID_2));
 
+	}
+
+	public function testTopFromPlayer() {
+		$domains = $this->utils->Domain->topFromPlayer(PLAYER_ID_1);
+		$this->assertNotEmpty($domains);
+		foreach ($domains as $domain) {
+			$this->assertTrue(isset($domain['Domain']['reports']));
+		}
 	}
 }

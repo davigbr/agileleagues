@@ -10,8 +10,16 @@
 					<span>Stats</span>
 				</a>
 			</li>
+			<? if (!$isGameMaster): ?>
+				<li data-action="personal">
+					<a href="<?= $this->Html->url('/dashboards/personal/'); ?>"><i class="entypo-user"></i>
+						<span>Personal</span>
+						<span class="badge badge-danger">NEW</span>
+					</a>
+				</li>
+			<? endif; ?>
 			<li data-action="players">
-				<a href="<?= $this->Html->url('/dashboards/players'); ?>"><i class="entypo-user"></i>
+				<a href="<?= $this->Html->url('/dashboards/players'); ?>"><i class="entypo-users"></i>
 					<span>Players</span>
 				</a>
 			</li>
@@ -24,7 +32,6 @@
 				<li data-action="leaderboards">
 					<a href="<?= $this->Html->url('/dashboards/xp'); ?>"><i class="glyphicon glyphicon-usd"></i>
 						<span>Daily XP</span>
-						<span class="badge badge-danger">NEW</span>
 					</a>
 				</li>
 			<?endif;?>

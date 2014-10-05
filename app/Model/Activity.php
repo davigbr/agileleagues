@@ -159,4 +159,21 @@ class Activity extends AppModel {
 			'limit' => $limit
 		));
 	}
+
+	public function topFromPlayer($playerId, $limit = 10) {
+		$activities = $this->query(
+			'SELECT Domain.*, Activity.*, COUNT(*) AS reports ' . 
+			'FROM log ' . 
+			'INNER JOIN activity AS Activity ON Activity.id = log.activity_id ' .
+			'INNER JOIN domain AS Domain ON Domain.id = log.domain_id ' .
+			'WHERE player_id = ? ' . 
+			'GROUP BY activity_id ' . 
+			'ORDER BY reports DESC ' . 
+			'LIMIT ' . (int)$limit, array($playerId));
+		foreach ($activities as &$activity) {
+			$activity['Activity']['reports'] = $activity[0]['reports'];
+			unset($activity[0]);
+		}
+		return $activities;
+	}
 }
