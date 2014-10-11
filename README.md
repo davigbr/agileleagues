@@ -7,25 +7,25 @@ The service is available for free at: www.agileleagues.com.
 More about gamification of agile software development: www.agilegamification.org.
 
 ### Target Group
-Customers: coaches, mentors and managers;
-Users: customers + creative self-organized teams;
+- Customers: coaches, mentors and managers;
+- Users: customers + creative self-organized teams;
 
 ### Needs
-Give more visibility to individual and team progress according to the company goals;
-Increase team self-organization and delegate most of the work;
-Leverage feedback and drive new behaviors, like new technical practices;
+- Give more visibility to individual and team progress according to the company goals;
+- Increase team self-organization and delegate most of the work;
+- Leverage feedback and drive new behaviors, like new technical practices;
 
 ### Product
-Activity-based gamification framework (domains, activities, tags, badges);
-Notifications and peer feedback;
-Self-regulation (activity and domain suggestion, auto XP);
+- Activity-based gamification framework (domains, activities, tags, badges);
+- Notifications and peer feedback;
+- Self-regulation (activity and domain suggestion, auto XP);
 
 ### Value
-Behaviors driven;
-Self-organization boosted;
-Progress visibility increased;
-Feedback amplified;
-More fun!
+- Behaviors driven;
+- Self-organization boosted;
+- Progress visibility increased;
+- Feedback amplified;
+- More fun!
 
 ## Installation Instructions
 
