@@ -1,11 +1,27 @@
-ALTER TABLE activity ADD COLUMN first_report DATETIME NULL DEFAULT NULL;
-ALTER TABLE activity ADD COLUMN last_report DATETIME NULL DEFAULT NULL;
-ALTER TABLE activity ADD COLUMN times_reported INT(10) UNSIGNED NOT NULL DEFAULT 0;
-ALTER TABLE activity ADD COLUMN reports_per_day DECIMAL(10,2) UNSIGNED NOT NULL DEFAULT 0;
+DROP TABLE event_join_log;
+DROP VIEW event_activity_progress;
+DROP TABLE event_task_log;
+DROP TABLE event_complete_log;
+DROP TABLE event_activity;
 
-UPDATE activity SET first_report = (SELECT created FROM log WHERE activity_id = activity.id ORDER BY created ASC LIMIT 1);
-UPDATE activity SET last_report = (SELECT created FROM log WHERE activity_id = activity.id ORDER BY created DESC LIMIT 1);
-UPDATE activity SET times_reported = (SELECT COUNT(*) FROM log WHERE activity_id = activity.id);
-UPDATE activity SET reports_per_day = 
-	(SELECT COUNT(*) FROM log WHERE activity_id = activity.id) / 
-	(1 + DATEDIFF(NOW(), created));
+ALTER TABLE log DROP FOREIGN KEY fk_log_event_id;
+ALTER TABLE log DROP COLUMN event_id;
+
+DELETE FROM xp_log WHERE event_task_id IS NOT NULL;
+DELETE FROM xp_log WHERE event_task_id_reviewed IS NOT NULL;
+DELETE FROM xp_log WHERE event_id_completed IS NOT NULL;
+	
+ALTER TABLE xp_log DROP FOREIGN KEY fk_xp_log_event_task_id;
+ALTER TABLE xp_log DROP COLUMN event_task_id;
+
+ALTER TABLE xp_log DROP FOREIGN KEY fk_xp_log_event_task_id_reviewed;
+ALTER TABLE xp_log DROP COLUMN event_task_id_reviewed;
+
+ALTER TABLE xp_log DROP FOREIGN KEY fk_xp_log_event_id_completed;
+ALTER TABLE xp_log DROP COLUMN event_id_completed;
+
+DROP TABLE event_task;
+DROP TABLE event;
+DROP TABLE event_type;
+
+ALTER TABLE player ADD COLUMN last_login DATETIME NULL DEFAULT NULL;

@@ -43,14 +43,6 @@ class AppController extends Controller {
 		'BadgeRequisite', 
 		'CalendarLog',
 		'Domain', 
-		'Event',
-		'EventTask',
-		'EventTaskLog',
-		'EventActivity',
-		'EventActivityProgress',
-		'EventJoinLog',
-		'EventCompleteLog',
-		'EventType',
 		'Log', 
 		'LogVote',
 		'Notification',
@@ -122,10 +114,8 @@ class AppController extends Controller {
 			$this->isGameMaster = $this->player['Player']['player_type_id'] == PLAYER_TYPE_GAME_MASTER;
 
 			$this->set('myPendingActivitiesCount', $this->Log->countPendingFromPlayer($playerId));
-			$this->set('pendingTasksCount', $this->EventTaskLog->countPendingFromPlayer($playerId));
 			$this->set('activitiesNotReviewedCount', $this->Log->countNotReviewed());
 			$this->set('teamPendingActivities', $this->Log->countPendingFromTeamNotFromPlayer($playerId));
-			$this->set('eventTasksNotReviewedCount', $this->EventTaskLog->countNotReviewed());
 
 			$this->set('allDomains', $this->Domain->allFromOwner($this->gameMasterId()));	
 		}

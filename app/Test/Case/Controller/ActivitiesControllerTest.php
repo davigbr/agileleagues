@@ -15,7 +15,6 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->utils->generateActivities();
 		$this->utils->generateLogs();
 		$this->utils->generateLogsNotReviewed();
-		$this->utils->generateEvents();
 		$this->utils->generateTags();
 		$this->controllerUtils = new ControllerTestCaseUtils($this);
 	}
@@ -63,11 +62,9 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->controllerUtils->mockAuthUser(PLAYER_ID_1);
 		$result = $this->testAction('/activities/report', array('return' => 'vars', 'method' => 'GET'));
 		$activities = $result['activities'];
-		$events = $result['events'];
 		$players = $result['players'];
 		$tags = $result['tags'];
 
-		$this->assertEquals(2, count($events));
 		$this->assertEquals(10, count($activities));
 		$this->assertEquals(1, count($players));
 		$this->assertEquals(4, count($tags));
@@ -77,10 +74,8 @@ class ActivitiesControllerTest extends ControllerTestCase {
 		$this->controllerUtils->mockAuthUser(GAME_MASTER_ID_2);
 		$result = $this->testAction('/activities/report', array('return' => 'vars', 'method' => 'GET'));
 		$activities = $result['activities'];
-		$events = $result['events'];
 		$players = $result['players'];
 
-		$this->assertEquals(0, count($events));
 		$this->assertEquals(0, count($activities));
 		$this->assertEquals(1, count($players));
 	}
@@ -104,9 +99,6 @@ class ActivitiesControllerTest extends ControllerTestCase {
 					0 => '1',
 					1 => '2'
 				)
-			),
-			'Event' => array(
-				'id' => '',
 			)
 		);
 		$this->testAction('/activities/report', array('method' => 'POST', 'data' => $data));
@@ -144,9 +136,6 @@ class ActivitiesControllerTest extends ControllerTestCase {
 					0 => '1',
 					1 => '2'
 				)
-			),
-			'Event' => array(
-				'id' => '',
 			)
 		);
 		$this->testAction('/activities/report', array('method' => 'POST', 'data' => $data));

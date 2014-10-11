@@ -55,8 +55,7 @@ class ActivitiesController extends AppController {
 				'LogVote' => array(
 					'Player',
 					'order' => array('LogVote.creation' => 'DESC')
-				),
-				'Event'
+				)
 			),
 			'limit' => 20,
 			'conditions' => array(
@@ -153,7 +152,6 @@ class ActivitiesController extends AppController {
 			$playerTypeId
 		));
 		$this->set('activitiesById', $this->Activity->allFromOwnerById($this->gameMasterId()));
-		$this->set('events', $this->Event->simpleActive($this->gameMasterId()));
 		$this->set('players', $this->Player->simpleTeamMates($this->Auth->user('id')));
 		$this->set('tags', $this->Tag->allActive($this->gameMasterId()));
 

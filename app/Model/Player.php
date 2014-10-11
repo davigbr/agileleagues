@@ -236,4 +236,8 @@ class Player extends AppModel {
         ));
     }
 
+    public function updateLastLogin($playerId) {
+        $this->query('UPDATE player SET last_login = NOW() WHERE id = ?', array($playerId));
+    }
+
 }

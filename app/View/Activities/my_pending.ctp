@@ -19,7 +19,6 @@
 					<th>Tags</th>
 					<th>Logged</th>
 					<th>Acquired</th>
-					<th>Event</th>
 					<th>Description</th>
 					<th>Actions</th>
 				</tr>
@@ -32,7 +31,6 @@
 						<td><?= $this->element('tag', array('tags' => $log['Tags'])); ?></td>
 						<td><?= $log['Log']['created']?></td>
 						<td><?= $log['Log']['acquired']?></td>
-						<td><?= h($log['Event']['name']); ?></td>
 						<td><?= h($log['Log']['description']); ?></td>
 						<td>
 							<?= $this->Form->postLink('<i class="glyphicon glyphicon-trash"></i>', '/logs/delete/' . $log['Log']['id'], $options = array('escape' => false, 'class'=> 'btn btn-danger btn-sm'), __('Are you sure you want to delete this activity log?')) ?>

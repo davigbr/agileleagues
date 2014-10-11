@@ -14,6 +14,7 @@
 			<li>Information added to the <strong>Activities list</strong>: total reports and average reports per day;</li>
 			<li>Tags added to the <strong>calendar day view</strong>;</li>
 			<li>Small changes to the <strong>Peer Activity Review</strong> screen in order to improve usability;</li>
+			<li>Added the <strong>Personal Dashboard</strong> that shows information about the logged player (prototype); </li>
 		</ol>
 
 		<p><span class="badge badge-danger">Bugs Fixed</span></p>

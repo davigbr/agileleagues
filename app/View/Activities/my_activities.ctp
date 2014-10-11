@@ -26,7 +26,6 @@
 					<th>Logged</th>
 					<th>Acquired</th>
 					<th>Paired With</th>	
-					<th>Event</th>
 					<th>Status</th>
 					<th title="Acceptance Votes">A. Votes</th>
 					<th title="Rejection Votes">R. Votes</th>
@@ -42,7 +41,6 @@
 						<td><?= $this->Format->dateTime($log['Log']['created'])?></td>
 						<td><?= $this->Format->dateTime($log['Log']['acquired'])?></td>
 						<td><?= $log['PairedPlayer']['name']?></td>
-						<td><?= h($log['Event']['name']); ?></td>
 						<td>
 							<? if ($log['Log']['accepted']):?>
 								<span class="badge badge-success">Accepted</span>

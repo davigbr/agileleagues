@@ -205,40 +205,6 @@
 				</li>
 			</ul>
 		</li>
-		<!-- <li data-controller="events">
-			<a href="#">
-				<i class="entypo-calendar"></i>
-				<span>Events</span>
-			</a>
-			<ul>
-				<li data-action="index">
-					<a href="<?= $this->Html->url('/events/index'); ?>"><i class="entypo-list"></i>
-						<span>List all events</span>
-					</a>
-				</li>
-				<li data-action="report">
-					<a href="<?= $this->Html->url('/events/report'); ?>">
-						<i class="entypo-doc"></i><span>Report Event Task</span>
-					</a>
-				</li>
-				<?if ($isGameMaster): ?>
-					<li data-action="create">
-						<a href="<?= $this->Html->url('/events/create'); ?>"><i class="entypo-plus"></i>
-							<span>Create</span>
-						</a>
-					</li>
-					<li data-action="notReviewed">
-						<a href="<?= $this->Html->url('/events/notReviewed'); ?>">
-							<i class="entypo-help"></i>
-							<span>Event Tasks Not Reviewed</span>
-							<?if($eventTasksNotReviewedCount > 0): ?>
-								<span class="badge badge-danger"><?= $eventTasksNotReviewedCount?></span>
-							<?endif;?>
-						</a>
-					</li>
-				<?endif;?>
-			</ul>
-		</li> -->
 		<li data-controller="notifications">
 			<a href="#">
 				<i class="entypo-mail"></i>

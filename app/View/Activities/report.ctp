@@ -30,11 +30,6 @@
 				<br/>
 
 				<?= $this->Bootstrap->input('acquired', array('class'=>'form-control form-control-inline')); ?>
-				<?= $this->Bootstrap->input('event_id', array(
-					'label' => 'Event', 
-					'empty' => '-', 
-					'options' => $events, 
-					'class' => 'form-control form-control-inline')); ?>
 				<?= $this->Bootstrap->input('player_id_pair', array(
 					'label' => 'Paired With', 
 					'empty' => '-', 
@@ -97,10 +92,6 @@
 			}
 		}).change();
 		
-		$('#tags input').click(function(event){
-			event.stopPropagation();
-		});
-
 		$('#tags tr').click(function(){
 			$('input', $(this)).click();
 		});

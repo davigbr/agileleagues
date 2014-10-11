@@ -151,4 +151,12 @@ class PlayerTest extends CakeTestCase {
 		}
 	}
 
+	public function testUpdateLastLogin() {
+		$gameMasterBefore = $this->utils->Player->findById(GAME_MASTER_ID_1);
+		$this->utils->Player->updateLastLogin(GAME_MASTER_ID_1);
+		$gameMasterAfter = $this->utils->Player->findById(GAME_MASTER_ID_1);
+		$this->assertNotEquals($gameMasterAfter['Player']['last_login'], $gameMasterBefore['Player']['last_login']);
+		$this->assertNotNull($gameMasterAfter['Player']['last_login']);
+	}
+
 }

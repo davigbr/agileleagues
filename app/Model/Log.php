@@ -24,13 +24,13 @@ class Log extends AppModel {
 			'notEmpty',
 			'duplicated' => array(
 				'rule' => 'duplicated',
-				'message' => 'It seems this activity has already been reported today with exactly the same information (activity, description, player, event).'
+				'message' => 'It seems this activity has already been reported today with exactly the same information (activity, description, player).'
 			)
 		),
 	);
 
 	public $belongsTo = array(
-		'Activity', 'Player', 'Domain', 'Event',
+		'Activity', 'Player', 'Domain',
 		'PairedPlayer' => array(
 			'className' => 'Player',
 			'foreignKey' => 'player_id_pair'
@@ -66,7 +66,6 @@ class Log extends AppModel {
 		$data .= isset($log['Log']['description'])? $log['Log']['description'] : '?';
 		$data .= isset($log['Log']['acquired'])? $log['Log']['acquired'] : '?';
 		$data .= isset($log['Log']['player_id'])? $log['Log']['player_id'] : '?';
-		$data .= isset($log['Log']['event_id'])? $log['Log']['event_id'] : '?';
 		return Security::hash($data, 'sha256', true);
 	}
 
@@ -234,8 +233,7 @@ class Log extends AppModel {
 				'Domain',
 				'PairedPlayer',
 				'Tags', 
-				'Activity',
-				'Event'
+				'Activity'
 			),
 			'conditions' => array('Log.player_id' => $playerId, 'Log.reviewed IS NULL'),
 			'order' => array('Log.created' => 'DESC')

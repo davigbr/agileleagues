@@ -21,11 +21,6 @@ class TestUtils {
         'Tag',
         'Configuration',
         'XpLog',    
-        'EventCompleteLog',
-        'EventTaskLog',
-        'EventTask',
-        'EventJoinLog',
-        'EventActivity',
         'Notification',
         'Timeline',
         'LogVote',
@@ -36,8 +31,6 @@ class TestUtils {
         'Badge', 
         'Activity', 
         'Domain', 
-        'Event',
-        'EventType',
         'Team',
         'Player',
         'PlayerType',
@@ -293,77 +286,6 @@ class TestUtils {
             array('activity_id' => 6, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => '2014-01-01'),
             array('activity_id' => 7, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => '2014-01-01'),
             array('activity_id' => 8, 'player_id' => PLAYER_ID_2, 'player_id_owner' => GAME_MASTER_ID_1, 'acquired' => '2014-01-01'),
-        ), array('validate' => false));
-    }
-
-    public function generateEvents() {
-        $this->EventType->saveMany(array(
-            array('id' => EVENT_TYPE_MISSION, 'Mission', 'level_required' => EVENT_LEVEL_REQUIRED_MISSION),
-            array('id' => EVENT_TYPE_CHALLENGE, 'Challenge', 'level_required' => EVENT_LEVEL_REQUIRED_CHALLENGE),
-        ));
-        
-        $today = (new DateTime())->format('Y-m-d');
-        $lastWeek = (new DateTime())->modify('-7 day')->format('Y-m-d');
-        $nextWeek = (new DateTime())->modify('+7 day')->format('Y-m-d');
-        $lastMonth = (new DateTime())->modify('-1 month')->format('Y-m-d');
-        $nextMonth = (new DateTime())->modify('+1 month')->format('Y-m-d');
-
-        $this->Event->saveMany(array(
-            array('id' => 1, 'player_id_owner' => GAME_MASTER_ID_1, 'event_type_id' => EVENT_TYPE_MISSION, 'name' => 'Active Mission', 'start' => $today, 'end' => $nextWeek),
-            array('id' => 2, 'player_id_owner' => GAME_MASTER_ID_1, 'event_type_id' => EVENT_TYPE_MISSION, 'name' => 'Future Mission', 'start' => $nextWeek, 'end' => $nextMonth),
-            array('id' => 3, 'player_id_owner' => GAME_MASTER_ID_1, 'event_type_id' => EVENT_TYPE_MISSION, 'name' => 'Past Mission', 'start' => $lastMonth, 'end' => $lastWeek),
-            array('id' => 4, 'player_id_owner' => GAME_MASTER_ID_1, 'event_type_id' => EVENT_TYPE_CHALLENGE, 'name' => 'Active Challenge', 'start' => $today, 'end' => $nextWeek),
-            array('id' => 5, 'player_id_owner' => GAME_MASTER_ID_1, 'event_type_id' => EVENT_TYPE_CHALLENGE, 'name' => 'Future Challenge', 'start' => $nextWeek, 'end' => $nextMonth),
-            array('id' => 6, 'player_id_owner' => GAME_MASTER_ID_1, 'event_type_id' => EVENT_TYPE_CHALLENGE, 'name' => 'Past Challenge', 'start' => $lastMonth, 'end' => $lastWeek),
-        ), array('validate' => false));
-    }
-
-    public function generateEventTasks() {
-        $this->EventTask->saveMany(array(
-            array('id' => 1, 'event_id' => 1, 'name' => 'Task 1', 'description' => 'Description 1', 'xp' => rand(0, 100)),
-            array('id' => 2, 'event_id' => 2, 'name' => 'Task 2', 'description' => 'Description 2', 'xp' => rand(0, 100)),
-            array('id' => 3, 'event_id' => 3, 'name' => 'Task 3', 'description' => 'Description 3', 'xp' => rand(0, 100)),
-            array('id' => 4, 'event_id' => 4, 'name' => 'Task 4', 'description' => 'Description 4', 'xp' => rand(0, 100)),
-            array('id' => 5, 'event_id' => 5, 'name' => 'Task 5', 'description' => 'Description 5', 'xp' => rand(0, 100)),
-            array('id' => 6, 'event_id' => 6, 'name' => 'Task 6', 'description' => 'Description 6', 'xp' => rand(0, 100))
-        ), array('validate' => false));
-    }
-
-    public function generateEventActivities() {
-        $this->EventActivity->saveMany(array(
-            array('id' => 1, 'event_id' => 1, 'activity_id' => 1, 'count' => 1),
-            array('id' => 2, 'event_id' => 2, 'activity_id' => 2, 'count' => 1),
-            array('id' => 3, 'event_id' => 3, 'activity_id' => 3, 'count' => 1),
-            array('id' => 4, 'event_id' => 4, 'activity_id' => 4, 'count' => 1),
-            array('id' => 5, 'event_id' => 5, 'activity_id' => 5, 'count' => 1),
-            array('id' => 6, 'event_id' => 6, 'activity_id' => 6, 'count' => 1)
-        ), array('validate' => false));
-    }
-
-    public function generateEventActivityLogs() {
-        $this->Log->saveMany(array(
-            array('event_id' => 1, 'activity_id' => 1, 'reviewed' => date('Y-m-d'), 'player_id' => PLAYER_ID_2),
-            array('event_id' => 2, 'activity_id' => 2, 'reviewed' => date('Y-m-d'), 'player_id' => PLAYER_ID_2),
-            array('event_id' => 3, 'activity_id' => 3, 'reviewed' => date('Y-m-d'), 'player_id' => PLAYER_ID_2),
-            array('event_id' => 4, 'activity_id' => 4, 'reviewed' => date('Y-m-d'), 'player_id' => PLAYER_ID_2),
-            array('event_id' => 5, 'activity_id' => 5, 'reviewed' => date('Y-m-d'), 'player_id' => PLAYER_ID_2),
-            array('event_id' => 6, 'activity_id' => 6, 'reviewed' => date('Y-m-d'), 'player_id' => PLAYER_ID_2)
-        ), array('validate' => false));
-    }
-
-    public function generateEventJoinLogs() {
-        $this->EventJoinLog->saveMany(array(
-            array('event_id' => 1, 'player_id' => PLAYER_ID_2),
-            array('event_id' => 2, 'player_id' => PLAYER_ID_2),
-            array('event_id' => 3, 'player_id' => PLAYER_ID_2)
-        ), array('validate' => false));
-    }
-
-    public function generateEventTaskLogs() {
-        $this->EventTaskLog->saveMany(array(
-            array('event_id' => 1, 'event_task_id' => 1, 'player_id' => PLAYER_ID_2),
-            array('event_id' => 2, 'event_task_id' => 2, 'player_id' => PLAYER_ID_2),
-            array('event_id' => 3, 'event_task_id' => 3, 'player_id' => PLAYER_ID_2)
         ), array('validate' => false));
     }
 

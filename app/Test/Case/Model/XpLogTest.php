@@ -13,10 +13,6 @@ class XpLogTest extends CakeTestCase {
 		$this->utils->generateDomains();
 		$this->utils->generateActivities();
 		$this->utils->generateLogs2();
-		$this->utils->generateEvents();
-		$this->utils->generateEventTasks();
-		$this->utils->generateEventTaskLogs();
-		$this->utils->generateEventJoinLogs();
 		$this->utils->generateTags();
 	}
 	
@@ -60,53 +56,6 @@ class XpLogTest extends CakeTestCase {
 		$this->assertEquals((int)$xp, $xpLog['Player']['xp'] - $playerBefore['Player']['xp']);
 
 		$this->assertEmpty($this->utils->Notification->findAllByPlayerId($playerId));
-	}
-
-	public function testEventTaskReported() {
-		$playerId = PLAYER_ID_2;
-		$eventTask = $this->utils->EventTaskLog->find('first');
-		$eventTaskId = $eventTask['EventTask']['id'];
-		$this->utils->XpLog->_eventTaskReported($playerId, $eventTaskId);		
-		$xpLog = $this->utils->XpLog->findByEventTaskIdAndPlayerId($eventTaskId, $playerId);
-		$this->assertNotEmpty($xpLog);
-	}
-
-	public function testEventTaskReviewed() {
-		$eventTask = $this->utils->EventTaskLog->find('first');
-		$eventTaskId = $eventTask['EventTask']['id'];
-		$this->utils->XpLog->_eventTaskReviewed(GAME_MASTER_ID_1, $eventTaskId);		
-		$xpLog = $this->utils->XpLog->findByEventTaskIdReviewedAndPlayerId($eventTaskId, GAME_MASTER_ID_1);
-		$this->assertNotEmpty($xpLog);
-	}
-
-	public function testEventTaskReviewedEventTaskNotFound() {
-		try {
-			$this->utils->XpLog->_eventTaskReviewed(GAME_MASTER_ID_1, 0);		
-			$this->fail();
-		} catch (Exception $ex) {
-			$this->assertEquals('EventTask not found',  $ex->getMessage());
-		}
-	}
-
-	public function testEventTaskReportedEventTaskNotFound() {
-		$playerId = PLAYER_ID_2;
-		try {
-			$this->utils->XpLog->_eventTaskReported($playerId, 0);		
-			$this->fail();
-		} catch (Exception $ex) {
-			$this->assertEquals('EventTask not found',  $ex->getMessage());
-		}
-	}
-
-	public function testEventTaskReportedPlayerNotFound() {
-		$eventTask = $this->utils->EventTaskLog->find('first');
-		$eventTaskId = $eventTask['EventTask']['id'];
-		try {
-			$this->utils->XpLog->_eventTaskReported(0, $eventTaskId);		
-			$this->fail();
-		} catch (Exception $ex) {
-			$this->assertEquals('Player not found',  $ex->getMessage());
-		}
 	}
 
 	public function testActivityReported() {
@@ -223,31 +172,6 @@ class XpLogTest extends CakeTestCase {
 			$this->fail();
 		} catch (Exception $ex) {
 			$this->assertEquals('Log not found', $ex->getMessage());
-		}
-	}
-
-	public function testEventJoined() {
-		$event = $this->utils->Event->allActive(GAME_MASTER_ID_1)[0];
-		$eventId = $event['Event']['id'];
-		$this->utils->XpLog->_eventJoined(PLAYER_ID_1, $eventId);
-		$xpLog = $this->utils->XpLog->findByPlayerIdAndEventIdJoined(PLAYER_ID_1, $eventId);
-		$this->assertEquals(EVENT_JOIN_XP, $xpLog['XpLog']['xp']);
-	}
-
-	public function testEventCompleted() {
-		$event = $this->utils->Event->allActive(GAME_MASTER_ID_1)[0];
-		$eventId = $event['Event']['id'];
-		$this->utils->XpLog->_eventCompleted(PLAYER_ID_1, $eventId);
-		$xpLog = $this->utils->XpLog->findByPlayerIdAndEventIdCompleted(PLAYER_ID_1, $eventId);
-		$this->assertEquals($event['Event']['xp'], $xpLog['XpLog']['xp']);
-	}
-
-	public function testEventCompletedEventNotFound() {
-		try {
-			$this->utils->XpLog->_eventCompleted(PLAYER_ID_1, 0);
-			$this->fail();
-		} catch (ModelException $ex) {
-			$this->assertEquals('Event not found.', $ex->getMessage());
 		}
 	}
 

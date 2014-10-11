@@ -239,6 +239,7 @@ class PlayersController extends AppController {
 	public function signin() {
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
+				$this->Player->updateLastLogin($this->Auth->user('id'));
 				return $this->redirect($this->Auth->redirectUrl());
 			} else {
 				$this->flashError(__('Invalid email and/or password.'));
@@ -256,6 +257,7 @@ class PlayersController extends AppController {
 		if ($this->request->is('post')) {
 			// Login por AJAX
 			if ($this->Auth->login()) {
+				$this->Player->updateLastLogin($this->Auth->user('id'));
 				$this->set('login_status', 'success');
 			} else {
 				$this->set('login_status', 'invalid');

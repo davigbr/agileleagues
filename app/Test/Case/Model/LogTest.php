@@ -26,7 +26,7 @@ class LogTest extends CakeTestCase {
 		));
 
 		$this->assertEquals(
-			'f6fa053a259675905d60930c24ef411cf53666395564b551fa7e71f0acc70ff7', 
+			'127a989067316581a27be22604301dd603bc79adc821911222bf49b27a3c3e8f', 
 			$this->utils->Log->hash($log));
 	}
 
