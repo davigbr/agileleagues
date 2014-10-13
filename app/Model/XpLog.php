@@ -7,12 +7,24 @@ class XpLog extends AppModel {
 	public $useTable = 'xp_log';
 
 	public $belongsTo = array(
-		'Player'
+		'Player',
+		'LogReviewed' => array(
+			'className' => 'Log',
+			'foreignKey' => 'log_id_reviewed'
+		),
+		'LogReported' => array(
+			'className' => 'Log',
+			'foreignKey' => 'log_id'
+		)
 	);
 	
 	public $validate = array(
 		'player_id' => 'notEmpty',
 		'xp' => 'notEmpty'
+	);
+
+	public $virtualFields = array(
+		'description' => "IF(log_id IS NOT NULL, 'Activity reported', IF(log_id_reviewed IS NOT NULL, 'Activity reviewed', '?'))"
 	);
 
 	public $uses = array('Notification', 'Log');

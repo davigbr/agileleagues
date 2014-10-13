@@ -20,6 +20,22 @@ class PlayersController extends AppController {
 		$this->set('players', $this->Player->allNotVerified($this->Auth->user('id')));
 	}
 
+	public function xp_history() {
+		$this->set('logs', $this->XpLog->find('all', array(
+			'conditions' => array(
+				'XpLog.player_id' => $this->Auth->user('id')
+			), 
+			'contain' => array(
+				'LogReviewed' => array('Activity', 'Domain'),
+				'LogReported' => array('Activity', 'Domain'),
+			),
+			'limit' => 1000,
+			'order' => array(
+				'XpLog.created' => 'DESC'
+			)
+		)));
+	}
+
 	public function credly() {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			// Validation is not necessary

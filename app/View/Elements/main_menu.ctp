@@ -202,6 +202,9 @@
 					<a href="<?= $this->Html->url('/players/'); ?>">
 						<span><i class="entypo-list"></i>Player List</span>
 					</a>
+					<a href="<?= $this->Html->url('/players/xp_history'); ?>">
+						<span><i class="entypo-list"></i>XP History</span>
+					</a>
 				</li>
 			</ul>
 		</li>
