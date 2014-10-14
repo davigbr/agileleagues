@@ -8,7 +8,13 @@ class Log extends AppModel {
 
 	public $validate = array(
 		'player_id' => array('notEmpty'),
-		'activity_id' => array('notEmpty'),
+		'activity_id' => array(
+			'notEmpty',
+			'dailyLimit' => array(
+				'rule' => 'dailyLimit',
+				'message' => 'Sorry, but you have already reached the daily reporting limit of this activity on this date.'
+			)
+		),
 		'acquired' => array(
 			'notEmpty', 
 			'acquiredPastRule' => array(
@@ -78,6 +84,34 @@ class Log extends AppModel {
 			}
 		}
 		return true;
+	}
+
+	public function dailyLimit() {
+		$activity = $this->Activity->findById($this->data['Log']['activity_id']);
+		$acquired = isset($this->data['Log']['acquired']) ? $this->data['Log']['acquired'] : null;
+		$times = isset($this->data['Log']['count'])? $this->data['Log']['count'] : 1;
+
+		if ($activity && $acquired) {
+			$reportLimit = (int)$activity['Activity']['daily_limit'];
+			
+			if ($reportLimit === 0) {
+				return true;
+			}
+
+			$reported = $this->find('count', array(
+				'conditions' => array(
+					'Log.player_id' => $this->data['Log']['player_id'],
+					'Log.activity_id' => $activity['Activity']['id'],
+					'Log.acquired' => $acquired
+				)
+			));
+
+			if ($reported + $times <= $reportLimit) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function duplicated() {
@@ -329,7 +363,7 @@ class Log extends AppModel {
 					'times_reported' => $timesReported
 				);
 				$activitySaved = $this->Activity->save($activityUpdate);
-				$logSaved = $this->saveAssociated($log);
+				$logSaved = $this->saveAssociated($log, array('validate' => false));
 				if (!$activitySaved) {
 					throw new Exception('Activity could not be saved.');
 				}

@@ -35,4 +35,5 @@ ALTER TABLE xp_log DROP COLUMN activity_id;
 ALTER TABLE xp_log DROP FOREIGN KEY fk_xp_log_activity_id_reviewed;
 ALTER TABLE xp_log DROP COLUMN activity_id_reviewed;
 
-
+ALTER TABLE activity 
+ADD COLUMN daily_limit SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0;

@@ -67,9 +67,9 @@ class LogTest extends CakeTestCase {
 		$this->assertNotEmpty($log);
 		$this->utils->Log->_review($log['Log']['id'], PLAYER_ID_2, 'accept');
 
-		$xpLog = $this->utils->XpLog->findByPlayerIdAndActivityId(
+		$xpLog = $this->utils->XpLog->findByPlayerIdAndLogId(
 			$log['Log']['player_id'], 
-			$log['Log']['activity_id']
+			$log['Log']['id']
 		);
 		$this->assertNotNull($xpLog);
 	}

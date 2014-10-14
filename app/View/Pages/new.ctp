@@ -4,6 +4,32 @@
 <div class="row">
 
 	<div class="col-lg-6">
+		<h2>Self-Regulation Release 1.8</h2>
+		<p>
+			Since the beginning we wanted Agile Leagues to be as much organic as possible. 
+			Our dream was that the players themselves could manage most of the game content.
+			This new release introduces some mechanics that will make the software more
+			self-regulated and less dependent on the Game Master role.
+		</p>
+
+		<p><span class="badge badge-success">Features Implemented</span></p>
+		<ol>
+			<li>TODO - <strong>Automatic Activity XP calculation</strong>;</li>
+			<li><strong>XP History</strong>: Players can now see their XP history (last 1000 XP logs);</li>
+			<li>TODO - <strong>Game Progress Dashboard</strong>: </li>
+		</ol>
+
+<!-- 		<p><span class="badge badge-danger">Bugs Fixed</span></p>
+		<ol>
+		</ol>
+ -->		
+		<p><span class="badge badge-info">General Improvements</span></p>
+		<ol>
+			<li>Missions removed;</li>
+		</ol>
+	</div>
+
+	<div class="col-lg-6">
 		<h2>+Adoption Release 1.7</h2>
 		<p>
 			Global Scrum Gathering Berlin was tremendously successful and we are now going to present the Agile Gamification lecture at the Agile Brazil 2014!

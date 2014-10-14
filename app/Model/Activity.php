@@ -29,7 +29,8 @@ class Activity extends AppModel {
 				'rule' => array('comparison', 'is greater', 0),
 				'message' => 'Should be greater than 0.'
 			)
-		)
+		),
+		'daily_limit' => 'notEmpty'
 	);
 
 

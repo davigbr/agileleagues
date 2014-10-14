@@ -163,8 +163,9 @@ class ActivitiesController extends AppController {
 			$log['Log']['player_id_owner'] = $this->gameMasterId();
 			$activityId = $log['Log']['activity_id'];
 
-			// Validad o primeiro log apenas
+			// Valida o primeiro log apenas
 			$firstLog = $log;
+			$firstLog['Log']['count'] = count($log['Log']['description']); // used by model validation
 			$firstLog['Log']['description'] = $firstLog['Log']['description'][0];
 			$this->Log->set($firstLog);
 

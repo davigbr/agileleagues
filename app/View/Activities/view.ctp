@@ -12,6 +12,7 @@
 				<p><strong>XP:</strong> <?= number_format($activity['Activity']['xp']) ?></p>
 				<p><strong>Acceptance Votes:</strong> <?= number_format($activity['Activity']['acceptance_votes']) ?></p>
 				<p><strong>Rejection Votes:</strong> <?= number_format($activity['Activity']['rejection_votes']) ?></p>
+				<p><strong>Daily Limit:</strong> <?= number_format($activity['Activity']['daily_limit']) ?></p>
 			</div>
 		</div>
 	</div>
