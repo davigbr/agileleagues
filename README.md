@@ -33,6 +33,7 @@ More about gamification of agile software development: www.agilegamification.org
   1. Install MySQL, PHP and Apache;
   2. Enable Apache mod_rewrite;
   3. Create the tmp folder structure;
+  4. Don't forget to enable PHP short open tags;
 2. Create a blank database by running the `sql/structure.sql` script;
 3. Populate the database with the basic data using the `sql/initial_data.sql` script;
 4. You're done. You should be able to run agileleagues inside your server and register as a Game Administrator;
