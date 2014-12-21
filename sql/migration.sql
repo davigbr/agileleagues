@@ -24,8 +24,6 @@ DROP TABLE event_task;
 DROP TABLE event;
 DROP TABLE event_type;
 
-ALTER TABLE player ADD COLUMN last_login DATETIME NULL DEFAULT NULL;
-
 ALTER TABLE xp_log DROP FOREIGN KEY fk_xp_log_event_id_joined;
 ALTER TABLE xp_log DROP COLUMN event_id_joined;
 

@@ -400,6 +400,7 @@ CREATE TABLE `player` (
   `credly_email` varchar(255) DEFAULT NULL,
   `credly_access_token` varchar(200) DEFAULT NULL,
   `credly_refresh_token` varchar(200) DEFAULT NULL,
+  `last_login DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_verification_hash` (`hash`) USING HASH,
   KEY `fk_player_type_id` (`player_type_id`),
