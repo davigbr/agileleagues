@@ -2,8 +2,6 @@
 
 AgileLeagues is a gamification tool that aims to *help self-organized creative teams drive behaviors, amplify feedback, and increase progress visibility*.
 
-The service is available for free at: www.agileleagues.com.
-
 More about gamification of agile software development: www.agilegamification.org.
 
 ### Target Group
